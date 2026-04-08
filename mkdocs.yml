@@ -7,7 +7,9 @@ theme:
   features:
     - navigation.tabs
     - navigation.sections
+    - navigation.indexes
     - navigation.top
+    - toc.integrate
     - search.suggest
     - search.highlight
     - content.code.copy
@@ -27,12 +29,17 @@ theme:
 extra_css:
   - stylesheets/extra.css
 
-# 메뉴 구조 (이미지의 목차를 참고하여 구성)
+extra_javascript:
+  - javascripts/scroll_top.js
+
+# 메뉴 구조
 nav:
-  - 1. 문서 개요: index.md
-  - 2. 게임 개요: analysis.md
-  - 3. 운빨존만겜: lucky_defense_reverse_design.md
-  # 추가 파일이 생기면 아래에 더 적어주세요!
+  - 게임 개요: index.md
+  - 게임 세부 시스템:
+    - systems/overview.md
+  - UI/UX: ux.md
+  - 스키마 설계: schema.md
+  - 필요 리소스: resources.md
 
 markdown_extensions:
   - attr_list
