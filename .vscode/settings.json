@@ -1,0 +1,11 @@
+{
+    "emeraldwalk.runonsave": {
+        "commands": [
+            {
+                "match": "\\.(md|yml)$",  // .md 파일이나 .yml 파일이 저장될 때 실행!
+                "isShell": true,
+                "cmd": "python -m mkdocs build"
+            }
+        ]
+    }
+}

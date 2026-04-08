@@ -1,0 +1,41 @@
+site_name: 운빨존만겜 역기획서
+site_url: https://suan2z.github.io/testgit/
+
+theme:
+  name: material
+  language: ko
+  features:
+    - navigation.tabs
+    - navigation.sections
+    - navigation.top
+    - search.suggest
+    - search.highlight
+    - content.code.copy
+
+  # 🎨 컬러 테마: 다크 모드(slate) 고정 및 형광 포인트
+  palette:
+    scheme: slate
+    primary: black      # 상단 바를 블랙으로 차분하게
+    accent: teal       # 강조 색상을 형광 느낌의 Teal로
+
+  # 폰트 설정
+  font:
+    text: Roboto
+    code: Roboto Mono
+
+# 🖌️ 세부 디자인을 위한 CSS 파일 연결
+extra_css:
+  - stylesheets/extra.css
+
+# 메뉴 구조 (이미지의 목차를 참고하여 구성)
+nav:
+  - 1. 문서 개요: index.md
+  - 2. 게임 개요: analysis.md
+  - 3. 운빨존만겜: lucky_defense_reverse_design.md
+  # 추가 파일이 생기면 아래에 더 적어주세요!
+
+markdown_extensions:
+  - attr_list
+  - md_in_html
+  - pymdownx.superfences
+  - tables

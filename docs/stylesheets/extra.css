@@ -1,0 +1,20 @@
+/* 1. 배경색 강제 변경 */
+[data-md-color-scheme="slate"] {
+    --md-default-bg-color: #0d1117 !important;
+    --md-default-fg-color: #e6edf3 !important;
+}
+
+/* 2. 제목 색상 강제 변경 (형광 민트) */
+h1, h2, h3, .md-nav__link--active {
+    color: #4df2a6 !important;
+}
+
+/* 3. 상단 바(Header) 색상 강제 변경 */
+.md-header {
+    background-color: #000000 !important;
+}
+
+/* 4. 본문 글자색 화이트로 */
+.md-typeset {
+    color: #ffffff !important;
+}
