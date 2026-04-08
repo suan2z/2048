@@ -1,5 +1,5 @@
-site_name: 운빨존만겜 역기획서
-site_url: https://suan2z.github.io/testgit/
+site_name: 2048 기획서
+site_url: https://suan2z.github.io/2048/
 
 theme:
   name: material
@@ -17,8 +17,8 @@ theme:
   # 🎨 컬러 테마: 다크 모드(slate) 고정 및 형광 포인트
   palette:
     scheme: slate
-    primary: black      # 상단 바를 블랙으로 차분하게
-    accent: teal       # 강조 색상을 형광 느낌의 Teal로
+    primary: teal       # 상단 바 - 다크 틸 계열
+    accent: cyan        # 강조 색상 - 시안
 
   # 폰트 설정
   font:
@@ -34,7 +34,13 @@ extra_javascript:
 
 # 메뉴 구조
 nav:
-  - 게임 개요: index.md
+  - 게임 개요:
+    - 안 1 — 망각의 감옥: concepts/prison.md
+    - 안 2 — 심판의 집행자들: concepts/executors.md
+    - 안 3 — 나이트메어 클럽: concepts/nightmare.md
+  - 레퍼런스:
+    - 림버스컴퍼니: references/limbus.md
+    - 카오스 제로 나이트메어: references/chaos_zero_nightmare.md
   - 게임 세부 시스템:
     - systems/overview.md
   - UI/UX: ux.md
