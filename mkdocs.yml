@@ -35,9 +35,10 @@ extra_javascript:
 # 메뉴 구조
 nav:
   - 게임 개요:
-    - 안 1 — 망각의 감옥: concepts/prison.md
-    - 안 2 — 심판의 집행자들: concepts/executors.md
-    - 안 3 — 나이트메어 클럽: concepts/nightmare.md
+    - 컨셉 비교 개요: concepts/index.md
+    - 안 A — 카제나 방식 × 패키지 RPG: concepts/concept_A.md
+    - 안 B — 스테이지 클리어 × 덱 리셋 로그라이크: concepts/concept_B.md
+    - 안 C — 2048 에너지 보드 × 덱 카드 RPG: concepts/concept_C.md
   - 레퍼런스:
     - 림버스컴퍼니: references/limbus.md
     - 카오스 제로 나이트메어: references/chaos_zero_nightmare.md
