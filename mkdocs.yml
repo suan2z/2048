@@ -6,6 +6,7 @@ theme:
   language: ko
   features:
     - navigation.tabs
+    - navigation.tabs.sticky
     - navigation.sections
     - navigation.indexes
     - navigation.top
@@ -34,19 +35,18 @@ extra_javascript:
 
 # 메뉴 구조
 nav:
-  - 게임 개요:
-    - 컨셉 비교 개요: concepts/index.md
-    - 안 A — 카제나 방식 × 패키지 RPG: concepts/concept_A.md
-    - 안 B — 스테이지 클리어 × 덱 리셋 로그라이크: concepts/concept_B.md
-    - 안 C — 2048 에너지 보드 × 덱 카드 RPG: concepts/concept_C.md
-  - 레퍼런스:
-    - 림버스컴퍼니: references/limbus.md
-    - 카오스 제로 나이트메어: references/chaos_zero_nightmare.md
+  - 게임 개요: index.md
   - 게임 세부 시스템:
     - systems/overview.md
   - UI/UX: ux.md
   - 스키마 설계: schema.md
   - 필요 리소스: resources.md
+  - 백업:
+    - 안 A — 카제나 방식 × 패키지 RPG: backup/concept_A.md
+    - 안 B — 스테이지 클리어 × 덱 리셋 로그라이크: backup/concept_B.md
+    - 안 C — 2048 에너지 보드 × 덱 카드 RPG: backup/concept_C.md
+    - 림버스 컴퍼니: references/limbus.md
+    - 카오스 제로 나이트메어: references/chaos_zero_nightmare.md
 
 markdown_extensions:
   - attr_list

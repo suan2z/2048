@@ -1,0 +1,16 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(where jq *)",
+      "Bash(tasklist)",
+      "Bash(python -c *)",
+      "Bash(where mkdocs *)",
+      "Bash(python -m mkdocs --version)",
+      "Bash(python \"c:/01_git/2048/.claude/mkdocs_hook.py\")",
+      "Bash(echo \"exit: $?\")",
+      "Read(//c/tmp/**)",
+      "Bash(taskkill //F //PID 22248)",
+      "Bash(python -m mkdocs build)"
+    ]
+  }
+}
