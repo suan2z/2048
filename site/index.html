@@ -417,6 +417,183 @@
   <a href="#_3" class="md-nav__link">
     <span class="md-ellipsis">
       
+        코어 루프
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        전투 시스템
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="전투 시스템">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        보드 슬라이드와 행동 카운트
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        스킬 카드와 발동 조건
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        적 행동 예고
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        핵심 긴장 구조
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        보드 위기 상황
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        파티 연계 발동
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_11" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        성장 시스템
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="성장 시스템">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_12" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        덱 성장 (챕터 내 — 챕터 클리어 시 리셋)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_13" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        챕터 패시브 (챕터 내 — 챕터 클리어 시 리셋)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_14" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        유물 (챕터 내 — 챕터 클리어 시 리셋)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_15" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        유저 레벨 (영구 성장)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_16" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        장비 (영구 성장)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_17" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        패키지 게임 특성
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_18" class="md-nav__link">
+    <span class="md-ellipsis">
+      
         문서 구조
       
     </span>
@@ -855,21 +1032,247 @@
 </tr>
 <tr>
 <td>파티 구성</td>
-<td>3인 고정</td>
+<td>최대 3인 출전 (보유 캐릭터 3인 이상 가능)</td>
 </tr>
 <tr>
-<td>채택 컨셉</td>
-<td><strong>안 C — 2048 에너지 보드 × 덱 카드 RPG</strong></td>
+<td>전투 방식</td>
+<td>2048 보드 슬라이드로 숫자 타일 완성 → 카드 발동 / 슬라이드 횟수가 적의 행동 카운트다운을 소모</td>
+</tr>
+<tr>
+<td>유사 게임</td>
+<td>Slay the Spire (카드), Puzzle Quest (퍼즐+RPG), Into the Breach (행동 예고+대응)</td>
 </tr>
 </tbody>
 </table>
 <hr />
 <h2 id="_2">핵심 컨셉</h2>
 <p><strong>슬라이드 한 번 한 번이 전략적 결정이다.</strong></p>
-<p>2048 방식의 에너지 보드를 슬라이드해 숫자 타일을 조합하고, 손패의 카드 발동 조건과 일치할 때 스킬이 발동된다.<br />
-보드를 슬라이드할 때마다 적의 행동 카운트가 소모되므로, 강한 카드를 준비할지 아니면 지금 낮은 카드로 버틸지 매 순간 선택이 필요하다.</p>
+<ul>
+<li>보드를 슬라이드할 때마다 <strong>행동 카운트</strong>가 소모됨</li>
+<li>적은 각자 <strong>행동 카운트</strong>를 가지며, 카운트가 0이 되면 공격 실행</li>
+<li>플레이어는 손에 든 스킬 카드를 보유하고, 카드마다 <strong>발동에 필요한 숫자 타일</strong>이 지정됨</li>
+<li>보드에서 해당 숫자 타일을 완성하면 카드를 발동할 수 있음</li>
+<li><strong>높은 숫자일수록 강력한 카드</strong> — 그러나 높은 숫자를 만들려면 슬라이드가 더 필요</li>
+</ul>
+<p>핵심 딜레마:</p>
+<blockquote>
+<p><em>"적이 다음 턴에 강력한 공격을 예고했다. 내 손에는 32짜리 방어 카드가 있는데, 보드에는 아직 16밖에 없다. 한 번 더 슬라이드해서 32를 만들까? 아니면 지금 있는 16짜리 카드를 써야 할까?"</em></p>
+</blockquote>
 <hr />
-<h2 id="_3">문서 구조</h2>
+<h2 id="_3">코어 루프</h2>
+<div class="highlight"><pre><span></span><code>스토리 챕터 진행
+    ↓
+전투 돌입 — 보드 초기화 + 핸드덱 드로우
+    ↓
+보드 슬라이드 (행동 카운트 소모)
+    ↓
+목표 숫자 타일 완성 → 카드 발동
+    ↓
+적 카운트 0 도달 → 적 행동 실행
+    ↓
+[반복] 적 전멸 → 전투 승리 → 카드 보상 획득
+    ↓
+거점 귀환 → 덱 편집 / 캐릭터 강화
+    ↓
+다음 챕터 진입
+</code></pre></div>
+<hr />
+<h2 id="_4">전투 시스템</h2>
+<h3 id="_5">보드 슬라이드와 행동 카운트</h3>
+<div class="highlight"><pre><span></span><code>[ 에너지 보드 ]          [ 적 행동 카운트 ]
+
+┌────┬────┬────┬────┐    고블린 검사   ▶ 3
+│  2 │    │  4 │    │    오크 마법사   ▶ 1  ← 다음 턴 공격!
+├────┼────┼────┼────┤    보스 드래곤   ▶ 5
+│    │  2 │    │  4 │
+├────┼────┼────┼────┤
+│  4 │    │  2 │    │
+├────┼────┼────┼────┤
+│    │  4 │    │  2 │
+└────┴────┴────┴────┘
+</code></pre></div>
+<ul>
+<li>플레이어가 보드를 <strong>1회 슬라이드</strong>할 때마다 <strong>모든 적의 카운트가 1 감소</strong></li>
+<li>카운트가 0인 적은 <strong>즉시 예고된 행동 실행</strong> 후 카운트 리셋</li>
+<li>카드 발동은 카운트 소모 없음 — 타일이 준비된 순간 언제든 발동 가능</li>
+</ul>
+<h3 id="_6">스킬 카드와 발동 조건</h3>
+<ul>
+<li>출전 캐릭터의 스킬 카드를 합산한 덱에서 매 전투 초기 <strong>5장 드로우</strong> — 핸드덱 구성</li>
+<li>각 카드에는 <strong>발동 숫자</strong>가 표시됨</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;">발동 숫자</th>
+<th style="text-align: center;">스킬 등급</th>
+<th>예시</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;">4</td>
+<td style="text-align: center;">기본</td>
+<td>단일 약공격, 소량 방어막</td>
+</tr>
+<tr>
+<td style="text-align: center;">8</td>
+<td style="text-align: center;">일반</td>
+<td>단일 공격, 디버프 1개</td>
+</tr>
+<tr>
+<td style="text-align: center;">16</td>
+<td style="text-align: center;">강화</td>
+<td>중간 공격, 광역 디버프, 아군 회복</td>
+</tr>
+<tr>
+<td style="text-align: center;">32</td>
+<td style="text-align: center;">강력</td>
+<td>강한 광역 공격, 파티 전체 방어막</td>
+</tr>
+<tr>
+<td style="text-align: center;">64</td>
+<td style="text-align: center;">필살</td>
+<td>캐릭터 전용 필살기</td>
+</tr>
+<tr>
+<td style="text-align: center;">128</td>
+<td style="text-align: center;">초월</td>
+<td>전투 판도를 뒤집는 초강력 효과</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>보드에 해당 숫자 타일이 존재하면 <strong>타일 소모 → 카드 발동</strong></li>
+<li>같은 숫자로 발동 가능한 카드가 여러 장이면 원하는 카드를 선택</li>
+</ul>
+<h3 id="_7">적 행동 예고</h3>
+<ul>
+<li>모든 적은 항상 <strong>다음 행동</strong>을 공개 표시</li>
+<li>예: "오크 마법사 — 카운트 1 — 전체 공격 12 예고"</li>
+<li>플레이어는 이 예고를 보고 남은 슬라이드 횟수와 타일 상황을 계산해 우선순위 결정</li>
+</ul>
+<h3 id="_8">핵심 긴장 구조</h3>
+<div class="highlight"><pre><span></span><code>슬라이드를 많이 할수록
+    → 높은 숫자 타일 완성 가능 → 강력한 카드 발동
+    → 그러나 적의 카운트가 빠르게 줄어듦 → 적 행동 더 빨리 옴
+
+슬라이드를 아낄수록
+    → 적 행동을 늦출 수 있음
+    → 그러나 낮은 숫자 카드만 쓸 수 있음 → 전투가 길어짐
+</code></pre></div>
+<h3 id="_9">보드 위기 상황</h3>
+<ul>
+<li>보드가 꽉 차면 슬라이드 시 새 타일이 생성되지 않음</li>
+<li>슬라이드해도 타일이 이동하지 않으면 <strong>행동 불능</strong> — 카드 발동도 슬라이드도 막힘</li>
+<li>보드 관리 실패 = 전략 붕괴의 직접 원인</li>
+</ul>
+<h3 id="_10">파티 연계 발동</h3>
+<ul>
+<li>같은 턴(슬라이드 없이 연속)에 서로 다른 캐릭터의 카드를 연속 발동하면 <strong>연계 보너스</strong></li>
+<li>예: A 캐릭터 16 카드 → B 캐릭터 16 카드 연속 발동 → 추가 광역 피해</li>
+<li>연계는 타일 2개를 한 번에 소모하므로 보드 계획이 필요</li>
+</ul>
+<hr />
+<h2 id="_11">성장 시스템</h2>
+<h3 id="_12">덱 성장 (챕터 내 — 챕터 클리어 시 리셋)</h3>
+<ul>
+<li>전투 보상: 카드 3장 중 1장 선택 → 덱에 추가</li>
+<li>카드 강화: 같은 카드 2장 합성 → 발동 숫자 감소 (예: 16 → 12) 또는 효과 강화</li>
+<li>챕터 클리어 시 획득한 카드 전부 초기화</li>
+</ul>
+<h3 id="_13">챕터 패시브 (챕터 내 — 챕터 클리어 시 리셋)</h3>
+<p>챕터 진행 중 레벨업 시 보드·전투 관련 패시브 선택. 선택한 패시브는 챕터 내 이후 전투에 즉시 적용. 챕터 클리어 시 초기화.</p>
+<table>
+<thead>
+<tr>
+<th>패시브</th>
+<th>효과</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>선제 타일</td>
+<td>전투 시작 시 보드에 4 타일 2개 추가 생성</td>
+</tr>
+<tr>
+<td>타일 절약</td>
+<td>카드 발동 후 소모 타일 수치의 절반을 보드에 반환</td>
+</tr>
+<tr>
+<td>카운트 지연</td>
+<td>전투 시작 시 모든 적 카운트 +1</td>
+</tr>
+<tr>
+<td>연계 전문</td>
+<td>연계 발동 보너스 피해 +50%</td>
+</tr>
+</tbody>
+</table>
+<h3 id="_14">유물 (챕터 내 — 챕터 클리어 시 리셋)</h3>
+<p>챕터 보스 처치 시 유물 획득 → 보드 규칙 또는 카드 조건을 변경. 챕터 클리어 시 초기화.</p>
+<table>
+<thead>
+<tr>
+<th>유물</th>
+<th>효과</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>시간의 모래</td>
+<td>특정 카드 발동 시 모든 적 카운트 +1</td>
+</tr>
+<tr>
+<td>황금 나침반</td>
+<td>슬라이드 3회마다 원하는 위치에 타일 1개 지정 생성</td>
+</tr>
+<tr>
+<td>공명석</td>
+<td>64 이상 타일 소모 시 추가로 핸드덱 1장 드로우</td>
+</tr>
+</tbody>
+</table>
+<h3 id="_15">유저 레벨 (영구 성장)</h3>
+<ul>
+<li>챕터 플레이로 경험치를 획득하며, 유저 레벨이 상승하면 챕터에서 등장하는 유물의 종류가 영구적으로 확장된다.</li>
+<li>승패 여부와 무관하게 경험치 지급.</li>
+</ul>
+<h3 id="_16">장비 (영구 성장)</h3>
+<ul>
+<li>아웃게임 상점 또는 뽑기를 통해 캐릭터별 장비를 획득한다.</li>
+<li>챕터 리셋과 무관하게 영구 유지되며 캐릭터 기본 스탯에 영향을 준다. (세부 스탯 미정)</li>
+</ul>
+<hr />
+<h2 id="_17">패키지 게임 특성</h2>
+<table>
+<thead>
+<tr>
+<th>요소</th>
+<th>설계 방향</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>엔딩 구조</td>
+<td>챕터 클리어 누적 → 최종 챕터 보스 격파 시 엔딩. 수집 요소에 따라 엔딩 분기</td>
+</tr>
+<tr>
+<td>학습 곡선</td>
+<td>초반은 낮은 카운트 적 + 낮은 숫자 카드 위주 → 후반 챕터에서 짧은 카운트 적 + 높은 숫자 카드 요구</td>
+</tr>
+<tr>
+<td>전략 깊이</td>
+<td>슬라이드 횟수 계산 + 핸드덱 우선순위 + 적 행동 예고 대응이 동시에 맞물림</td>
+</tr>
+<tr>
+<td>재플레이 유인</td>
+<td>덱 방향 (저숫자 다발 vs. 고숫자 필살) + 패시브 선택에 따라 완전히 다른 플레이 스타일</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="_18">문서 구조</h2>
 <table>
 <thead>
 <tr>
