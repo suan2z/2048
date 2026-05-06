@@ -8,13 +8,9 @@
       
       
       
-        <link rel="canonical" href="https://suan2z.github.io/2048/schema/">
+        <link rel="canonical" href="https://suan2z.github.io/2048/_plan_phase1/">
       
       
-        <link rel="prev" href="../ux/">
-      
-      
-        <link rel="next" href="../resources/">
       
       
         
@@ -25,7 +21,7 @@
     
     
       
-        <title>스키마 설계 - 2048 기획서</title>
+        <title>1단계 구현 기획 문서 계획 - 2048 기획서</title>
       
     
     
@@ -76,7 +72,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#_1" class="md-skip">
+        <a href="#1" class="md-skip">
           콘텐츠로 이동
         </a>
       
@@ -112,7 +108,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              스키마 설계
+              1단계 구현 기획 문서 계획
             
           </span>
         </div>
@@ -239,11 +235,9 @@
   
   
   
-    
   
-  
-    <li class="md-tabs__item md-tabs__item--active">
-      <a href="./" class="md-tabs__link">
+    <li class="md-tabs__item">
+      <a href="../schema/" class="md-tabs__link">
         
   
   
@@ -536,37 +530,10 @@
       
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    스키마 설계
-  
-
-    
-  </span>
-  
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../schema/" class="md-nav__link">
         
   
   
@@ -582,70 +549,6 @@
   
 
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="목차">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      목차
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#_2" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        구조체 목록
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#erd" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        ERD
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#_3" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        구조체 상세
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#_4" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        향후 추가 예정 구조체
-      
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -932,418 +835,393 @@
 
 
 
-<h1 id="_1">스키마 설계</h1>
+<h1 id="1">1단계 구현 기획 문서 계획</h1>
 <blockquote>
-<p>현재 문서는 <strong>1단계 — 보드 시스템</strong> 구현에 필요한 데이터 구조만 정의합니다.<br />
-카드·전투·적 AI·파티·성장 시스템의 스키마는 각 시스템 문서 완성 후 추가될 예정입니다.<br />
-구조체 동작 상세는 <a href="../systems/board/"><code>docs/systems/board.md</code></a>를 참조하십시오.</p>
+<p>작성일: 2026-05-06<br />
+대상 구현 기간: 05/11 – 05/22 (보드 시스템)<br />
+기준 일정: <code>docs/schedule.md</code> 1단계</p>
 </blockquote>
 <hr />
-<h2 id="_2">구조체 목록</h2>
+<h2 id="1_1">1. 기존 문서에서 이미 정의된 내용</h2>
+<h3 id="docssystemsoverviewmd"><code>docs/systems/overview.md</code> — 보드 시스템 섹션</h3>
+<p>아래 항목은 <code>overview.md</code>에 명확히 서술되어 있어 재작성 불필요.</p>
 <table>
 <thead>
 <tr>
-<th>구조체</th>
-<th>분류</th>
-<th>설명</th>
+<th>항목</th>
+<th>정의 내용</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><a href="#boardstate"><code>BoardState</code></a></td>
-<td>런타임 상태</td>
-<td>전투 중 보드 전체 상태를 관리하는 최상위 구조체</td>
+<td>보드 기본 크기</td>
+<td>4×4 (16칸). 유물·패시브에 의해 확장 가능</td>
 </tr>
 <tr>
-<td><a href="#tile"><code>Tile</code></a></td>
-<td>연산 임시</td>
-<td>슬라이드 연산 중 타일 단위 데이터를 표현하는 임시 구조체</td>
+<td>슬라이드 동작</td>
+<td>지정 방향으로 모든 타일이 밀림. 인접한 동일 숫자 타일은 병합되어 두 배 값이 됨</td>
 </tr>
 <tr>
-<td><a href="#stageconfig"><code>StageConfig</code></a></td>
-<td>정적 설정</td>
-<td>스테이지별 보드 관련 설정값. 전투 시작 시 <code>BoardState</code>에 주입</td>
+<td>새 타일 생성 타이밍</td>
+<td>슬라이드 1회 후 빈 칸 중 무작위 1칸에 생성</td>
 </tr>
 <tr>
-<td><a href="#tilespawnconfig"><code>TileSpawnConfig</code></a></td>
-<td>정적 설정</td>
-<td><code>StageConfig</code>에 포함되는 타일 생성 규칙</td>
+<td>새 타일 후보 값</td>
+<td>2 또는 4</td>
+</tr>
+<tr>
+<td>슬라이드 횟수 제한</td>
+<td>턴당 제한 존재 (기본값 미정)</td>
+</tr>
+<tr>
+<td>타일 소모 조건</td>
+<td>카드 발동 숫자와 정확히 일치해야 소모. 상위 숫자 대체 불가</td>
+</tr>
+<tr>
+<td>행동 불능 조건</td>
+<td>보드가 꽉 차서 슬라이드해도 어떤 타일도 이동하지 않는 경우</td>
+</tr>
+<tr>
+<td>행동 불능 효과</td>
+<td>슬라이드와 카드 발동 모두 차단</td>
+</tr>
+<tr>
+<td>유효 슬라이드 기준</td>
+<td>병합이 없더라도 타일이 물리적으로 이동했으면 유효. 카운트 소모 + 새 타일 생성 발생</td>
+</tr>
+</tbody>
+</table>
+<h3 id="docsindexmd"><code>docs/index.md</code> — 전투 시스템 보드 관련 내용</h3>
+<table>
+<thead>
+<tr>
+<th>항목</th>
+<th>정의 내용</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>보드 위기 상황</td>
+<td>보드가 꽉 차면 슬라이드 시 새 타일이 생성되지 않음 (overview.md와 일부 상충 — 아래 미결 사항 참고)</td>
+</tr>
+<tr>
+<td>슬라이드의 적 카운트 영향</td>
+<td>슬라이드는 적 행동 카운트에 영향을 주지 않음</td>
 </tr>
 </tbody>
 </table>
 <hr />
-<h2 id="erd">ERD</h2>
-<div class="highlight"><pre><span></span><code>┌──────────────────────────┐          ┌────────────────────────────────┐
-│        StageConfig       │          │          TileSpawnConfig        │
-├──────────────────────────┤  1 ── 1  ├────────────────────────────────┤
-│ maxSlides: number        │──────────│ values:  number[]              │
-│ tileSpawnConfig          │          │ weights: number[]              │
-└──────────────────────────┘          └────────────────────────────────┘
-            │ 전투 시작 시 주입
-            ▼
-┌──────────────────────────────────────────────────────────┐
-│                        BoardState                        │
-├──────────────────────────────────────────────────────────┤
-│ board:           number[][]  (4×4, 빈 칸 = 0)           │
-│ slideCount:      number                                  │
-│ maxSlides:       number      ← StageConfig에서 주입      │
-│ isSlideBlocked:  boolean                                 │
-└──────────────────────────────────────────────────────────┘
-            │ 슬라이드 연산 시작 시 변환
-            ▼
-┌──────────────────────────┐
-│           Tile           │
-├──────────────────────────┤   슬라이드 완료 후
-│ value:           number  │──────────────────▶ 정수값만 board[][]에 반환
-│ mergedThisTurn:  boolean │   mergedThisTurn 전체 false 초기화
-└──────────────────────────┘
+<h2 id="2-1">2. 1단계 구현 항목별 문서화 상태</h2>
+<table>
+<thead>
+<tr>
+<th>구현 항목</th>
+<th>문서화 상태</th>
+<th>비고</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>4×4 격자 데이터 구조 및 렌더링</td>
+<td>부분 정의</td>
+<td>보드 크기·타일 값 목록 언급됨. <strong>데이터 구조(배열 형태, 타일 객체 속성, 빈 칸 표현 방식)는 미정의</strong></td>
+</tr>
+<tr>
+<td>상·하·좌·우 슬라이드 로직 (이동 + 병합)</td>
+<td>규칙 수준 정의</td>
+<td>슬라이드 방향·병합 배율 명시됨. <strong>병합 우선순위(슬라이드 방향 기준 순서), 1회 슬라이드에서 연쇄 병합 허용 여부는 미정의</strong></td>
+</tr>
+<tr>
+<td>슬라이드 후 랜덤 빈 칸에 2/4 타일 생성</td>
+<td>부분 정의</td>
+<td>생성 타이밍·값 후보 명시됨. <strong>2와 4의 생성 확률 비율 미정</strong></td>
+</tr>
+<tr>
+<td>턴당 슬라이드 횟수 제한 처리</td>
+<td>규칙 언급만</td>
+<td>제한 존재 확인됨. <strong>기본 횟수값, 소진 시 동작(슬라이드 입력 차단 여부), 횟수 리셋 타이밍 미정</strong></td>
+</tr>
+<tr>
+<td>행동 불능 판정</td>
+<td>조건·효과 정의</td>
+<td>조건과 효과 모두 명시됨. <strong>판정 시점(슬라이드 시도 시점인지 슬라이드 횟수 소진 후인지), 해제 조건 미정</strong></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="3">3. 구현 전 반드시 확정해야 할 미결 사항</h2>
+<h3 id="3-a">3-A. 슬라이드 횟수 관련</h3>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>미결 항목</th>
+<th>선택지 예시</th>
+<th>영향 범위</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td><strong>턴당 슬라이드 기본 횟수</strong></td>
+<td>~~3, 4, 5 중 선택~~ <strong>→ 스테이지별로 설정. 스테이지 기획 시 결정</strong></td>
+<td>핵심 밸런스. 게임 전체 난이도 곡선에 직결</td>
+</tr>
+<tr>
+<td>2</td>
+<td><strong>슬라이드 횟수 소진 시 동작</strong></td>
+<td>~~(a) 입력 자체를 차단 / (b) 슬라이드는 가능하나 새 타일 미생성~~ <strong>→ 0이 되면 슬라이드 입력 차단. 액션 버튼만 눌러야 함</strong></td>
+<td>구현 방식과 UX에 영향</td>
+</tr>
+<tr>
+<td>3</td>
+<td><strong>횟수 리셋 타이밍</strong></td>
+<td>~~(a) 액션 버튼 누른 뒤 / (b) 새 핸드 드로우 후~~ <strong>→ 새 핸드 드로우 후 리셋</strong></td>
+<td>해소됨</td>
+</tr>
+<tr>
+<td>4</td>
+<td><strong>패시브/유물에 의한 횟수 증감 방식</strong></td>
+<td>절대값(+2) vs. 배율(×1.5)</td>
+<td>성장 시스템과의 인터페이스 설계에 영향</td>
+</tr>
+</tbody>
+</table>
+<h3 id="3-b">3-B. 타일 생성 관련</h3>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>미결 항목</th>
+<th>선택지 예시</th>
+<th>영향 범위</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>5</td>
+<td><strong>2 타일과 4 타일의 생성 확률 비율</strong></td>
+<td>~~90%:10%, 80%:20%, 75%:25%~~ <strong>→ 기본은 2 타일만 생성. 스테이지/캐릭터 특성으로 4 타일 생성 추가 가능 (초기에는 기본만)</strong></td>
+<td>밸런스. 스테이지·캐릭터 설계 시 확장</td>
+</tr>
+<tr>
+<td>6</td>
+<td><strong>전투 시작 시 보드 초기 상태</strong></td>
+<td>~~(a) 완전 빈 보드 / (b) 2 타일 2~4개 배치 후 시작~~ <strong>→ 완전 빈 보드</strong></td>
+<td>해소됨</td>
+</tr>
+<tr>
+<td>7</td>
+<td><strong>보드가 꽉 찬 상태에서의 슬라이드 후 타일 생성</strong></td>
+<td>~~(a) 병합으로 빈 칸이 생기면 생성 / (b) 원래 빈 칸이 없으면 미생성~~ <strong>→ (a) 채택. 슬라이드 후 빈 칸이 있으면 생성, 없으면 미생성. index.md 수정 완료</strong></td>
+<td>해소됨</td>
+</tr>
+</tbody>
+</table>
+<h3 id="3-c">3-C. 병합 로직 관련</h3>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>미결 항목</th>
+<th>선택지 예시</th>
+<th>영향 범위</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>8</td>
+<td><strong>1회 슬라이드에서 연쇄 병합 허용 여부</strong></td>
+<td>~~(a) 표준 2048 규칙: 이미 병합된 타일은 같은 슬라이드 내에서 재병합 불가 / (b) 연쇄 병합 허용~~ <strong>→ 표준 2048 규칙 채택. 연쇄 병합 불허</strong></td>
+<td>해소됨</td>
+</tr>
+<tr>
+<td>9</td>
+<td><strong>슬라이드 방향별 병합 처리 순서</strong></td>
+<td>~~(a) 슬라이드 방향 기준 앞에서 뒤 순서로 처리 (표준 2048) / (b) 별도 규칙~~ <strong>→ 표준 2048 규칙 채택</strong></td>
+<td>해소됨</td>
+</tr>
+</tbody>
+</table>
+<h3 id="3-d">3-D. 행동 불능 관련</h3>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>미결 항목</th>
+<th>선택지 예시</th>
+<th>영향 범위</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>10</td>
+<td><strong>슬라이드 불능 판정 시점</strong></td>
+<td>~~(a) 슬라이드 시도 직후 / (b) 횟수 소진 시 / (c) 모든 방향 불가 시점~~ <strong>→ 슬라이드 시도 직후 이동 없음 감지 시 슬라이드 입력만 차단</strong></td>
+<td>해소됨</td>
+</tr>
+<tr>
+<td>11</td>
+<td><strong>슬라이드 불능 해제 조건</strong></td>
+<td>~~(a) 즉시 패배 / (b) 유물·패시브로 강제 해제~~ <strong>→ 카드 발동으로 타일이 소모된 뒤 슬라이드 가능 상태가 되면 자동 해제. 액션 버튼으로 턴 진행 가능</strong></td>
+<td>해소됨</td>
+</tr>
+<tr>
+<td>12</td>
+<td><strong>슬라이드 불능 시 적 행동 처리</strong></td>
+<td>~~(a) 카운트 감소 없음 / (b) 즉시 패배~~ <strong>→ 액션 버튼으로 턴을 정상 진행하므로 적 카운트 정상 감소</strong></td>
+<td>해소됨</td>
+</tr>
+</tbody>
+</table>
+<h3 id="3-e">3-E. 문서 간 기술 불일치 — 확인 필요</h3>
+<p><code>index.md</code>와 <code>overview.md</code> 사이에 아래 표현이 상충한다. 구현 전 하나로 통일해야 한다.</p>
+<table>
+<thead>
+<tr>
+<th>항목</th>
+<th><code>index.md</code> 기술</th>
+<th><code>overview.md</code> 기술</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>보드가 꽉 찼을 때 슬라이드 결과</td>
+<td>"새 타일이 생성되지 않음" (슬라이드 자체는 가능)</td>
+<td>"슬라이드해도 어떤 타일도 이동하지 않으면 행동 불능" (조건이 다름)</td>
+</tr>
+</tbody>
+</table>
+<p>→ 실제로 두 상황은 별개다: (상황 A) 보드가 꽉 찼지만 병합이 일어나는 경우 / (상황 B) 어느 방향으로도 타일 이동이 없는 경우. 두 상황을 구분하여 각각의 동작을 명시해야 한다.</p>
+<hr />
+<h2 id="4">4. 작성이 필요한 문서와 섹션 계획</h2>
+<h3 id="1_2">우선순위 높음 — 1단계 구현에 직접 필요</h3>
+<h4 id="4-1-docssystemsboardmd">4-1. <code>docs/systems/board.md</code> 신규 작성 (최우선)</h4>
+<p>기존 <code>overview.md</code> 보드 섹션의 규칙을 포함하되, 구현자가 코드 작성에 바로 참조할 수 있는 수준으로 상세화한다.</p>
+<p>작성할 섹션:</p>
+<div class="highlight"><pre><span></span><code>1. 보드 데이터 구조
+   - 4×4 2차원 배열 표현 방식
+   - 타일 단위 데이터 (값, 위치, 이번 슬라이드에서 병합 여부 플래그)
+   - 빈 칸 표현 방식 (null / 0 / 별도 타입)
+
+2. 슬라이드 알고리즘 명세
+   - 4방향별 처리 순서 정의 (예: 왼쪽 슬라이드 시 각 행을 왼쪽부터 순회)
+   - 타일 이동 로직 (빈 칸 채우기 순서)
+   - 병합 로직 (같은 값 감지 → 병합 → 병합 완료 플래그 설정)
+   - 연쇄 병합 허용 여부 명시 [미결 #8 확정 후 작성]
+   - 유효 슬라이드 판정 로직 (이동 전후 보드 상태 비교)
+
+3. 새 타일 생성 규칙
+   - 생성 트리거: 유효 슬라이드 완료 직후
+   - 생성 위치: 빈 칸 목록에서 무작위 1칸
+   - 생성 값: 2 또는 4 (확률 비율 [미결 #5 확정 후 작성])
+   - 보드 만원 상태에서의 처리 [미결 #7 확정 후 작성]
+
+4. 슬라이드 횟수 제한
+   - 기본 횟수 값 [미결 #1 확정 후 작성]
+   - 횟수 카운터 감소 타이밍 (유효 슬라이드 시에만 감소 vs. 시도마다 감소)
+   - 횟수 소진 시 입력 처리 [미결 #2 확정 후 작성]
+   - 횟수 리셋 타이밍 [미결 #3 확정 후 작성]
+
+5. 행동 불능 판정
+   - 판정 조건: 4방향 모두에서 유효 슬라이드가 불가능한 상태
+   - 판정 시점 [미결 #10 확정 후 작성]
+   - 행동 불능 상태의 효과 (슬라이드 입력 차단, 카드 발동 차단)
+   - 해제 조건 [미결 #11 확정 후 작성]
+   - 행동 불능 시 적 행동 처리 [미결 #12 확정 후 작성]
+
+6. 전투 시작 시 보드 초기화
+   - 초기 보드 상태 [미결 #6 확정 후 작성]
+   - 초기화 순서 (빈 보드 → 초기 타일 배치 → 핸드 드로우와의 순서 관계)
+
+7. 예외 케이스 목록
+   - index.md / overview.md 불일치 항목 통합 정리 [미결 3-E 확정 후 작성]
+   - 보드 꽉 참 + 슬라이드 시 병합 발생 케이스
+   - 보드 꽉 참 + 슬라이드 시 병합도 없는 케이스 (행동 불능)
 </code></pre></div>
-<p><strong>관계 설명</strong></p>
-<table>
-<thead>
-<tr>
-<th>관계</th>
-<th>설명</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>StageConfig</code> → <code>BoardState</code></td>
-<td>전투 시작 시 <code>StageConfig.maxSlides</code>가 <code>BoardState.maxSlides</code>로 주입된다. <code>StageConfig</code> 자체는 런타임에 보존되지 않는다.</td>
-</tr>
-<tr>
-<td><code>StageConfig</code> → <code>TileSpawnConfig</code></td>
-<td><code>StageConfig</code>가 <code>tileSpawnConfig</code> 필드로 <code>TileSpawnConfig</code>를 포함한다 (컴포지션).</td>
-</tr>
-<tr>
-<td><code>BoardState.board</code> → <code>Tile</code></td>
-<td>슬라이드 연산 진입 시 <code>board[r][c]</code> 정수값을 <code>Tile</code> 객체로 변환하여 처리한다. 연산 완료 후 다시 정수값으로 평탄화한다.</td>
-</tr>
-</tbody>
-</table>
-<hr />
-<h2 id="_3">구조체 상세</h2>
-<h3 id="boardstate">BoardState</h3>
-<p>전투 중 보드 전체 상태를 관리하는 최상위 런타임 구조체.<br />
-슬라이드 처리, 횟수 관리, 불능 감지 등 모든 보드 연산의 기준 데이터를 보유한다.</p>
-<blockquote>
-<p>상세 동작: <a href="../systems/board/"><code>docs/systems/board.md</code> §2-4. BoardState 구조체</a></p>
-</blockquote>
-<table>
-<thead>
-<tr>
-<th>필드</th>
-<th>타입</th>
-<th>초기값</th>
-<th>설명</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>board</code></td>
-<td><code>number[][]</code></td>
-<td>4×4 전체 <code>0</code></td>
-<td>4행 × 4열 정수 배열. 빈 칸은 <code>0</code>, 타일이 있는 칸은 <code>2</code> 이상의 양의 정수.</td>
-</tr>
-<tr>
-<td><code>slideCount</code></td>
-<td><code>number</code></td>
-<td><code>maxSlides</code> 값</td>
-<td>현재 턴에 남은 슬라이드 횟수. 유효 슬라이드 확정 시 1 감소. <code>0</code>이 되면 슬라이드 입력 차단.</td>
-</tr>
-<tr>
-<td><code>maxSlides</code></td>
-<td><code>number</code></td>
-<td><code>StageConfig.maxSlides</code></td>
-<td>스테이지에서 설정된 턴당 최대 슬라이드 횟수. 액션 버튼 처리 완료 → 새 핸드 드로우 완료 후 <code>slideCount</code>를 이 값으로 초기화. 코드에 하드코딩하지 않는다.</td>
-</tr>
-<tr>
-<td><code>isSlideBlocked</code></td>
-<td><code>boolean</code></td>
-<td><code>false</code></td>
-<td>슬라이드 불능 상태 여부. 4방향 모두 무효 슬라이드일 때 <code>true</code>. <code>true</code>이면 슬라이드 입력 차단. <code>slideCount === 0</code>에 의한 차단과 독립적으로 동작.</td>
-</tr>
-</tbody>
-</table>
-<p><strong>제약 조건</strong></p>
-<table>
-<thead>
-<tr>
-<th>항목</th>
-<th>규칙</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>board</code> 크기</td>
-<td>기본 4×4. 유물·패시브에 의해 확장 가능(예: 5×5). 확장 시 배열 크기와 슬라이드 알고리즘 순회 범위를 함께 변경.</td>
-</tr>
-<tr>
-<td><code>board</code> 원소</td>
-<td><code>0</code> 또는 <code>2</code>의 거듭제곱 양의 정수 (<code>2, 4, 8, 16, 32, 64, 128, …</code>). 다른 값은 허용하지 않는다.</td>
-</tr>
-<tr>
-<td><code>slideCount</code></td>
-<td><code>0</code> 이상 <code>maxSlides</code> 이하. 음수가 되지 않도록 감소 전 <code>0</code> 여부를 확인.</td>
-</tr>
-<tr>
-<td><code>maxSlides</code></td>
-<td>양의 정수. <code>0</code>이면 슬라이드 불가 스테이지로 동작. 스테이지 데이터에서 주입.</td>
-</tr>
-</tbody>
-</table>
-<hr />
-<h3 id="tile">Tile</h3>
-<p>슬라이드 연산 중에만 사용하는 임시 구조체.<br />
-<code>board[r][c]</code> 정수값을 연산 진입 시 <code>Tile</code> 객체로 변환하고, 슬라이드 완료 후 다시 정수값으로 평탄화한다.</p>
-<blockquote>
-<p>상세 동작: <a href="../systems/board/"><code>docs/systems/board.md</code> §2-2. 타일 단위 데이터</a></p>
-</blockquote>
-<table>
-<thead>
-<tr>
-<th>필드</th>
-<th>타입</th>
-<th>초기값</th>
-<th>설명</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>value</code></td>
-<td><code>number</code></td>
-<td>변환 원본 정수</td>
-<td>타일의 숫자 값. <code>2</code>의 거듭제곱 (<code>2, 4, 8, 16, 32, 64, 128, …</code>). 병합 시 두 배가 된다.</td>
-</tr>
-<tr>
-<td><code>mergedThisTurn</code></td>
-<td><code>boolean</code></td>
-<td><code>false</code></td>
-<td>현재 슬라이드에서 이미 병합된 타일이면 <code>true</code>. 연쇄 병합 차단에 사용. 슬라이드 1회 완료 시 보드 전체에서 <code>false</code>로 초기화.</td>
-</tr>
-</tbody>
-</table>
-<p><strong>사용 흐름</strong></p>
-<div class="highlight"><pre><span></span><code>슬라이드 연산 진입
-  → board[r][c] (정수) → Tile { value, mergedThisTurn: false } 변환
-  → 이동 + 병합 처리
-      병합 발생 시: 앞쪽 타일 value × 2, mergedThisTurn = true
-                   뒤쪽 타일 제거
-  → 결과 배열을 board[r][c] (정수) 로 평탄화
-  → 보드 전체 Tile.mergedThisTurn = false 초기화
+<h4 id="4-2-docsschemamd">4-2. <code>docs/schema.md</code> — 보드 관련 데이터 구조 섹션 추가</h4>
+<p>현재 완전 플레이스홀더 상태. 1단계 구현에 필요한 범위만 우선 작성한다.</p>
+<p>작성할 섹션:</p>
+<div class="highlight"><pre><span></span><code>BoardState
+  - board: number[][] (4×4, 빈 칸은 0)
+  - slideCount: number (현재 턴 남은 슬라이드 횟수)
+  - maxSlides: number (턴당 최대 슬라이드 횟수)
+  - isActionLocked: boolean (행동 불능 여부)
+
+Tile (슬라이드 연산 중 임시 구조)
+  - value: number
+  - mergedThisTurn: boolean (이번 슬라이드에서 병합된 타일인지)
 </code></pre></div>
-<p><strong>제약 조건</strong></p>
+<h3 id="_1">우선순위 중간 — 미결 사항 결정을 위한 보조 문서</h3>
+<h4 id="4-3-docssystemsboardmd">4-3. <code>docs/systems/board.md</code> 내 "미결 사항 결정 로그" 섹션</h4>
+<p>위 3항에서 식별한 미결 사항(#1~#12)을 보드 문서 하단에 표로 관리한다. 구현 시작 전까지 기획자가 각 항목을 결정하고 이 표를 채운다.</p>
+<div class="highlight"><pre><span></span><code>| # | 항목 | 결정값 | 결정일 | 결정 근거 |
+|---|------|--------|--------|-----------|
+| 1 | 턴당 슬라이드 기본 횟수 | (미정) | - | - |
+...
+</code></pre></div>
+<hr />
+<h2 id="5">5. 작성 불필요 / 현재 상태 유지</h2>
 <table>
 <thead>
 <tr>
-<th>항목</th>
-<th>규칙</th>
+<th>문서</th>
+<th>이유</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>병합 조건</td>
-<td><code>value</code>가 동일하고, 두 타일 모두 <code>mergedThisTurn === false</code>일 때만 병합.</td>
+<td><code>docs/systems/overview.md</code> 보드 섹션</td>
+<td>1단계 구현을 지원하는 수준으로 이미 충분히 작성됨. 미결 사항 확정 후 보완</td>
 </tr>
 <tr>
-<td>연쇄 병합</td>
-<td>불허. <code>mergedThisTurn === true</code>인 타일은 같은 슬라이드 내에서 재병합 대상이 되지 않는다.</td>
+<td><code>docs/index.md</code></td>
+<td>개요 수준으로 충분. 다만 overview.md와의 불일치(3-E)는 확정 후 한 쪽을 수정</td>
 </tr>
 <tr>
-<td>빈 칸 표현</td>
-<td><code>Tile</code> 없음(배열에서 제거). 슬라이드 연산 중 빈 칸은 <code>Tile</code> 객체를 생성하지 않고 공간을 비워 둔다.</td>
+<td><code>docs/systems/combat.md</code> 등 2단계 이후 문서</td>
+<td>1단계 범위 외. 2단계 구현 계획 시 작성</td>
 </tr>
 </tbody>
 </table>
 <hr />
-<h3 id="stageconfig">StageConfig</h3>
-<p>스테이지별 보드 관련 설정값을 정의하는 정적 설정 구조체.<br />
-전투 시작 시 <code>BoardState</code>에 값을 주입하고 역할을 마친다.</p>
-<blockquote>
-<p>이 구조체는 보드 관련 항목만 포함합니다. 적 구성, 스토리 이벤트 등 다른 스테이지 설정은 추후 추가될 예정입니다.</p>
-</blockquote>
-<table>
-<thead>
-<tr>
-<th>필드</th>
-<th>타입</th>
-<th>기본값</th>
-<th>설명</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>maxSlides</code></td>
-<td><code>number</code></td>
-<td>스테이지별 기획값</td>
-<td>해당 스테이지의 턴당 최대 슬라이드 횟수. 전투 시작 시 <code>BoardState.maxSlides</code>로 주입된다.</td>
-</tr>
-<tr>
-<td><code>tileSpawnConfig</code></td>
-<td><code>TileSpawnConfig</code></td>
-<td><code>{ values: [2], weights: [1] }</code></td>
-<td>해당 스테이지의 타일 생성 규칙. 상세는 <a href="#tilespawnconfig"><code>TileSpawnConfig</code></a> 참조.</td>
-</tr>
-</tbody>
-</table>
-<p><strong>제약 조건</strong></p>
-<table>
-<thead>
-<tr>
-<th>항목</th>
-<th>규칙</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>maxSlides</code></td>
-<td>양의 정수. <code>0</code> 설정 시 해당 스테이지에서는 슬라이드를 사용할 수 없다.</td>
-</tr>
-<tr>
-<td><code>tileSpawnConfig</code></td>
-<td>반드시 유효한 <code>TileSpawnConfig</code> 인스턴스를 포함해야 한다. <code>null</code> 허용하지 않음.</td>
-</tr>
-</tbody>
-</table>
+<h2 id="6-doc-writer">6. doc-writer 호출 가이드</h2>
+<h3 id="6-1-docssystemsboardmd">6-1. <code>docs/systems/board.md</code> (신규, 최우선)</h3>
+<ul>
+<li><strong>파일</strong>: <code>docs/systems/board.md</code> (신규 생성)</li>
+<li><strong>섹션</strong>: 보드 데이터 구조, 슬라이드 알고리즘 명세, 새 타일 생성 규칙, 슬라이드 횟수 제한, 행동 불능 판정, 전투 시작 시 초기화, 예외 케이스, 미결 사항 결정 로그</li>
+<li><strong>참고 문서</strong>:</li>
+<li><code>docs/systems/overview.md</code> §보드 시스템 (기준 규칙 출처)</li>
+<li><code>docs/index.md</code> §보드 슬라이드와 액션 버튼, §보드 위기 상황 (추가 규칙 및 불일치 항목)</li>
+<li><code>docs/schedule.md</code> §1단계 (구현 항목 체크리스트)</li>
+<li><strong>작성 전 필수 결정 항목</strong>: 미결 #1(슬라이드 기본 횟수), #5(2/4 생성 비율), #6(초기 보드 상태), #7(만원 시 타일 생성), #8(연쇄 병합 여부), #10(불능 판정 시점), #11(불능 해제 조건), #12(불능 시 적 행동)</li>
+<li><strong>주의</strong>: 미결 항목은 <code>[미결 #N — 결정 필요]</code> 표시로 남겨두고 나머지를 먼저 작성한다.</li>
+</ul>
+<h3 id="6-2-docsschemamd">6-2. <code>docs/schema.md</code> 보드 섹션 (부분 작성)</h3>
+<ul>
+<li><strong>파일</strong>: <code>docs/schema.md</code> (기존 파일에 섹션 추가)</li>
+<li><strong>섹션</strong>: BoardState 구조체, Tile 임시 구조체 (1단계 범위만)</li>
+<li><strong>참고 문서</strong>: <code>docs/systems/board.md</code> 작성 후 참조</li>
+<li><strong>작성 조건</strong>: <code>docs/systems/board.md</code>의 미결 사항 중 #1, #8이 확정된 후 작성 권장</li>
+</ul>
 <hr />
-<h3 id="tilespawnconfig">TileSpawnConfig</h3>
-<p>슬라이드 완료 후 새 타일 생성 시 어떤 값의 타일을 어떤 확률로 생성할지를 정의하는 구조체.<br />
-<code>StageConfig</code>에 포함되어 스테이지별로 타일 생성 분포를 다르게 설정할 수 있다.</p>
-<blockquote>
-<p>상세 동작: <a href="../systems/board/"><code>docs/systems/board.md</code> §4-3. 생성 값</a></p>
-</blockquote>
-<table>
-<thead>
-<tr>
-<th>필드</th>
-<th>타입</th>
-<th>기본값</th>
-<th>설명</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>values</code></td>
-<td><code>number[]</code></td>
-<td><code>[2]</code></td>
-<td>생성 가능한 타일 값 목록. 각 원소는 <code>2</code>의 거듭제곱이어야 한다.</td>
-</tr>
-<tr>
-<td><code>weights</code></td>
-<td><code>number[]</code></td>
-<td><code>[1]</code></td>
-<td><code>values</code>의 각 값에 대응하는 생성 가중치. <code>values</code>와 반드시 같은 길이여야 한다. 가중치가 높을수록 해당 값의 타일이 더 자주 생성된다.</td>
-</tr>
-</tbody>
-</table>
-<p><strong>가중치 해석 예시</strong></p>
-<table>
-<thead>
-<tr>
-<th><code>values</code></th>
-<th><code>weights</code></th>
-<th>동작</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>[2]</code></td>
-<td><code>[1]</code></td>
-<td>항상 <code>2</code> 생성 (초기 구현 단계 기본값)</td>
-</tr>
-<tr>
-<td><code>[2, 4]</code></td>
-<td><code>[3, 1]</code></td>
-<td><code>2</code> 75%, <code>4</code> 25% 확률로 생성</td>
-</tr>
-<tr>
-<td><code>[2, 4, 8]</code></td>
-<td><code>[6, 3, 1]</code></td>
-<td><code>2</code> 60%, <code>4</code> 30%, <code>8</code> 10% 확률로 생성</td>
-</tr>
-</tbody>
-</table>
-<p><strong>제약 조건</strong></p>
-<table>
-<thead>
-<tr>
-<th>항목</th>
-<th>규칙</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>배열 길이</td>
-<td><code>values.length === weights.length</code>. 길이가 다르면 오류 처리.</td>
-</tr>
-<tr>
-<td><code>values</code> 원소</td>
-<td><code>2</code>의 거듭제곱인 양의 정수. (<code>2, 4, 8, 16, …</code>).</td>
-</tr>
-<tr>
-<td><code>weights</code> 원소</td>
-<td>양의 정수. <code>0</code> 이하 허용하지 않음.</td>
-</tr>
-<tr>
-<td>최소 항목 수</td>
-<td><code>values</code>는 최소 1개 이상의 원소를 포함해야 한다.</td>
-</tr>
-</tbody>
-</table>
-<hr />
-<h2 id="_4">향후 추가 예정 구조체</h2>
-<p>다음 구조체는 각 시스템 문서 완성 후 이 파일에 추가됩니다.</p>
-<table>
-<thead>
-<tr>
-<th>구조체</th>
-<th>관련 시스템</th>
-<th>참고 문서</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>Card</code></td>
-<td>카드</td>
-<td><code>docs/systems/card.md</code> (작성 예정)</td>
-</tr>
-<tr>
-<td><code>Deck</code></td>
-<td>카드</td>
-<td><code>docs/systems/card.md</code> (작성 예정)</td>
-</tr>
-<tr>
-<td><code>Enemy</code></td>
-<td>적 AI</td>
-<td><code>docs/systems/enemy.md</code> (작성 예정)</td>
-</tr>
-<tr>
-<td><code>Character</code></td>
-<td>파티</td>
-<td><code>docs/systems/party.md</code> (작성 예정)</td>
-</tr>
-<tr>
-<td><code>Relic</code></td>
-<td>성장</td>
-<td><code>docs/systems/growth.md</code> (작성 예정)</td>
-</tr>
-<tr>
-<td><code>PassiveSkill</code></td>
-<td>성장</td>
-<td><code>docs/systems/growth.md</code> (작성 예정)</td>
-</tr>
-<tr>
-<td><code>ChapterProgress</code></td>
-<td>진행</td>
-<td><code>docs/progression.md</code> (작성 예정)</td>
-</tr>
-<tr>
-<td><code>CombatState</code></td>
-<td>전투</td>
-<td><code>docs/systems/combat.md</code> (작성 예정)</td>
-</tr>
-</tbody>
-</table>
+<h2 id="7-1">7. 1단계 착수 전 체크리스트</h2>
+<p>기획자가 구현 시작일(05/11) 전까지 완료해야 할 항목:</p>
+<ul>
+<li>[x] 미결 #1: 턴당 슬라이드 기본 횟수 → 스테이지별 설정</li>
+<li>[x] 미결 #2: 슬라이드 횟수 소진 시 동작 → 0이 되면 슬라이드 입력 차단</li>
+<li>[x] 미결 #3: 횟수 리셋 타이밍 → 새 핸드 드로우 후</li>
+<li>[x] 미결 #5: 타일 생성 → 기본은 2 타일만, 스테이지/캐릭터 특성으로 4 추가 가능</li>
+<li>[x] 미결 #6: 전투 시작 시 초기 보드 상태 → 완전 빈 보드</li>
+<li>[x] 미결 #7: 보드 만원 시 슬라이드 후 타일 생성 → 슬라이드 후 빈 칸 있으면 생성. index.md 수정 완료</li>
+<li>[x] 미결 #8: 연쇄 병합 → 표준 2048 채택 (불허)</li>
+<li>[x] 미결 #9: 병합 처리 순서 → 표준 2048 채택</li>
+<li>[x] 미결 #10: 슬라이드 불능 판정 → 슬라이드 시도 직후 이동 없음 감지, 슬라이드만 차단</li>
+<li>[x] 미결 #11: 슬라이드 불능 해제 → 타일 소모 후 슬라이드 가능 상태 되면 자동 해제</li>
+<li>[x] 미결 #12: 슬라이드 불능 시 적 행동 → 액션 버튼으로 정상 진행, 카운트 정상 감소</li>
+<li>[ ] <code>docs/systems/board.md</code> 초안 작성 완료</li>
+<li>[ ] <code>docs/schema.md</code> BoardState 섹션 작성 완료</li>
+</ul>
 
 
 

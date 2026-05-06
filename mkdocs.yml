@@ -38,6 +38,7 @@ nav:
   - 게임 개요: index.md
   - 게임 세부 시스템:
     - systems/overview.md
+    - 보드 시스템: systems/board.md
   - UI/UX: ux.md
   - 스키마 설계: schema.md
   - 필요 리소스: resources.md
@@ -54,3 +55,5 @@ markdown_extensions:
   - md_in_html
   - pymdownx.superfences
   - tables
+  - toc:
+      toc_depth: 2
