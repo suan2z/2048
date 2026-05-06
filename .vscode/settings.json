@@ -7,5 +7,6 @@
                 "cmd": "python -m mkdocs build"
             }
         ]
-    }
+    },
+    "liveServer.settings.port": 5501
 }

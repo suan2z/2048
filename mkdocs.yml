@@ -41,6 +41,7 @@ nav:
   - UI/UX: ux.md
   - 스키마 설계: schema.md
   - 필요 리소스: resources.md
+  - 일정: schedule.md
   - 백업:
     - 안 A — 카제나 방식 × 패키지 RPG: backup/concept_A.md
     - 안 B — 스테이지 클리어 × 덱 리셋 로그라이크: backup/concept_B.md
