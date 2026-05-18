@@ -25,7 +25,7 @@
     
     
       
-        <title>데이터 시트 - 2048 기획서</title>
+        <title>기획 테이블 시트 - 2048 기획서</title>
       
     
     
@@ -112,7 +112,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              데이터 시트
+              기획 테이블 시트
             
           </span>
         </div>
@@ -261,58 +261,23 @@
   
   
   
+    
   
-    <li class="md-tabs__item">
-      <a href="../schema/" class="md-tabs__link">
-        
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../schema/" class="md-tabs__link">
+          
   
   
     
   
-  스키마 설계
+  데이터
 
-      </a>
-    </li>
-  
-
-      
-        
-  
-  
-  
-  
-    <li class="md-tabs__item">
-      <a href="../enums/" class="md-tabs__link">
-        
-  
-  
+        </a>
+      </li>
     
-  
-  열거형 정의
-
-      </a>
-    </li>
-  
-
-      
-        
-  
-  
-  
-    
-  
-  
-    <li class="md-tabs__item md-tabs__item--active">
-      <a href="./" class="md-tabs__link">
-        
-  
-  
-    
-  
-  데이터 시트
-
-      </a>
-    </li>
   
 
       
@@ -837,6 +802,71 @@
       
   
   
+    
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    데이터
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    데이터
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
   
   
     <li class="md-nav__item">
@@ -859,9 +889,10 @@
     </li>
   
 
-    
-      
-      
+              
+            
+              
+                
   
   
   
@@ -886,9 +917,10 @@
     </li>
   
 
-    
-      
-      
+              
+            
+              
+                
   
   
     
@@ -910,7 +942,7 @@
   <span class="md-ellipsis">
     
   
-    데이터 시트
+    기획 테이블 시트
   
 
     
@@ -928,7 +960,7 @@
   <span class="md-ellipsis">
     
   
-    데이터 시트
+    기획 테이블 시트
   
 
     
@@ -1000,6 +1032,14 @@
     </ul>
   
 </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
       
     </li>
   
@@ -1091,10 +1131,10 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_10" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" >
         
           
-          <label class="md-nav__link" for="__nav_10" id="__nav_10_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="0">
             
   
   
@@ -1112,8 +1152,8 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_10_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_10">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
             <span class="md-nav__icon md-icon"></span>
             
   
@@ -1287,9 +1327,10 @@
 
 
 
-<h1 id="_1">데이터 시트 설계</h1>
+<h1 id="_1">기획 테이블 시트</h1>
+<p><a class="md-button md-button--primary" href="https://docs.google.com/spreadsheets/d/1SRpzgAzrPeH7GlxGkBo3hs83RiYDknOo3uXKJkeRubM/edit" target="_blank">📋 구글 시트 열기</a></p>
 <blockquote>
-<p>Google Sheets(또는 Excel)로 게임 데이터를 편집하고, 변환 스크립트로 JSON을 생성하는 파이프라인을 정의합니다.<br />
+<p>Google Sheets로 게임 데이터를 편집하고, 변환 스크립트로 JSON을 생성하는 파이프라인을 정의합니다.<br />
 JSON 구조 상세는 <a href="../schema/">schema.md</a>를 참조하십시오.</p>
 </blockquote>
 <hr />
@@ -1617,16 +1658,10 @@ JSON 구조 상세는 <a href="../schema/">schema.md</a>를 참조하십시오.<
 <td>카드 표시 이름</td>
 </tr>
 <tr>
-<td><code>triggerNumber</code></td>
-<td>number</td>
-<td><code>16</code></td>
-<td>발동 숫자. <code>4/8/16/32/64/128</code> 중 하나</td>
-</tr>
-<tr>
-<td><code>grade</code></td>
+<td><code>tileRank</code></td>
 <td>enum</td>
 <td><code>ENHANCED</code></td>
-<td><code>triggerNumber</code>에서 파생. 입력 편의용</td>
+<td>발동 타일 등급. <code>BASIC</code> / <code>NORMAL</code> / <code>ENHANCED</code> / <code>POWERFUL</code> / <code>LETHAL</code> / <code>TRANSCENDENT</code></td>
 </tr>
 <tr>
 <td><code>effectType</code></td>
@@ -1671,10 +1706,10 @@ JSON 구조 상세는 <a href="../schema/">schema.md</a>를 참조하십시오.<
 <td><code>BUFF</code>/<code>DEBUFF</code> 전용. 지속 액션 버튼 횟수. 빈 칸이면 영구</td>
 </tr>
 <tr>
-<td><code>upgradedTriggerNumber</code></td>
-<td>number</td>
-<td><code>8</code></td>
-<td>강화 후 대체 발동 숫자. 빈 칸이면 미강화 상태</td>
+<td><code>upgradedTileRank</code></td>
+<td>enum</td>
+<td><code>NORMAL</code></td>
+<td>강화 후 대체 등급. 반드시 <code>tileRank</code>보다 낮은 등급. 빈 칸이면 미강화 상태</td>
 </tr>
 </tbody>
 </table>
@@ -1685,8 +1720,7 @@ JSON 구조 상세는 <a href="../schema/">schema.md</a>를 참조하십시오.<
 <th>id</th>
 <th>ownerCharacterId</th>
 <th>name</th>
-<th style="text-align: center;">triggerNumber</th>
-<th>grade</th>
+<th>tileRank</th>
 <th>effectType</th>
 <th>targetType</th>
 <th style="text-align: center;">damage</th>
@@ -1694,7 +1728,7 @@ JSON 구조 상세는 <a href="../schema/">schema.md</a>를 참조하십시오.<
 <th>buffId</th>
 <th>debuffId</th>
 <th style="text-align: center;">duration</th>
-<th style="text-align: center;">upgradedTriggerNumber</th>
+<th style="text-align: center;">upgradedTileRank</th>
 </tr>
 </thead>
 <tbody>
@@ -1702,7 +1736,6 @@ JSON 구조 상세는 <a href="../schema/">schema.md</a>를 참조하십시오.<
 <td>char_a_atk_01</td>
 <td>char_a</td>
 <td>참격</td>
-<td style="text-align: center;">8</td>
 <td>NORMAL</td>
 <td>ATTACK</td>
 <td>SINGLE_ENEMY</td>
@@ -1717,7 +1750,6 @@ JSON 구조 상세는 <a href="../schema/">schema.md</a>를 참조하십시오.<
 <td>char_a_atk_02</td>
 <td>char_a</td>
 <td>연참</td>
-<td style="text-align: center;">16</td>
 <td>ENHANCED</td>
 <td>ATTACK</td>
 <td>ALL_ENEMIES</td>
@@ -1726,13 +1758,12 @@ JSON 구조 상세는 <a href="../schema/">schema.md</a>를 참조하십시오.<
 <td></td>
 <td></td>
 <td style="text-align: center;"></td>
-<td style="text-align: center;">8</td>
+<td style="text-align: center;">NORMAL</td>
 </tr>
 <tr>
 <td>char_b_heal_01</td>
 <td>char_b</td>
 <td>응급처치</td>
-<td style="text-align: center;">8</td>
 <td>NORMAL</td>
 <td>HEAL</td>
 <td>SINGLE_ALLY</td>
@@ -1747,7 +1778,6 @@ JSON 구조 상세는 <a href="../schema/">schema.md</a>를 참조하십시오.<
 <td>char_c_buff_01</td>
 <td>char_c</td>
 <td>방어 태세</td>
-<td style="text-align: center;">16</td>
 <td>ENHANCED</td>
 <td>BUFF</td>
 <td>ALL_ALLIES</td>
