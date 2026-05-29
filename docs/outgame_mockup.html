@@ -534,7 +534,14 @@
     }
     .c-skill-tab.on { background:var(--card-bg); border-color:var(--accent); color:var(--accent); }
 
-    .c-skill-grid { display:flex; gap:10px; flex-wrap:wrap; }
+    .c-skill-grid {
+      display:flex; gap:10px; flex-wrap:nowrap;
+      overflow-x:auto; overflow-y:visible;
+      padding-bottom:8px;
+    }
+    .c-skill-grid::-webkit-scrollbar { height:4px; }
+    .c-skill-grid::-webkit-scrollbar-track { background:transparent; }
+    .c-skill-grid::-webkit-scrollbar-thumb { background:var(--border2); border-radius:2px; }
     .c-skill-card {
       width:155px; flex-shrink:0;
       background:var(--card-bg); border:1px solid var(--border2); border-radius:10px;
