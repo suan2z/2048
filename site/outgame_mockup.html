@@ -28,10 +28,31 @@
       padding: 10px; gap: 10px;
       font-family: 'Segoe UI', system-ui, sans-serif;
       color: var(--text);
-      overflow: hidden;
+      overflow-x: hidden; overflow-y: auto;
     }
 
     .bs-wrap { display: flex; justify-content: center; width: 100%; }
+
+    /* reference strip */
+    .ref-strip {
+      display:flex; align-items:flex-end; gap:8px;
+      padding:6px 0 2px; overflow-x:auto;
+      max-width:100%;
+    }
+    .ref-strip::-webkit-scrollbar { height:3px; }
+    .ref-strip::-webkit-scrollbar-thumb { background:var(--border2); border-radius:2px; }
+    .ref-strip-label {
+      font-size:10px; color:var(--dim); white-space:nowrap;
+      font-family:'Roboto Mono',monospace; align-self:center;
+      padding-right:4px; flex-shrink:0;
+    }
+    .ref-item { display:flex; flex-direction:column; align-items:center; gap:3px; flex-shrink:0; }
+    .ref-item img {
+      height:90px; width:auto; max-width:160px;
+      border-radius:5px; border:1px solid var(--border2);
+      object-fit:cover; display:block;
+    }
+    .ref-item span { font-size:9px; color:var(--dim); font-family:'Roboto Mono',monospace; }
 
     .bs {
       width: 1280px; height: 720px; flex-shrink: 0;
@@ -700,6 +721,54 @@
       display:flex; align-items:center; justify-content:center;
       font-size:13px; color:var(--dim); cursor:pointer;
     }
+
+    /* ══════════════════════════
+       REFERENCE BELOW (화면별 레퍼런스 — 목업 아래에 크게 표시)
+    ══════════════════════════ */
+    .ref-below {
+      width: 100%; max-width: 1280px;
+      display: flex; flex-direction: column; gap: 12px;
+      padding: 8px 0 50px;
+    }
+    .ref-below-head {
+      display: flex; align-items: center; gap: 8px;
+      font-size: 14px; font-weight: 700; color: var(--accent);
+      padding-bottom: 6px; border-bottom: 1px solid var(--border);
+    }
+    .ref-below-name { color: var(--dim); font-weight: 400; font-size: 12px; }
+    .ref-below-imgs {
+      display: flex; flex-wrap: wrap; gap: 18px; justify-content: center; align-items: flex-start;
+    }
+    .ref-below-item {
+      flex: 1 1 560px; max-width: 1000px;
+      background: var(--panel); border: 1px solid var(--border2); border-radius: 10px;
+      overflow: hidden;
+    }
+    .ref-below-item img {
+      width: 100%; height: auto; display: block; cursor: zoom-in;
+      transition: opacity .15s;
+    }
+    .ref-below-item img:hover { opacity: .85; }
+    .ref-below-cap {
+      font-size: 11px; color: var(--dim); padding: 8px 12px;
+      border-top: 1px solid var(--border); font-family: 'Roboto Mono', monospace;
+    }
+    .ref-below-empty {
+      width: 100%; text-align: center; font-size: 12px; color: var(--dim); padding: 24px 0;
+    }
+
+    /* lightbox */
+    .ref-lightbox {
+      position: fixed; inset: 0; z-index: 2000;
+      background: rgba(0,0,0,.9);
+      display: none; align-items: center; justify-content: center;
+      padding: 30px; cursor: zoom-out;
+    }
+    .ref-lightbox.show { display: flex; }
+    .ref-lightbox img {
+      max-width: 96%; max-height: 96%;
+      border-radius: 8px; box-shadow: 0 0 50px rgba(0,0,0,.85);
+    }
   </style>
 </head>
 <body>
@@ -1270,12 +1339,66 @@
 </div><!-- .bs -->
 </div><!-- .bs-wrap -->
 
+<!-- ═══════════════════════════════════════
+     REFERENCE BELOW — 화면별 레퍼런스 (목업 아래 크게 표시)
+═══════════════════════════════════════ -->
+<div class="ref-below" id="ref-below">
+  <div class="ref-below-head">📐 현재 화면 레퍼런스 <span class="ref-below-name" id="ref-below-name"></span></div>
+  <div class="ref-below-imgs" id="ref-below-imgs"></div>
+</div>
+
+<div class="ref-lightbox" id="ref-lightbox" onclick="this.classList.remove('show')">
+  <img id="ref-lightbox-img" src="" alt="레퍼런스 확대">
+</div>
+
 <script>
 /* ── screen switch ── */
 const IDS = ['menu','story','battle','char','team','rogue'];
 function go(id) {
   IDS.forEach(s => document.getElementById('screen-'+s).classList.toggle('active', s===id));
   document.querySelectorAll('.toolbar .tb-btn').forEach((b,i)=>b.classList.toggle('on', IDS[i]===id));
+  updateRef(id);
+}
+
+/* ── reference float ── */
+const REF_BASE = 'assets/references/';
+const REF_MAP = {
+  menu:          {name:'로비/메인 메뉴',  imgs:[['ref_01_lobby.png','로비화면 (메인 메뉴)']]},
+  battle:        {name:'전투 모드',       imgs:[['ref_07_battle_mode.png','전투 모드 선택']]},
+  char:          {name:'캐릭터 정보',     imgs:[['ref_05_character.png','캐릭터 정보']]},
+  team:          {name:'팀 구성',         imgs:[['ref_06_team.png','팀 구성']]},
+  rogue:         {name:'로그라이크 맵',   imgs:[['ref_08_roguelike_map.png','로그라이크 스테이지 맵']]},
+  'story-mode':  {name:'스토리 · 모드 선택', imgs:[['ref_02_story_select.png','스토리모드 선택']]},
+  'story-act':   {name:'스토리 · 막 선택',   imgs:[['ref_03_story_chapter.png','챕터(막) 선택']]},
+  'story-stage': {name:'스토리 · 스테이지',  imgs:[['ref_04_story_stage.png','스테이지 진행 1'],['ref_04b_story_stage.png','스테이지 진행 2']]},
+  'story-sub':   {name:'스토리 · 서브',     imgs:[['ref_02_story_select.png','서브 스토리 (참고)']]},
+};
+function refKey(id) {
+  if (id === 'story') {
+    const cur = document.querySelector('#screen-story .stv.active');
+    const v = cur ? cur.id.replace('stv-','') : 'mode';
+    return 'story-' + v;
+  }
+  return id;
+}
+function updateRef(id) {
+  const data = REF_MAP[refKey(id)];
+  document.getElementById('ref-below-name').textContent = data ? '· ' + data.name : '';
+  const box = document.getElementById('ref-below-imgs');
+  if (!data || !data.imgs.length) {
+    box.innerHTML = '<div class="ref-below-empty">이 화면에 연결된 레퍼런스가 없습니다.</div>';
+    return;
+  }
+  box.innerHTML = data.imgs.map(([f,cap])=>`
+    <div class="ref-below-item">
+      <img src="${REF_BASE}${f}" alt="${cap}" onclick="refLightbox('${REF_BASE}${f}')">
+      <div class="ref-below-cap">${cap}</div>
+    </div>`).join('');
+}
+function refLightbox(src) {
+  const lb = document.getElementById('ref-lightbox');
+  document.getElementById('ref-lightbox-img').src = src;
+  lb.classList.add('show');
 }
 
 /* ── auto-scale ── */
@@ -1296,6 +1419,7 @@ function storyNav(view) {
   if (cur) { STORY_STACK.push(cur.id); cur.classList.remove('active'); }
   document.getElementById('stv-' + view).classList.add('active');
   document.getElementById('story-breadcrumb').textContent = STORY_CRUMBS[view] || '';
+  updateRef('story');
 }
 
 function storyBack() {
@@ -1305,6 +1429,7 @@ function storyBack() {
   document.getElementById(prev).classList.add('active');
   const view = prev.replace('stv-','');
   document.getElementById('story-breadcrumb').textContent = STORY_CRUMBS[view] || '';
+  updateRef('story');
 }
 
 /* ── character data ── */
@@ -1466,6 +1591,9 @@ function buildRogueMap() {
   svg.innerHTML = html;
 }
 buildRogueMap();
+
+/* ── init reference float (초기 화면: 메인 메뉴) ── */
+updateRef('menu');
 
 /* ── team tabs ── */
 function teamTab(t){
