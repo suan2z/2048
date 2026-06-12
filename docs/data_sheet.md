@@ -8,18 +8,33 @@
 
 ### JSON 파일 구성
 
-다운로드 버튼은 아래 8개 파일을 `gamedata.zip`으로 압축 제공한다.
+다운로드 버튼은 아래 23개 파일을 `gamedata.zip`으로 압축 제공한다. 모든 파일은 단순 배열(`[]`)이다.
 
-| JSON 파일 | 원본 시트 | JSON 키 |
-|-----------|-----------|---------|
-| `strings.json` | `StringTBL_KR` | (배열) |
-| `metadata.json` | `CardTraitTBL`, `CardTeamTBL`, `CardRarityTBL`, `CardIntentTBL` | `traits`, `teams`, `rarities`, `intents` |
-| `abilities.json` | `CardAbilityTBL` | (배열) |
-| `statuses.json` | `CardStatusTBL` | (배열) |
-| `cards.json` | `CardTBL` | (배열) |
-| `champions.json` | `ChampionTBL` | (배열) |
-| `enemies.json` | `EnemyTBL`, `StartCardDeckTBL` | `enemies`, `decks` |
-| `maps.json` | `MapTBL`, `MapRandomEventTBL`, `MapFixedWidthTBL`, `MapFixedEventTBL`, `MapEvent_BattleTBL`, `ExtraEnemyTBL`, `MapEvent_ChoiceTBL`, `MapEvent_TradeTBL`, `MapEvent_EffectTBL`, `MapEvent_OtherTBL`, `MapEvent_ShopTBL` | `maps`, `randomEvents`, `fixedWidths`, `fixedEvents`, `battleEvents`, `extraEnemies`, `choiceEvents`, `tradeEvents`, `effectEvents`, `otherEvents`, `shopEvents` |
+| JSON 파일 | 원본 시트 |
+|-----------|-----------|
+| `StringTBL_KR.json` | `StringTBL_KR` |
+| `CardTraitTBL.json` | `CardTraitTBL` |
+| `CardTeamTBL.json` | `CardTeamTBL` |
+| `CardRarityTBL.json` | `CardRarityTBL` |
+| `CardIntentTBL.json` | `CardIntentTBL` |
+| `CardAbilityTBL.json` | `CardAbilityTBL` |
+| `CardStatusTBL.json` | `CardStatusTBL` |
+| `CardTBL.json` | `CardTBL` |
+| `ChampionTBL.json` | `ChampionTBL` |
+| `EnemyTBL.json` | `EnemyTBL` |
+| `StartCardDeckTBL.json` | `StartCardDeckTBL` |
+| `MapTBL.json` | `MapTBL` |
+| `MapRandomEventTBL.json` | `MapRandomEventTBL` |
+| `MapFixedWidthTBL.json` | `MapFixedWidthTBL` |
+| `MapFixedEventTBL.json` | `MapFixedEventTBL` |
+| `MapEvent_BattleTBL.json` | `MapEvent_BattleTBL` |
+| `ExtraEnemyTBL.json` | `ExtraEnemyTBL` |
+| `MapEvent_ChoiceTBL.json` | `MapEvent_ChoiceTBL` |
+| `MapEvent_TradeTBL.json` | `MapEvent_TradeTBL` |
+| `MapEvent_EffectTBL.json` | `MapEvent_EffectTBL` |
+| `MapEvent_OtherTBL.json` | `MapEvent_OtherTBL` |
+| `MapEvent_ShopTBL.json` | `MapEvent_ShopTBL` |
+| `GlobalEnum.json` | `GlobalEnum` |
 
 ---
 

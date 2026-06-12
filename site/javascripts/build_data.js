@@ -32,10 +32,35 @@ function extractKey(combined) {
   return parts[parts.length - 1] || combined;
 }
 
+// 헤더 행(gviz 결합) 전용: 따옴표 안 줄바꿈(설명 셀) 처리 후 나머지 텍스트 반환
+function parseHeaderRow(csvText) {
+  let cur = '', inQ = false, i = 0;
+  const cells = [];
+  while (i < csvText.length) {
+    const ch = csvText[i];
+    if (inQ) {
+      if (ch === '"' && csvText[i + 1] === '"') { cur += '"'; i += 2; continue; }
+      if (ch === '"') { inQ = false; i++; continue; }
+      cur += ch; i++; continue; // 따옴표 안 줄바꿈 → 셀 내용으로 유지
+    }
+    if (ch === '"') { inQ = true; i++; continue; }
+    if (ch === ',') { cells.push(cur); cur = ''; i++; continue; }
+    if (ch === '\r' || ch === '\n') {
+      if (ch === '\r' && csvText[i + 1] === '\n') i++;
+      cells.push(cur);
+      return { cells, rest: csvText.slice(i + 1) };
+    }
+    cur += ch; i++;
+  }
+  cells.push(cur);
+  return { cells, rest: '' };
+}
+
 function parseCSV(csvText) {
-  const lines = csvText.replace(/\r/g, '').trim().split('\n');
-  // line 0 = gviz 결합 헤더,  line 1+ = 데이터
-  const rawHeaders = parseCSVLine(lines[0]);
+  const text = csvText.trim();
+  if (!text) return [];
+  // 헤더 행은 따옴표 안 줄바꿈 포함 가능 (설명 행의 줄바꿈 대응)
+  const { cells: rawHeaders, rest } = parseHeaderRow(text);
   // 중복 헤더 처리 (ExtraEnemyTBL의 ChampionMin/Enemy1~4 등)
   const count = {};
   const headers = rawHeaders.map(h => {
@@ -43,10 +68,11 @@ function parseCSV(csvText) {
     count[key] = (count[key] || 0) + 1;
     return count[key] > 1 ? `${key}_${count[key]}` : key;
   });
-  return lines.slice(1)
+  // 데이터 행은 줄바꿈 없으므로 기존 방식 그대로
+  return rest.split('\n')
     .filter(l => l.trim() !== '')
     .map(line => {
-      const vals = parseCSVLine(line);
+      const vals = parseCSVLine(line.replace(/\r$/, ''));
       return Object.fromEntries(headers.map((h, i) => [h, vals[i] ?? '']));
     });
 }
@@ -370,31 +396,33 @@ async function buildAndDownloadData() {
 
     set('⏳ JSON 변환 중...');
     const zip = new JSZip();
-    zip.file('strings.json',   JSON.stringify(buildStrings(strRows), null, 2));
-    zip.file('metadata.json',  JSON.stringify({
-      traits: buildTraits(traitRows), teams: buildTeams(teamRows),
-      rarities: buildRarities(rarityRows), intents: buildIntents(intentRows),
-    }, null, 2));
-    zip.file('abilities.json', JSON.stringify(buildAbilities(abilRows), null, 2));
-    zip.file('statuses.json',  JSON.stringify(buildStatuses(statusRows), null, 2));
-    zip.file('cards.json',     JSON.stringify(buildCards(cardRows), null, 2));
-    zip.file('champions.json', JSON.stringify(buildChampions(champRows), null, 2));
-    zip.file('enemies.json',   JSON.stringify({
-      enemies: buildEnemies(enemyRows), decks: buildDecks(deckRows),
-    }, null, 2));
-    zip.file('maps.json',      JSON.stringify({
-      maps:         buildMaps(mapRows),
-      randomEvents: buildMapRandomEvents(randRows),
-      fixedWidths:  buildMapFixedWidth(fixedWidthRows),
-      fixedEvents:  buildMapFixedEvents(fixedEvtRows),
-      battleEvents: buildBattleEvents(battleRows),
-      extraEnemies: buildExtraEnemies(extraRows),
-      choiceEvents: buildChoiceEvents(choiceRows),
-      tradeEvents:  buildTradeEvents(tradeRows),
-      effectEvents: buildEffectEvents(effectRows),
-      otherEvents:  buildOtherEvents(otherRows),
-      shopEvents:   buildShopEvents(shopRows),
-    }, null, 2));
+    const files = [
+      ['StringTBL_KR.json',         buildStrings(strRows)],
+      ['CardTraitTBL.json',         buildTraits(traitRows)],
+      ['CardTeamTBL.json',          buildTeams(teamRows)],
+      ['CardRarityTBL.json',        buildRarities(rarityRows)],
+      ['CardIntentTBL.json',        buildIntents(intentRows)],
+      ['CardAbilityTBL.json',       buildAbilities(abilRows)],
+      ['CardStatusTBL.json',        buildStatuses(statusRows)],
+      ['CardTBL.json',              buildCards(cardRows)],
+      ['ChampionTBL.json',          buildChampions(champRows)],
+      ['EnemyTBL.json',             buildEnemies(enemyRows)],
+      ['StartCardDeckTBL.json',     buildDecks(deckRows)],
+      ['MapTBL.json',               buildMaps(mapRows)],
+      ['MapRandomEventTBL.json',    buildMapRandomEvents(randRows)],
+      ['MapFixedWidthTBL.json',     buildMapFixedWidth(fixedWidthRows)],
+      ['MapFixedEventTBL.json',     buildMapFixedEvents(fixedEvtRows)],
+      ['MapEvent_BattleTBL.json',   buildBattleEvents(battleRows)],
+      ['ExtraEnemyTBL.json',        buildExtraEnemies(extraRows)],
+      ['MapEvent_ChoiceTBL.json',   buildChoiceEvents(choiceRows)],
+      ['MapEvent_TradeTBL.json',    buildTradeEvents(tradeRows)],
+      ['MapEvent_EffectTBL.json',   buildEffectEvents(effectRows)],
+      ['MapEvent_OtherTBL.json',    buildOtherEvents(otherRows)],
+      ['MapEvent_ShopTBL.json',     buildShopEvents(shopRows)],
+    ];
+    for (const [name, data] of files) {
+      zip.file(name, JSON.stringify(data, null, 2));
+    }
 
     set('⏳ ZIP 생성 중...');
     downloadBlob(await zip.generateAsync({ type: 'blob' }), 'gamedata.zip');

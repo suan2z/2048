@@ -386,61 +386,41 @@ async function main() {
   ]);
 
   console.log('JSON 변환 중...');
-  const strings      = buildStrings(strRows);
-  const metadata     = {
-    traits:   buildTraits(traitRows),
-    teams:    buildTeams(teamRows),
-    rarities: buildRarities(rarityRows),
-    intents:  buildIntents(intentRows),
-  };
-  const abilities    = buildAbilities(abilRows);
-  const statuses     = buildStatuses(statusRows);
-  const cards        = buildCards(cardRows);
-  const champions    = buildChampions(champRows);
-  const enemies      = buildEnemies(enemyRows);
-  const decks        = buildDecks(deckRows);
-  const maps         = buildMaps(mapRows);
-  const mapEvents    = {
-    randomEvents:  buildMapRandomEvents(randEvtRows),
-    fixedEvents:   buildMapFixedEvents(fixedEvtRows),
-    battleEvents:  buildBattleEvents(battleRows),
-    choiceEvents:  buildChoiceEvents(choiceRows),
-    tradeEvents:   buildTradeEvents(tradeRows),
-    effectEvents:  buildEffectEvents(effectRows),
-    otherEvents:   buildOtherEvents(otherRows),
-    shopEvents:    buildShopEvents(shopRows),
-    extraEnemies:  buildExtraEnemies(extraRows),
-  };
-  const globalEnum   = buildGlobalEnum(enumRows);
 
   fs.mkdirSync(OUTPUT_DIR, { recursive: true });
   const write = (name: string, data: unknown) =>
     fs.writeFileSync(path.join(OUTPUT_DIR, name), JSON.stringify(data, null, 2));
 
-  write('strings.json',    strings);
-  write('metadata.json',   metadata);
-  write('abilities.json',  abilities);
-  write('statuses.json',   statuses);
-  write('cards.json',      cards);
-  write('champions.json',  champions);
-  write('enemies.json',    enemies);
-  write('decks.json',      decks);
-  write('maps.json',       maps);
-  write('mapEvents.json',  mapEvents);
-  write('globalEnum.json', globalEnum);
+  const out = [
+    ['StringTBL_KR.json',          buildStrings(strRows)],
+    ['CardTraitTBL.json',          buildTraits(traitRows)],
+    ['CardTeamTBL.json',           buildTeams(teamRows)],
+    ['CardRarityTBL.json',         buildRarities(rarityRows)],
+    ['CardIntentTBL.json',         buildIntents(intentRows)],
+    ['CardAbilityTBL.json',        buildAbilities(abilRows)],
+    ['CardStatusTBL.json',         buildStatuses(statusRows)],
+    ['CardTBL.json',               buildCards(cardRows)],
+    ['ChampionTBL.json',           buildChampions(champRows)],
+    ['EnemyTBL.json',              buildEnemies(enemyRows)],
+    ['StartCardDeckTBL.json',      buildDecks(deckRows)],
+    ['MapTBL.json',                buildMaps(mapRows)],
+    ['MapRandomEventTBL.json',     buildMapRandomEvents(randEvtRows)],
+    ['MapFixedEventTBL.json',      buildMapFixedEvents(fixedEvtRows)],
+    ['MapEvent_BattleTBL.json',    buildBattleEvents(battleRows)],
+    ['MapEvent_ChoiceTBL.json',    buildChoiceEvents(choiceRows)],
+    ['MapEvent_TradeTBL.json',     buildTradeEvents(tradeRows)],
+    ['MapEvent_EffectTBL.json',    buildEffectEvents(effectRows)],
+    ['MapEvent_OtherTBL.json',     buildOtherEvents(otherRows)],
+    ['MapEvent_ShopTBL.json',      buildShopEvents(shopRows)],
+    ['ExtraEnemyTBL.json',         buildExtraEnemies(extraRows)],
+    ['GlobalEnum.json',            buildGlobalEnum(enumRows)],
+  ] as [string, unknown][];
 
-  console.log(`\n✓ 완료: ${OUTPUT_DIR}`);
-  console.log(`  strings.json     ${strings.length}행`);
-  console.log(`  metadata.json    traits:${metadata.traits.length} teams:${metadata.teams.length} rarities:${metadata.rarities.length} intents:${metadata.intents.length}`);
-  console.log(`  abilities.json   ${abilities.length}개`);
-  console.log(`  statuses.json    ${statuses.length}개`);
-  console.log(`  cards.json       ${cards.length}장`);
-  console.log(`  champions.json   ${champions.length}명`);
-  console.log(`  enemies.json     ${enemies.length}종`);
-  console.log(`  decks.json       ${decks.length}개`);
-  console.log(`  maps.json        ${maps.length}개`);
-  console.log(`  mapEvents.json   battles:${mapEvents.battleEvents.length} choices:${mapEvents.choiceEvents.length} ...`);
-  console.log(`  globalEnum.json  ${globalEnum.length}행`);
+  for (const [name, data] of out) {
+    write(name, data);
+    const len = Array.isArray(data) ? `${(data as unknown[]).length}개` : '';
+    console.log(`  ✓ ${name.padEnd(28)} ${len}`);
+  }
 }
 
 main().catch(console.error);

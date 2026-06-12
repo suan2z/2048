@@ -100,9 +100,11 @@ async function main() {
       continue;
     }
 
-    // row1 = 영문 헤더, 설명 행 생성
+    // row1 = 영문 헤더, 설명 행 생성 (줄바꿈 제거)
     const englishRow    = row1;
-    const descRow       = englishRow.map(en => descMap[en.trim()] ?? '');
+    const descRow       = englishRow.map(en =>
+      (descMap[en.trim()] ?? '').replace(/[\r\n]+/g, ' ').trim()
+    );
     const dataRows      = values.slice(2);
 
     // 새 구조: [한글, 설명, 영문, ...data]
