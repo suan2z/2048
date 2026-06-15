@@ -1198,6 +1198,17 @@
   <a href="#_2" class="md-nav__link">
     <span class="md-ellipsis">
       
+        테이블 정의
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
         시트 구성 개요
       
     </span>
@@ -1705,61 +1716,137 @@
 <p><small style="color:#7070a0;font-family:'Roboto Mono',monospace;background:rgba(255,255,255,0.05);padding:2px 12px;border-radius:20px;border:1px solid rgba(255,255,255,0.08);">📄 docs/data_sheet.md</small></p>
 <p><a class="md-button md-button--primary" href="https://docs.google.com/spreadsheets/d/1SRpzgAzrPeH7GlxGkBo3hs83RiYDknOo3uXKJkeRubM/edit" target="_blank">📋 구글 시트 열기</a></p>
 <p><button id="btn-build-data" class="md-button" onclick="buildAndDownloadData()">📦 JSON 전체 다운로드</button></p>
-<h3 id="json">JSON 파일 구성</h3>
-<p>다운로드 버튼은 아래 8개 파일을 <code>gamedata.zip</code>으로 압축 제공한다.</p>
+<p>시트별 JSON 파일(<code>{시트명}.json</code>)과 컬럼 정의 모음인 <code>schema.json</code>을 포함해 총 23개 파일을 <code>gamedata.zip</code>으로 제공한다. 각 파일은 단순 배열(<code>[]</code>) 형태이며, 배열 컬럼(Slots·Enemies 등)은 시트의 분할 슬롯들을 자동 집계한다.</p>
+<hr />
+<h2 id="_2">테이블 정의</h2>
 <table>
 <thead>
 <tr>
-<th>JSON 파일</th>
-<th>원본 시트</th>
-<th>JSON 키</th>
+<th>테이블</th>
+<th>정의</th>
+<th style="text-align: center;">JSON 산출</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><code>strings.json</code></td>
 <td><code>StringTBL_KR</code></td>
-<td>(배열)</td>
+<td>게임 내 모든 화면 표시 텍스트를 UID 키로 보관하는 문자열 사전. 다국어 확장 시 <code>StringTBL_EN</code> 등을 동일 UID로 추가한다.</td>
+<td style="text-align: center;"><button class="md-button md-button--sm" onclick="downloadSingleJSON('StringTBL_KR', this)">⬇ JSON</button></td>
 </tr>
 <tr>
-<td><code>metadata.json</code></td>
-<td><code>CardTraitTBL</code>, <code>CardTeamTBL</code>, <code>CardRarityTBL</code>, <code>CardIntentTBL</code></td>
-<td><code>traits</code>, <code>teams</code>, <code>rarities</code>, <code>intents</code></td>
-</tr>
-<tr>
-<td><code>abilities.json</code></td>
 <td><code>CardAbilityTBL</code></td>
-<td>(배열)</td>
+<td>카드 또는 적이 발동하는 개별 효과 단위 정의. 트리거·대상·조건·효과를 선언적으로 기술하며, 하나의 카드는 최대 4개 어빌리티를 참조할 수 있다.</td>
+<td style="text-align: center;"><button class="md-button md-button--sm" onclick="downloadSingleJSON('CardAbilityTBL', this)">⬇ JSON</button></td>
 </tr>
 <tr>
-<td><code>statuses.json</code></td>
 <td><code>CardStatusTBL</code></td>
-<td>(배열)</td>
+<td>버프·디버프 상태이상 정의. 효과 종류(StatusEffect enum), 지속 방식(StatusDuration enum), 표시 정보를 관리한다.</td>
+<td style="text-align: center;"><button class="md-button md-button--sm" onclick="downloadSingleJSON('CardStatusTBL', this)">⬇ JSON</button></td>
 </tr>
 <tr>
-<td><code>cards.json</code></td>
+<td><code>CardTraitTBL</code></td>
+<td>카드에 붙는 태그 특성 정의. 시너지 조건이나 어빌리티 트리거 필터(<code>is_skill</code>, <code>is_attack</code> 등)에서 참조된다.</td>
+<td style="text-align: center;"><button class="md-button md-button--sm" onclick="downloadSingleJSON('CardTraitTBL', this)">⬇ JSON</button></td>
+</tr>
+<tr>
+<td><code>CardTeamTBL</code></td>
+<td>카드와 챔피언이 속하는 진영(팀) 정의. 팀별 시너지 발동 및 덱 구성 제약의 기준 단위.</td>
+<td style="text-align: center;"><button class="md-button md-button--sm" onclick="downloadSingleJSON('CardTeamTBL', this)">⬇ JSON</button></td>
+</tr>
+<tr>
+<td><code>CardRarityTBL</code></td>
+<td>카드 희귀도 등급 정의. 상점 진열 확률(<code>Probability</code>)과 보상 카드 필터링에 사용된다.</td>
+<td style="text-align: center;"><button class="md-button md-button--sm" onclick="downloadSingleJSON('CardRarityTBL', this)">⬇ JSON</button></td>
+</tr>
+<tr>
+<td><code>CardIntentTBL</code></td>
+<td>적이 카드를 사용할 때 플레이어에게 보여주는 행동 예고(의도) 아이콘 정의. 우선순위와 표시 여부를 제어한다.</td>
+<td style="text-align: center;"><button class="md-button md-button--sm" onclick="downloadSingleJSON('CardIntentTBL', this)">⬇ JSON</button></td>
+</tr>
+<tr>
 <td><code>CardTBL</code></td>
-<td>(배열)</td>
+<td>플레이어·적이 사용하는 카드 전체 정의. 2048 전용 필드 <code>tileRank</code>·<code>upgradedTileRank</code>로 발동에 필요한 타일 등급을 지정한다.</td>
+<td style="text-align: center;"><button class="md-button md-button--sm" onclick="downloadSingleJSON('CardTBL', this)">⬇ JSON</button></td>
 </tr>
 <tr>
-<td><code>champions.json</code></td>
 <td><code>ChampionTBL</code></td>
-<td>(배열)</td>
+<td>플레이어가 파티에 편성하는 챔피언 정의. HP·Speed·Hand·Energy 4종 스탯과 레벨업 증분값, 시작 덱을 포함한다.</td>
+<td style="text-align: center;"><button class="md-button md-button--sm" onclick="downloadSingleJSON('ChampionTBL', this)">⬇ JSON</button></td>
 </tr>
 <tr>
-<td><code>enemies.json</code></td>
-<td><code>EnemyTBL</code>, <code>StartCardDeckTBL</code></td>
-<td><code>enemies</code>, <code>decks</code></td>
+<td><code>EnemyTBL</code></td>
+<td>전투에 등장하는 적 정의. 챔피언과 동일한 스탯 구조를 사용하며, <code>CardDeck</code>으로 행동 카드 덱을 참조한다.</td>
+<td style="text-align: center;"><button class="md-button md-button--sm" onclick="downloadSingleJSON('EnemyTBL', this)">⬇ JSON</button></td>
 </tr>
 <tr>
-<td><code>maps.json</code></td>
-<td><code>MapTBL</code>, <code>MapRandomEventTBL</code>, <code>MapFixedWidthTBL</code>, <code>MapFixedEventTBL</code>, <code>MapEvent_BattleTBL</code>, <code>ExtraEnemyTBL</code>, <code>MapEvent_ChoiceTBL</code>, <code>MapEvent_TradeTBL</code>, <code>MapEvent_EffectTBL</code>, <code>MapEvent_OtherTBL</code>, <code>MapEvent_ShopTBL</code></td>
-<td><code>maps</code>, <code>randomEvents</code>, <code>fixedWidths</code>, <code>fixedEvents</code>, <code>battleEvents</code>, <code>extraEnemies</code>, <code>choiceEvents</code>, <code>tradeEvents</code>, <code>effectEvents</code>, <code>otherEvents</code>, <code>shopEvents</code></td>
+<td><code>StartCardDeckTBL</code></td>
+<td>챔피언 시작 덱 또는 적 행동 덱을 정의. 최대 10개 슬롯에 카드 ID를 배치하며, 빈 슬롯은 덱에 포함되지 않는다.</td>
+<td style="text-align: center;"><button class="md-button md-button--sm" onclick="downloadSingleJSON('StartCardDeckTBL', this)">⬇ JSON</button></td>
+</tr>
+<tr>
+<td><code>MapTBL</code></td>
+<td>로그라이트 런에서 생성되는 맵의 구조 파라미터(깊이·너비·분기 확률) 및 이벤트 풀 연결 정의.</td>
+<td style="text-align: center;"><button class="md-button md-button--sm" onclick="downloadSingleJSON('MapTBL', this)">⬇ JSON</button></td>
+</tr>
+<tr>
+<td><code>MapRandomEventTBL</code></td>
+<td>맵 노드에 랜덤 배치될 이벤트 풀 목록. 동일 맵 내 이벤트 중복 방지를 위해 풀 방식으로 관리한다.</td>
+<td style="text-align: center;"><button class="md-button md-button--sm" onclick="downloadSingleJSON('MapRandomEventTBL', this)">⬇ JSON</button></td>
+</tr>
+<tr>
+<td><code>MapFixedEventTBL</code></td>
+<td>특정 깊이(층)에 강제 배치되는 고정 이벤트 정의. 보스 방·중요 이벤트 위치를 고정할 때 사용한다.</td>
+<td style="text-align: center;"><button class="md-button md-button--sm" onclick="downloadSingleJSON('MapFixedEventTBL', this)">⬇ JSON</button></td>
+</tr>
+<tr>
+<td><code>MapFixedWidthTBL</code></td>
+<td>맵의 깊이(층)별 고정 노드 너비를 정의. 특정 층에서 분기 없이 너비를 강제 지정할 때 사용한다.</td>
+<td style="text-align: center;"><button class="md-button md-button--sm" onclick="downloadSingleJSON('MapFixedWidthTBL', this)">⬇ JSON</button></td>
+</tr>
+<tr>
+<td><code>MapEvent_BattleTBL</code></td>
+<td>전투 이벤트 정의. 등장 적 구성·레벨·보상(골드·경험치·카드)을 포함한다.</td>
+<td style="text-align: center;"><button class="md-button md-button--sm" onclick="downloadSingleJSON('MapEvent_BattleTBL', this)">⬇ JSON</button></td>
+</tr>
+<tr>
+<td><code>MapEvent_ChoiceTBL</code></td>
+<td>선택지 이벤트 정의. 최대 4개 선택지를 제공하며, 각 선택은 <code>MapEvent_TradeTBL</code>이나 <code>MapEvent_EffectTBL</code>로 연결된다.</td>
+<td style="text-align: center;"><button class="md-button md-button--sm" onclick="downloadSingleJSON('MapEvent_ChoiceTBL', this)">⬇ JSON</button></td>
+</tr>
+<tr>
+<td><code>MapEvent_TradeTBL</code></td>
+<td>골드·체력을 소비하고 골드·경험치·회복을 얻는 교역 이벤트 단위 정의.</td>
+<td style="text-align: center;"><button class="md-button md-button--sm" onclick="downloadSingleJSON('MapEvent_TradeTBL', this)">⬇ JSON</button></td>
+</tr>
+<tr>
+<td><code>MapEvent_EffectTBL</code></td>
+<td>즉시 효과를 발동하는 이벤트 단위 정의. 선택지 결과나 고정 이벤트에서 연계 호출되는 경우가 많다.</td>
+<td style="text-align: center;"><button class="md-button md-button--sm" onclick="downloadSingleJSON('MapEvent_EffectTBL', this)">⬇ JSON</button></td>
+</tr>
+<tr>
+<td><code>MapEvent_OtherTBL</code></td>
+<td>전투·선택·교역·효과에 해당하지 않는 특수 이벤트(보상 획득, 세계 상태 변경, 상점, 카드 강화 등) 정의.</td>
+<td style="text-align: center;"><button class="md-button md-button--sm" onclick="downloadSingleJSON('MapEvent_OtherTBL', this)">⬇ JSON</button></td>
+</tr>
+<tr>
+<td><code>MapEvent_ShopTBL</code></td>
+<td>카드·아이템을 사고파는 상점 노드 정의. 구매·판매 배율과 진열 수량을 제어한다.</td>
+<td style="text-align: center;"><button class="md-button md-button--sm" onclick="downloadSingleJSON('MapEvent_ShopTBL', this)">⬇ JSON</button></td>
+</tr>
+<tr>
+<td><code>ExtraEnemyTBL</code></td>
+<td>전투 이벤트에서 파티 인원 수에 따라 조건부로 추가되는 보조 적 세트 정의.</td>
+<td style="text-align: center;"><button class="md-button md-button--sm" onclick="downloadSingleJSON('ExtraEnemyTBL', this)">⬇ JSON</button></td>
+</tr>
+<tr>
+<td><code>GlobalEnum</code></td>
+<td>코드와 시트가 공유하는 숫자 enum 값 일람. <code>AbilityTrigger</code>, <code>AbilityTarget</code>, <code>StatusEffect</code>, <code>MapEventType</code>, <code>TileRank</code> 등 모든 enum 그룹을 단일 테이블로 관리한다. Node.js 빌드 전용.</td>
+<td style="text-align: center;">—</td>
 </tr>
 </tbody>
 </table>
-<hr />
-<h2 id="_2">시트 구성 개요</h2>
+<p>스키마 타입 정의 상세는 <a href="../schema/">스키마 설계</a>를 참조한다.</p>
+<h2 id="_3">시트 구성 개요</h2>
 <p>Google Sheets 내 <strong>23개 시트(테이블)</strong>를 5개 그룹으로 분류한다. 각 시트는 하나의 데이터 테이블이다.</p>
 <table>
 <thead>
@@ -1797,110 +1884,6 @@
 </tr>
 </tbody>
 </table>
-<h3 id="_3">테이블 정의</h3>
-<table>
-<thead>
-<tr>
-<th>테이블</th>
-<th>정의</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>StringTBL_KR</code></td>
-<td>게임 내 모든 화면 표시 텍스트를 UID 키로 보관하는 문자열 사전. 다국어 확장 시 <code>StringTBL_EN</code> 등을 동일 UID로 추가한다.</td>
-</tr>
-<tr>
-<td><code>CardAbilityTBL</code></td>
-<td>카드 또는 적이 발동하는 개별 효과 단위 정의. 트리거·대상·조건·효과를 선언적으로 기술하며, 하나의 카드는 최대 4개 어빌리티를 참조할 수 있다.</td>
-</tr>
-<tr>
-<td><code>CardStatusTBL</code></td>
-<td>버프·디버프 상태이상 정의. 효과 종류(StatusEffect enum), 지속 방식(StatusDuration enum), 표시 정보를 관리한다.</td>
-</tr>
-<tr>
-<td><code>CardTraitTBL</code></td>
-<td>카드에 붙는 태그 특성 정의. 시너지 조건이나 어빌리티 트리거 필터(<code>is_skill</code>, <code>is_attack</code> 등)에서 참조된다.</td>
-</tr>
-<tr>
-<td><code>CardTeamTBL</code></td>
-<td>카드와 챔피언이 속하는 진영(팀) 정의. 팀별 시너지 발동 및 덱 구성 제약의 기준 단위.</td>
-</tr>
-<tr>
-<td><code>CardRarityTBL</code></td>
-<td>카드 희귀도 등급 정의. 상점 진열 확률(<code>Probability</code>)과 보상 카드 필터링에 사용된다.</td>
-</tr>
-<tr>
-<td><code>CardIntentTBL</code></td>
-<td>적이 카드를 사용할 때 플레이어에게 보여주는 행동 예고(의도) 아이콘 정의. 우선순위와 표시 여부를 제어한다.</td>
-</tr>
-<tr>
-<td><code>CardTBL</code></td>
-<td>플레이어·적이 사용하는 카드 전체 정의. 2048 전용 필드 <code>tileRank</code>·<code>upgradedTileRank</code>로 발동에 필요한 타일 등급을 지정한다.</td>
-</tr>
-<tr>
-<td><code>ChampionTBL</code></td>
-<td>플레이어가 파티에 편성하는 챔피언 정의. HP·Speed·Hand·Energy 4종 스탯과 레벨업 증분값, 시작 덱을 포함한다.</td>
-</tr>
-<tr>
-<td><code>EnemyTBL</code></td>
-<td>전투에 등장하는 적 정의. 챔피언과 동일한 스탯 구조를 사용하며, <code>CardDeck</code>으로 행동 카드 덱을 참조한다.</td>
-</tr>
-<tr>
-<td><code>StartCardDeckTBL</code></td>
-<td>챔피언 시작 덱 또는 적 행동 덱을 정의. 최대 10개 슬롯에 카드 ID를 배치하며, 빈 슬롯은 덱에 포함되지 않는다.</td>
-</tr>
-<tr>
-<td><code>MapTBL</code></td>
-<td>로그라이트 런에서 생성되는 맵의 구조 파라미터(깊이·너비·분기 확률) 및 이벤트 풀 연결 정의.</td>
-</tr>
-<tr>
-<td><code>MapRandomEventTBL</code></td>
-<td>맵 노드에 랜덤 배치될 이벤트 풀 목록. 동일 맵 내 이벤트 중복 방지를 위해 풀 방식으로 관리한다.</td>
-</tr>
-<tr>
-<td><code>MapFixedEventTBL</code></td>
-<td>특정 깊이(층)에 강제 배치되는 고정 이벤트 정의. 보스 방·중요 이벤트 위치를 고정할 때 사용한다.</td>
-</tr>
-<tr>
-<td><code>MapFixedWidthTBL</code></td>
-<td>맵의 깊이(층)별 고정 노드 너비를 정의. 특정 층에서 분기 없이 너비를 강제 지정할 때 사용한다.</td>
-</tr>
-<tr>
-<td><code>MapEvent_BattleTBL</code></td>
-<td>전투 이벤트 정의. 등장 적 구성·레벨·보상(골드·경험치·카드)을 포함한다.</td>
-</tr>
-<tr>
-<td><code>MapEvent_ChoiceTBL</code></td>
-<td>선택지 이벤트 정의. 최대 4개 선택지를 제공하며, 각 선택은 <code>MapEvent_TradeTBL</code>이나 <code>MapEvent_EffectTBL</code>로 연결된다.</td>
-</tr>
-<tr>
-<td><code>MapEvent_TradeTBL</code></td>
-<td>골드·체력을 소비하고 골드·경험치·회복을 얻는 교역 이벤트 단위 정의.</td>
-</tr>
-<tr>
-<td><code>MapEvent_EffectTBL</code></td>
-<td>즉시 효과를 발동하는 이벤트 단위 정의. 선택지 결과나 고정 이벤트에서 연계 호출되는 경우가 많다.</td>
-</tr>
-<tr>
-<td><code>MapEvent_OtherTBL</code></td>
-<td>전투·선택·교역·효과에 해당하지 않는 특수 이벤트(보상 획득, 세계 상태 변경, 상점, 카드 강화 등) 정의.</td>
-</tr>
-<tr>
-<td><code>MapEvent_ShopTBL</code></td>
-<td>카드·아이템을 사고파는 상점 노드 정의. 구매·판매 배율과 진열 수량을 제어한다.</td>
-</tr>
-<tr>
-<td><code>ExtraEnemyTBL</code></td>
-<td>전투 이벤트에서 파티 인원 수에 따라 조건부로 추가되는 보조 적 세트 정의.</td>
-</tr>
-<tr>
-<td><code>GlobalEnum</code></td>
-<td>코드와 시트가 공유하는 숫자 enum 값 일람. <code>AbilityTrigger</code>, <code>AbilityTarget</code>, <code>StatusEffect</code>, <code>MapEventType</code>, <code>TileRank</code> 등 모든 enum 그룹을 단일 테이블로 관리한다.</td>
-</tr>
-</tbody>
-</table>
-<p>스키마 타입 정의 상세는 <a href="../schema/">스키마 설계</a>를 참조한다.</p>
 <hr />
 <h2 id="stringtbl-uid">StringTBL UID 범위</h2>
 <table>
@@ -2122,6 +2105,11 @@
 <td><code>TgtCond1~3</code></td>
 <td><code>string?</code></td>
 <td>대상 필터 조건</td>
+</tr>
+<tr>
+<td><code>TgtFilter1</code></td>
+<td><code>string?</code></td>
+<td>대상 추가 필터</td>
 </tr>
 <tr>
 <td><code>Effect1</code></td>
@@ -3417,30 +3405,25 @@
 </thead>
 <tbody>
 <tr>
-<td><code>Name</code></td>
-<td><code>string</code></td>
-<td>덱 식별자 PK</td>
-</tr>
-<tr>
 <td><code>Type</code></td>
 <td><code>string</code></td>
 <td><code>Champion</code> — 챔피언 시작 덱 / <code>Enemies</code> — 적 행동 덱</td>
 </tr>
 <tr>
 <td><code>ID</code></td>
-<td><code>number</code></td>
-<td>고유 ID</td>
+<td><code>string</code></td>
+<td>덱 식별자 PK</td>
 </tr>
 <tr>
-<td><code>Slot1~Slot10</code></td>
-<td><code>string?</code></td>
-<td><code>CardTBL.Name</code> 참조. 각 슬롯의 카드. 공란이면 슬롯 없음</td>
+<td><code>Slots</code></td>
+<td><code>string[]</code></td>
+<td><code>CardTBL.ID</code> 참조. 카드 ID 배열 (최대 10). 빈 슬롯 제외 후 집계</td>
 </tr>
 </tbody>
 </table>
 <p><strong>참조 관계</strong></p>
 <ul>
-<li><code>Slot1~10</code> → <code>CardTBL.Name</code></li>
+<li><code>Slots</code> → <code>CardTBL.ID</code></li>
 <li><code>ChampionTBL.StartDeck</code>에서 참조됨</li>
 <li><code>EnemyTBL.CardDeck</code>에서 참조됨</li>
 </ul>
@@ -3448,50 +3431,26 @@
 <table>
 <thead>
 <tr>
-<th>Name</th>
 <th>Type</th>
 <th>ID</th>
-<th>Slot1</th>
-<th>Slot2</th>
-<th>Slot3</th>
-<th>Slot4</th>
-<th>Slot5</th>
-<th>Slot6</th>
+<th>Slots</th>
 </tr>
 </thead>
 <tbody>
 <tr>
+<td>Champion</td>
 <td>deck_kestrel_start</td>
-<td>Champion</td>
-<td>5001</td>
-<td>kestrel_shield_strike</td>
-<td>kestrel_shield_strike</td>
-<td>kestrel_iron_wall</td>
-<td>kestrel_rally</td>
-<td>kestrel_basic_atk</td>
-<td></td>
+<td><code>["kestrel_shield_strike","kestrel_shield_strike","kestrel_iron_wall","kestrel_rally","kestrel_basic_atk"]</code></td>
 </tr>
 <tr>
+<td>Champion</td>
 <td>deck_cipher_start</td>
-<td>Champion</td>
-<td>5002</td>
-<td>cipher_vuln_analysis</td>
-<td>cipher_vuln_analysis</td>
-<td>cipher_data_burst</td>
-<td>cipher_observe</td>
-<td>cipher_basic_atk</td>
-<td></td>
+<td><code>["cipher_vuln_analysis","cipher_vuln_analysis","cipher_data_burst","cipher_observe","cipher_basic_atk"]</code></td>
 </tr>
 <tr>
-<td>deck_drone_guard</td>
 <td>Enemies</td>
-<td>6001</td>
-<td>enemy_atk_drone_s12</td>
-<td>enemy_atk_drone_s12</td>
-<td>enemy_buff_drone</td>
-<td></td>
-<td></td>
-<td></td>
+<td>deck_drone_guard</td>
+<td><code>["enemy_atk_drone_s12","enemy_atk_drone_s12","enemy_buff_drone"]</code></td>
 </tr>
 </tbody>
 </table>
@@ -3679,13 +3638,13 @@
 <tbody>
 <tr>
 <td><code>ID</code></td>
-<td><code>number</code></td>
-<td>고유 ID</td>
+<td><code>string</code></td>
+<td>고정 너비 식별자 PK</td>
 </tr>
 <tr>
-<td><code>Depth1~12</code></td>
-<td><code>number?</code></td>
-<td>해당 깊이(층)의 강제 너비. <code>0</code> 또는 공란이면 MapTBL의 WidthMin~WidthMax 범위로 랜덤 생성</td>
+<td><code>Depths</code></td>
+<td><code>number[]</code></td>
+<td>깊이(층)별 강제 너비 배열 (최대 12개). 빈 슬롯 제외 후 집계. <code>0</code>이면 해당 층은 WidthMin~WidthMax 범위로 랜덤 생성</td>
 </tr>
 </tbody>
 </table>
@@ -3787,14 +3746,14 @@
 <td>적 레벨 오프셋. <code>EnemyTBL.LvUpMax</code> 범위 내</td>
 </tr>
 <tr>
-<td><code>Enemy1~4</code></td>
-<td><code>string?</code></td>
-<td><code>EnemyTBL.Name</code> 참조. 등장 적. 공란이면 해당 슬롯 없음</td>
+<td><code>Enemies</code></td>
+<td><code>string[]</code></td>
+<td><code>EnemyTBL.ID</code> 참조. 등장 적 ID 배열 (최대 4). 빈 슬롯 제외 후 집계</td>
 </tr>
 <tr>
 <td><code>ExtraEnemy</code></td>
 <td><code>string?</code></td>
-<td><code>ExtraEnemyTBL.Name</code> 참조. 조건부 추가 적</td>
+<td><code>ExtraEnemyTBL.ID</code> 참조. 조건부 추가 적</td>
 </tr>
 <tr>
 <td><code>RewardGold</code></td>
@@ -3845,23 +3804,21 @@
 </table>
 <p><strong>참조 관계</strong></p>
 <ul>
-<li><code>Enemy1~4</code> → <code>EnemyTBL.Name</code></li>
-<li><code>ExtraEnemy</code> → <code>ExtraEnemyTBL.Name</code></li>
-<li><code>CardRarity</code> → <code>CardRarityTBL.Name</code></li>
+<li><code>Enemies</code> → <code>EnemyTBL.ID</code></li>
+<li><code>ExtraEnemy</code> → <code>ExtraEnemyTBL.ID</code></li>
+<li><code>CardRarity</code> → <code>CardRarityTBL.ID</code></li>
 </ul>
 <p><strong>예시</strong></p>
 <table>
 <thead>
 <tr>
-<th>Name</th>
 <th>ID</th>
 <th style="text-align: center;">DepthMin</th>
 <th style="text-align: center;">DepthMax</th>
 <th style="text-align: center;">EnemyLevel</th>
-<th>enemy1</th>
-<th>enemy2</th>
-<th style="text-align: center;">rewardGold</th>
-<th style="text-align: center;">rewardXP</th>
+<th>Enemies</th>
+<th style="text-align: center;">RewardGold</th>
+<th style="text-align: center;">RewardXP</th>
 <th style="text-align: center;">IsRewardCards</th>
 <th>CardRarity</th>
 </tr>
@@ -3869,41 +3826,35 @@
 <tbody>
 <tr>
 <td>battle_ch1_normal_1</td>
-<td>8001</td>
 <td style="text-align: center;">1</td>
 <td style="text-align: center;">4</td>
 <td style="text-align: center;">0</td>
-<td>drone_guard</td>
-<td>drone_guard</td>
+<td><code>["drone_guard","drone_guard"]</code></td>
 <td style="text-align: center;">5</td>
 <td style="text-align: center;">20</td>
-<td style="text-align: center;">TRUE</td>
+<td style="text-align: center;">true</td>
 <td>common</td>
 </tr>
 <tr>
 <td>battle_ch1_elite_1</td>
-<td>8011</td>
 <td style="text-align: center;">5</td>
 <td style="text-align: center;">9</td>
 <td style="text-align: center;">1</td>
-<td>drone_guard</td>
-<td>drone_guard</td>
+<td><code>["drone_guard","drone_guard"]</code></td>
 <td style="text-align: center;">15</td>
 <td style="text-align: center;">40</td>
-<td style="text-align: center;">TRUE</td>
+<td style="text-align: center;">true</td>
 <td>rare</td>
 </tr>
 <tr>
 <td>battle_ch1_boss</td>
-<td>8021</td>
 <td style="text-align: center;">10</td>
 <td style="text-align: center;">12</td>
 <td style="text-align: center;">0</td>
-<td>warden_1st</td>
-<td></td>
+<td><code>["warden_1st"]</code></td>
 <td style="text-align: center;">30</td>
 <td style="text-align: center;">80</td>
-<td style="text-align: center;">TRUE</td>
+<td style="text-align: center;">true</td>
 <td>epic</td>
 </tr>
 </tbody>
@@ -4056,6 +4007,16 @@
 <td>소비 체력. <code>0</code>이면 없음</td>
 </tr>
 <tr>
+<td><code>GainItems</code></td>
+<td><code>string[]</code></td>
+<td>획득 아이템 ID 배열 (최대 3). 빈 슬롯 제외 후 집계</td>
+</tr>
+<tr>
+<td><code>GainAlly</code></td>
+<td><code>string?</code></td>
+<td>획득 아군 ID. <code>EnemyTBL</code> 또는 <code>ChampionTBL</code> 참조</td>
+</tr>
+<tr>
 <td><code>GainGold</code></td>
 <td><code>number</code></td>
 <td>획득 골드</td>
@@ -4069,26 +4030,6 @@
 <td><code>GainHeal</code></td>
 <td><code>number</code></td>
 <td>회복량. <code>0</code>이면 없음</td>
-</tr>
-<tr>
-<td><code>GainItem1</code></td>
-<td><code>string?</code></td>
-<td>획득 아이템 ID 1</td>
-</tr>
-<tr>
-<td><code>GainItem2</code></td>
-<td><code>string?</code></td>
-<td>획득 아이템 ID 2</td>
-</tr>
-<tr>
-<td><code>GainItem3</code></td>
-<td><code>string?</code></td>
-<td>획득 아이템 ID 3</td>
-</tr>
-<tr>
-<td><code>GainAlly</code></td>
-<td><code>string?</code></td>
-<td>획득 아군 ID. <code>EnemyTBL</code> 또는 <code>ChampionTBL</code> 참조</td>
 </tr>
 <tr>
 <td><code>DescStringID</code></td>
@@ -4313,19 +4254,9 @@
 <td>판매 가격 배율. 기본값 <code>0.5</code></td>
 </tr>
 <tr>
-<td><code>Item1</code></td>
-<td><code>string?</code></td>
-<td>고정 진열 아이템 ID 1</td>
-</tr>
-<tr>
-<td><code>Item2</code></td>
-<td><code>string?</code></td>
-<td>고정 진열 아이템 ID 2</td>
-</tr>
-<tr>
-<td><code>Item3</code></td>
-<td><code>string?</code></td>
-<td>고정 진열 아이템 ID 3</td>
+<td><code>FixedItems</code></td>
+<td><code>string[]</code></td>
+<td>고정 진열 아이템 ID 배열 (최대 3). 빈 슬롯 제외 후 집계</td>
 </tr>
 <tr>
 <td><code>CardsRand</code></td>
@@ -4338,9 +4269,9 @@
 <td>상점에 진열되는 아이템 수 (랜덤 선택)</td>
 </tr>
 <tr>
-<td><code>ItemRandSlot1~4</code></td>
-<td><code>string?</code></td>
-<td>랜덤 아이템 슬롯 설정 키. 아이템 풀 제한 시 사용</td>
+<td><code>ItemRandSlots</code></td>
+<td><code>string[]</code></td>
+<td>랜덤 아이템 슬롯 설정 키 배열 (최대 4). 빈 슬롯 제외 후 집계</td>
 </tr>
 </tbody>
 </table>

@@ -6,37 +6,39 @@
 
 <button id="btn-build-data" class="md-button" onclick="buildAndDownloadData()">📦 JSON 전체 다운로드</button>
 
-### JSON 파일 구성
-
-다운로드 버튼은 아래 23개 파일을 `gamedata.zip`으로 압축 제공한다. 모든 파일은 단순 배열(`[]`)이다.
-
-| JSON 파일 | 원본 시트 |
-|-----------|-----------|
-| `StringTBL_KR.json` | `StringTBL_KR` |
-| `CardTraitTBL.json` | `CardTraitTBL` |
-| `CardTeamTBL.json` | `CardTeamTBL` |
-| `CardRarityTBL.json` | `CardRarityTBL` |
-| `CardIntentTBL.json` | `CardIntentTBL` |
-| `CardAbilityTBL.json` | `CardAbilityTBL` |
-| `CardStatusTBL.json` | `CardStatusTBL` |
-| `CardTBL.json` | `CardTBL` |
-| `ChampionTBL.json` | `ChampionTBL` |
-| `EnemyTBL.json` | `EnemyTBL` |
-| `StartCardDeckTBL.json` | `StartCardDeckTBL` |
-| `MapTBL.json` | `MapTBL` |
-| `MapRandomEventTBL.json` | `MapRandomEventTBL` |
-| `MapFixedWidthTBL.json` | `MapFixedWidthTBL` |
-| `MapFixedEventTBL.json` | `MapFixedEventTBL` |
-| `MapEvent_BattleTBL.json` | `MapEvent_BattleTBL` |
-| `ExtraEnemyTBL.json` | `ExtraEnemyTBL` |
-| `MapEvent_ChoiceTBL.json` | `MapEvent_ChoiceTBL` |
-| `MapEvent_TradeTBL.json` | `MapEvent_TradeTBL` |
-| `MapEvent_EffectTBL.json` | `MapEvent_EffectTBL` |
-| `MapEvent_OtherTBL.json` | `MapEvent_OtherTBL` |
-| `MapEvent_ShopTBL.json` | `MapEvent_ShopTBL` |
-| `GlobalEnum.json` | `GlobalEnum` |
+시트별 JSON 파일(`{시트명}.json`)과 컬럼 정의 모음인 `schema.json`을 포함해 총 23개 파일을 `gamedata.zip`으로 제공한다. 각 파일은 단순 배열(`[]`) 형태이며, 배열 컬럼(Slots·Enemies 등)은 시트의 분할 슬롯들을 자동 집계한다.
 
 ---
+
+## 테이블 정의
+
+| 테이블 | 정의 | JSON 산출 |
+|--------|------|:---------:|
+| `StringTBL_KR` | 게임 내 모든 화면 표시 텍스트를 UID 키로 보관하는 문자열 사전. 다국어 확장 시 `StringTBL_EN` 등을 동일 UID로 추가한다. | <button class="md-button md-button--sm" onclick="downloadSingleJSON('StringTBL_KR', this)">⬇ JSON</button> |
+| `CardAbilityTBL` | 카드 또는 적이 발동하는 개별 효과 단위 정의. 트리거·대상·조건·효과를 선언적으로 기술하며, 하나의 카드는 최대 4개 어빌리티를 참조할 수 있다. | <button class="md-button md-button--sm" onclick="downloadSingleJSON('CardAbilityTBL', this)">⬇ JSON</button> |
+| `CardStatusTBL` | 버프·디버프 상태이상 정의. 효과 종류(StatusEffect enum), 지속 방식(StatusDuration enum), 표시 정보를 관리한다. | <button class="md-button md-button--sm" onclick="downloadSingleJSON('CardStatusTBL', this)">⬇ JSON</button> |
+| `CardTraitTBL` | 카드에 붙는 태그 특성 정의. 시너지 조건이나 어빌리티 트리거 필터(`is_skill`, `is_attack` 등)에서 참조된다. | <button class="md-button md-button--sm" onclick="downloadSingleJSON('CardTraitTBL', this)">⬇ JSON</button> |
+| `CardTeamTBL` | 카드와 챔피언이 속하는 진영(팀) 정의. 팀별 시너지 발동 및 덱 구성 제약의 기준 단위. | <button class="md-button md-button--sm" onclick="downloadSingleJSON('CardTeamTBL', this)">⬇ JSON</button> |
+| `CardRarityTBL` | 카드 희귀도 등급 정의. 상점 진열 확률(`Probability`)과 보상 카드 필터링에 사용된다. | <button class="md-button md-button--sm" onclick="downloadSingleJSON('CardRarityTBL', this)">⬇ JSON</button> |
+| `CardIntentTBL` | 적이 카드를 사용할 때 플레이어에게 보여주는 행동 예고(의도) 아이콘 정의. 우선순위와 표시 여부를 제어한다. | <button class="md-button md-button--sm" onclick="downloadSingleJSON('CardIntentTBL', this)">⬇ JSON</button> |
+| `CardTBL` | 플레이어·적이 사용하는 카드 전체 정의. 2048 전용 필드 `tileRank`·`upgradedTileRank`로 발동에 필요한 타일 등급을 지정한다. | <button class="md-button md-button--sm" onclick="downloadSingleJSON('CardTBL', this)">⬇ JSON</button> |
+| `ChampionTBL` | 플레이어가 파티에 편성하는 챔피언 정의. HP·Speed·Hand·Energy 4종 스탯과 레벨업 증분값, 시작 덱을 포함한다. | <button class="md-button md-button--sm" onclick="downloadSingleJSON('ChampionTBL', this)">⬇ JSON</button> |
+| `EnemyTBL` | 전투에 등장하는 적 정의. 챔피언과 동일한 스탯 구조를 사용하며, `CardDeck`으로 행동 카드 덱을 참조한다. | <button class="md-button md-button--sm" onclick="downloadSingleJSON('EnemyTBL', this)">⬇ JSON</button> |
+| `StartCardDeckTBL` | 챔피언 시작 덱 또는 적 행동 덱을 정의. 최대 10개 슬롯에 카드 ID를 배치하며, 빈 슬롯은 덱에 포함되지 않는다. | <button class="md-button md-button--sm" onclick="downloadSingleJSON('StartCardDeckTBL', this)">⬇ JSON</button> |
+| `MapTBL` | 로그라이트 런에서 생성되는 맵의 구조 파라미터(깊이·너비·분기 확률) 및 이벤트 풀 연결 정의. | <button class="md-button md-button--sm" onclick="downloadSingleJSON('MapTBL', this)">⬇ JSON</button> |
+| `MapRandomEventTBL` | 맵 노드에 랜덤 배치될 이벤트 풀 목록. 동일 맵 내 이벤트 중복 방지를 위해 풀 방식으로 관리한다. | <button class="md-button md-button--sm" onclick="downloadSingleJSON('MapRandomEventTBL', this)">⬇ JSON</button> |
+| `MapFixedEventTBL` | 특정 깊이(층)에 강제 배치되는 고정 이벤트 정의. 보스 방·중요 이벤트 위치를 고정할 때 사용한다. | <button class="md-button md-button--sm" onclick="downloadSingleJSON('MapFixedEventTBL', this)">⬇ JSON</button> |
+| `MapFixedWidthTBL` | 맵의 깊이(층)별 고정 노드 너비를 정의. 특정 층에서 분기 없이 너비를 강제 지정할 때 사용한다. | <button class="md-button md-button--sm" onclick="downloadSingleJSON('MapFixedWidthTBL', this)">⬇ JSON</button> |
+| `MapEvent_BattleTBL` | 전투 이벤트 정의. 등장 적 구성·레벨·보상(골드·경험치·카드)을 포함한다. | <button class="md-button md-button--sm" onclick="downloadSingleJSON('MapEvent_BattleTBL', this)">⬇ JSON</button> |
+| `MapEvent_ChoiceTBL` | 선택지 이벤트 정의. 최대 4개 선택지를 제공하며, 각 선택은 `MapEvent_TradeTBL`이나 `MapEvent_EffectTBL`로 연결된다. | <button class="md-button md-button--sm" onclick="downloadSingleJSON('MapEvent_ChoiceTBL', this)">⬇ JSON</button> |
+| `MapEvent_TradeTBL` | 골드·체력을 소비하고 골드·경험치·회복을 얻는 교역 이벤트 단위 정의. | <button class="md-button md-button--sm" onclick="downloadSingleJSON('MapEvent_TradeTBL', this)">⬇ JSON</button> |
+| `MapEvent_EffectTBL` | 즉시 효과를 발동하는 이벤트 단위 정의. 선택지 결과나 고정 이벤트에서 연계 호출되는 경우가 많다. | <button class="md-button md-button--sm" onclick="downloadSingleJSON('MapEvent_EffectTBL', this)">⬇ JSON</button> |
+| `MapEvent_OtherTBL` | 전투·선택·교역·효과에 해당하지 않는 특수 이벤트(보상 획득, 세계 상태 변경, 상점, 카드 강화 등) 정의. | <button class="md-button md-button--sm" onclick="downloadSingleJSON('MapEvent_OtherTBL', this)">⬇ JSON</button> |
+| `MapEvent_ShopTBL` | 카드·아이템을 사고파는 상점 노드 정의. 구매·판매 배율과 진열 수량을 제어한다. | <button class="md-button md-button--sm" onclick="downloadSingleJSON('MapEvent_ShopTBL', this)">⬇ JSON</button> |
+| `ExtraEnemyTBL` | 전투 이벤트에서 파티 인원 수에 따라 조건부로 추가되는 보조 적 세트 정의. | <button class="md-button md-button--sm" onclick="downloadSingleJSON('ExtraEnemyTBL', this)">⬇ JSON</button> |
+| `GlobalEnum` | 코드와 시트가 공유하는 숫자 enum 값 일람. `AbilityTrigger`, `AbilityTarget`, `StatusEffect`, `MapEventType`, `TileRank` 등 모든 enum 그룹을 단일 테이블로 관리한다. Node.js 빌드 전용. | — |
+
+스키마 타입 정의 상세는 [스키마 설계](schema.md)를 참조한다.
 
 ## 시트 구성 개요
 
@@ -49,36 +51,6 @@ Google Sheets 내 **23개 시트(테이블)**를 5개 그룹으로 분류한다.
 | [캐릭터·적](#3-캐릭터적) | 3 | `ChampionTBL`, `EnemyTBL`, `StartCardDeckTBL` |
 | [맵·이벤트](#4-맵이벤트) | 11 | `MapTBL`, `MapRandomEventTBL`, `MapFixedWidthTBL`, `MapFixedEventTBL`, `MapEvent_BattleTBL`, `MapEvent_ChoiceTBL`, `MapEvent_TradeTBL`, `MapEvent_EffectTBL`, `MapEvent_OtherTBL`, `MapEvent_ShopTBL`, `ExtraEnemyTBL` |
 | [공통](#5-공통) | 1 | `GlobalEnum` |
-
-### 테이블 정의
-
-| 테이블 | 정의 |
-|--------|------|
-| `StringTBL_KR` | 게임 내 모든 화면 표시 텍스트를 UID 키로 보관하는 문자열 사전. 다국어 확장 시 `StringTBL_EN` 등을 동일 UID로 추가한다. |
-| `CardAbilityTBL` | 카드 또는 적이 발동하는 개별 효과 단위 정의. 트리거·대상·조건·효과를 선언적으로 기술하며, 하나의 카드는 최대 4개 어빌리티를 참조할 수 있다. |
-| `CardStatusTBL` | 버프·디버프 상태이상 정의. 효과 종류(StatusEffect enum), 지속 방식(StatusDuration enum), 표시 정보를 관리한다. |
-| `CardTraitTBL` | 카드에 붙는 태그 특성 정의. 시너지 조건이나 어빌리티 트리거 필터(`is_skill`, `is_attack` 등)에서 참조된다. |
-| `CardTeamTBL` | 카드와 챔피언이 속하는 진영(팀) 정의. 팀별 시너지 발동 및 덱 구성 제약의 기준 단위. |
-| `CardRarityTBL` | 카드 희귀도 등급 정의. 상점 진열 확률(`Probability`)과 보상 카드 필터링에 사용된다. |
-| `CardIntentTBL` | 적이 카드를 사용할 때 플레이어에게 보여주는 행동 예고(의도) 아이콘 정의. 우선순위와 표시 여부를 제어한다. |
-| `CardTBL` | 플레이어·적이 사용하는 카드 전체 정의. 2048 전용 필드 `tileRank`·`upgradedTileRank`로 발동에 필요한 타일 등급을 지정한다. |
-| `ChampionTBL` | 플레이어가 파티에 편성하는 챔피언 정의. HP·Speed·Hand·Energy 4종 스탯과 레벨업 증분값, 시작 덱을 포함한다. |
-| `EnemyTBL` | 전투에 등장하는 적 정의. 챔피언과 동일한 스탯 구조를 사용하며, `CardDeck`으로 행동 카드 덱을 참조한다. |
-| `StartCardDeckTBL` | 챔피언 시작 덱 또는 적 행동 덱을 정의. 최대 10개 슬롯에 카드 ID를 배치하며, 빈 슬롯은 덱에 포함되지 않는다. |
-| `MapTBL` | 로그라이트 런에서 생성되는 맵의 구조 파라미터(깊이·너비·분기 확률) 및 이벤트 풀 연결 정의. |
-| `MapRandomEventTBL` | 맵 노드에 랜덤 배치될 이벤트 풀 목록. 동일 맵 내 이벤트 중복 방지를 위해 풀 방식으로 관리한다. |
-| `MapFixedEventTBL` | 특정 깊이(층)에 강제 배치되는 고정 이벤트 정의. 보스 방·중요 이벤트 위치를 고정할 때 사용한다. |
-| `MapFixedWidthTBL` | 맵의 깊이(층)별 고정 노드 너비를 정의. 특정 층에서 분기 없이 너비를 강제 지정할 때 사용한다. |
-| `MapEvent_BattleTBL` | 전투 이벤트 정의. 등장 적 구성·레벨·보상(골드·경험치·카드)을 포함한다. |
-| `MapEvent_ChoiceTBL` | 선택지 이벤트 정의. 최대 4개 선택지를 제공하며, 각 선택은 `MapEvent_TradeTBL`이나 `MapEvent_EffectTBL`로 연결된다. |
-| `MapEvent_TradeTBL` | 골드·체력을 소비하고 골드·경험치·회복을 얻는 교역 이벤트 단위 정의. |
-| `MapEvent_EffectTBL` | 즉시 효과를 발동하는 이벤트 단위 정의. 선택지 결과나 고정 이벤트에서 연계 호출되는 경우가 많다. |
-| `MapEvent_OtherTBL` | 전투·선택·교역·효과에 해당하지 않는 특수 이벤트(보상 획득, 세계 상태 변경, 상점, 카드 강화 등) 정의. |
-| `MapEvent_ShopTBL` | 카드·아이템을 사고파는 상점 노드 정의. 구매·판매 배율과 진열 수량을 제어한다. |
-| `ExtraEnemyTBL` | 전투 이벤트에서 파티 인원 수에 따라 조건부로 추가되는 보조 적 세트 정의. |
-| `GlobalEnum` | 코드와 시트가 공유하는 숫자 enum 값 일람. `AbilityTrigger`, `AbilityTarget`, `StatusEffect`, `MapEventType`, `TileRank` 등 모든 enum 그룹을 단일 테이블로 관리한다. |
-
-스키마 타입 정의 상세는 [스키마 설계](schema.md)를 참조한다.
 
 ---
 
@@ -161,6 +133,7 @@ Google Sheets 내 **23개 시트(테이블)**를 5개 그룹으로 분류한다.
 | `SelectTarget` | `string` | 대상 레이블. GlobalEnum.AbilityTarget 참조 |
 | `Target` | `number` | 대상 enum 값 |
 | `TgtCond1~3` | `string?` | 대상 필터 조건 |
+| `TgtFilter1` | `string?` | 대상 추가 필터 |
 | `Effect1` | `string?` | 주 효과. 예: `damage`, `heal`, `add_shield` |
 | `Effect2` | `string?` | 보조 효과 |
 | `Status1` | `string?` | 적용 상태이상. `CardStatusTBL.Name` 참조 |
@@ -512,24 +485,23 @@ Google Sheets 내 **23개 시트(테이블)**를 5개 그룹으로 분류한다.
 
 | 컬럼 | 타입 | 설명 |
 |------|------|------|
-| `Name` | `string` | 덱 식별자 PK |
 | `Type` | `string` | `Champion` — 챔피언 시작 덱 / `Enemies` — 적 행동 덱 |
-| `ID` | `number` | 고유 ID |
-| `Slot1~Slot10` | `string?` | `CardTBL.Name` 참조. 각 슬롯의 카드. 공란이면 슬롯 없음 |
+| `ID` | `string` | 덱 식별자 PK |
+| `Slots` | `string[]` | `CardTBL.ID` 참조. 카드 ID 배열 (최대 10). 빈 슬롯 제외 후 집계 |
 
 **참조 관계**
 
-- `Slot1~10` → `CardTBL.Name`
+- `Slots` → `CardTBL.ID`
 - `ChampionTBL.StartDeck`에서 참조됨
 - `EnemyTBL.CardDeck`에서 참조됨
 
 **예시**
 
-| Name | Type | ID | Slot1 | Slot2 | Slot3 | Slot4 | Slot5 | Slot6 |
-|------|------|----|-------|-------|-------|-------|-------|-------|
-| deck_kestrel_start | Champion | 5001 | kestrel_shield_strike | kestrel_shield_strike | kestrel_iron_wall | kestrel_rally | kestrel_basic_atk | |
-| deck_cipher_start | Champion | 5002 | cipher_vuln_analysis | cipher_vuln_analysis | cipher_data_burst | cipher_observe | cipher_basic_atk | |
-| deck_drone_guard | Enemies | 6001 | enemy_atk_drone_s12 | enemy_atk_drone_s12 | enemy_buff_drone | | | |
+| Type | ID | Slots |
+|------|----|-------|
+| Champion | deck_kestrel_start | `["kestrel_shield_strike","kestrel_shield_strike","kestrel_iron_wall","kestrel_rally","kestrel_basic_atk"]` |
+| Champion | deck_cipher_start | `["cipher_vuln_analysis","cipher_vuln_analysis","cipher_data_burst","cipher_observe","cipher_basic_atk"]` |
+| Enemies | deck_drone_guard | `["enemy_atk_drone_s12","enemy_atk_drone_s12","enemy_buff_drone"]` |
 
 ---
 
@@ -601,8 +573,8 @@ Google Sheets 내 **23개 시트(테이블)**를 5개 그룹으로 분류한다.
 
 | 컬럼 | 타입 | 설명 |
 |------|------|------|
-| `ID` | `number` | 고유 ID |
-| `Depth1~12` | `number?` | 해당 깊이(층)의 강제 너비. `0` 또는 공란이면 MapTBL의 WidthMin~WidthMax 범위로 랜덤 생성 |
+| `ID` | `string` | 고정 너비 식별자 PK |
+| `Depths` | `number[]` | 깊이(층)별 강제 너비 배열 (최대 12개). 빈 슬롯 제외 후 집계. `0`이면 해당 층은 WidthMin~WidthMax 범위로 랜덤 생성 |
 
 **참조 관계**
 
@@ -646,8 +618,8 @@ Google Sheets 내 **23개 시트(테이블)**를 5개 그룹으로 분류한다.
 | `DepthMin` | `number` | 등장 가능 최소 깊이 |
 | `DepthMax` | `number` | 등장 가능 최대 깊이 |
 | `EnemyLevel` | `number` | 적 레벨 오프셋. `EnemyTBL.LvUpMax` 범위 내 |
-| `Enemy1~4` | `string?` | `EnemyTBL.Name` 참조. 등장 적. 공란이면 해당 슬롯 없음 |
-| `ExtraEnemy` | `string?` | `ExtraEnemyTBL.Name` 참조. 조건부 추가 적 |
+| `Enemies` | `string[]` | `EnemyTBL.ID` 참조. 등장 적 ID 배열 (최대 4). 빈 슬롯 제외 후 집계 |
+| `ExtraEnemy` | `string?` | `ExtraEnemyTBL.ID` 참조. 조건부 추가 적 |
 | `RewardGold` | `number` | 클리어 시 추가 골드 (적 처치 보상과 별개) |
 | `RewardXP` | `number` | 클리어 시 경험치 |
 | `IsRewardCards` | `boolean` | 카드 보상 제공 여부 |
@@ -660,17 +632,17 @@ Google Sheets 내 **23개 시트(테이블)**를 5개 그룹으로 분류한다.
 
 **참조 관계**
 
-- `Enemy1~4` → `EnemyTBL.Name`
-- `ExtraEnemy` → `ExtraEnemyTBL.Name`
-- `CardRarity` → `CardRarityTBL.Name`
+- `Enemies` → `EnemyTBL.ID`
+- `ExtraEnemy` → `ExtraEnemyTBL.ID`
+- `CardRarity` → `CardRarityTBL.ID`
 
 **예시**
 
-| Name | ID | DepthMin | DepthMax | EnemyLevel | enemy1 | enemy2 | rewardGold | rewardXP | IsRewardCards | CardRarity |
-|------|----|:--------:|:--------:|:----------:|--------|--------|:----------:|:--------:|:-------------:|------------|
-| battle_ch1_normal_1 | 8001 | 1 | 4 | 0 | drone_guard | drone_guard | 5 | 20 | TRUE | common |
-| battle_ch1_elite_1 | 8011 | 5 | 9 | 1 | drone_guard | drone_guard | 15 | 40 | TRUE | rare |
-| battle_ch1_boss | 8021 | 10 | 12 | 0 | warden_1st | | 30 | 80 | TRUE | epic |
+| ID | DepthMin | DepthMax | EnemyLevel | Enemies | RewardGold | RewardXP | IsRewardCards | CardRarity |
+|----|:--------:|:--------:|:----------:|---------|:----------:|:--------:|:-------------:|------------|
+| battle_ch1_normal_1 | 1 | 4 | 0 | `["drone_guard","drone_guard"]` | 5 | 20 | true | common |
+| battle_ch1_elite_1 | 5 | 9 | 1 | `["drone_guard","drone_guard"]` | 15 | 40 | true | rare |
+| battle_ch1_boss | 10 | 12 | 0 | `["warden_1st"]` | 30 | 80 | true | epic |
 
 ---
 
@@ -721,13 +693,11 @@ Google Sheets 내 **23개 시트(테이블)**를 5개 그룹으로 분류한다.
 | `SpendItem` | `string?` | 소비 아이템 ID. 공란이면 없음 |
 | `SpendGold` | `number` | 소비 골드. `0`이면 없음 |
 | `SpendHP` | `number` | 소비 체력. `0`이면 없음 |
+| `GainItems` | `string[]` | 획득 아이템 ID 배열 (최대 3). 빈 슬롯 제외 후 집계 |
+| `GainAlly` | `string?` | 획득 아군 ID. `EnemyTBL` 또는 `ChampionTBL` 참조 |
 | `GainGold` | `number` | 획득 골드 |
 | `GainXP` | `number` | 획득 경험치 |
 | `GainHeal` | `number` | 회복량. `0`이면 없음 |
-| `GainItem1` | `string?` | 획득 아이템 ID 1 |
-| `GainItem2` | `string?` | 획득 아이템 ID 2 |
-| `GainItem3` | `string?` | 획득 아이템 ID 3 |
-| `GainAlly` | `string?` | 획득 아군 ID. `EnemyTBL` 또는 `ChampionTBL` 참조 |
 | `DescStringID` | `number` | StringTBL UID (270000~). 이벤트 설명 |
 
 **예시**
@@ -796,12 +766,10 @@ Google Sheets 내 **23개 시트(테이블)**를 5개 그룹으로 분류한다.
 | `DepthMax` | `number` | 등장 가능 최대 깊이 |
 | `BuyMult` | `number` | 구매 가격 배율. 기본값 `1.0` |
 | `SellyMult` | `number` | 판매 가격 배율. 기본값 `0.5` |
-| `Item1` | `string?` | 고정 진열 아이템 ID 1 |
-| `Item2` | `string?` | 고정 진열 아이템 ID 2 |
-| `Item3` | `string?` | 고정 진열 아이템 ID 3 |
+| `FixedItems` | `string[]` | 고정 진열 아이템 ID 배열 (최대 3). 빈 슬롯 제외 후 집계 |
 | `CardsRand` | `number` | 상점에 진열되는 카드 수 (랜덤 선택) |
 | `ItemsRand` | `number` | 상점에 진열되는 아이템 수 (랜덤 선택) |
-| `ItemRandSlot1~4` | `string?` | 랜덤 아이템 슬롯 설정 키. 아이템 풀 제한 시 사용 |
+| `ItemRandSlots` | `string[]` | 랜덤 아이템 슬롯 설정 키 배열 (최대 4). 빈 슬롯 제외 후 집계 |
 
 ---
 

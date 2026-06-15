@@ -94,6 +94,7 @@ export interface Ability {
   TgtCond1?: string;
   TgtCond2?: string;
   TgtCond3?: string;
+  TgtFilter1?: string;
   Effect1?: string;
   Effect2?: string;
   Status1?: string;
