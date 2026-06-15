@@ -460,7 +460,7 @@ async function downloadSingleJSON(sheetName, btn) {
     if      (sheetName === 'MapEvent_ChoiceTBL') data = buildChoiceEvents(rows);
     else if (sheetName === 'ExtraEnemyTBL')      data = buildExtraEnemies(rows);
     else                                          data = buildGeneric(rows, sheetName);
-    downloadBlob(new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' }), `${sheetName}.json`);
+    downloadBlob(new Blob([JSON.stringify({ rows: data }, null, 2)], { type: 'application/json' }), `${sheetName}.json`);
   } catch(e) {
     alert('오류: ' + e.message);
   } finally {
@@ -524,7 +524,7 @@ async function buildAndDownloadData() {
       ['schema.json',               SCHEMA],
     ];
     for (const [name, data] of files) {
-      zip.file(name, JSON.stringify(data, null, 2));
+      zip.file(name, JSON.stringify(name === 'schema.json' ? data : { rows: data }, null, 2));
     }
 
     set('⏳ ZIP 생성 중...');

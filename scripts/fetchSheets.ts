@@ -440,7 +440,10 @@ async function main() {
 
   fs.mkdirSync(OUTPUT_DIR, { recursive: true });
   const write = (name: string, data: unknown) =>
-    fs.writeFileSync(path.join(OUTPUT_DIR, name), JSON.stringify(data, null, 2));
+    fs.writeFileSync(path.join(OUTPUT_DIR, name), JSON.stringify(
+      name === 'schema.json' ? data : { rows: data },
+      null, 2
+    ));
 
   const out = [
     ['StringTBL_KR.json',          buildGeneric(strRows,      'StringTBL_KR')],
