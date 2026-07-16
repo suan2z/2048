@@ -631,13 +631,15 @@
     }
     .team-slot.sel .t-num { color:rgba(0,188,212,.25); }
 
-    .t-portraits { display:flex; gap:8px; align-items:center; flex-shrink:0; }
+    .t-portrait-col { display:flex; flex-direction:column; align-items:center; gap:6px; flex-shrink:0; width:96px; }
     .t-portrait {
-      width:72px; height:72px; border-radius:12px;
+      width:88px; height:88px; border-radius:14px;
       background:var(--panel); border:2px solid var(--border2);
       display:flex; align-items:center; justify-content:center;
-      font-size:28px;
+      font-size:38px;
     }
+    .t-portrait-name { font-size:14px; font-weight:800; color:var(--text); }
+    .t-portrait-role { font-size:11px; color:var(--dim); }
 
     .t-info { flex:1; display:flex; flex-direction:column; gap:6px; }
     .t-info-row { display:flex; align-items:center; gap:8px; font-size:13px; }
@@ -675,6 +677,7 @@
       border:2px solid var(--border2); background:var(--card-bg);
       display:flex; align-items:center; justify-content:center; font-size:18px;
     }
+    .rogue-char-name { font-size:11px; font-weight:700; color:var(--text); }
     .rogue-char-hp { width:38px; height:3px; background:var(--border); border-radius:2px; overflow:hidden; }
     .rogue-char-hpf { height:100%; border-radius:2px; }
 
@@ -779,7 +782,7 @@
   <button class="tb-btn" onclick="go('story')">📖 스토리 모드</button>
   <button class="tb-btn" onclick="go('battle')">⚔ 전투 모드</button>
   <button class="tb-btn" onclick="go('char')">👤 캐릭터 정보</button>
-  <button class="tb-btn" onclick="go('team')">🧩 팀 구성</button>
+  <button class="tb-btn" onclick="go('team')">🧩 덱 관리</button>
   <div class="tb-sep"></div>
   <button class="tb-btn" onclick="go('rogue')">🗺 로그라이크 맵</button>
 </div>
@@ -838,7 +841,7 @@
       <div class="menu-mission">
         <div class="menu-mission-icon">⚡</div>
         <div>
-          <div class="menu-mission-title">일반 로그라이크 3회 완료</div>
+          <div class="menu-mission-title">스토리 로그라이크 3회 완료</div>
           <div class="menu-mission-prog">3 / 3 ✓ 완료</div>
         </div>
       </div>
@@ -883,8 +886,8 @@
       <div class="mnav-divider"></div>
       <div class="mnav-item" onclick="go('team')">
         <div class="mnav-left">
-          <div class="mnav-name">팀 구성</div>
-          <div class="mnav-sub">일반 3팀 · 도전 2팀</div>
+          <div class="mnav-name">덱 관리</div>
+          <div class="mnav-sub">일반 3덱 · 도전 2덱</div>
         </div>
         <div class="mnav-right"><div class="mnav-icon">🧩</div></div>
       </div>
@@ -1084,10 +1087,10 @@
       <div class="mc-body">
         <div class="mc-title">도전 로그라이크 모드</div>
         <div class="mc-subtitle">Challenge Roguelike</div>
-        <div class="mc-desc">챕터 클리어 후에도 계속 도전 가능. 몬스터가 점점 강해지며 최종 패배 시 도전 팀덱을 저장할 수 있다.</div>
+        <div class="mc-desc">챕터 클리어 후에도 계속 도전 가능. 몬스터가 점점 강해지며 최종 패배 시 그 강해진 빌드를 도전 완성 덱으로 저장할 수 있다.</div>
         <div class="mc-stats">
           <div class="mc-stat-row"><span>최고 기록</span><span>3챕터 7막</span></div>
-          <div class="mc-stat-row"><span>도전 팀덱</span><span>2 / 10</span></div>
+          <div class="mc-stat-row"><span>도전 완성 덱</span><span>2 / 10</span></div>
         </div>
         <div class="mc-btn mc-btn-r" onclick="go('rogue')" style="cursor:pointer;">▶ 시작하기</div>
       </div>
@@ -1098,10 +1101,10 @@
       <div class="mc-body">
         <div class="mc-title">일반 전투 모드</div>
         <div class="mc-subtitle">Normal Battle</div>
-        <div class="mc-desc">저장된 일반 팀덱으로 고정 스테이지를 도전. 각 스테이지는 고유한 적 구성과 특수 조건이 있으며 뒤로 갈수록 강해진다.</div>
+        <div class="mc-desc">저장된 일반 완성 덱으로 고정 스테이지를 도전. 각 스테이지는 고유한 적 구성과 특수 조건이 있으며 뒤로 갈수록 강해진다.</div>
         <div class="mc-stats">
           <div class="mc-stat-row"><span>진행 상황</span><span>스테이지 8 / 30</span></div>
-          <div class="mc-stat-row"><span>일반 팀덱</span><span>3 / 10</span></div>
+          <div class="mc-stat-row"><span>일반 완성 덱</span><span>3 / 10</span></div>
         </div>
         <div class="mc-btn mc-btn-n">▶ 시작하기</div>
       </div>
@@ -1112,13 +1115,13 @@
       <div class="mc-body">
         <div class="mc-title">도전 전투 모드</div>
         <div class="mc-subtitle">Challenge Battle</div>
-        <div class="mc-desc">저장된 도전 팀덱으로 강화된 고정 스테이지를 도전. 도전 팀덱 보유 시 해금된다.</div>
+        <div class="mc-desc">저장된 도전 완성 덱으로 강화된 고정 스테이지를 도전. 도전 완성 덱 보유 시 해금된다.</div>
         <div class="mc-stats">
-          <div class="mc-stat-row"><span>해금 조건</span><span>도전 팀덱 보유</span></div>
-          <div class="mc-stat-row"><span>도전 팀덱</span><span>2 / 10</span></div>
+          <div class="mc-stat-row"><span>해금 조건</span><span>도전 완성 덱 보유</span></div>
+          <div class="mc-stat-row"><span>도전 완성 덱</span><span>2 / 10</span></div>
         </div>
         <div class="mc-btn mc-btn-lk">🔒 잠금 해제 필요</div>
-        <div class="mc-lock-hint">도전 로그라이크에서 도전 팀덱을 획득하세요</div>
+        <div class="mc-lock-hint">도전 로그라이크에서 도전 완성 덱을 획득하세요</div>
       </div>
     </div>
 
@@ -1200,7 +1203,7 @@
 
   <div class="top-bar">
     <div class="back-btn" onclick="go('menu')">← 뒤로</div>
-    <div class="screen-title">전투원 목록</div>
+    <div class="screen-title">완성 덱 관리</div>
     <span style="font-size:12px;color:var(--dim);margin-left:3px;">ⓘ</span>
     <div style="margin-left:auto;display:flex;gap:10px;align-items:center;">
       <span style="font-size:15px;cursor:pointer;color:var(--dim);">▼</span>
@@ -1212,80 +1215,85 @@
     </div>
   </div>
 
-  <!-- 탭바 -->
+  <!-- 탭바 (일반 / 도전 완성 덱) -->
   <div class="team-tab-bar">
-    <div class="team-tab on" id="ttab-n" onclick="teamTab('n')">일반 전투 팀</div>
-    <div class="team-tab"    id="ttab-c" onclick="teamTab('c')">도전 전투 팀</div>
-    <div class="team-edit-btn">👥 편집</div>
+    <div class="team-tab on" id="ttab-n" onclick="teamTab('n')">일반 완성 덱</div>
+    <div class="team-tab"    id="ttab-c" onclick="teamTab('c')">도전 완성 덱</div>
+    <div class="team-edit-btn">🃏 편집</div>
   </div>
 
-  <!-- 일반 팀 -->
+  <!-- 일반 완성 덱 -->
   <div class="team-body" id="tpanel-n">
     <div class="team-slot sel">
       <div class="t-num">1</div>
-      <div class="t-portraits">
+      <div class="t-portrait-col">
         <div class="t-portrait">🛡</div>
-        <div class="t-portrait">⚡</div>
-        <div class="t-portrait">💊</div>
+        <div class="t-portrait-name">케스트럴</div>
+        <div class="t-portrait-role">Lv.24 · 탱커</div>
       </div>
       <div class="t-info">
-        <div class="t-info-row"><span class="t-info-label">결성일 :</span><span class="t-info-val">2026-05-28 14:32:01</span></div>
+        <div class="t-info-row"><span class="t-info-label">덱 카드 :</span><span class="t-info-val">18장</span></div>
+        <div class="t-info-row"><span class="t-info-label">완성일 :</span><span class="t-info-val">2026-05-28 14:32:01</span></div>
         <div class="t-info-row"><span class="t-info-label">최고 점수 :</span><span class="t-info-val">8,240,000</span></div>
       </div>
       <div class="t-skill-btn">스킬덱 보기</div>
     </div>
     <div class="team-slot">
       <div class="t-num">2</div>
-      <div class="t-portraits">
+      <div class="t-portrait-col">
         <div class="t-portrait">🎯</div>
-        <div class="t-portrait">👁</div>
-        <div class="t-portrait">🛡</div>
+        <div class="t-portrait-name">베인</div>
+        <div class="t-portrait-role">Lv.19 · 스나이퍼</div>
       </div>
       <div class="t-info">
-        <div class="t-info-row"><span class="t-info-label">결성일 :</span><span class="t-info-val">2026-05-25 09:11:44</span></div>
+        <div class="t-info-row"><span class="t-info-label">덱 카드 :</span><span class="t-info-val">15장</span></div>
+        <div class="t-info-row"><span class="t-info-label">완성일 :</span><span class="t-info-val">2026-05-25 09:11:44</span></div>
         <div class="t-info-row"><span class="t-info-label">최고 점수 :</span><span class="t-info-val">5,120,000</span></div>
       </div>
       <div class="t-skill-btn">스킬덱 보기</div>
     </div>
     <div class="team-slot">
       <div class="t-num">3</div>
-      <div class="t-portraits">
+      <div class="t-portrait-col">
         <div class="t-portrait">⚡</div>
-        <div class="t-portrait">🎯</div>
-        <div class="t-portrait">👁</div>
+        <div class="t-portrait-name">주베</div>
+        <div class="t-portrait-role">Lv.15 · 스카우트</div>
       </div>
       <div class="t-info">
-        <div class="t-info-row"><span class="t-info-label">결성일 :</span><span class="t-info-val">2026-05-22 20:05:17</span></div>
+        <div class="t-info-row"><span class="t-info-label">덱 카드 :</span><span class="t-info-val">13장</span></div>
+        <div class="t-info-row"><span class="t-info-label">완성일 :</span><span class="t-info-val">2026-05-22 20:05:17</span></div>
         <div class="t-info-row"><span class="t-info-label">최고 점수 :</span><span class="t-info-val">3,780,000</span></div>
       </div>
       <div class="t-skill-btn">스킬덱 보기</div>
     </div>
   </div>
 
-  <!-- 도전 팀 -->
+  <!-- 도전 완성 덱 -->
   <div class="team-body" id="tpanel-c" style="display:none">
     <div class="team-slot sel">
       <div class="t-num">1</div>
-      <div class="t-portraits">
+      <div class="t-portrait-col">
         <div class="t-portrait">🛡</div>
-        <div class="t-portrait">🎯</div>
-        <div class="t-portrait">👁</div>
+        <div class="t-portrait-name">케스트럴</div>
+        <div class="t-portrait-role">Lv.38 · 탱커</div>
       </div>
       <div class="t-info">
-        <div class="t-info-row"><span class="t-info-label">결성일 :</span><span class="t-info-val">2026-05-29 18:44:03</span></div>
+        <div class="t-info-row"><span class="t-info-label">덱 카드 :</span><span class="t-info-val">24장</span></div>
+        <div class="t-info-row"><span class="t-info-label">완성일 :</span><span class="t-info-val">2026-05-29 18:44:03</span></div>
         <div class="t-info-row"><span class="t-info-label">최고 점수 :</span><span class="t-info-val">22,500,000</span></div>
       </div>
       <div class="t-skill-btn">스킬덱 보기</div>
     </div>
     <div class="team-slot">
       <div class="t-num">2</div>
-      <div class="t-portraits">
+      <div class="t-portrait-col">
         <div class="t-portrait">⚡</div>
-        <div class="t-portrait">💊</div>
-        <div class="t-portrait">🎯</div>
+        <div class="t-portrait-name">주베</div>
+        <div class="t-portrait-role">Lv.31 · 스카우트</div>
       </div>
       <div class="t-info">
-        <div class="t-info-row"><span class="t-info-label">결성일 :</span><span class="t-info-val">2026-05-27 11:20:58</span></div>
+        <div class="t-info-row"><span class="t-info-label">덱 카드 :</span><span class="t-info-val">21장</span></div>
+        <div class="t-info-row"><span class="t-info-label">완성일 :</span><span class="t-info-val">2026-05-27 11:20:58</span></div>
         <div class="t-info-row"><span class="t-info-label">최고 점수 :</span><span class="t-info-val">14,100,000</span></div>
       </div>
       <div class="t-skill-btn">스킬덱 보기</div>
@@ -1299,23 +1307,15 @@
 <div class="screen" id="screen-rogue">
 
   <div class="rogue-top">
-    <div class="rogue-hp-col">
-      <div class="rogue-hp-txt">430 / 430</div>
-      <div class="rogue-hpbar"><div class="rogue-hpfill" style="width:78%"></div></div>
-    </div>
     <div class="rogue-chars">
       <div class="rogue-char-col">
         <div class="rogue-char">🛡</div>
-        <div class="rogue-char-hp"><div class="rogue-char-hpf" style="width:90%;background:#4caf50;"></div></div>
+        <div class="rogue-char-name">케스트럴</div>
       </div>
-      <div class="rogue-char-col">
-        <div class="rogue-char">⚡</div>
-        <div class="rogue-char-hp"><div class="rogue-char-hpf" style="width:58%;background:#ff9800;"></div></div>
-      </div>
-      <div class="rogue-char-col">
-        <div class="rogue-char">💊</div>
-        <div class="rogue-char-hp"><div class="rogue-char-hpf" style="width:100%;background:#4caf50;"></div></div>
-      </div>
+    </div>
+    <div class="rogue-hp-col">
+      <div class="rogue-hp-txt">430 / 430</div>
+      <div class="rogue-hpbar"><div class="rogue-hpfill" style="width:100%"></div></div>
     </div>
     <div class="rogue-res">
       <div class="rogue-gold">💰 240</div>
@@ -1366,7 +1366,7 @@ const REF_MAP = {
   menu:          {name:'로비/메인 메뉴',  imgs:[['ref_01_lobby.png','로비화면 (메인 메뉴)']]},
   battle:        {name:'전투 모드',       imgs:[['ref_07_battle_mode.png','전투 모드 선택']]},
   char:          {name:'캐릭터 정보',     imgs:[['ref_05_character.png','캐릭터 정보']]},
-  team:          {name:'팀 구성',         imgs:[['ref_06_team.png','팀 구성']]},
+  team:          {name:'덱 관리',         imgs:[['ref_06_team.png','덱 관리']]},
   rogue:         {name:'로그라이크 맵',   imgs:[['ref_08_roguelike_map.png','로그라이크 스테이지 맵']]},
   'story-mode':  {name:'스토리 · 모드 선택', imgs:[['ref_02_story_select.png','스토리모드 선택']]},
   'story-act':   {name:'스토리 · 막 선택',   imgs:[['ref_03_story_chapter.png','챕터(막) 선택']]},

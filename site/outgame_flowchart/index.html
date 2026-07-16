@@ -1646,7 +1646,7 @@
     MENU --&gt; SM[스토리 모드]
     MENU --&gt; BM[전투 모드]
     MENU --&gt; CI[캐릭터 정보]
-    MENU --&gt; TC[팀 구성]
+    MENU --&gt; TC[덱 관리]
 
     subgraph sg_story[스토리 모드]
         SM --&gt; MS[메인 스토리\n챕터 선택]
@@ -1654,34 +1654,35 @@
 
         MS --&gt; CH[챕터 경로 진행]
         CH --&gt; STS[스토리 스테이지\n연출 → 즉시 보상]
-        CH --&gt; NBS[일반 전투 스테이지\n일반 팀덱으로 전투]
-        CH --&gt; NRS[일반 로그라이크 스테이지\n챕터 로그라이크 진행]
+        CH --&gt; NBS[스토리 전투 스테이지\n일반 완성 덱으로 전투]
+        CH --&gt; NRS[스토리 로그라이크 스테이지\n챕터 로그라이크 진행]
 
         NRS --&gt; NR_CLR{클리어?}
-        NR_CLR --&gt;|성공| NR_SAVE[/일반 팀덱 저장 여부 확인/]
+        NR_CLR --&gt;|성공| NR_SAVE[/일반 완성 덱 저장 여부 확인/]
         NR_SAVE --&gt; NR_END([스테이지 종료])
         NR_CLR --&gt;|실패| NR_FAIL([경험치 획득 → 종료])
     end
 
     subgraph sg_battle[전투 모드]
         BM --&gt; CRM[도전 로그라이크 모드]
-        BM --&gt; NBM[일반 전투 모드\n일반 팀덱 선택\n→ 고정 스테이지 전투]
-        BM --&gt; CBM[도전 전투 모드\n도전 팀덱 선택\n→ 고정 스테이지 전투\n⚠ 조건부 해금]
+        BM --&gt; NBM[일반 전투 모드\n일반 완성 덱 선택\n→ 고정 스테이지 전투]
+        BM --&gt; CBM[도전 전투 모드\n도전 완성 덱 선택\n→ 강화 고정 스테이지 전투\n⚠ 조건부 해금]
 
-        CRM --&gt; CR_PLAY[챕터 로그라이크 진행]
-        CR_PLAY --&gt; CR_CLR{클리어?}
-        CR_CLR --&gt;|챕터 클리어| CR_SAVE_N[/일반 팀덱 저장 가능/]
-        CR_SAVE_N --&gt; CR_CONT{계속 도전?}
-        CR_CONT --&gt;|계속| CR_PLAY
+        CRM --&gt; CR_PLAY[기본 챕터 로그라이크 진행]
+        CR_PLAY --&gt; CR_CLR{챕터 클리어?}
+        CR_CLR --&gt;|클리어| CR_SAVE_N[/일반 완성 덱 저장 기회/]
+        CR_CLR --&gt;|실패| CR_FAIL([경험치 획득 → 종료])
+        CR_SAVE_N --&gt; CR_CONT{무한 진행?}
         CR_CONT --&gt;|종료| CR_END([종료])
-        CR_CLR --&gt;|최종 패배| CR_SAVE_C[/도전 팀덱 저장 가능/]
+        CR_CONT --&gt;|계속| CR_INF[무한 진행\n끝없이 강해짐]
+        CR_INF --&gt; CR_SAVE_C[/최종 패배 시\n도전 완성 덱 저장/]
         CR_SAVE_C --&gt; CR_END
     end
 
     subgraph sg_manage[정보 · 관리]
         CI --&gt; CI_VIEW[캐릭터 5인\n능력치 · 스킬덱 탭\n열람 전용]
-        TC --&gt; TC_N[일반 전투 팀\n1~10팀 관리]
-        TC --&gt; TC_C[도전 전투 팀\n1~10팀 관리]
+        TC --&gt; TC_N[일반 완성 덱\n1~10개 관리]
+        TC --&gt; TC_C[도전 완성 덱\n1~10개 관리]
     end
 
     classDef saveNode fill:#1a6b4a,stroke:#2ecc71,color:#fff
@@ -1702,7 +1703,7 @@
 <td><strong>스토리 모드</strong></td>
 <td>메인 스토리</td>
 <td>로그라이크 방식</td>
-<td>8챕터 순차 진행. 챕터당 일반 로그라이크 1개 + 일반 전투 + 스토리 스테이지 배치</td>
+<td>8챕터 순차 진행. 챕터당 스토리 로그라이크 1개 + 스토리 전투 + 스토리 스테이지 배치</td>
 </tr>
 <tr>
 <td><strong>스토리 모드</strong></td>
@@ -1714,19 +1715,19 @@
 <td><strong>전투 모드</strong></td>
 <td>도전 로그라이크</td>
 <td>로그라이크 방식</td>
-<td>챕터 클리어 후 계속 도전. 최종 패배 시 도전 팀덱 저장</td>
+<td>챕터 클리어 후 계속 도전. 최종 패배 시 도전 완성 덱 저장</td>
 </tr>
 <tr>
 <td><strong>전투 모드</strong></td>
 <td>일반 전투</td>
-<td>일반 팀덱</td>
+<td>일반 완성 덱</td>
 <td>고정 스테이지 리스트. 뒤로 갈수록 강한 적</td>
 </tr>
 <tr>
 <td><strong>전투 모드</strong></td>
 <td>도전 전투</td>
-<td>도전 팀덱</td>
-<td>고정 스테이지 리스트. 조건부 해금</td>
+<td>도전 완성 덱</td>
+<td>강화된 고정 스테이지 리스트. 조건부 해금</td>
 </tr>
 <tr>
 <td><strong>캐릭터 정보</strong></td>
@@ -1735,10 +1736,10 @@
 <td>5인 캐릭터 능력치 · 스킬덱 열람 전용</td>
 </tr>
 <tr>
-<td><strong>팀 구성</strong></td>
+<td><strong>덱 관리</strong></td>
 <td>—</td>
 <td>—</td>
-<td>일반·도전 팀덱 1~10팀 저장 관리</td>
+<td>일반·도전 완성 덱 1~10개 저장 관리</td>
 </tr>
 </tbody>
 </table>
