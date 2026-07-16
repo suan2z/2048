@@ -718,7 +718,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_2" class="md-nav__link">
+  <a href="#_3" class="md-nav__link">
     <span class="md-ellipsis">
       
         관련 문서
@@ -1322,6 +1322,8 @@
       
         
       
+        
+      
     
     
     
@@ -1410,6 +1412,34 @@
     
   
     캐릭터
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../contents/skills/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    스킬
   
 
     
@@ -1820,7 +1850,7 @@ row 3 [   ] [  4] [   ] [  2]
 <tr>
 <td><code>maxSlides</code></td>
 <td><code>number</code></td>
-<td>해당 스테이지에서 설정된 턴당 최대 슬라이드 횟수</td>
+<td>턴당 최대 슬라이드 횟수. <strong>출전 캐릭터의 슬라이드 스탯 + 유물 증감</strong> (§5-1)</td>
 </tr>
 <tr>
 <td><code>isSlideBlocked</code></td>
@@ -1830,7 +1860,7 @@ row 3 [   ] [  4] [   ] [  2]
 </tbody>
 </table>
 <blockquote>
-<p><code>maxSlides</code>는 스테이지 기획 시 스테이지 데이터에서 주입한다. 스테이지별 설정이므로 코드에 하드코딩하지 않는다.</p>
+<p><code>maxSlides</code>는 <strong>출전 캐릭터가 보유한 고유 스탯</strong>에서 온다. 스테이지 데이터로 주입하지 않으며, 핸드 구성에 따라 변하지도 않는다. 전투 시작 시 1회 확정되고 유물 획득 시에만 변경된다.</p>
 </blockquote>
 <h3 id="2-5">2-5. 보드 확장</h3>
 <p>기본 보드 크기는 4×4다. 유물·패시브 효과에 의해 보드가 확장될 수 있다(예: 5×5). 확장 시에는 <code>board</code> 배열 크기와 슬라이드 알고리즘의 순회 범위가 함께 변경된다. 확장 규칙의 상세는 <a href="../growth/">growth.md</a>에서 다룬다.</p>
@@ -2001,8 +2031,107 @@ row 3 [   ] [  4] [   ] [  2]
 </blockquote>
 <hr />
 <h2 id="5">5. 슬라이드 횟수 제한</h2>
-<h3 id="5-1">5-1. 기본 횟수</h3>
-<p>턴당 최대 슬라이드 횟수(<code>maxSlides</code>)는 <strong>스테이지별로 설정</strong>한다. 스테이지 기획 시 스테이지 데이터에 값을 지정하며, 코드에 하드코딩하지 않는다.</p>
+<h3 id="5-1">5-1. 슬라이드 횟수 = 캐릭터 고유 스탯</h3>
+<p>턴당 최대 슬라이드 횟수(<code>maxSlides</code>)는 <strong>출전 캐릭터가 고유 스탯으로 보유</strong>한다. 핸드 구성이나 스테이지와 무관하며, 전투 내내 동일하다.</p>
+<div class="highlight"><pre><span></span><code>maxSlides = 출전 캐릭터의 슬라이드 스탯 + 유물 증감 합계
+</code></pre></div>
+<p>캐릭터별 슬라이드 스탯의 원본 정의는 <a href="../character/">character.md §슬라이드 스탯</a>에서 관리한다.</p>
+<table>
+<thead>
+<tr>
+<th>캐릭터</th>
+<th>역할</th>
+<th style="text-align: center;"><strong>슬라이드 스탯</strong></th>
+<th style="text-align: center;">카드 코스트 밴드</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>주베</td>
+<td>스카우트</td>
+<td style="text-align: center;"><strong>30</strong></td>
+<td style="text-align: center;">0 ~ 64</td>
+</tr>
+<tr>
+<td>사이퍼</td>
+<td>호크</td>
+<td style="text-align: center;"><strong>60</strong></td>
+<td style="text-align: center;">0 ~ 128</td>
+</tr>
+<tr>
+<td>펄스</td>
+<td>서스테이너</td>
+<td style="text-align: center;"><strong>120</strong></td>
+<td style="text-align: center;">0 ~ 256</td>
+</tr>
+<tr>
+<td>케스트럴</td>
+<td>탱커</td>
+<td style="text-align: center;"><strong>260</strong></td>
+<td style="text-align: center;">0 ~ 512</td>
+</tr>
+<tr>
+<td>베인</td>
+<td>스나이퍼</td>
+<td style="text-align: center;"><strong>520</strong></td>
+<td style="text-align: center;">4 ~ 1024</td>
+</tr>
+</tbody>
+</table>
+<p><strong>설계 의도</strong> — 슬라이드 스탯은 각 캐릭터의 <strong>카드 코스트 밴드 상한에 맞춰</strong> 부여된다. 값 <code>2</code> 타일만으로 숫자 <code>N</code>을 만들려면 <code>N/2</code>개의 2-타일이 필요하고 슬라이드 1회당 타일 1개가 생성되므로(<a href="#4-새-타일-생성-규칙">§4</a>), 슬라이드 스탯은 대략 <strong>밴드 상한의 절반</strong> 수준이다. 즉 "한 턴 예산으로 자기 상한 카드를 거의 만들어낼 수 있다"가 기준선이다.</p>
+<table>
+<thead>
+<tr>
+<th>캐릭터</th>
+<th style="text-align: center;">상한 <code>N</code></th>
+<th style="text-align: center;">필요 2-타일 (<code>N/2</code>)</th>
+<th style="text-align: center;">슬라이드</th>
+<th style="text-align: center;">한 턴 내 상한 카드 완성</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>주베</td>
+<td style="text-align: center;">64</td>
+<td style="text-align: center;">32</td>
+<td style="text-align: center;">30</td>
+<td style="text-align: center;">✗ (2 부족)</td>
+</tr>
+<tr>
+<td>사이퍼</td>
+<td style="text-align: center;">128</td>
+<td style="text-align: center;">64</td>
+<td style="text-align: center;">60</td>
+<td style="text-align: center;">✗ (4 부족)</td>
+</tr>
+<tr>
+<td>펄스</td>
+<td style="text-align: center;">256</td>
+<td style="text-align: center;">128</td>
+<td style="text-align: center;">120</td>
+<td style="text-align: center;">✗ (8 부족)</td>
+</tr>
+<tr>
+<td>케스트럴</td>
+<td style="text-align: center;">512</td>
+<td style="text-align: center;">256</td>
+<td style="text-align: center;">260</td>
+<td style="text-align: center;">✓ (4 여유)</td>
+</tr>
+<tr>
+<td>베인</td>
+<td style="text-align: center;">1024</td>
+<td style="text-align: center;">512</td>
+<td style="text-align: center;">520</td>
+<td style="text-align: center;">✓ (8 여유)</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><strong>보드는 턴이 넘어가도 유지되므로</strong>(§7 참조) 한 턴 내 완성이 불가해도 문제가 되지 않는다. 주베·사이퍼·펄스는 상한 카드를 쓰려면 <strong>턴을 넘겨 쌓아야</strong> 하고, 케스트럴·베인은 <strong>한 턴에 몰아서</strong> 완성할 수 있다. 이 비대칭이 캐릭터별 운영 감각의 차이를 만든다.</p>
+</blockquote>
+<h4 id="_2">발동 숫자와의 무관성</h4>
+<p><code>maxSlides</code>는 <strong>핸드 구성과 무관</strong>하다. 핸드가 전부 발동 숫자 0인 경우에도 캐릭터 스탯만큼의 슬라이드가 그대로 주어진다. (0 카드는 퍼즐 없이 발동하지만, 슬라이드 자체가 사라지지는 않는다 — 남는 슬라이드로 다음 턴을 위해 보드를 미리 정비할 수 있다.)</p>
 <h3 id="5-2">5-2. 횟수 카운터 감소 타이밍</h3>
 <p><strong>유효 슬라이드가 확정된 시점에만</strong> <code>slideCount</code>를 1 감소시킨다. 무효 슬라이드(타일이 이동하지 않은 경우)는 횟수를 소모하지 않는다.</p>
 <div class="highlight"><pre><span></span><code>슬라이드 시도
@@ -2039,11 +2168,30 @@ row 3 [   ] [  4] [   ] [  2]
   → 카드 발동 처리
   → 핸드 전체 소모덱으로 이동
   → 새 핸드 드로우
-  → slideCount = maxSlides  ← 이 시점에 리셋
+  → slideCount = maxSlides   ← 이 시점에 리셋 (재산정 없음)
   → 적 행동 카운트 처리
 </code></pre></div>
-<h3 id="5-5">5-5. 패시브·유물에 의한 횟수 변경</h3>
-<p>패시브나 유물이 슬라이드 횟수를 변경하는 경우, <strong>절대값 증감</strong> 방식을 기본으로 한다(예: +2, -1). 배율 방식 사용 여부는 성장 시스템 기획 시 결정한다. 변경된 횟수는 <code>maxSlides</code>에 반영되며, 다음 리셋 시점부터 적용된다.</p>
+<p><code>maxSlides</code>는 캐릭터 스탯이므로 <strong>턴마다 재산정하지 않는다.</strong> 리셋은 단순히 <code>slideCount</code>를 <code>maxSlides</code> 값으로 되돌리는 것이다.</p>
+<p><strong>턴 호흡은 캐릭터가 결정한다</strong> — 매 턴 동일한 슬라이드 예산이 주어지며, 그 크기는 출전 캐릭터에 따라 30(주베)에서 520(베인)까지 벌어진다. 즉 <strong>어떤 캐릭터로 출전했느냐가 그 전투 전체의 템포</strong>를 결정하고, 드로우 운은 템포에 영향을 주지 않는다.</p>
+<h3 id="5-5">5-5. 유물에 의한 슬라이드 확장</h3>
+<p>캐릭터의 슬라이드 스탯은 <strong>유물로 확장 가능</strong>하다. 이것이 슬라이드 횟수를 늘리는 주된 성장 경로다.</p>
+<div class="highlight"><pre><span></span><code>maxSlides = 캐릭터 슬라이드 스탯 + 유물 증감 합계
+</code></pre></div>
+<ul>
+<li><strong>절대값 증감</strong> 방식을 기본으로 한다(예: +20, -5). 배율 방식 사용 여부는 성장 시스템 기획 시 결정한다.</li>
+<li>유물 획득·상실 시 <code>maxSlides</code>를 즉시 재계산하며, 다음 리셋 시점부터 반영된다.</li>
+<li><code>maxSlides</code>는 <strong>0 미만으로 내려가지 않는다.</strong> <code>-</code> 증감으로 음수가 되면 0으로 클램프한다.</li>
+</ul>
+<div class="highlight"><pre><span></span><code>예) 베인(520) + 유물 &quot;슬라이드 +30&quot;
+    maxSlides = 520 + 30 = 550
+
+예) 주베(30) + 유물 &quot;슬라이드 +20&quot;
+    maxSlides = 30 + 20 = 50   → 상한 64를 한 턴에 완성 가능해짐 (필요 32)
+</code></pre></div>
+<blockquote>
+<p>저슬라이드 캐릭터일수록 <strong>유물의 상대적 가치가 크다.</strong> 주베에게 <code>+20</code>은 예산이 67% 늘어나는 반면, 베인에게는 4% 증가에 그친다. 유물 설계 시 절대값 증감이 캐릭터 간 불균형을 낳는다는 점에 유의한다.</p>
+<p><strong>[미결 D-2]</strong> 절대값 증감이 저슬라이드 캐릭터에게 과도하게 유리한 문제를 배율 방식(예: +10%)이나 캐릭터별 보정으로 완화할지 결정 필요.</p>
+</blockquote>
 <hr />
 <h2 id="6">6. 슬라이드 불능 판정</h2>
 <h3 id="6-1">6-1. 정의</h3>
@@ -2106,12 +2254,14 @@ row 3 [   ] [  4] [   ] [  2]
 <p>패시브 "선제 타일"이 활성화된 경우 초기화 직후 빈 칸 중 무작위 2칸에 값 <code>4</code>인 타일을 배치한다. 이 과정은 §4의 새 타일 생성 로직과 동일한 방식으로 처리한다.</p>
 <h3 id="7-2">7-2. 초기화 순서</h3>
 <div class="highlight"><pre><span></span><code>1. board 배열 전체를 0으로 초기화
-2. slideCount = maxSlides (스테이지 데이터에서 주입)
-3. isSlideBlocked = false
-4. 패시브 &quot;선제 타일&quot; 적용 (보유 시): 빈 칸 중 무작위 2칸에 4 타일 배치
-5. 핸드 드로우 (카드 시스템으로 위임 — card.md 참조)
+2. maxSlides = 출전 캐릭터의 슬라이드 스탯 + 유물 증감   (§5-1)
+3. slideCount = maxSlides
+4. isSlideBlocked = false
+5. 패시브 &quot;선제 타일&quot; 적용 (보유 시): 빈 칸 중 무작위 2칸에 4 타일 배치
+6. 핸드 드로우 (카드 시스템으로 위임 — card.md 참조)
 </code></pre></div>
 <blockquote>
+<p><code>maxSlides</code>가 캐릭터 스탯에서 오므로 <strong>핸드 드로우 이전에 확정</strong>할 수 있다. 출전 캐릭터가 정해지는 시점(전투 진입)에 이미 값이 결정된다.</p>
 <p>보드 초기화(1~4단계)는 핸드 드로우(5단계) 이전에 완료되어야 한다. 핸드 내용에 따라 보드 상태를 변경하는 패시브가 향후 추가될 수 있으므로 순서를 명확히 유지한다.</p>
 </blockquote>
 <hr />
@@ -2148,7 +2298,7 @@ row 3 [   ] [  4] [   ] [  2]
 <h3 id="e">케이스 E — 타일 소모 숫자 불일치</h3>
 <p>카드의 발동 숫자와 보드의 타일 값이 정확히 일치해야만 소모된다. 예를 들어 발동 숫자 <code>16</code>인 카드는 보드에 <code>16</code> 타일이 있을 때만 발동 가능하다. 보드에 <code>32</code> 타일이 있더라도 <code>16</code> 카드의 대체 발동으로 사용할 수 없다.</p>
 <hr />
-<h2 id="_2">관련 문서</h2>
+<h2 id="_3">관련 문서</h2>
 <table>
 <thead>
 <tr>

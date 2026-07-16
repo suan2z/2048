@@ -60,6 +60,7 @@ nav:
   - 콘텐츠:
     - 시나리오: contents/scenario.md
     - 캐릭터: contents/characters.md
+    - 스킬: contents/skills.md
   - 필요 리소스: resources.md
   - 일정: schedule.md
   - 백업:

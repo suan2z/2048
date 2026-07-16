@@ -1300,6 +1300,8 @@
       
         
       
+        
+      
     
     
     
@@ -1388,6 +1390,34 @@
     
   
     캐릭터
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../contents/skills/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    스킬
   
 
     
@@ -1789,8 +1819,10 @@
         - 대기덱이 5장 미만인 경우 처리는 card.md §드로우 규칙을 따른다
 
 단계 7. slideCount 초기화
-        - slideCount = maxSlides (스테이지 데이터에서 주입된 값)
-        - board.md §5-4 참조: 새 핸드 드로우 완료 후 리셋. 전투 시작 시 핸드 드로우(단계 6) 완료가 이 조건을 충족한다
+        - maxSlides = 출전 캐릭터의 슬라이드 스탯 + 유물 증감   (board.md §5-1)
+        - slideCount = maxSlides
+        - maxSlides는 캐릭터 스탯이므로 핸드 구성과 무관하다. 출전 캐릭터가
+          확정된 단계 1 시점에 이미 결정되어 있다
 
 단계 8. 슬라이드 페이즈 진입
         - 초기화 완료. 플레이어 입력 수신 시작
@@ -1804,8 +1836,11 @@ row 1 [  0] [  0] [  0] [  0]
 row 2 [  0] [  4] [  0] [  0]
 row 3 [  0] [  0] [  0] [  0]
 
-slideCount = maxSlides (예: 5)
-핸드: [카드A(16), 카드B(8), 카드C(32), 카드D(4), 카드E(16)]
+출전 캐릭터: 케스트럴 (슬라이드 스탯 260)
+핸드: [카드A(16), 카드B(8), 카드C(32), 카드D(2), 카드E(16)]
+
+maxSlides  = 260 (+ 유물 증감)
+slideCount = 260
 </code></pre></div>
 <hr />
 <h2 id="3">3. 슬라이드 페이즈</h2>
@@ -1981,13 +2016,17 @@ slideCount = maxSlides (예: 5)
 </ul>
 <hr />
 <h3 id="7-slidecount">단계 7 — slideCount 리셋</h3>
-<p>재드로우(단계 6) 완료 후 slideCount를 초기화한다.</p>
-<div class="highlight"><pre><span></span><code>slideCount = maxSlides
+<p>재드로우(단계 6) 완료 후 slideCount를 <code>maxSlides</code>로 초기화한다.</p>
+<div class="highlight"><pre><span></span><code>slideCount = maxSlides   (= 출전 캐릭터 슬라이드 스탯 + 유물 증감)
 </code></pre></div>
 <ul>
-<li>리셋 타이밍은 반드시 <strong>핸드 드로우 완료 후</strong>다. (<a href="../board/">board.md §5-4</a> 기준)</li>
-<li>패시브·유물에 의해 maxSlides가 변경된 경우 변경된 값으로 리셋한다.</li>
+<li><code>maxSlides</code>는 <strong>캐릭터 스탯이므로 재산정하지 않는다.</strong> 리셋은 단순히 값을 되돌리는 것이다. (<a href="../board/">board.md §5-1·§5-4</a> 기준)</li>
+<li>핸드가 전부 0 코스트여도 슬라이드는 그대로 주어진다. 남는 슬라이드로 다음 턴을 위해 보드를 정비할 수 있다.</li>
+<li>유물 증감이 전투 중 변한 경우(획득·상실) 변경된 값으로 리셋한다.</li>
 </ul>
+<blockquote>
+<p>슬라이드 예산은 <strong>매 턴 동일</strong>하며 그 크기는 출전 캐릭터가 결정한다(주베 30 ~ 베인 520). 드로우 운은 턴 길이에 영향을 주지 않는다.</p>
+</blockquote>
 <hr />
 <h3 id="8-1">단계 8 — 모든 적 카운트 -1</h3>
 <p>전장에 생존한 모든 적의 행동 카운트를 1 감소시킨다.</p>
