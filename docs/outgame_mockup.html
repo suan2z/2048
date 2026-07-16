@@ -97,48 +97,18 @@
     /* ══════════════════════════
        SCREEN 1 — MAIN MENU
     ══════════════════════════ */
-    #screen-menu { background: #07071a; flex-direction: column; }
-
-    .menu-top {
-      height: 54px; flex-shrink: 0;
-      background: rgba(0,0,0,0.75);
-      border-bottom: 1px solid rgba(0,188,212,0.15);
-      display: flex; align-items: center;
-      padding: 0 16px; gap: 14px; z-index: 10;
+    #screen-menu {
+      background: #07071a; flex-direction: column;
+      align-items: center; overflow: hidden;
     }
-    .menu-lv {
-      display: flex; flex-direction: column; align-items: center;
-      background: rgba(0,188,212,0.12); border: 1px solid var(--accent);
-      border-radius: 6px; padding: 2px 10px; flex-shrink: 0;
-    }
-    .menu-lv-label { font-size: 8px; color: var(--accent); letter-spacing: 1px; }
-    .menu-lv-num   { font-size: 18px; font-weight: 900; color: #fff; line-height: 1.1; }
-    .menu-player   { display: flex; flex-direction: column; gap: 4px; }
-    .menu-player-name { font-size: 13px; font-weight: 700; color: var(--text); }
-    .menu-xp-wrap  { display: flex; align-items: center; gap: 6px; }
-    .menu-xp-bar   { width: 120px; height: 4px; background: var(--border); border-radius: 2px; overflow: hidden; }
-    .menu-xp-fill  { height: 100%; background: var(--accent); border-radius: 2px; }
-    .menu-xp-text  { font-size: 9px; color: var(--dim); }
 
-    .menu-resources { margin-left: auto; display: flex; align-items: center; gap: 6px; }
-    .menu-res {
-      display: flex; align-items: center; gap: 5px;
-      background: rgba(0,0,0,0.5); border: 1px solid var(--border2);
-      border-radius: 16px; padding: 4px 10px;
-      font-size: 12px; font-weight: 700; color: var(--text);
+    /* 콘텐츠 레이어 — 중앙 상단 타이틀 / 중앙 하단 메뉴 */
+    .menu-stage {
+      position: relative; z-index: 2; flex: 1; width: 100%;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: space-between;
+      padding: 150px 0 44px;
     }
-    .menu-res-add { color: var(--accent); font-size: 12px; font-weight: 700; cursor: pointer; margin-left: 2px; }
-    .menu-icon-btn {
-      width: 34px; height: 34px; border-radius: 8px;
-      background: rgba(0,0,0,0.5); border: 1px solid var(--border2);
-      display: flex; align-items: center; justify-content: center;
-      font-size: 16px; cursor: pointer; position: relative;
-    }
-    .menu-icon-btn .lk { position: absolute; top: -4px; right: -4px; font-size: 9px; }
-
-    .menu-main { flex: 1; display: flex; overflow: hidden; }
-
-    .menu-center { flex: 1; position: relative; overflow: hidden; }
     .menu-bg-grid {
       position: absolute; inset: 0; pointer-events: none;
       background-image:
@@ -147,98 +117,54 @@
       background-size: 60px 60px;
     }
     .menu-bg-glow {
-      position: absolute; top: 50%; left: 45%;
+      position: absolute; top: 50%; left: 50%;
       transform: translate(-50%,-50%);
-      width: 520px; height: 520px;
-      background: radial-gradient(circle, rgba(0,188,212,0.07) 0%, transparent 70%);
+      width: 620px; height: 620px;
+      background: radial-gradient(circle, rgba(0,188,212,0.08) 0%, transparent 70%);
       pointer-events: none;
     }
-    .menu-char-area {
-      position: absolute; inset: 0;
-      display: flex; align-items: center; justify-content: center;
-    }
-    .menu-char-wrap { display: flex; flex-direction: column; align-items: center; gap: 8px; }
-    .menu-char-silhouette {
-      width: 230px; height: 360px;
-      background: linear-gradient(180deg, rgba(0,188,212,0.07) 0%, rgba(0,188,212,0.02) 100%);
-      border: 1px solid rgba(0,188,212,0.14);
-      border-radius: 12px;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 90px; position: relative; overflow: hidden;
-    }
-    .menu-char-silhouette::after {
-      content: '';
-      position: absolute; bottom: 0; left: 0; right: 0; height: 80px;
-      background: linear-gradient(0deg, rgba(7,7,26,0.85) 0%, transparent 100%);
-    }
-    .menu-char-name { font-size: 11px; color: var(--accent); letter-spacing: 3px; font-family:'Roboto Mono',monospace; }
-    .menu-char-role { font-size: 10px; color: var(--dim); }
-
-    .menu-title-overlay { position: absolute; top: 24px; left: 28px; }
-    .menu-title-overlay h1 {
-      font-size: 26px; font-weight: 900; letter-spacing: .1em;
+    /* 상단~중앙 타이틀 */
+    .menu-title { text-align: center; }
+    .menu-title h1 {
+      font-size: 58px; font-weight: 900; letter-spacing: .16em;
       color: var(--accent2);
-      text-shadow: 0 0 20px #00e5ff55;
+      text-shadow: 0 0 34px #00e5ff66, 0 3px 10px rgba(0,0,0,.8);
+      line-height: 1.1;
     }
-    .menu-title-overlay p { font-size: 11px; color: var(--dim); margin-top: 4px; letter-spacing: .04em; }
+    .menu-title p {
+      font-size: 12px; color: var(--dim);
+      margin-top: 14px; letter-spacing: .1em;
+    }
 
-    .menu-mission {
-      position: absolute; bottom: 22px; left: 22px;
-      background: rgba(8,8,28,0.92); border: 1px solid var(--border2); border-radius: 8px;
-      padding: 8px 14px; display: flex; align-items: center; gap: 10px;
+    /* 중앙 하단 메뉴 — 테두리 없는 텍스트 목록 */
+    .menu-buttons { display: flex; flex-direction: column; align-items: center; gap: 3px; }
+    .mbtn {
+      position: relative;
+      padding: 7px 46px;
+      font-size: 17px; font-weight: 700;
+      color: #c3c3d6; letter-spacing: .1em;
+      cursor: pointer;
+      text-shadow: 0 2px 8px rgba(0,0,0,.85);
+      transition: color .15s, text-shadow .15s;
     }
-    .menu-mission-icon {
-      width: 30px; height: 30px; border-radius: 6px;
-      background: rgba(0,188,212,0.12); border: 1px solid var(--accent);
-      display: flex; align-items: center; justify-content: center; font-size: 14px; flex-shrink: 0;
+    .mbtn:hover { color: var(--accent2); text-shadow: 0 0 16px #00e5ff99; }
+    /* 선택 항목 좌우 장식 */
+    .mbtn::before, .mbtn::after {
+      position: absolute; top: 50%; transform: translateY(-50%);
+      color: var(--accent); font-size: 13px; opacity: 0;
+      transition: opacity .15s;
     }
-    .menu-mission-title { font-size: 11px; color: var(--text); font-weight: 600; }
-    .menu-mission-prog  { font-size: 10px; color: var(--accent); margin-top: 2px; }
+    .mbtn::before { content: '❯'; left: 20px; }
+    .mbtn::after  { content: '❮'; right: 20px; }
+    .mbtn:hover::before, .mbtn:hover::after { opacity: 1; }
 
-    .menu-nav-panel {
-      width: 270px; flex-shrink: 0;
-      background: rgba(5,5,18,0.94);
-      border-left: 1px solid rgba(0,188,212,0.15);
-      display: flex; flex-direction: column; padding: 8px 0;
-    }
-    .mnav-item {
-      padding: 14px 20px 14px 16px;
-      display: flex; align-items: center; justify-content: space-between;
-      cursor: pointer; border-left: 3px solid transparent;
-      transition: background .15s, border-color .15s;
-    }
-    .mnav-item:hover { background: rgba(0,188,212,0.07); border-left-color: var(--accent); }
-    .mnav-item.active { background: rgba(0,188,212,0.1); border-left-color: var(--accent); }
-    .mnav-item.locked { opacity: .4; cursor: default; }
-    .mnav-item.locked:hover { background: transparent; border-left-color: transparent; }
-    .mnav-divider { height: 1px; background: var(--border); margin: 3px 16px; }
-    .mnav-left { display: flex; flex-direction: column; gap: 3px; }
-    .mnav-name { font-size: 15px; font-weight: 700; color: var(--text); }
-    .mnav-sub  { font-size: 10px; color: var(--dim); }
-    .mnav-item.active .mnav-name { color: var(--accent2); }
-    .mnav-right { display: flex; align-items: center; gap: 6px; }
-    .mnav-icon { font-size: 22px; }
-    .mnav-lock { font-size: 11px; }
+    .mbtn-quit { color: #8a8aa0; }
+    .mbtn-quit:hover { color: #ff8a8a; text-shadow: 0 0 16px #ff5a5a88; }
+    .mbtn-quit::before, .mbtn-quit::after { color: #ff5a5a; }
 
-    .menu-bottom {
-      height: 76px; flex-shrink: 0;
-      background: rgba(0,0,0,0.65);
-      border-top: 1px solid rgba(0,188,212,0.1);
-      display: flex; align-items: center; padding: 0 16px; gap: 10px;
-    }
-    .menu-event {
-      flex: 1; height: 54px;
-      background: linear-gradient(135deg, rgba(0,188,212,0.07), rgba(80,40,180,0.07));
-      border: 1px solid var(--border2); border-radius: 8px;
-      display: flex; align-items: center; gap: 12px; padding: 0 14px; cursor: pointer;
-      transition: border-color .15s;
-    }
-    .menu-event:hover { border-color: var(--accent); }
-    .menu-event-icon { font-size: 24px; }
-    .menu-event-title { font-size: 12px; font-weight: 700; color: var(--text); }
-    .menu-event-timer { font-size: 10px; color: var(--warning); margin-top: 2px; }
     .menu-ver {
-      display: flex; flex-direction: column; gap: 3px; text-align: right; flex-shrink: 0;
+      position: absolute; bottom: 14px; right: 18px; z-index: 2;
+      display: flex; gap: 12px;
     }
     .menu-ver span { font-size: 10px; color: var(--dim); }
 
@@ -781,8 +707,8 @@
   <div class="tb-sep"></div>
   <button class="tb-btn" onclick="go('story')">📖 스토리 모드</button>
   <button class="tb-btn" onclick="go('battle')">⚔ 전투 모드</button>
-  <button class="tb-btn" onclick="go('char')">👤 캐릭터 정보</button>
-  <button class="tb-btn" onclick="go('team')">🧩 덱 관리</button>
+  <button class="tb-btn" onclick="go('char')">👤 캐릭터</button>
+  <button class="tb-btn" onclick="go('team')">🧩 캐릭터 › 덱 관리</button>
   <div class="tb-sep"></div>
   <button class="tb-btn" onclick="go('rogue')">🗺 로그라이크 맵</button>
 </div>
@@ -795,126 +721,30 @@
 ═══════════════════════════════════════ -->
 <div class="screen active" id="screen-menu">
 
-  <!-- 상단 바 -->
-  <div class="menu-top">
-    <div class="menu-lv">
-      <div class="menu-lv-label">LV</div>
-      <div class="menu-lv-num">07</div>
-    </div>
-    <div class="menu-player">
-      <div class="menu-player-name">위버 (Weaver)</div>
-      <div class="menu-xp-wrap">
-        <div class="menu-xp-bar"><div class="menu-xp-fill" style="width:56%"></div></div>
-        <div class="menu-xp-text">56%</div>
-      </div>
-    </div>
-    <div class="menu-resources">
-      <div class="menu-res">⚡ 213 / 240 <span class="menu-res-add">＋</span></div>
-      <div class="menu-icon-btn" title="미션">📋</div>
-      <div class="menu-icon-btn" title="상점">🛒<span class="lk">🔒</span></div>
-      <div class="menu-icon-btn" title="가챠">💠<span class="lk">🔒</span></div>
-      <div class="menu-icon-btn" title="설정">☰</div>
-    </div>
-  </div>
+  <!-- 배경 레이어 -->
+  <div class="menu-bg-grid"></div>
+  <div class="menu-bg-glow"></div>
 
-  <!-- 본문 -->
-  <div class="menu-main">
+  <!-- 콘텐츠: 중앙 상단 타이틀 / 중앙 하단 메뉴 -->
+  <div class="menu-stage">
 
-    <!-- 중앙: 캐릭터 + 배경 -->
-    <div class="menu-center">
-      <div class="menu-bg-grid"></div>
-      <div class="menu-bg-glow"></div>
-
-      <div class="menu-title-overlay">
-        <h1>TESSERA WEAVER</h1>
-        <p>당신의 스와이프가 도시의 코드를 다시 쓴다</p>
-      </div>
-
-      <div class="menu-char-area">
-        <div class="menu-char-wrap">
-          <div class="menu-char-silhouette">🧑‍💼</div>
-          <div class="menu-char-name">WEAVER</div>
-          <div class="menu-char-role">제3구역 집행관</div>
-        </div>
-      </div>
-
-      <div class="menu-mission">
-        <div class="menu-mission-icon">⚡</div>
-        <div>
-          <div class="menu-mission-title">스토리 로그라이크 3회 완료</div>
-          <div class="menu-mission-prog">3 / 3 ✓ 완료</div>
-        </div>
-      </div>
+    <div class="menu-title">
+      <h1>TESSERA WEAVER</h1>
+      <p>당신의 스와이프가 도시의 코드를 다시 쓴다</p>
     </div>
 
-    <!-- 우측 네비게이션 패널 -->
-    <div class="menu-nav-panel">
-      <div class="mnav-item active" onclick="go('story')">
-        <div class="mnav-left">
-          <div class="mnav-name">스토리</div>
-          <div class="mnav-sub">챕터 3 · 1막 진행 중</div>
-        </div>
-        <div class="mnav-right"><div class="mnav-icon">📖</div></div>
-      </div>
-      <div class="mnav-divider"></div>
-      <div class="mnav-item" onclick="go('battle')">
-        <div class="mnav-left">
-          <div class="mnav-name">전투 모드</div>
-          <div class="mnav-sub">도전 로그라이크 · 일반 · 도전</div>
-        </div>
-        <div class="mnav-right"><div class="mnav-icon">⚔</div></div>
-      </div>
-      <div class="mnav-divider"></div>
-      <div class="mnav-item locked">
-        <div class="mnav-left">
-          <div class="mnav-name">카오스 모드</div>
-          <div class="mnav-sub">챕터 5 클리어 필요</div>
-        </div>
-        <div class="mnav-right">
-          <div class="mnav-icon">🌀</div>
-          <div class="mnav-lock">🔒</div>
-        </div>
-      </div>
-      <div class="mnav-divider"></div>
-      <div class="mnav-item" onclick="go('char')">
-        <div class="mnav-left">
-          <div class="mnav-name">캐릭터 정보</div>
-          <div class="mnav-sub">5인 보유</div>
-        </div>
-        <div class="mnav-right"><div class="mnav-icon">👤</div></div>
-      </div>
-      <div class="mnav-divider"></div>
-      <div class="mnav-item" onclick="go('team')">
-        <div class="mnav-left">
-          <div class="mnav-name">덱 관리</div>
-          <div class="mnav-sub">일반 3덱 · 도전 2덱</div>
-        </div>
-        <div class="mnav-right"><div class="mnav-icon">🧩</div></div>
-      </div>
+    <div class="menu-buttons">
+      <div class="mbtn" onclick="go('story')">스토리</div>
+      <div class="mbtn" onclick="go('battle')">전투 모드</div>
+      <div class="mbtn" onclick="go('char')">캐릭터</div>
+      <div class="mbtn mbtn-quit">종료</div>
     </div>
 
   </div>
 
-  <!-- 하단 이벤트 배너 -->
-  <div class="menu-bottom">
-    <div class="menu-event">
-      <div class="menu-event-icon">🌆</div>
-      <div>
-        <div class="menu-event-title">이벤트: 앵커를 찾아라</div>
-        <div class="menu-event-timer">⏱ 39일 15시간 남음</div>
-      </div>
-    </div>
-    <div class="menu-event">
-      <div class="menu-event-icon">💠</div>
-      <div>
-        <div class="menu-event-title">신규 캐릭터 베인 픽업</div>
-        <div class="menu-event-timer">⏱ 14일 08시간 남음</div>
-      </div>
-    </div>
-    <div class="menu-ver">
-      <span>v0.1.0-dev</span>
-      <span>세이브 슬롯 A</span>
-    </div>
+  <div class="menu-ver">
+    <span>v0.1.0-dev</span>
+    <span>세이브 슬롯 A</span>
   </div>
 
 </div>
@@ -1134,8 +964,11 @@
 <div class="screen" id="screen-char">
   <div class="top-bar">
     <div class="back-btn" onclick="go('menu')">← 뒤로</div>
-    <div class="screen-title">상세 정보</div>
-    <span style="font-size:12px;color:var(--dim);margin-left:3px;">ⓘ</span>
+    <div class="screen-title">캐릭터</div>
+    <div class="tab-group">
+      <div class="tab on">캐릭터 정보</div>
+      <div class="tab" onclick="go('team')">덱 관리</div>
+    </div>
     <div style="margin-left:auto;display:flex;gap:8px;align-items:center;">
       <span style="font-size:18px;cursor:pointer;opacity:.65;">📋</span>
       <span style="font-size:18px;cursor:pointer;opacity:.65;">🏠</span>
@@ -1203,8 +1036,11 @@
 
   <div class="top-bar">
     <div class="back-btn" onclick="go('menu')">← 뒤로</div>
-    <div class="screen-title">완성 덱 관리</div>
-    <span style="font-size:12px;color:var(--dim);margin-left:3px;">ⓘ</span>
+    <div class="screen-title">캐릭터</div>
+    <div class="tab-group">
+      <div class="tab" onclick="go('char')">캐릭터 정보</div>
+      <div class="tab on">덱 관리</div>
+    </div>
     <div style="margin-left:auto;display:flex;gap:10px;align-items:center;">
       <span style="font-size:15px;cursor:pointer;color:var(--dim);">▼</span>
       <span style="font-size:12px;color:var(--dim);cursor:pointer;">레벨</span>

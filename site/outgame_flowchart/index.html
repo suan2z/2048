@@ -1641,12 +1641,12 @@
 <h2 id="_1">흐름 순서도</h2>
 <p><a class="md-button" href="../outgame_flowchart.html" target="_blank">🗺 크게 보기</a></p>
 <pre class="mermaid"><code>flowchart TD
-    START([▶ 게임 시작]) --&gt; MENU[메인 메뉴]
+    START([▶ 게임 시작]) --&gt; MENU[메인 메뉴\n타이틀 + 메뉴 버튼]
 
-    MENU --&gt; SM[스토리 모드]
+    MENU --&gt; SM[스토리]
     MENU --&gt; BM[전투 모드]
-    MENU --&gt; CI[캐릭터 정보]
-    MENU --&gt; TC[덱 관리]
+    MENU --&gt; CHAR[캐릭터]
+    MENU --&gt; QUIT([종료])
 
     subgraph sg_story[스토리 모드]
         SM --&gt; MS[메인 스토리\n챕터 선택]
@@ -1679,8 +1679,9 @@
         CR_SAVE_C --&gt; CR_END
     end
 
-    subgraph sg_manage[정보 · 관리]
-        CI --&gt; CI_VIEW[캐릭터 5인\n능력치 · 스킬덱 탭\n열람 전용]
+    subgraph sg_manage[캐릭터]
+        CHAR --&gt; CI[캐릭터 정보 탭\n5인 능력치 · 스킬덱\n열람 전용]
+        CHAR --&gt; TC[덱 관리 탭]
         TC --&gt; TC_N[일반 완성 덱\n1~10개 관리]
         TC --&gt; TC_C[도전 완성 덱\n1~10개 관리]
     end
@@ -1730,16 +1731,22 @@
 <td>강화된 고정 스테이지 리스트. 조건부 해금</td>
 </tr>
 <tr>
-<td><strong>캐릭터 정보</strong></td>
-<td>—</td>
+<td><strong>캐릭터</strong></td>
+<td>캐릭터 정보 탭</td>
 <td>—</td>
 <td>5인 캐릭터 능력치 · 스킬덱 열람 전용</td>
 </tr>
 <tr>
-<td><strong>덱 관리</strong></td>
-<td>—</td>
+<td><strong>캐릭터</strong></td>
+<td>덱 관리 탭</td>
 <td>—</td>
 <td>일반·도전 완성 덱 1~10개 저장 관리</td>
+</tr>
+<tr>
+<td><strong>종료</strong></td>
+<td>—</td>
+<td>—</td>
+<td>게임 종료</td>
 </tr>
 </tbody>
 </table>
