@@ -1415,7 +1415,7 @@
   <a href="#7" class="md-nav__link">
     <span class="md-ellipsis">
       
-        7. 캐릭터별 공격/방어 배분 요약
+        7. 캐릭터별 카드 구성 요약
       
     </span>
   </a>
@@ -1434,7 +1434,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_17" class="md-nav__link">
+  <a href="#_23" class="md-nav__link">
     <span class="md-ellipsis">
       
         관련 문서
@@ -1752,65 +1752,18 @@
 <h2 id="1">1. 개요</h2>
 <p>스킬은 곧 <strong>스킬 카드</strong>다. 각 카드에는 보드에서 소모할 <strong>발동 숫자(코스트)</strong>가 지정되며, 허용값은 <code>0</code>과 2의 거듭제곱 <code>2 ~ 2048</code>이다. 숫자가 높을수록 강력하다.</p>
 <p>전투는 <strong>1인 출전</strong>이므로, 해당 전투의 덱은 출전 캐릭터의 스킬 카드로만 구성된다.</p>
-<blockquote>
-<p><strong>이번 문서 범위</strong> — 아래 §2~6은 <strong>공격·방어 카드만</strong> 정의한다. 유틸·회복·디버프 등 그 외 유형은 각 캐릭터의 "기타 유형(추후)" 항목에 이름만 남겨두고 다음 작업에서 채운다. 0 코스트 슬롯도 대부분 유틸 카드 자리이므로 이번 범위에서 비워 둔다.</p>
-</blockquote>
-<h3 id="_2">코스트 밴드와 슬라이드는 캐릭터가 정한다</h3>
+<p><strong>현재 캐릭터당 20장 · 총 100장</strong>을 정의한다. 최종 목표 규모(70장 이상)를 충족하며, 추가 확장 여지는 각 캐릭터의 빈 코스트 슬롯에 남아 있다.</p>
+<h3 id="_2">캐릭터 전용 원칙</h3>
+<p><strong>모든 스킬은 캐릭터 고유다. 여러 캐릭터가 함께 쓰는 공통 스킬은 존재하지 않는다.</strong> (<a href="../../systems/card/">card.md §1-1</a>)</p>
+<ul>
+<li>카드 획득 경로(전투 보상·상점·이벤트) 전부 <strong>출전 캐릭터 소유 카드만</strong> 후보로 제시한다.</li>
+<li>같은 역할을 하는 카드라도 캐릭터마다 <strong>이름·수치·연출이 모두 다르다.</strong> 예를 들어 방어막 부여 카드는 케스트럴 "베스천 전개", 사이퍼 "방화벽", 펄스 "바이오 실드"로 각각 별개의 카드다.</li>
+<li>따라서 <strong>캐릭터 선택이 곧 카드 풀 선택</strong>이며, 코스트 밴드·슬라이드 스탯과 함께 전투 경험 전체를 규정한다.</li>
+</ul>
+<h3 id="_3">코스트 밴드와 슬라이드는 캐릭터가 정한다</h3>
 <p>캐릭터마다 <strong>사용하는 카드 코스트 범위가 고정</strong>되어 있고, 턴당 슬라이드 횟수도 <strong>캐릭터 고유 스탯</strong>이다. 핸드 구성이나 드로우 운과 무관하며, 전투 내내 동일하다. (<a href="../../systems/character/">character.md §슬라이드 스탯</a> · <a href="../../systems/board/">board.md §5-1</a>)</p>
 <div class="highlight"><pre><span></span><code>maxSlides = 캐릭터 슬라이드 스탯 + 유물 증감
 </code></pre></div>
-<p>슬라이드 스탯은 각 캐릭터 밴드 상한의 <strong>대략 절반</strong>으로 설정된다. <code>2</code> 타일로 숫자 <code>N</code>을 만들려면 <code>N/2</code>개가 필요하기 때문이다.</p>
-<p><strong>발동 숫자 0인 카드는 타일을 소모하지 않고 퍼즐 없이 즉시 발동한다.</strong></p>
-<h3 id="_3">등급 대응</h3>
-<p>발동 숫자가 등급을 결정한다. (상세: <a href="../../systems/card/">card.md §2-3</a>)</p>
-<table>
-<thead>
-<tr>
-<th style="text-align: center;">발동 숫자</th>
-<th>등급</th>
-<th>성격</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align: center;">0</td>
-<td>무코스트</td>
-<td>퍼즐 불요. 소량 유틸·드로우</td>
-</tr>
-<tr>
-<td style="text-align: center;">2 · 4</td>
-<td>기본</td>
-<td>약공격, 소량 유틸</td>
-</tr>
-<tr>
-<td style="text-align: center;">8 · 16</td>
-<td>일반</td>
-<td>단일 공격, 디버프 1개</td>
-</tr>
-<tr>
-<td style="text-align: center;">32 · 64</td>
-<td>강화</td>
-<td>중간 공격, 광역 디버프, 회복</td>
-</tr>
-<tr>
-<td style="text-align: center;">128 · 256</td>
-<td>강력</td>
-<td>강한 광역 공격, 방어막</td>
-</tr>
-<tr>
-<td style="text-align: center;">512 · 1024</td>
-<td>필살</td>
-<td>캐릭터 전용 필살기</td>
-</tr>
-<tr>
-<td style="text-align: center;">2048</td>
-<td>초월</td>
-<td>전투 판도를 뒤집는 효과</td>
-</tr>
-</tbody>
-</table>
-<h3 id="_4">캐릭터별 코스트 밴드 — 턴 호흡의 정체성</h3>
-<p>캐릭터마다 코스트 밴드와 슬라이드 스탯이 <strong>짝을 이뤄 고정</strong>되어 있다. 전투 템포 자체가 캐릭터의 정체성이다.</p>
 <table>
 <thead>
 <tr>
@@ -1871,48 +1824,104 @@
 </tr>
 </tbody>
 </table>
-<p><strong>두 갈래의 운영 감각</strong> — 주베·사이퍼·펄스는 슬라이드가 상한 완성에 살짝 못 미쳐(각 -2·-4·-8) <strong>상한 카드를 쓰려면 턴을 넘겨 보드를 쌓아야</strong> 한다. 반면 케스트럴·베인은 여유가 있어(+4·+8) <strong>한 턴에 몰아서</strong> 완성할 수 있다. 보드가 턴을 넘어 유지되므로 전자도 성립하며, 이 차이가 "누적형"과 "폭발형"의 감각 차이를 만든다.</p>
+<p><strong>두 갈래의 운영 감각</strong> — 주베·사이퍼·펄스는 슬라이드가 상한 완성에 살짝 못 미쳐(각 -2·-4·-8) <strong>상한 카드를 쓰려면 턴을 넘겨 보드를 쌓아야</strong> 한다. 반면 케스트럴·베인은 여유가 있어(+4·+8) <strong>한 턴에 몰아서</strong> 완성할 수 있다.</p>
 <blockquote>
 <p>베인만 <strong>0·2 코스트가 없다.</strong> 짧게 끊을 수단이 없다는 것이 "저격수" 정체성을 만든다.</p>
 </blockquote>
-<h3 id="_5">수치 기준</h3>
-<p>이번 공격/방어 카드의 수치는 아래 기준으로 산정한 <strong>임시값</strong>이다(정식 밸런싱은 미결 S-6).</p>
-<ul>
-<li><strong>공격/방어 값은 코스트에 비례</strong>하되, 슬라이드 1회당 효율이 대략 일정하도록 잡았다. 즉 고코스트 한 방과 저코스트 다발의 총 효율이 비슷하며, 차이는 "언제 터지느냐(즉시성)"다.</li>
-<li><strong>역할 배율</strong>을 적용한다. 베인은 공격 특화(방어 최소), 케스트럴은 방어 특화, 펄스는 공격이 약한 대신 방어·회복(추후), 주베·사이퍼는 중간.</li>
-<li><strong>획득</strong> 열: <code>기본</code>은 로그라이크 시작 시 보유, <code>해금</code>은 보상·상점 풀 등장.</li>
-</ul>
-<h3 id="_6">스킬덱 구분</h3>
-<p>캐릭터 화면의 <strong>캐릭터 정보 탭</strong>에서 아래 세 구분으로 열람한다. (<a href="../../outgame/">outgame.md</a> 참조)</p>
+<h3 id="_4">등급 대응</h3>
 <table>
 <thead>
 <tr>
-<th>구분</th>
-<th>내용</th>
+<th style="text-align: center;">발동 숫자</th>
+<th>등급</th>
+<th>성격</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><strong>기본 스킬덱</strong></td>
-<td>로그라이크 시작 시 보유하는 초기 카드</td>
+<td style="text-align: center;">0</td>
+<td>무코스트</td>
+<td>퍼즐 불요. 소량 유틸·드로우</td>
 </tr>
 <tr>
-<td><strong>해금 스킬덱</strong></td>
-<td>해금 완료되어 보상·상점 풀에 등장 가능한 카드</td>
+<td style="text-align: center;">2 · 4</td>
+<td>기본</td>
+<td>약공격, 소량 유틸</td>
 </tr>
 <tr>
-<td><strong>미해금 스킬덱</strong></td>
-<td>아직 해금되지 않은 카드 — 정보 미표시</td>
+<td style="text-align: center;">8 · 16</td>
+<td>일반</td>
+<td>단일 공격, 디버프 1개</td>
+</tr>
+<tr>
+<td style="text-align: center;">32 · 64</td>
+<td>강화</td>
+<td>중간 공격, 광역 디버프, 회복</td>
+</tr>
+<tr>
+<td style="text-align: center;">128 · 256</td>
+<td>강력</td>
+<td>강한 광역 공격, 방어막</td>
+</tr>
+<tr>
+<td style="text-align: center;">512 · 1024</td>
+<td>필살</td>
+<td>캐릭터 전용 필살기</td>
+</tr>
+<tr>
+<td style="text-align: center;">2048</td>
+<td>초월</td>
+<td>전투 판도를 뒤집는 효과</td>
 </tr>
 </tbody>
 </table>
+<h3 id="_5">수치 기준</h3>
+<p>모든 수치는 아래 기준으로 산정한 <strong>임시값</strong>이다(정식 밸런싱은 미결 S-6).</p>
+<table>
+<thead>
+<tr>
+<th>항목</th>
+<th>기준</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>기본 스케일</strong></td>
+<td>값은 코스트에 비례. 슬라이드 1회당 효율이 대략 일정하도록 잡아, 고코스트 한 방과 저코스트 다발의 총 효율이 비슷하다</td>
+</tr>
+<tr>
+<td><strong>역할 배율</strong></td>
+<td>공격은 베인 ×1.4 · 사이퍼 ×1.0 · 주베 ×0.9 · 케스트럴 ×0.8 · 펄스 ×0.7 / 방어는 케스트럴 ×1.5 · 펄스 ×1.2 · 사이퍼 ×0.9 · 주베 ×0.8 · 베인 ×0.5</td>
+</tr>
+<tr>
+<td><strong>광역 공격</strong></td>
+<td>같은 코스트 단일 공격의 <strong>×0.7</strong>. 다수 적을 때 총 피해가 역전되도록 설계</td>
+</tr>
+<tr>
+<td><strong>다단 공격</strong></td>
+<td>타격 총합이 같은 코스트 단일 공격과 비슷. 분산되는 대신 방어막 관통·연계에 유리</td>
+</tr>
+<tr>
+<td><strong>회복</strong></td>
+<td>방어막과 동일 스케일. 방어막은 선불(피해 예방), 회복은 후불(피해 복구)</td>
+</tr>
+<tr>
+<td><strong>버프·디버프</strong></td>
+<td><code>%</code> 증감 + 지속 턴 수. 지속 턴은 액션 버튼 횟수 기준</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><strong>획득</strong> 열 — <code>기본</code>은 로그라이크 시작 시 보유(캐릭터당 5~6장), <code>해금</code>은 보상·상점 풀 등장.</p>
+<p>사용 효과 타입은 <a href="../../systems/card/">card.md §2-2</a>에서 확정한 <strong>7종</strong>(<code>ATTACK</code>·<code>SHIELD</code>·<code>HEAL</code>·<code>BUFF</code>·<code>DEBUFF</code>·<code>UTILITY</code>·<code>PERSISTENT</code>)에 모두 대응된다. 표의 <code>드로우</code>·<code>유틸</code>은 <code>UTILITY</code>, <code>지속</code>은 <code>PERSISTENT</code>에 해당한다.</p>
+</blockquote>
 <hr />
 <h2 id="2-kestrel">2. 케스트럴 (Kestrel) — 탱커</h2>
 <blockquote>
-<p>그리드 내 장벽 타일 생성, 적 공격 차단 및 타일 이동 제한 · 핵심 장비 <strong>베스천(The Bastion)</strong>
-밴드 <strong>0~512</strong> · 슬라이드 <strong>260</strong> · <strong>방어 특화</strong></p>
+<p>장벽 타일 생성, 적 공격 차단 · 핵심 장비 <strong>베스천(The Bastion)</strong>
+밴드 <strong>0~512</strong> · 슬라이드 <strong>260</strong> · HP 180 · ATK 22 · DEF 35 · <strong>방어 특화</strong></p>
 </blockquote>
-<h3 id="_7">공격 카드</h3>
+<h3 id="_6">공격 카드</h3>
 <table>
 <thead>
 <tr>
@@ -1938,13 +1947,19 @@
 <tr>
 <td style="text-align: center;">32</td>
 <td>충격파</td>
-<td>광역 공격 34</td>
+<td>광역 공격 24</td>
 <td style="text-align: center;">기본</td>
 </tr>
 <tr>
 <td style="text-align: center;">128</td>
 <td>분쇄</td>
 <td>단일 공격 130</td>
+<td style="text-align: center;">해금</td>
+</tr>
+<tr>
+<td style="text-align: center;">256</td>
+<td>대지 강타</td>
+<td>광역 공격 175</td>
 <td style="text-align: center;">해금</td>
 </tr>
 <tr>
@@ -1955,7 +1970,7 @@
 </tr>
 </tbody>
 </table>
-<h3 id="_8">방어 카드</h3>
+<h3 id="_7">방어 카드</h3>
 <table>
 <thead>
 <tr>
@@ -1998,17 +2013,113 @@
 </tr>
 </tbody>
 </table>
+<h3 id="_8">지원 카드</h3>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;">코스트</th>
+<th>카드명</th>
+<th style="text-align: center;">유형</th>
+<th>효과</th>
+<th style="text-align: center;">획득</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;">0</td>
+<td>반격 자세</td>
+<td style="text-align: center;">버프</td>
+<td>이번 턴 받는 피해의 30%를 공격자에게 반사</td>
+<td style="text-align: center;">기본</td>
+</tr>
+<tr>
+<td style="text-align: center;">4</td>
+<td>도발</td>
+<td style="text-align: center;">디버프</td>
+<td>적 1체가 다음 행동을 반드시 캐릭터에게 사용</td>
+<td style="text-align: center;">해금</td>
+</tr>
+<tr>
+<td style="text-align: center;">8</td>
+<td>견고한 자세</td>
+<td style="text-align: center;">버프</td>
+<td>2턴간 방어막 획득량 +30%</td>
+<td style="text-align: center;">해금</td>
+</tr>
+<tr>
+<td style="text-align: center;">16</td>
+<td>재정비</td>
+<td style="text-align: center;">회복</td>
+<td>체력 23 회복</td>
+<td style="text-align: center;">해금</td>
+</tr>
+<tr>
+<td style="text-align: center;">32</td>
+<td>장벽 생성</td>
+<td style="text-align: center;">유틸</td>
+<td>보드 타일 1개를 이동 불가로 고정</td>
+<td style="text-align: center;">해금</td>
+</tr>
+<tr>
+<td style="text-align: center;">64</td>
+<td>강철 의지</td>
+<td style="text-align: center;">버프</td>
+<td>3턴간 받는 피해 -20%</td>
+<td style="text-align: center;">해금</td>
+</tr>
+</tbody>
+</table>
+<h3 id="_9">추가 스킬덱 — 바리케이드 콤보</h3>
+<p>슬레이 더 스파이어의 <strong>바리케이드 + 몸통 박치기</strong> 조합을 케스트럴 전용으로 이식한 조합 덱. 쌓아 올린 방어막을 그대로 화력으로 전환하는 <strong>"방어가 곧 공격"</strong> 운영이다.</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;">코스트</th>
+<th>카드명</th>
+<th style="text-align: center;">유형</th>
+<th>효과</th>
+<th style="text-align: center;">획득</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;">2</td>
+<td>버티기</td>
+<td style="text-align: center;">방어막</td>
+<td>방어막 4</td>
+<td style="text-align: center;">해금</td>
+</tr>
+<tr>
+<td style="text-align: center;">16</td>
+<td>몸통 박치기</td>
+<td style="text-align: center;">공격</td>
+<td><strong>현재 방어막 수치만큼</strong> 단일 공격. 발동 후 방어막을 0으로 소모</td>
+<td style="text-align: center;">해금</td>
+</tr>
+<tr>
+<td style="text-align: center;">128</td>
+<td>바리케이드</td>
+<td style="text-align: center;"><strong>지속</strong></td>
+<td>이번 전투 동안 <strong>몸통 박치기가 방어막을 소모하지 않는다</strong></td>
+<td style="text-align: center;">해금</td>
+</tr>
+</tbody>
+</table>
+<div class="highlight"><pre><span></span><code>[바리케이드 미보유]  방어막 750 → 몸통 박치기 → 750 피해 + 방어막 0   (1회성)
+[바리케이드 보유]    방어막 750 → 몸통 박치기 → 750 피해 + 방어막 유지 (매 턴 반복)
+</code></pre></div>
+<p><strong>자연스러운 제동 장치</strong> — 바리케이드가 있어도 <strong>적의 공격은 방어막을 그대로 깎는다.</strong> 몸통 박치기의 피해량이 곧 남은 생존력이므로, 맞을수록 화력이 줄어든다.</p>
+<p><strong>설계 근거</strong> — 우리 게임은 방어막이 <strong>기본적으로 누적 유지</strong>되므로(슬더스의 턴별 리셋과 다름), 바리케이드를 원본대로 "유지" 역할로 두면 의미가 없다. 역할을 뒤집어 <strong>소모를 막는</strong> 카드로 재정의해, 원본의 손맛은 살리면서 다른 캐릭터의 방어막 규칙은 건드리지 않는다.</p>
 <blockquote>
-<p>밴드 상한 512에 <strong>공격·방어 카드가 모두</strong> 존재한다. 260 슬라이드로 512를 한 턴에 완성할 수 있으므로, "파쇄 강타(공격)"와 "철벽 요새(방어)" 중 무엇을 만들지가 케스트럴의 핵심 선택이 된다.</p>
+<p><strong>[미결 S-10]</strong> 이 조합은 <strong>지속(파워) 효과 타입</strong>과 <strong>파생 수치 참조</strong>(<code>damageSource: CURRENT_SHIELD</code>)를 요구한다. 현재 <code>CardEffectType</code>·<code>EffectParams</code>로는 표현 불가. (<a href="../../systems/card/">card.md 미결 A-1</a> 연동)</p>
 </blockquote>
-<p><strong>기타 유형(추후)</strong> — 0 반격 자세(피해 반사), 32 장벽 생성(타일 고정), 도발(적 집중 유도)</p>
 <hr />
 <h2 id="3-jube">3. 주베 (Jube) — 스카우트</h2>
 <blockquote>
-<p>낮은 숫자 타일 빠르게 합치기, 특정 위치로 타일 강제 이동 · 핵심 장비 <strong>슬라이더(The Sliders)</strong>
-밴드 <strong>0~64</strong> · 슬라이드 <strong>30</strong> (가장 짧음) · <strong>경량 다발 공격</strong></p>
+<p>낮은 숫자 타일 빠르게 합치기, 타일 강제 이동 · 핵심 장비 <strong>슬라이더(The Sliders)</strong>
+밴드 <strong>0~64</strong> · 슬라이드 <strong>30</strong> (가장 짧음) · HP 120 · ATK 18 · SPD 28 · <strong>경량 다발</strong></p>
 </blockquote>
-<h3 id="_9">공격 카드</h3>
+<h3 id="_10">공격 카드</h3>
 <table>
 <thead>
 <tr>
@@ -2032,6 +2143,12 @@
 <td style="text-align: center;">기본</td>
 </tr>
 <tr>
+<td style="text-align: center;">4</td>
+<td>이중 타격</td>
+<td>단일 공격 3 × 2회</td>
+<td style="text-align: center;">해금</td>
+</tr>
+<tr>
 <td style="text-align: center;">8</td>
 <td>부스터</td>
 <td>단일 공격 11</td>
@@ -2040,13 +2157,19 @@
 <tr>
 <td style="text-align: center;">16</td>
 <td>쇄도</td>
-<td>광역 공격 20</td>
+<td>광역 공격 14</td>
 <td style="text-align: center;">기본</td>
 </tr>
 <tr>
 <td style="text-align: center;">32</td>
 <td>강습</td>
 <td>단일 공격 38</td>
+<td style="text-align: center;">해금</td>
+</tr>
+<tr>
+<td style="text-align: center;">32</td>
+<td>연속 베기</td>
+<td>단일 공격 13 × 3회</td>
 <td style="text-align: center;">해금</td>
 </tr>
 <tr>
@@ -2057,7 +2180,7 @@
 </tr>
 </tbody>
 </table>
-<h3 id="_10">방어 카드</h3>
+<h3 id="_11">방어 카드</h3>
 <table>
 <thead>
 <tr>
@@ -2075,24 +2198,106 @@
 <td style="text-align: center;">기본</td>
 </tr>
 <tr>
+<td style="text-align: center;">8</td>
+<td>회피 기동</td>
+<td>방어막 8</td>
+<td style="text-align: center;">해금</td>
+</tr>
+<tr>
 <td style="text-align: center;">16</td>
 <td>잔상</td>
 <td>방어막 15</td>
 <td style="text-align: center;">해금</td>
 </tr>
+<tr>
+<td style="text-align: center;">32</td>
+<td>잔영 방벽</td>
+<td>방어막 29</td>
+<td style="text-align: center;">해금</td>
+</tr>
+</tbody>
+</table>
+<h3 id="_12">지원 카드</h3>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;">코스트</th>
+<th>카드명</th>
+<th style="text-align: center;">유형</th>
+<th>효과</th>
+<th style="text-align: center;">획득</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;">0</td>
+<td>슬라이더</td>
+<td style="text-align: center;">유틸</td>
+<td>이번 턴 슬라이드 +1</td>
+<td style="text-align: center;">기본</td>
+</tr>
+<tr>
+<td style="text-align: center;">0</td>
+<td>타일 흡수</td>
+<td style="text-align: center;">유틸</td>
+<td>타일 1개를 인접 타일과 즉시 병합</td>
+<td style="text-align: center;">해금</td>
+</tr>
+<tr>
+<td style="text-align: center;">2</td>
+<td>빠른 이동</td>
+<td style="text-align: center;">유틸</td>
+<td>타일 1개를 원하는 빈 칸으로 이동</td>
+<td style="text-align: center;">해금</td>
+</tr>
+<tr>
+<td style="text-align: center;">2</td>
+<td>견제</td>
+<td style="text-align: center;">디버프</td>
+<td>적 1체 공격력 2턴간 -15%</td>
+<td style="text-align: center;">해금</td>
+</tr>
+<tr>
+<td style="text-align: center;">4</td>
+<td>표식</td>
+<td style="text-align: center;">디버프</td>
+<td>적 1체가 받는 피해 2턴간 +15%</td>
+<td style="text-align: center;">해금</td>
+</tr>
+<tr>
+<td style="text-align: center;">8</td>
+<td>교란</td>
+<td style="text-align: center;">디버프</td>
+<td>적 1체가 받는 피해 2턴간 +20%</td>
+<td style="text-align: center;">해금</td>
+</tr>
+<tr>
+<td style="text-align: center;">16</td>
+<td>가속</td>
+<td style="text-align: center;">드로우</td>
+<td>카드 2장 즉시 드로우</td>
+<td style="text-align: center;">해금</td>
+</tr>
+<tr>
+<td style="text-align: center;">64</td>
+<td>그림자 분신</td>
+<td style="text-align: center;">버프</td>
+<td>3턴간 받는 피해 -25%</td>
+<td style="text-align: center;">해금</td>
+</tr>
 </tbody>
 </table>
 <blockquote>
-<p>밴드가 좁아(≤64) 카드값 자체는 작지만, 슬라이드가 짧아 <strong>저코스트 카드를 여러 턴 빠르게 돌리는</strong> 스타일이다. 방어 카드는 최소한만 두어 공격 지향을 유지한다.</p>
+<p><strong>"슬라이더"가 0 코스트인 것이 주베의 핵심이다.</strong> 슬라이드를 얻는 카드가 슬라이드를 요구하면 순환 모순이 되므로, 퍼즐 없이 발동해야만 성립한다. 밴드 상한이 가장 낮아(64) 턴이 짧은 대신, 0 코스트 카드로 그 짧은 턴을 스스로 늘려 쓴다.</p>
+<p><strong>[미결 S-8]</strong> "슬라이더"의 +1이 <code>slideCount</code>만 늘리는지 <code>maxSlides</code>를 늘리는지 정의 필요.</p>
 </blockquote>
-<p><strong>기타 유형(추후)</strong> — 0 슬라이더(슬라이드 +1), 0 타일 흡수(타일 병합 +1), 빠른 이동(타일 강제 이동)</p>
 <hr />
 <h2 id="4-vane">4. 베인 (Vane) — 스나이퍼</h2>
 <blockquote>
 <p>고단계 타일 소모 → 강력한 단일 딜링 · 핵심 장비 <strong>라스트 노트(The Last Note)</strong>
-밴드 <strong>4~1024</strong> · 슬라이드 <strong>520</strong> (가장 김) · <strong>단일 고화력 · 방어 최소</strong></p>
+밴드 <strong>4~1024</strong> · 슬라이드 <strong>520</strong> (가장 김) · HP 100 · ATK 45 · DEF 10 · <strong>단일 고화력</strong></p>
 </blockquote>
-<h3 id="_11">공격 카드</h3>
+<h3 id="_13">공격 카드</h3>
 <table>
 <thead>
 <tr>
@@ -2110,6 +2315,12 @@
 <td style="text-align: center;">기본</td>
 </tr>
 <tr>
+<td style="text-align: center;">8</td>
+<td>속사 연발</td>
+<td>단일 공격 8 × 2회</td>
+<td style="text-align: center;">기본</td>
+</tr>
+<tr>
 <td style="text-align: center;">16</td>
 <td>속사</td>
 <td>단일 공격 30</td>
@@ -2123,15 +2334,15 @@
 </tr>
 <tr>
 <td style="text-align: center;">64</td>
-<td>조준 사격</td>
-<td>단일 공격 115</td>
+<td>다중 조준</td>
+<td>단일 공격 38 × 3회</td>
 <td style="text-align: center;">해금</td>
 </tr>
 <tr>
 <td style="text-align: center;">128</td>
 <td>관통탄</td>
 <td>단일 공격 200 · <strong>방어 무시</strong></td>
-<td style="text-align: center;">기본</td>
+<td style="text-align: center;">해금</td>
 </tr>
 <tr>
 <td style="text-align: center;">256</td>
@@ -2143,7 +2354,13 @@
 <td style="text-align: center;">512</td>
 <td>심장 겨냥</td>
 <td>단일 공격 840</td>
-<td style="text-align: center;">기본</td>
+<td style="text-align: center;">해금</td>
+</tr>
+<tr>
+<td style="text-align: center;">512</td>
+<td>처형</td>
+<td>단일 공격 840. 대상 체력 30% 이하면 <strong>피해 2배</strong></td>
+<td style="text-align: center;">해금</td>
 </tr>
 <tr>
 <td style="text-align: center;">1024</td>
@@ -2153,7 +2370,7 @@
 </tr>
 </tbody>
 </table>
-<h3 id="_12">방어 카드</h3>
+<h3 id="_14">방어 카드</h3>
 <table>
 <thead>
 <tr>
@@ -2171,24 +2388,91 @@
 <td style="text-align: center;">기본</td>
 </tr>
 <tr>
+<td style="text-align: center;">32</td>
+<td>위장</td>
+<td>방어막 18</td>
+<td style="text-align: center;">해금</td>
+</tr>
+<tr>
 <td style="text-align: center;">64</td>
 <td>연막</td>
-<td>방어막 55</td>
+<td>방어막 35</td>
+<td style="text-align: center;">해금</td>
+</tr>
+<tr>
+<td style="text-align: center;">128</td>
+<td>저격 진지</td>
+<td>방어막 68</td>
+<td style="text-align: center;">해금</td>
+</tr>
+</tbody>
+</table>
+<h3 id="_15">지원 카드</h3>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;">코스트</th>
+<th>카드명</th>
+<th style="text-align: center;">유형</th>
+<th>효과</th>
+<th style="text-align: center;">획득</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;">4</td>
+<td>조준 보정</td>
+<td style="text-align: center;">버프</td>
+<td>다음 공격 카드의 피해 +30%</td>
+<td style="text-align: center;">기본</td>
+</tr>
+<tr>
+<td style="text-align: center;">16</td>
+<td>저격 예열</td>
+<td style="text-align: center;">버프</td>
+<td>다음 공격 카드의 피해 +50%</td>
+<td style="text-align: center;">해금</td>
+</tr>
+<tr>
+<td style="text-align: center;">32</td>
+<td>약점 간파</td>
+<td style="text-align: center;">디버프</td>
+<td>적 1체 방어력 3턴간 -30%</td>
+<td style="text-align: center;">해금</td>
+</tr>
+<tr>
+<td style="text-align: center;">64</td>
+<td>집중</td>
+<td style="text-align: center;">버프</td>
+<td>3턴간 공격 피해 +25%</td>
+<td style="text-align: center;">해금</td>
+</tr>
+<tr>
+<td style="text-align: center;">128</td>
+<td>숨 고르기</td>
+<td style="text-align: center;">드로우</td>
+<td>카드 2장 드로우 + 다음 공격 피해 +20%</td>
+<td style="text-align: center;">해금</td>
+</tr>
+<tr>
+<td style="text-align: center;">256</td>
+<td>완벽한 정적</td>
+<td style="text-align: center;">버프</td>
+<td>다음 공격 카드의 피해 <strong>2배</strong></td>
 <td style="text-align: center;">해금</td>
 </tr>
 </tbody>
 </table>
 <blockquote>
-<p>밴드 전체가 공격으로 채워진 유일한 캐릭터. 방어 카드는 구색만 갖춘 2장뿐이다. 520 슬라이드로 1024 "라스트 노트"(1650 피해)를 한 턴에 완성할 수 있으나 여유가 8회뿐이라 정밀 플레이를 요구한다. <a href="../characters/">characters.md</a>의 <em>"단 한 발로 부응하는 가장 정밀한 총구"</em> 설정과 맞물린다.</p>
+<p><strong>베인만 0·2 코스트가 없다.</strong> 방어 카드도 배율이 가장 낮아(×0.5) 구색만 갖춘 수준이다. 520 슬라이드로 1024 "라스트 노트"(1650 피해)를 한 턴에 완성할 수 있으나 여유가 8회뿐이라 정밀 플레이를 요구한다. 버프 카드로 한 방의 기댓값을 끌어올리는 것이 핵심 운영이다.</p>
 </blockquote>
-<p><strong>기타 유형(추후)</strong> — 16 저격 예열(다음 공격 +50%), 64 다중 조준(연속 타격)</p>
 <hr />
 <h2 id="5-cipher">5. 사이퍼 (Cipher) — 호크</h2>
 <blockquote>
-<p>적 다음 패턴 사전 표시, 취약 상태 부여, 디버프 · 핵심 장비 <strong>헤르메스(Hermes)</strong> 드론 3기
-밴드 <strong>0~128</strong> · 슬라이드 <strong>60</strong> · <strong>중간 · 균형형</strong></p>
+<p>적 패턴 사전 표시, 취약 부여, 디버프 · 핵심 장비 <strong>헤르메스(Hermes)</strong> 드론 3기
+밴드 <strong>0~128</strong> · 슬라이드 <strong>60</strong> · HP 110 · ATK 20 · DEF 18 · <strong>디버프 특화</strong></p>
 </blockquote>
-<h3 id="_13">공격 카드</h3>
+<h3 id="_16">공격 카드</h3>
 <table>
 <thead>
 <tr>
@@ -2218,14 +2502,20 @@
 <td style="text-align: center;">해금</td>
 </tr>
 <tr>
+<td style="text-align: center;">64</td>
+<td>과부하</td>
+<td>단일 공격 82</td>
+<td style="text-align: center;">해금</td>
+</tr>
+<tr>
 <td style="text-align: center;">128</td>
 <td>데이터 붕괴</td>
-<td>광역 공격 160</td>
+<td>광역 공격 112</td>
 <td style="text-align: center;">해금</td>
 </tr>
 </tbody>
 </table>
-<h3 id="_14">방어 카드</h3>
+<h3 id="_17">방어 카드</h3>
 <table>
 <thead>
 <tr>
@@ -2243,10 +2533,16 @@
 <td style="text-align: center;">기본</td>
 </tr>
 <tr>
+<td style="text-align: center;">8</td>
+<td>프록시 우회</td>
+<td>방어막 9</td>
+<td style="text-align: center;">해금</td>
+</tr>
+<tr>
 <td style="text-align: center;">16</td>
 <td>프록시 실드</td>
 <td>방어막 17</td>
-<td style="text-align: center;">기본</td>
+<td style="text-align: center;">해금</td>
 </tr>
 <tr>
 <td style="text-align: center;">64</td>
@@ -2254,19 +2550,109 @@
 <td>방어막 63</td>
 <td style="text-align: center;">해금</td>
 </tr>
+<tr>
+<td style="text-align: center;">128</td>
+<td>절대 방벽</td>
+<td>방어막 122</td>
+<td style="text-align: center;">해금</td>
+</tr>
+</tbody>
+</table>
+<h3 id="_18">지원 카드</h3>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;">코스트</th>
+<th>카드명</th>
+<th style="text-align: center;">유형</th>
+<th>효과</th>
+<th style="text-align: center;">획득</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;">0</td>
+<td>스캔</td>
+<td style="text-align: center;">유틸</td>
+<td>적 1체의 다음 행동을 미리 표시</td>
+<td style="text-align: center;">기본</td>
+</tr>
+<tr>
+<td style="text-align: center;">0</td>
+<td>노이즈</td>
+<td style="text-align: center;">디버프</td>
+<td>적 1체 공격력 1턴간 -10%</td>
+<td style="text-align: center;">해금</td>
+</tr>
+<tr>
+<td style="text-align: center;">2</td>
+<td>해킹 패킷</td>
+<td style="text-align: center;">디버프</td>
+<td>적 1체가 받는 피해 2턴간 +15%</td>
+<td style="text-align: center;">기본</td>
+</tr>
+<tr>
+<td style="text-align: center;">4</td>
+<td>데이터 수집</td>
+<td style="text-align: center;">드로우</td>
+<td>카드 1장 즉시 드로우</td>
+<td style="text-align: center;">해금</td>
+</tr>
+<tr>
+<td style="text-align: center;">8</td>
+<td>취약 지정</td>
+<td style="text-align: center;">디버프</td>
+<td>적 1체가 받는 피해 2턴간 +30%</td>
+<td style="text-align: center;">해금</td>
+</tr>
+<tr>
+<td style="text-align: center;">16</td>
+<td>시스템 오류</td>
+<td style="text-align: center;">디버프</td>
+<td>적 1체 방어력 3턴간 -25%</td>
+<td style="text-align: center;">해금</td>
+</tr>
+<tr>
+<td style="text-align: center;">16</td>
+<td>헤르메스</td>
+<td style="text-align: center;">유틸</td>
+<td>드론 배치. 3턴간 매 턴 자동 단일 공격 6</td>
+<td style="text-align: center;">해금</td>
+</tr>
+<tr>
+<td style="text-align: center;">32</td>
+<td>예측 조작</td>
+<td style="text-align: center;">유틸</td>
+<td>적 1체의 행동 카운트 +1</td>
+<td style="text-align: center;">해금</td>
+</tr>
+<tr>
+<td style="text-align: center;">64</td>
+<td>방화벽 강화</td>
+<td style="text-align: center;">버프</td>
+<td>3턴간 받는 피해 -20%</td>
+<td style="text-align: center;">해금</td>
+</tr>
+<tr>
+<td style="text-align: center;">128</td>
+<td>시스템 마비</td>
+<td style="text-align: center;">디버프</td>
+<td><strong>모든 적</strong>의 행동 카운트 +1</td>
+<td style="text-align: center;">해금</td>
+</tr>
 </tbody>
 </table>
 <blockquote>
-<p>사이퍼의 본체는 디버프·정보(추후)이며, 공격/방어는 무난한 균형형으로 둔다. 상한 128 공격 "데이터 붕괴"는 광역이라 다수 적 상대에 강하다.</p>
+<p>사이퍼는 지원 카드가 10장으로 가장 많다. 직접 화력은 평범하지만 <strong>취약·방어력 감소를 겹쳐 아군 피해량을 증폭</strong>시키는 것이 본체다.</p>
+<p><strong>[미결 S-5]</strong> "예측 조작"·"시스템 마비"(적 카운트 +1)와 유물 "시간의 모래"의 중첩 규칙 정의 필요.</p>
 </blockquote>
-<p><strong>기타 유형(추후)</strong> — 0 스캔(취약 표시), 취약 지정(피해 +30%), 예측 조작(적 카운트 +1), 헤르메스(드론 배치)</p>
 <hr />
 <h2 id="6-pulse">6. 펄스 (Pulse) — 서스테이너</h2>
 <blockquote>
-<p>타일 합칠 때마다 체력 회복, 방해 타일 정화 · 핵심 장비 <strong>에테르(Aether)</strong>
-밴드 <strong>0~256</strong> · 슬라이드 <strong>120</strong> · <strong>공격 약함 · 방어 중상</strong></p>
+<p>체력 회복, 방해 타일 정화 · 핵심 장비 <strong>에테르(Aether)</strong>
+밴드 <strong>0~256</strong> · 슬라이드 <strong>120</strong> · HP 130 · ATK 12 · DEF 20 · <strong>회복 특화</strong></p>
 </blockquote>
-<h3 id="_15">공격 카드</h3>
+<h3 id="_19">공격 카드</h3>
 <table>
 <thead>
 <tr>
@@ -2287,12 +2673,12 @@
 <td style="text-align: center;">16</td>
 <td>정화 방출</td>
 <td>단일 공격 15</td>
-<td style="text-align: center;">기본</td>
+<td style="text-align: center;">해금</td>
 </tr>
 <tr>
 <td style="text-align: center;">64</td>
 <td>에테르 파동</td>
-<td>광역 공격 57</td>
+<td>광역 공격 40</td>
 <td style="text-align: center;">해금</td>
 </tr>
 <tr>
@@ -2303,7 +2689,7 @@
 </tr>
 </tbody>
 </table>
-<h3 id="_16">방어 카드</h3>
+<h3 id="_20">방어 카드</h3>
 <table>
 <thead>
 <tr>
@@ -2321,10 +2707,16 @@
 <td style="text-align: center;">기본</td>
 </tr>
 <tr>
+<td style="text-align: center;">8</td>
+<td>보호막 생성</td>
+<td>방어막 12</td>
+<td style="text-align: center;">해금</td>
+</tr>
+<tr>
 <td style="text-align: center;">32</td>
 <td>나노 장막</td>
 <td>방어막 43</td>
-<td style="text-align: center;">기본</td>
+<td style="text-align: center;">해금</td>
 </tr>
 <tr>
 <td style="text-align: center;">128</td>
@@ -2334,22 +2726,126 @@
 </tr>
 </tbody>
 </table>
+<h3 id="_21">회복 카드</h3>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;">코스트</th>
+<th>카드명</th>
+<th>효과</th>
+<th style="text-align: center;">획득</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;">2</td>
+<td>응급 처치</td>
+<td>체력 4 회복</td>
+<td style="text-align: center;">기본</td>
+</tr>
+<tr>
+<td style="text-align: center;">4</td>
+<td>진정제</td>
+<td>체력 6 회복</td>
+<td style="text-align: center;">기본</td>
+</tr>
+<tr>
+<td style="text-align: center;">8</td>
+<td>나노 치유</td>
+<td>체력 12 회복</td>
+<td style="text-align: center;">기본</td>
+</tr>
+<tr>
+<td style="text-align: center;">16</td>
+<td>재생 촉진</td>
+<td><strong>3턴간</strong> 매 턴 체력 8 회복 (총 24)</td>
+<td style="text-align: center;">해금</td>
+</tr>
+<tr>
+<td style="text-align: center;">64</td>
+<td>회복 파동</td>
+<td>체력 84 회복</td>
+<td style="text-align: center;">해금</td>
+</tr>
+<tr>
+<td style="text-align: center;">128</td>
+<td>에테르 방출</td>
+<td>체력 150 회복 + <strong>디버프 전부 제거</strong></td>
+<td style="text-align: center;">해금</td>
+</tr>
+<tr>
+<td style="text-align: center;">256</td>
+<td>완전 소생</td>
+<td>체력 312 회복</td>
+<td style="text-align: center;">해금</td>
+</tr>
+</tbody>
+</table>
+<h3 id="_22">지원 카드</h3>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;">코스트</th>
+<th>카드명</th>
+<th style="text-align: center;">유형</th>
+<th>효과</th>
+<th style="text-align: center;">획득</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;">0</td>
+<td>나노 필드</td>
+<td style="text-align: center;">유틸</td>
+<td>방해 타일 1개 정화</td>
+<td style="text-align: center;">기본</td>
+</tr>
+<tr>
+<td style="text-align: center;">8</td>
+<td>생명선</td>
+<td style="text-align: center;">버프</td>
+<td>전투 중 1회, 치명 피해를 체력 1로 버팀</td>
+<td style="text-align: center;">해금</td>
+</tr>
+<tr>
+<td style="text-align: center;">32</td>
+<td>정화 파동</td>
+<td style="text-align: center;">유틸</td>
+<td>자신의 디버프 전부 제거</td>
+<td style="text-align: center;">해금</td>
+</tr>
+<tr>
+<td style="text-align: center;">32</td>
+<td>활력 주입</td>
+<td style="text-align: center;">버프</td>
+<td>3턴간 방어막 획득량 +30%</td>
+<td style="text-align: center;">해금</td>
+</tr>
+<tr>
+<td style="text-align: center;">64</td>
+<td>억제 필드</td>
+<td style="text-align: center;">디버프</td>
+<td><strong>모든 적</strong> 공격력 2턴간 -20%</td>
+<td style="text-align: center;">해금</td>
+</tr>
+</tbody>
+</table>
 <blockquote>
-<p>펄스의 공격값은 역할 배율이 가장 낮아(같은 코스트 기준 최약) 순수 딜링에는 부적합하다. 방어 카드가 상대적으로 강하며, 진짜 강점인 회복 계열은 추후 작성한다.</p>
-</blockquote>
-<p><strong>기타 유형(추후)</strong> — 0 나노 필드(방해 타일 정화), 회복 계열(응급 처치·나노 치유·회복 파동·에테르 방출), 생명선(치명 피해 방지), 정화 파동(디버프 제거)</p>
-<blockquote>
-<p>펄스 회복 계열의 축 분리 설계(즉시 / 지속 / 대회복+정화)는 확정되어 있으며, 회복 카드 작성 시 그대로 적용한다.</p>
+<p><strong>회복 계열의 축 분리</strong> — 1인 전투로 "단일/전체" 구분이 사라진 자리를 다른 축으로 대체했다. <code>2·4·8</code>은 즉시 소량, <code>16 재생 촉진</code>은 총량이 크지만 <strong>턴을 나눠 받는</strong> 선행 투자, <code>128 에테르 방출</code>은 회복에 <strong>정화를 겸하는</strong> 위기 탈출용, <code>256 완전 소생</code>은 순수 대회복. 단순 수치 상위호환이 아니라 목적이 갈린다.</p>
 </blockquote>
 <hr />
-<h2 id="7">7. 캐릭터별 공격/방어 배분 요약</h2>
+<h2 id="7">7. 캐릭터별 카드 구성 요약</h2>
 <table>
 <thead>
 <tr>
 <th>캐릭터</th>
 <th style="text-align: center;">밴드</th>
-<th style="text-align: center;">공격 카드</th>
-<th style="text-align: center;">방어 카드</th>
+<th style="text-align: center;">공격</th>
+<th style="text-align: center;">방어</th>
+<th style="text-align: center;">회복</th>
+<th style="text-align: center;">지원</th>
+<th style="text-align: center;">콤보</th>
+<th style="text-align: center;"><strong>합계</strong></th>
 <th>성향</th>
 </tr>
 </thead>
@@ -2357,41 +2853,73 @@
 <tr>
 <td>주베</td>
 <td style="text-align: center;">0~64</td>
-<td style="text-align: center;">6</td>
-<td style="text-align: center;">2</td>
-<td>경량 다발 공격</td>
+<td style="text-align: center;">8</td>
+<td style="text-align: center;">4</td>
+<td style="text-align: center;">—</td>
+<td style="text-align: center;">8</td>
+<td style="text-align: center;">—</td>
+<td style="text-align: center;"><strong>20</strong></td>
+<td>경량 다발 · 타일 조작</td>
 </tr>
 <tr>
 <td>사이퍼</td>
 <td style="text-align: center;">0~128</td>
-<td style="text-align: center;">4</td>
-<td style="text-align: center;">3</td>
-<td>균형형</td>
+<td style="text-align: center;">5</td>
+<td style="text-align: center;">5</td>
+<td style="text-align: center;">—</td>
+<td style="text-align: center;">10</td>
+<td style="text-align: center;">—</td>
+<td style="text-align: center;"><strong>20</strong></td>
+<td>디버프 특화</td>
 </tr>
 <tr>
 <td>펄스</td>
 <td style="text-align: center;">0~256</td>
 <td style="text-align: center;">4</td>
-<td style="text-align: center;">3</td>
-<td>방어 우위, 공격 최약</td>
+<td style="text-align: center;">4</td>
+<td style="text-align: center;">7</td>
+<td style="text-align: center;">5</td>
+<td style="text-align: center;">—</td>
+<td style="text-align: center;"><strong>20</strong></td>
+<td>회복 특화</td>
 </tr>
 <tr>
 <td>케스트럴</td>
 <td style="text-align: center;">0~512</td>
+<td style="text-align: center;">6</td>
 <td style="text-align: center;">5</td>
-<td style="text-align: center;">5</td>
-<td>방어 특화, 공방 균형</td>
+<td style="text-align: center;">—</td>
+<td style="text-align: center;">6</td>
+<td style="text-align: center;">3</td>
+<td style="text-align: center;"><strong>20</strong></td>
+<td>방어 특화 + 바리케이드 콤보</td>
 </tr>
 <tr>
 <td>베인</td>
 <td style="text-align: center;">4~1024</td>
-<td style="text-align: center;">8</td>
-<td style="text-align: center;">2</td>
-<td>공격 특화</td>
+<td style="text-align: center;">10</td>
+<td style="text-align: center;">4</td>
+<td style="text-align: center;">—</td>
+<td style="text-align: center;">6</td>
+<td style="text-align: center;">—</td>
+<td style="text-align: center;"><strong>20</strong></td>
+<td>단일 고화력</td>
+</tr>
+<tr>
+<td></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"><strong>33</strong></td>
+<td style="text-align: center;"><strong>22</strong></td>
+<td style="text-align: center;"><strong>7</strong></td>
+<td style="text-align: center;"><strong>35</strong></td>
+<td style="text-align: center;"><strong>3</strong></td>
+<td style="text-align: center;"><strong>100</strong></td>
+<td></td>
 </tr>
 </tbody>
 </table>
 <p><strong>핵심 딜레마와의 연결</strong> — 코스트가 클수록 강하지만 슬라이드 예산을 그만큼 소모한다. 케스트럴·베인은 상한 카드를 한 턴에 완성할 수 있어 <strong>"한 방 vs 다발"</strong>을 매 턴 저울질하고, 주베·사이퍼·펄스는 상한 카드를 위해 <strong>턴을 넘겨 보드를 쌓을지</strong> 저코스트로 끊어 갈지 선택한다.</p>
+<p><strong>0 코스트의 역할</strong> — 0 코스트 카드는 모두 <em>"보드 상황과 무관하게 성립해야 하는 것"</em>이다. 슬라이드 획득(슬라이더), 정보(스캔), 방어 태세(반격 자세), 정화(나노 필드). 퍼즐이 막힌 최악의 상황에서도 최소한의 행동을 보장하는 안전망이며, <strong>베인에게는 그 안전망이 없다.</strong></p>
 <hr />
 <h2 id="8">8. 미결 사항</h2>
 <table>
@@ -2404,14 +2932,24 @@
 </thead>
 <tbody>
 <tr>
-<td><strong>S-9</strong></td>
-<td><strong>기타 유형 카드 미작성</strong></td>
-<td>유틸·회복·디버프·버프 카드 전부 이름만 있고 미작성. 특히 0 코스트 슬롯 대부분이 비어 있음</td>
+<td><strong>S-6</strong></td>
+<td><strong>수치 밸런싱</strong></td>
+<td>100장 전부 §1 수치 기준에 따른 임시값. 특히 <strong>광역 ×0.7 계수</strong>와 <strong>다단 공격 총합</strong>이 실제로 단일과 균형을 이루는지 검증 미착수</td>
 </tr>
 <tr>
-<td><strong>S-6</strong></td>
-<td>수치 밸런싱</td>
-<td>공격/방어 값은 코스트 비례 임시값(§1 수치 기준). 슬라이드당 효율 일정을 가정했으나 정식 밸런싱·검증 미착수</td>
+<td>~~S-12~~</td>
+<td>~~버프·디버프 중첩 규칙~~</td>
+<td><strong>해소됨.</strong> <code>power</code> 합산 + effectId별 상한, <code>duration</code>은 max 갱신 (<a href="../../systems/card/">card.md §2-2</a>). 사이퍼의 취약 +15%+30%는 <strong>45%로 합산</strong>된다</td>
+</tr>
+<tr>
+<td>~~S-10~~</td>
+<td>~~지속 타입·파생 수치 미지원~~</td>
+<td><strong>해소됨.</strong> <code>PERSISTENT</code> 타입과 <code>damageSource: CURRENT_SHIELD</code> 확정 (<a href="../../systems/card/">card.md §2-2</a>)</td>
+</tr>
+<tr>
+<td>~~S-11~~</td>
+<td>~~방어막·드로우 타입 미확정~~</td>
+<td><strong>해소됨.</strong> <code>SHIELD</code> 확정, 드로우는 <code>UTILITY</code>의 <code>draw</code>로 흡수</td>
 </tr>
 <tr>
 <td><strong>S-2</strong></td>
@@ -2419,39 +2957,44 @@
 <td>밴드 상한이 베인 1024까지라 2048은 어느 캐릭터에도 없다. 보상·유물 한정 등장 여부 결정 필요</td>
 </tr>
 <tr>
-<td><strong>S-3</strong></td>
-<td>미해금 스킬 내용</td>
-<td>각 캐릭터 미해금 슬롯의 실제 카드 미정</td>
-</tr>
-<tr>
 <td><strong>S-5</strong></td>
 <td>적 카운트 개입 중첩</td>
-<td>사이퍼 "예측 조작"과 유물 "시간의 모래"의 중첩 규칙 (기타 유형 작성 시)</td>
+<td>사이퍼 "예측 조작"·"시스템 마비"와 유물 "시간의 모래"의 중첩 규칙</td>
 </tr>
 <tr>
 <td><strong>S-8</strong></td>
 <td>슬라이더 +1의 대상</td>
-<td>주베 "슬라이더"가 <code>slideCount</code>만 늘리는지 <code>maxSlides</code>를 늘리는지 (기타 유형 작성 시)</td>
+<td>주베 "슬라이더"가 <code>slideCount</code>만 늘리는지 <code>maxSlides</code>를 늘리는지</td>
 </tr>
 <tr>
 <td>~~S-1~~</td>
 <td>~~펄스 회복 상위호환~~</td>
-<td><strong>해소됨.</strong> 즉시/지속/대회복+정화로 축 분리 확정 (회복 카드 작성 시 적용)</td>
+<td><strong>해소됨.</strong> 즉시/지속/정화겸용/대회복으로 축 분리 (§6)</td>
+</tr>
+<tr>
+<td>~~S-3~~</td>
+<td>~~미해금 스킬 내용~~</td>
+<td><strong>해소됨.</strong> 캐릭터당 20장으로 전 슬롯 확정</td>
 </tr>
 <tr>
 <td>~~S-4~~</td>
 <td>~~발동 숫자 상한 불일치~~</td>
-<td><strong>해소됨.</strong> 코스트가 2048까지 확장되어 베인 "512·1024 이상 소모" 서술이 유효</td>
+<td><strong>해소됨.</strong> 코스트가 2048까지 확장</td>
 </tr>
 <tr>
 <td>~~S-7~~</td>
 <td>~~코스트 재배치~~</td>
-<td><strong>완료.</strong> 캐릭터별 밴드 방식 (§1 밴드표)</td>
+<td><strong>완료.</strong> 캐릭터별 밴드 방식 (§1)</td>
+</tr>
+<tr>
+<td>~~S-9~~</td>
+<td>~~기타 유형 카드 미작성~~</td>
+<td><strong>완료.</strong> 회복·버프·디버프·드로우·유틸 전부 작성</td>
 </tr>
 </tbody>
 </table>
 <hr />
-<h2 id="_17">관련 문서</h2>
+<h2 id="_23">관련 문서</h2>
 <table>
 <thead>
 <tr>
@@ -2462,7 +3005,7 @@
 <tbody>
 <tr>
 <td><a href="../../systems/card/">systems/card.md</a></td>
-<td>카드 구조체, 덱 운영, 드로우, 발동 흐름</td>
+<td>카드 구조체, 캐릭터 전용 원칙, 덱 운영, 발동 흐름</td>
 </tr>
 <tr>
 <td><a href="../characters/">contents/characters.md</a></td>

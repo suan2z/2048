@@ -2153,7 +2153,7 @@ nextAction = actions[currentActionIndex]  (다음 예고 등록)
 <tr>
 <td><code>attack_down</code></td>
 <td>카드 발동 피해량 감소</td>
-<td>감소량 (절대값)</td>
+<td>감소율 (<strong>%</strong>)</td>
 </tr>
 <tr>
 <td><code>defense_down</code></td>
@@ -2161,9 +2161,14 @@ nextAction = actions[currentActionIndex]  (다음 예고 등록)
 <td>감소율 (%)</td>
 </tr>
 <tr>
+<td><code>vulnerable</code></td>
+<td>받는 피해 증가</td>
+<td>증가율 (%)</td>
+</tr>
+<tr>
 <td><code>poison</code></td>
 <td>액션 버튼마다 체력 감소</td>
-<td>감소량</td>
+<td>감소량 (절대값)</td>
 </tr>
 <tr>
 <td><code>count_reduce</code></td>
@@ -2172,6 +2177,10 @@ nextAction = actions[currentActionIndex]  (다음 예고 등록)
 </tr>
 </tbody>
 </table>
+<blockquote>
+<p><code>effectId</code>는 <a href="../card/">card.md §2-2</a>와 <strong>동일한 이름 공간</strong>을 사용한다. 같은 식별자는 부여 주체가 적이든 카드든 완전히 동일하게 동작하며, <strong>중첩 규칙(합산 + 상한)과 피해 계산식도 card.md의 정의를 따른다.</strong></p>
+<p><code>attack_down</code>의 <code>power</code>는 원래 절대값이었으나 <strong>%로 통일</strong>했다. 발동 숫자가 0~2048로 벌어져 피해량 범위가 2~1650에 달하므로, 절대값 증감은 저코스트에서 과하고 고코스트에서 무의미해지기 때문이다.</p>
+</blockquote>
 <h3 id="5-4-buff_self">5-4. 자기 강화 버프 (<code>BUFF_SELF</code>)</h3>
 <p>적 자신에게 유리한 상태를 부여한다.</p>
 <table>
@@ -2217,13 +2226,18 @@ nextAction = actions[currentActionIndex]  (다음 예고 등록)
 <tbody>
 <tr>
 <td><code>shield_gain</code></td>
-<td>방어막 부여</td>
-<td>방어막 수치</td>
+<td>방어막 부여 (즉시 1회)</td>
+<td>방어막 수치 (절대값)</td>
 </tr>
 <tr>
 <td><code>attack_up</code></td>
-<td>다음 공격 피해량 증가</td>
-<td>증가량 (절대값)</td>
+<td>주는 피해 증가</td>
+<td>증가율 (<strong>%</strong>)</td>
+</tr>
+<tr>
+<td><code>damage_reduce</code></td>
+<td>받는 피해 감소</td>
+<td>감소율 (%)</td>
 </tr>
 <tr>
 <td><code>count_reset</code></td>
@@ -2232,6 +2246,9 @@ nextAction = actions[currentActionIndex]  (다음 예고 등록)
 </tr>
 </tbody>
 </table>
+<blockquote>
+<p><code>attack_up</code>도 <code>attack_down</code>과 같은 이유로 <strong>%로 통일</strong>했다. <code>shield_gain</code>은 배율이 아니라 부여 수치 자체이므로 절대값을 유지한다. (배율 증가는 별도 식별자 <code>shield_gain_up</code>)</p>
+</blockquote>
 <hr />
 <h2 id="6">6. 보스 페이즈 시스템</h2>
 <p>보스(<code>BOSS</code> 유형)는 체력 구간에 따라 행동 패턴이 교체된다. 패턴 교체 시 카운트가 리셋되고 새 예고가 즉시 등록된다.</p>

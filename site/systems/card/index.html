@@ -691,7 +691,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#4_1" class="md-nav__link">
+  <a href="#4" class="md-nav__link">
     <span class="md-ellipsis">
       
         4. 드로우 규칙
@@ -1742,6 +1742,42 @@
 <p>카드 시스템은 출전 캐릭터의 스킬 카드를 <strong>대기덱·핸드덱·소모덱</strong> 세 영역으로 통합 관리하는 구조다. 각 카드에는 보드에서 소모해야 하는 <strong>발동 숫자</strong>(0·2·4·8·…·2048)가 지정되어 있으며, 숫자가 높을수록 강력한 효과를 제공한다.</p>
 <p><strong>발동 숫자 0인 카드는 보드 타일을 소모하지 않으며, 퍼즐 없이 즉시 사용 가능하다.</strong></p>
 <p>캐릭터마다 <strong>사용하는 카드 코스트 범위가 고정</strong>되어 있으며(§2-4), 턴에 주어지는 슬라이드 횟수는 <strong>출전 캐릭터의 고유 스탯</strong>이다. (<a href="../board/">board.md §5-1</a> 참조)</p>
+<h3 id="1-1">1-1. 캐릭터 전용 원칙</h3>
+<p><strong>모든 스킬 카드는 특정 캐릭터 1인의 전용 카드다. 공통 카드·공용 카드 풀은 존재하지 않는다.</strong></p>
+<table>
+<thead>
+<tr>
+<th>항목</th>
+<th>규칙</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>소유</td>
+<td>모든 카드는 <code>ownerCharacterId</code>로 소유 캐릭터가 확정된다. 소유자 없는 카드는 없다</td>
+</tr>
+<tr>
+<td>덱 구성</td>
+<td>전투 덱은 <strong>출전 캐릭터 소유 카드로만</strong> 구성된다. 미출전 캐릭터의 카드는 포함되지 않는다</td>
+</tr>
+<tr>
+<td>보상·상점</td>
+<td>카드 획득 경로(전투 보상·상점·이벤트) 전부 <strong>출전 캐릭터 소유 카드만</strong> 후보로 제시한다 (§6)</td>
+</tr>
+<tr>
+<td>카드 이름</td>
+<td>캐릭터 간 <strong>중복되지 않는다.</strong> 같은 역할의 카드라도 캐릭터마다 고유 이름·연출을 가진다</td>
+</tr>
+<tr>
+<td>강화</td>
+<td>강화된 카드도 소유 캐릭터가 바뀌지 않는다</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>이 원칙에 따라 <strong>캐릭터 선택이 곧 카드 풀 선택</strong>이 된다. 코스트 밴드(§2-4)·슬라이드 스탯과 함께, 캐릭터가 전투 경험 전체를 규정하는 축이다.</p>
+<p>캐릭터별 실제 카드 목록은 <a href="../../contents/skills/">contents/skills.md</a>에서 관리한다.</p>
+</blockquote>
 <h3 id="_2">카드 시스템의 흐름 요약</h3>
 <div class="highlight"><pre><span></span><code>전투 시작
     └─ 선택 캐릭터의 카드를 셔플 → 대기덱 구성
@@ -1823,85 +1859,363 @@
     : triggerNumber
 </code></pre></div>
 <h3 id="2-2-cardeffecttype">2-2. 효과 타입 열거형 (CardEffectType)</h3>
-<blockquote>
-<p><strong>[미결 A-1]</strong> 카드 효과 타입의 범위가 확정되지 않았습니다.<br />
-- <strong>(a)</strong> 공격·회복·버프·디버프 4종으로 고정<br />
-- <strong>(b)</strong> 실드(Shield)·드로우(Draw)·상태이상(StatusEffect) 등 추가 타입 포함한 확장 목록  </p>
-<p>아래 표는 <strong>(a) 기준 4종을 기본으로</strong> 작성하되, 확장 타입 후보를 함께 나열합니다. 확정 시 <code>EffectParams</code> 구조체도 함께 갱신해야 합니다.</p>
-</blockquote>
-<h4 id="4">기본 4종 (확정)</h4>
+<p><strong>7종으로 확정한다.</strong> <a href="../../contents/skills/">contents/skills.md</a>의 100장이 실제로 요구하는 범위를 기준으로 산정했으며, 버프·디버프의 식별자 규약은 <a href="../enemy/">enemy.md §5-3·5-4</a>와 통일한다.</p>
 <table>
 <thead>
 <tr>
-<th><code>CardEffectType</code> 값</th>
+<th><code>CardEffectType</code></th>
 <th>설명</th>
 <th>주요 <code>EffectParams</code> 필드</th>
+<th>사용 예</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td><code>ATTACK</code></td>
-<td>적 단일 또는 전체에 피해를 입힌다</td>
-<td><code>damage: int</code>, <code>targetType: TargetType</code></td>
+<td>적에게 피해를 입힌다</td>
+<td><code>damage</code>, <code>targetType</code>, <code>hitCount</code>, <code>ignoreShield</code>, <code>damageSource</code></td>
+<td>방패 치기, 관통탄</td>
+</tr>
+<tr>
+<td><code>SHIELD</code></td>
+<td>피해를 흡수하는 방어막을 부여한다</td>
+<td><code>shieldAmount</code></td>
+<td>베스천 전개, 철벽 요새</td>
 </tr>
 <tr>
 <td><code>HEAL</code></td>
-<td>아군 단일 또는 전체의 HP를 회복한다</td>
-<td><code>healAmount: int</code>, <code>targetType: TargetType</code></td>
+<td>체력을 회복한다</td>
+<td><code>healAmount</code>, <code>duration</code></td>
+<td>나노 치유, 재생 촉진</td>
 </tr>
 <tr>
 <td><code>BUFF</code></td>
-<td>아군에게 유리한 상태 효과를 부여한다</td>
-<td><code>buffId: string</code>, <code>duration: int</code>, <code>targetType: TargetType</code></td>
+<td>자신에게 유리한 상태를 부여한다</td>
+<td><code>effectId</code>, <code>power</code>, <code>duration</code></td>
+<td>조준 보정, 강철 의지</td>
 </tr>
 <tr>
 <td><code>DEBUFF</code></td>
-<td>적에게 불리한 상태 효과를 부여한다</td>
-<td><code>debuffId: string</code>, <code>duration: int</code>, <code>targetType: TargetType</code></td>
+<td>적에게 불리한 상태를 부여한다</td>
+<td><code>effectId</code>, <code>power</code>, <code>duration</code>, <code>targetType</code></td>
+<td>취약 지정, 억제 필드</td>
+</tr>
+<tr>
+<td><code>UTILITY</code></td>
+<td>보드·덱·적 카운트를 조작한다</td>
+<td><code>utilityId</code>, <code>power</code></td>
+<td>슬라이더, 장벽 생성, 예측 조작</td>
+</tr>
+<tr>
+<td><code>PERSISTENT</code></td>
+<td>전투가 끝날 때까지 <strong>규칙 자체를 변경</strong>한다</td>
+<td><code>persistentId</code></td>
+<td>바리케이드</td>
 </tr>
 </tbody>
 </table>
-<h4 id="a-1">확장 타입 후보 (A-1 미결 — 채택 여부 확정 필요)</h4>
+<p><strong>설계 판단</strong></p>
+<ul>
+<li><code>STATUS_EFFECT</code>는 <strong>별도 타입으로 두지 않는다.</strong> 독·마비 등은 <code>DEBUFF</code>의 <code>effectId</code>로 표현하면 충분하며, 타입을 나누면 중첩·해제 규칙이 이원화된다.</li>
+<li><code>DRAW</code>도 <strong>별도 타입이 아니라</strong> <code>UTILITY</code>의 <code>utilityId: "draw"</code>로 흡수한다. 드로우는 보드·덱 조작 계열과 처리 흐름이 같다.</li>
+<li><code>PERSISTENT</code>는 <strong>1회 발동 후 전투 내내 유지</strong>되는 유일한 타입이다. 다른 타입은 모두 발동 즉시 해소된다.</li>
+</ul>
+<h4 id="effectparams">EffectParams 공통 구조</h4>
+<div class="highlight"><pre><span></span><code>EffectParams {
+    targetType    : TargetType    // SELF | SINGLE_ENEMY | ALL_ENEMIES
+
+    // ATTACK
+    damage        : int?          // 1회 타격당 피해량
+    hitCount      : int?          // 타격 횟수. 생략 시 1 (다단 공격용)
+    ignoreShield  : bool?         // true면 방어막을 무시하고 체력에 직접 적용
+    damageSource  : DamageSource? // 피해량 산출 기준. 생략 시 damage 고정값 사용
+    bonusCondition: string?       // 조건부 배율. 예: &quot;target_hp_below_30&quot; → 피해 2배
+
+    // SHIELD / HEAL
+    shieldAmount  : int?
+    healAmount    : int?          // duration 지정 시 &quot;매 턴 healAmount 회복&quot;
+
+    // BUFF / DEBUFF
+    effectId      : string?       // enemy.md와 공유하는 식별자 (아래 표)
+    power         : int?          // 효과 강도. % 또는 절대값 (effectId별 해석)
+    duration      : int?          // 지속 턴 수 (액션 버튼 횟수 기준). 0 = 영구
+
+    // UTILITY / PERSISTENT
+    utilityId     : string?
+    persistentId  : string?
+}
+
+enum DamageSource {
+    FIXED,           // damage 필드 값 그대로 (기본)
+    CURRENT_SHIELD   // 현재 방어막 수치만큼 (몸통 박치기)
+}
+</code></pre></div>
+<blockquote>
+<p><code>targetType</code>에 아군 대상값이 없는 것은 <strong>1인 전투</strong>이기 때문이다. 회복·버프는 항상 출전 캐릭터 자신(<code>SELF</code>)에게 적용되므로 대상 선택이 불필요하다. (<a href="../character/">character.md §피해 대상</a>)</p>
+</blockquote>
+<h4 id="effectid-buff-debuff">effectId 목록 (BUFF · DEBUFF)</h4>
+<p><code>enemy.md</code>가 적 측에서 사용하는 식별자와 <strong>동일한 이름 공간</strong>을 쓴다. 같은 <code>effectId</code>는 주체가 누구든 같은 규칙으로 동작한다.</p>
+<p><strong><code>power</code> 해석 규칙 (A-8 확정)</strong> — 식별자 성격에 따라 두 가지로 나뉘며, <strong>혼용하지 않는다.</strong></p>
+<ul>
+<li><strong>비율형(%)</strong> — 피해·획득량처럼 <em>다른 수치에 곱해지는</em> 효과. 발동 숫자가 0~2048로 3자릿수 이상 벌어져 있어(피해 2 ~ 1650), 절대값 증감은 저코스트에서 과하고 고코스트에서 무의미해진다. 따라서 <strong>모든 배율성 효과는 %로 통일한다.</strong></li>
+<li><strong>수치형(절대값)</strong> — 독 피해량, 발동 횟수처럼 <em>그 자체가 최종 수치</em>인 효과.</li>
+</ul>
 <table>
 <thead>
 <tr>
-<th><code>CardEffectType</code> 후보값</th>
+<th>effectId</th>
+<th style="text-align: center;">분류</th>
+<th style="text-align: center;">대상</th>
 <th>설명</th>
-<th>비고</th>
+<th style="text-align: center;"><code>power</code></th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><code>SHIELD</code></td>
-<td>아군에게 피해를 일정량 흡수하는 방어막을 부여</td>
-<td>방어막 수치 소진 시 자동 제거</td>
+<td><code>attack_up</code></td>
+<td style="text-align: center;">BUFF</td>
+<td style="text-align: center;">자신</td>
+<td>주는 피해 증가</td>
+<td style="text-align: center;"><strong>%</strong></td>
 </tr>
 <tr>
-<td><code>DRAW</code></td>
-<td>대기덱에서 지정 장수를 즉시 핸드에 추가로 드로우</td>
-<td>핸드 초과 장수 처리 규칙 별도 결정 필요</td>
+<td><code>damage_reduce</code></td>
+<td style="text-align: center;">BUFF</td>
+<td style="text-align: center;">자신</td>
+<td>받는 피해 감소</td>
+<td style="text-align: center;"><strong>%</strong></td>
 </tr>
 <tr>
-<td><code>STATUS_EFFECT</code></td>
-<td>독·마비 등 지속 피해 또는 행동 제한 상태이상 부여</td>
-<td><code>DEBUFF</code>와 별도 분리 여부 결정 필요</td>
+<td><code>shield_gain_up</code></td>
+<td style="text-align: center;">BUFF</td>
+<td style="text-align: center;">자신</td>
+<td>방어막 획득량 증가</td>
+<td style="text-align: center;"><strong>%</strong></td>
+</tr>
+<tr>
+<td><code>thorns</code></td>
+<td style="text-align: center;">BUFF</td>
+<td style="text-align: center;">자신</td>
+<td>받은 피해의 일부를 공격자에게 반사</td>
+<td style="text-align: center;"><strong>%</strong></td>
+</tr>
+<tr>
+<td><code>endure</code></td>
+<td style="text-align: center;">BUFF</td>
+<td style="text-align: center;">자신</td>
+<td>치명 피해를 체력 1로 버팀</td>
+<td style="text-align: center;">절대값 (횟수)</td>
+</tr>
+<tr>
+<td><code>attack_down</code></td>
+<td style="text-align: center;">DEBUFF</td>
+<td style="text-align: center;">적</td>
+<td>주는 피해 감소</td>
+<td style="text-align: center;"><strong>%</strong></td>
+</tr>
+<tr>
+<td><code>defense_down</code></td>
+<td style="text-align: center;">DEBUFF</td>
+<td style="text-align: center;">적</td>
+<td>방어막 획득량 감소</td>
+<td style="text-align: center;"><strong>%</strong></td>
+</tr>
+<tr>
+<td><code>vulnerable</code></td>
+<td style="text-align: center;">DEBUFF</td>
+<td style="text-align: center;">적</td>
+<td>받는 피해 증가</td>
+<td style="text-align: center;"><strong>%</strong></td>
+</tr>
+<tr>
+<td><code>taunt</code></td>
+<td style="text-align: center;">DEBUFF</td>
+<td style="text-align: center;">적</td>
+<td>다음 행동을 반드시 캐릭터에게 사용</td>
+<td style="text-align: center;">—</td>
+</tr>
+<tr>
+<td><code>poison</code></td>
+<td style="text-align: center;">DEBUFF</td>
+<td style="text-align: center;">적</td>
+<td>액션 버튼마다 체력 감소</td>
+<td style="text-align: center;">절대값 (피해)</td>
 </tr>
 </tbody>
 </table>
-<h4 id="effectparams">EffectParams 공통 구조</h4>
-<div class="highlight"><pre><span></span><code>EffectParams {
-    targetType      : TargetType    // SINGLE_ENEMY | ALL_ENEMIES | SINGLE_ALLY | ALL_ALLIES
-    damage          : int?          // ATTACK 타입 사용
-    healAmount      : int?          // HEAL 타입 사용
-    buffId          : string?       // BUFF 타입 사용
-    debuffId        : string?       // DEBUFF 타입 사용
-    duration        : int?          // BUFF·DEBUFF 지속 턴 수 (액션 버튼 횟수 기준)
-    shieldAmount    : int?          // SHIELD 타입 사용 (A-1 확장 시)
-    drawCount       : int?          // DRAW 타입 사용 (A-1 확장 시)
-}
-</code></pre></div>
 <blockquote>
-<p><code>duration</code> 필드의 단위(액션 버튼 횟수 vs. 적 공격 횟수)는 미결 C-5와 연동되며, <code>docs/systems/enemy.md</code> 작성 시 함께 확정한다.</p>
+<p><a href="../enemy/">enemy.md §5-3·5-4</a>의 <code>attack_down</code>·<code>attack_up</code>은 원래 <strong>절대값</strong> 해석이었으나, 위 규칙에 맞춰 <strong>%로 통일</strong>했다. 적이 부여하든 카드가 부여하든 같은 <code>effectId</code>는 완전히 동일하게 동작한다.</p>
+</blockquote>
+<h4 id="a-9">중첩 규칙 (A-9 확정)</h4>
+<p>같은 <code>effectId</code>가 여러 번 부여될 때의 처리다.</p>
+<table>
+<thead>
+<tr>
+<th>항목</th>
+<th>규칙</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong><code>power</code></strong></td>
+<td><strong>합산한다.</strong> 단 effectId별 <strong>상한</strong>에서 멈춘다</td>
+</tr>
+<tr>
+<td><strong><code>duration</code></strong></td>
+<td><strong>더 긴 쪽으로 갱신</strong>한다 (<code>max</code>). 합산하지 않는다</td>
+</tr>
+<tr>
+<td>상한 도달 후</td>
+<td><code>power</code>는 더 오르지 않고 <code>duration</code>만 갱신된다</td>
+</tr>
+<tr>
+<td>서로 다른 effectId</td>
+<td>각각 독립적으로 유지된다 (예: <code>vulnerable</code>와 <code>defense_down</code> 동시 적용)</td>
+</tr>
+</tbody>
+</table>
+<p><strong>합산을 택한 이유</strong> — 사이퍼는 디버프 특화 캐릭터로 <code>해킹 패킷</code>(+15%)·<code>취약 지정</code>(+30%) 등 같은 계열 카드를 여러 장 가진다. 갱신 방식이면 낮은 카드가 높은 카드 뒤에 나오는 순간 <strong>완전히 무의미해져</strong> 덱 구성의 의미가 사라진다. 합산은 "겹칠수록 강해지는" 디버프 특화의 정체성을 지탱한다.</p>
+<p><strong>상한이 필요한 이유</strong> — 무제한 합산 시 지속 턴 안에 디버프를 계속 덧씌워 피해 배율이 발산한다. 상한은 그 폭주를 막는 안전장치다.</p>
+<table>
+<thead>
+<tr>
+<th>effectId</th>
+<th style="text-align: center;">상한</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>vulnerable</code></td>
+<td style="text-align: center;">+100% (받는 피해 최대 2배)</td>
+</tr>
+<tr>
+<td><code>attack_up</code></td>
+<td style="text-align: center;">+100%</td>
+</tr>
+<tr>
+<td><code>attack_down</code></td>
+<td style="text-align: center;">−60%</td>
+</tr>
+<tr>
+<td><code>defense_down</code></td>
+<td style="text-align: center;">−60%</td>
+</tr>
+<tr>
+<td><code>damage_reduce</code></td>
+<td style="text-align: center;">−50%</td>
+</tr>
+<tr>
+<td><code>shield_gain_up</code></td>
+<td style="text-align: center;">+100%</td>
+</tr>
+<tr>
+<td><code>thorns</code></td>
+<td style="text-align: center;">+50%</td>
+</tr>
+<tr>
+<td><code>endure</code></td>
+<td style="text-align: center;">3회</td>
+</tr>
+<tr>
+<td><code>poison</code></td>
+<td style="text-align: center;">상한 없음 (절대값 누적)</td>
+</tr>
+</tbody>
+</table>
+<h4 id="_5">피해 계산식</h4>
+<p>버프·디버프가 모두 반영된 최종 피해량이다. 각 항의 <code>%</code>는 <strong>중첩 합산 후 상한이 적용된 값</strong>이다.</p>
+<div class="highlight"><pre><span></span><code>최종 피해 = 기본 피해
+          × (1 + 공격자.attack_up% − 공격자.attack_down%)   ← 공격자 측 보정
+          × (1 + 대상.vulnerable%)                          ← 대상 피격 증폭
+          × (1 − 대상.damage_reduce%)                        ← 대상 경감
+
+→ 방어막이 있으면 방어막부터 차감, 초과분을 체력에 적용
+   (ignoreShield = true면 방어막을 건너뛰고 체력에 직접)
+</code></pre></div>
+<ul>
+<li>각 괄호는 <strong>곱연산</strong>, 괄호 안 동종 효과는 <strong>합연산</strong>이다.</li>
+<li>계산 결과가 음수면 0으로 클램프한다.</li>
+<li><code>defense_down</code>은 피해가 아니라 <strong>방어막 획득 시점</strong>에 적용된다: <code>실제 방어막 = 표기값 × (1 + shield_gain_up% − defense_down%)</code></li>
+</ul>
+<h4 id="utilityid">utilityId 목록</h4>
+<table>
+<thead>
+<tr>
+<th>utilityId</th>
+<th>설명</th>
+<th><code>power</code> 해석</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>draw</code></td>
+<td>대기덱에서 즉시 드로우</td>
+<td>드로우 장수</td>
+</tr>
+<tr>
+<td><code>slide_plus</code></td>
+<td>이번 턴 슬라이드 횟수 증가</td>
+<td>증가 횟수</td>
+</tr>
+<tr>
+<td><code>tile_lock</code></td>
+<td>보드 타일 1개를 이동 불가로 고정</td>
+<td>고정 턴 수</td>
+</tr>
+<tr>
+<td><code>tile_move</code></td>
+<td>타일 1개를 지정 빈 칸으로 이동</td>
+<td>—</td>
+</tr>
+<tr>
+<td><code>tile_merge</code></td>
+<td>타일 1개를 인접 타일과 즉시 병합</td>
+<td>—</td>
+</tr>
+<tr>
+<td><code>tile_purify</code></td>
+<td>방해 타일 제거</td>
+<td>제거 개수</td>
+</tr>
+<tr>
+<td><code>enemy_count_up</code></td>
+<td>적 행동 카운트 증가</td>
+<td>증가값</td>
+</tr>
+<tr>
+<td><code>cleanse</code></td>
+<td>자신의 디버프 제거</td>
+<td>제거 개수. 0 = 전부</td>
+</tr>
+<tr>
+<td><code>summon_drone</code></td>
+<td>드론 배치. 지속 턴 동안 매 턴 자동 공격</td>
+<td>공격력</td>
+</tr>
+<tr>
+<td><code>reveal_intent</code></td>
+<td>적의 다음 행동을 미리 표시</td>
+<td>—</td>
+</tr>
+</tbody>
+</table>
+<h4 id="persistentid">persistentId 목록</h4>
+<table>
+<thead>
+<tr>
+<th>persistentId</th>
+<th>설명</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>barricade</code></td>
+<td>방어막을 소모하는 효과(<code>damageSource: CURRENT_SHIELD</code>)가 방어막을 소모하지 않게 한다</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><code>duration</code>의 단위는 <strong>액션 버튼 횟수</strong> 기준이며, <a href="../enemy/">enemy.md 미결 C-5</a>와 규약을 공유한다.</p>
 </blockquote>
 <h3 id="2-3-cardgrade">2-3. 카드 등급 정의 (CardGrade)</h3>
 <p>카드 등급은 <code>triggerNumber</code>로 결정되며, 강화 후 <code>upgradedTriggerNumber</code>가 기존 등급 경계를 넘어서도 <strong>기준 등급은 변경되지 않는다</strong>. 등급은 카드 식별 및 UI 표시 목적으로만 사용한다.</p>
@@ -2103,7 +2417,7 @@
 5. discardDeck은 빈 배열로 초기화
 </code></pre></div>
 <hr />
-<h2 id="4_1">4. 드로우 규칙</h2>
+<h2 id="4">4. 드로우 규칙</h2>
 <h3 id="4-1-2">4-1. 드로우 트리거 2종</h3>
 <p>드로우는 다음 두 시점에만 발생한다.</p>
 <table>
@@ -2253,7 +2567,8 @@
 <p>전투 승리 시 카드 보상 선택 화면이 표시된다.</p>
 <div class="highlight"><pre><span></span><code>전투 승리 확정
     ↓
-보상 후보 카드 3장 무작위 선정 (보상 풀에서 추출)
+보상 후보 카드 3장 무작위 선정
+  (출전 캐릭터 전용 카드 풀에서만 추출 — §1-1)
     ↓
 보상 화면 표시: 카드 3장을 나란히 표시, 각 카드의 이름·발동 숫자·효과 표시
     ↓
@@ -2264,7 +2579,8 @@
     ↓
 보상 화면 종료 → 거점 귀환
 </code></pre></div>
-<p>보상 후보 카드 3장은 현재 덱에 포함된 카드와 중복될 수 있다. 보상 화면에서 카드를 선택하지 않고 건너뛰는 옵션은 별도로 결정 필요 (현재 미정의).</p>
+<p>보상 후보 카드 3장은 현재 덱에 포함된 카드와 중복될 수 있다. <strong>단, 후보는 출전 캐릭터가 소유한 카드(<code>ownerCharacterId</code> 일치)로만 구성된다.</strong> 다른 캐릭터의 카드는 어떤 경로로도 보상에 등장하지 않는다. (§1-1 캐릭터 전용 원칙)</p>
+<p>보상 화면에서 카드를 선택하지 않고 건너뛰는 옵션은 별도로 결정 필요 (현재 미정의).</p>
 <h3 id="7-2">7-2. 챕터 클리어 시 덱 초기화</h3>
 <p>챕터 클리어 확정 시점에 아래 순서로 초기화한다.</p>
 <div class="highlight"><pre><span></span><code>1. DeckState 전체(waitDeck, hand, discardDeck) 소멸
@@ -2354,10 +2670,22 @@
 </thead>
 <tbody>
 <tr>
-<td><strong>A-1</strong></td>
-<td>카드 효과 타입 목록 (4종 고정 vs. 확장)</td>
-<td>Card 구조체, EffectParams 설계 전반</td>
-<td style="text-align: center;">2단계 착수 전</td>
+<td>~~A-1~~</td>
+<td>~~카드 효과 타입 목록~~</td>
+<td><strong>확정: 7종</strong> (ATTACK·SHIELD·HEAL·BUFF·DEBUFF·UTILITY·PERSISTENT) (§2-2)</td>
+<td style="text-align: center;">—</td>
+</tr>
+<tr>
+<td>~~A-8~~</td>
+<td>~~<code>power</code> 해석 (% vs. 절대값)~~</td>
+<td><strong>확정: 배율성 효과는 전부 %</strong>, 독·횟수 등 수치형만 절대값. enemy.md도 통일 (§2-2)</td>
+<td style="text-align: center;">—</td>
+</tr>
+<tr>
+<td>~~A-9~~</td>
+<td>~~버프·디버프 중첩 규칙~~</td>
+<td><strong>확정: <code>power</code> 합산 + effectId별 상한, <code>duration</code>은 max 갱신</strong> (§2-2)</td>
+<td style="text-align: center;">—</td>
 </tr>
 <tr>
 <td>~~A-6~~</td>

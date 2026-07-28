@@ -15,6 +15,22 @@
 
 캐릭터마다 **사용하는 카드 코스트 범위가 고정**되어 있으며(§2-4), 턴에 주어지는 슬라이드 횟수는 **출전 캐릭터의 고유 스탯**이다. ([board.md §5-1](board.md) 참조)
 
+### 1-1. 캐릭터 전용 원칙
+
+**모든 스킬 카드는 특정 캐릭터 1인의 전용 카드다. 공통 카드·공용 카드 풀은 존재하지 않는다.**
+
+| 항목 | 규칙 |
+|------|------|
+| 소유 | 모든 카드는 `ownerCharacterId`로 소유 캐릭터가 확정된다. 소유자 없는 카드는 없다 |
+| 덱 구성 | 전투 덱은 **출전 캐릭터 소유 카드로만** 구성된다. 미출전 캐릭터의 카드는 포함되지 않는다 |
+| 보상·상점 | 카드 획득 경로(전투 보상·상점·이벤트) 전부 **출전 캐릭터 소유 카드만** 후보로 제시한다 (§6) |
+| 카드 이름 | 캐릭터 간 **중복되지 않는다.** 같은 역할의 카드라도 캐릭터마다 고유 이름·연출을 가진다 |
+| 강화 | 강화된 카드도 소유 캐릭터가 바뀌지 않는다 |
+
+> 이 원칙에 따라 **캐릭터 선택이 곧 카드 풀 선택**이 된다. 코스트 밴드(§2-4)·슬라이드 스탯과 함께, 캐릭터가 전투 경험 전체를 규정하는 축이다.
+>
+> 캐릭터별 실제 카드 목록은 [contents/skills.md](../contents/skills.md)에서 관리한다.
+
 ### 카드 시스템의 흐름 요약
 
 ```
@@ -70,45 +86,150 @@ effectiveTriggerNumber = (upgradeLevel >= 1 && upgradedTriggerNumber != null)
 
 ### 2-2. 효과 타입 열거형 (CardEffectType)
 
-> **[미결 A-1]** 카드 효과 타입의 범위가 확정되지 않았습니다.  
-> - **(a)** 공격·회복·버프·디버프 4종으로 고정  
-> - **(b)** 실드(Shield)·드로우(Draw)·상태이상(StatusEffect) 등 추가 타입 포함한 확장 목록  
->
-> 아래 표는 **(a) 기준 4종을 기본으로** 작성하되, 확장 타입 후보를 함께 나열합니다. 확정 시 `EffectParams` 구조체도 함께 갱신해야 합니다.
+**7종으로 확정한다.** [contents/skills.md](../contents/skills.md)의 100장이 실제로 요구하는 범위를 기준으로 산정했으며, 버프·디버프의 식별자 규약은 [enemy.md §5-3·5-4](enemy.md)와 통일한다.
 
-#### 기본 4종 (확정)
+| `CardEffectType` | 설명 | 주요 `EffectParams` 필드 | 사용 예 |
+|------------------|------|--------------------------|---------|
+| `ATTACK` | 적에게 피해를 입힌다 | `damage`, `targetType`, `hitCount`, `ignoreShield`, `damageSource` | 방패 치기, 관통탄 |
+| `SHIELD` | 피해를 흡수하는 방어막을 부여한다 | `shieldAmount` | 베스천 전개, 철벽 요새 |
+| `HEAL` | 체력을 회복한다 | `healAmount`, `duration` | 나노 치유, 재생 촉진 |
+| `BUFF` | 자신에게 유리한 상태를 부여한다 | `effectId`, `power`, `duration` | 조준 보정, 강철 의지 |
+| `DEBUFF` | 적에게 불리한 상태를 부여한다 | `effectId`, `power`, `duration`, `targetType` | 취약 지정, 억제 필드 |
+| `UTILITY` | 보드·덱·적 카운트를 조작한다 | `utilityId`, `power` | 슬라이더, 장벽 생성, 예측 조작 |
+| `PERSISTENT` | 전투가 끝날 때까지 **규칙 자체를 변경**한다 | `persistentId` | 바리케이드 |
 
-| `CardEffectType` 값 | 설명 | 주요 `EffectParams` 필드 |
-|---------------------|------|--------------------------|
-| `ATTACK` | 적 단일 또는 전체에 피해를 입힌다 | `damage: int`, `targetType: TargetType` |
-| `HEAL` | 아군 단일 또는 전체의 HP를 회복한다 | `healAmount: int`, `targetType: TargetType` |
-| `BUFF` | 아군에게 유리한 상태 효과를 부여한다 | `buffId: string`, `duration: int`, `targetType: TargetType` |
-| `DEBUFF` | 적에게 불리한 상태 효과를 부여한다 | `debuffId: string`, `duration: int`, `targetType: TargetType` |
+**설계 판단**
 
-#### 확장 타입 후보 (A-1 미결 — 채택 여부 확정 필요)
-
-| `CardEffectType` 후보값 | 설명 | 비고 |
-|-------------------------|------|------|
-| `SHIELD` | 아군에게 피해를 일정량 흡수하는 방어막을 부여 | 방어막 수치 소진 시 자동 제거 |
-| `DRAW` | 대기덱에서 지정 장수를 즉시 핸드에 추가로 드로우 | 핸드 초과 장수 처리 규칙 별도 결정 필요 |
-| `STATUS_EFFECT` | 독·마비 등 지속 피해 또는 행동 제한 상태이상 부여 | `DEBUFF`와 별도 분리 여부 결정 필요 |
+- `STATUS_EFFECT`는 **별도 타입으로 두지 않는다.** 독·마비 등은 `DEBUFF`의 `effectId`로 표현하면 충분하며, 타입을 나누면 중첩·해제 규칙이 이원화된다.
+- `DRAW`도 **별도 타입이 아니라** `UTILITY`의 `utilityId: "draw"`로 흡수한다. 드로우는 보드·덱 조작 계열과 처리 흐름이 같다.
+- `PERSISTENT`는 **1회 발동 후 전투 내내 유지**되는 유일한 타입이다. 다른 타입은 모두 발동 즉시 해소된다.
 
 #### EffectParams 공통 구조
 
 ```
 EffectParams {
-    targetType      : TargetType    // SINGLE_ENEMY | ALL_ENEMIES | SINGLE_ALLY | ALL_ALLIES
-    damage          : int?          // ATTACK 타입 사용
-    healAmount      : int?          // HEAL 타입 사용
-    buffId          : string?       // BUFF 타입 사용
-    debuffId        : string?       // DEBUFF 타입 사용
-    duration        : int?          // BUFF·DEBUFF 지속 턴 수 (액션 버튼 횟수 기준)
-    shieldAmount    : int?          // SHIELD 타입 사용 (A-1 확장 시)
-    drawCount       : int?          // DRAW 타입 사용 (A-1 확장 시)
+    targetType    : TargetType    // SELF | SINGLE_ENEMY | ALL_ENEMIES
+
+    // ATTACK
+    damage        : int?          // 1회 타격당 피해량
+    hitCount      : int?          // 타격 횟수. 생략 시 1 (다단 공격용)
+    ignoreShield  : bool?         // true면 방어막을 무시하고 체력에 직접 적용
+    damageSource  : DamageSource? // 피해량 산출 기준. 생략 시 damage 고정값 사용
+    bonusCondition: string?       // 조건부 배율. 예: "target_hp_below_30" → 피해 2배
+
+    // SHIELD / HEAL
+    shieldAmount  : int?
+    healAmount    : int?          // duration 지정 시 "매 턴 healAmount 회복"
+
+    // BUFF / DEBUFF
+    effectId      : string?       // enemy.md와 공유하는 식별자 (아래 표)
+    power         : int?          // 효과 강도. % 또는 절대값 (effectId별 해석)
+    duration      : int?          // 지속 턴 수 (액션 버튼 횟수 기준). 0 = 영구
+
+    // UTILITY / PERSISTENT
+    utilityId     : string?
+    persistentId  : string?
+}
+
+enum DamageSource {
+    FIXED,           // damage 필드 값 그대로 (기본)
+    CURRENT_SHIELD   // 현재 방어막 수치만큼 (몸통 박치기)
 }
 ```
 
-> `duration` 필드의 단위(액션 버튼 횟수 vs. 적 공격 횟수)는 미결 C-5와 연동되며, `docs/systems/enemy.md` 작성 시 함께 확정한다.
+> `targetType`에 아군 대상값이 없는 것은 **1인 전투**이기 때문이다. 회복·버프는 항상 출전 캐릭터 자신(`SELF`)에게 적용되므로 대상 선택이 불필요하다. ([character.md §피해 대상](character.md))
+
+#### effectId 목록 (BUFF · DEBUFF)
+
+`enemy.md`가 적 측에서 사용하는 식별자와 **동일한 이름 공간**을 쓴다. 같은 `effectId`는 주체가 누구든 같은 규칙으로 동작한다.
+
+**`power` 해석 규칙 (A-8 확정)** — 식별자 성격에 따라 두 가지로 나뉘며, **혼용하지 않는다.**
+
+- **비율형(%)** — 피해·획득량처럼 *다른 수치에 곱해지는* 효과. 발동 숫자가 0~2048로 3자릿수 이상 벌어져 있어(피해 2 ~ 1650), 절대값 증감은 저코스트에서 과하고 고코스트에서 무의미해진다. 따라서 **모든 배율성 효과는 %로 통일한다.**
+- **수치형(절대값)** — 독 피해량, 발동 횟수처럼 *그 자체가 최종 수치*인 효과.
+
+| effectId | 분류 | 대상 | 설명 | `power` |
+|----------|:----:|:----:|------|:-------:|
+| `attack_up` | BUFF | 자신 | 주는 피해 증가 | **%** |
+| `damage_reduce` | BUFF | 자신 | 받는 피해 감소 | **%** |
+| `shield_gain_up` | BUFF | 자신 | 방어막 획득량 증가 | **%** |
+| `thorns` | BUFF | 자신 | 받은 피해의 일부를 공격자에게 반사 | **%** |
+| `endure` | BUFF | 자신 | 치명 피해를 체력 1로 버팀 | 절대값 (횟수) |
+| `attack_down` | DEBUFF | 적 | 주는 피해 감소 | **%** |
+| `defense_down` | DEBUFF | 적 | 방어막 획득량 감소 | **%** |
+| `vulnerable` | DEBUFF | 적 | 받는 피해 증가 | **%** |
+| `taunt` | DEBUFF | 적 | 다음 행동을 반드시 캐릭터에게 사용 | — |
+| `poison` | DEBUFF | 적 | 액션 버튼마다 체력 감소 | 절대값 (피해) |
+
+> [enemy.md §5-3·5-4](enemy.md)의 `attack_down`·`attack_up`은 원래 **절대값** 해석이었으나, 위 규칙에 맞춰 **%로 통일**했다. 적이 부여하든 카드가 부여하든 같은 `effectId`는 완전히 동일하게 동작한다.
+
+#### 중첩 규칙 (A-9 확정)
+
+같은 `effectId`가 여러 번 부여될 때의 처리다.
+
+| 항목 | 규칙 |
+|------|------|
+| **`power`** | **합산한다.** 단 effectId별 **상한**에서 멈춘다 |
+| **`duration`** | **더 긴 쪽으로 갱신**한다 (`max`). 합산하지 않는다 |
+| 상한 도달 후 | `power`는 더 오르지 않고 `duration`만 갱신된다 |
+| 서로 다른 effectId | 각각 독립적으로 유지된다 (예: `vulnerable`와 `defense_down` 동시 적용) |
+
+**합산을 택한 이유** — 사이퍼는 디버프 특화 캐릭터로 `해킹 패킷`(+15%)·`취약 지정`(+30%) 등 같은 계열 카드를 여러 장 가진다. 갱신 방식이면 낮은 카드가 높은 카드 뒤에 나오는 순간 **완전히 무의미해져** 덱 구성의 의미가 사라진다. 합산은 "겹칠수록 강해지는" 디버프 특화의 정체성을 지탱한다.
+
+**상한이 필요한 이유** — 무제한 합산 시 지속 턴 안에 디버프를 계속 덧씌워 피해 배율이 발산한다. 상한은 그 폭주를 막는 안전장치다.
+
+| effectId | 상한 |
+|----------|:----:|
+| `vulnerable` | +100% (받는 피해 최대 2배) |
+| `attack_up` | +100% |
+| `attack_down` | −60% |
+| `defense_down` | −60% |
+| `damage_reduce` | −50% |
+| `shield_gain_up` | +100% |
+| `thorns` | +50% |
+| `endure` | 3회 |
+| `poison` | 상한 없음 (절대값 누적) |
+
+#### 피해 계산식
+
+버프·디버프가 모두 반영된 최종 피해량이다. 각 항의 `%`는 **중첩 합산 후 상한이 적용된 값**이다.
+
+```
+최종 피해 = 기본 피해
+          × (1 + 공격자.attack_up% − 공격자.attack_down%)   ← 공격자 측 보정
+          × (1 + 대상.vulnerable%)                          ← 대상 피격 증폭
+          × (1 − 대상.damage_reduce%)                        ← 대상 경감
+
+→ 방어막이 있으면 방어막부터 차감, 초과분을 체력에 적용
+   (ignoreShield = true면 방어막을 건너뛰고 체력에 직접)
+```
+
+- 각 괄호는 **곱연산**, 괄호 안 동종 효과는 **합연산**이다.
+- 계산 결과가 음수면 0으로 클램프한다.
+- `defense_down`은 피해가 아니라 **방어막 획득 시점**에 적용된다: `실제 방어막 = 표기값 × (1 + shield_gain_up% − defense_down%)`
+
+#### utilityId 목록
+
+| utilityId | 설명 | `power` 해석 |
+|-----------|------|-------------|
+| `draw` | 대기덱에서 즉시 드로우 | 드로우 장수 |
+| `slide_plus` | 이번 턴 슬라이드 횟수 증가 | 증가 횟수 |
+| `tile_lock` | 보드 타일 1개를 이동 불가로 고정 | 고정 턴 수 |
+| `tile_move` | 타일 1개를 지정 빈 칸으로 이동 | — |
+| `tile_merge` | 타일 1개를 인접 타일과 즉시 병합 | — |
+| `tile_purify` | 방해 타일 제거 | 제거 개수 |
+| `enemy_count_up` | 적 행동 카운트 증가 | 증가값 |
+| `cleanse` | 자신의 디버프 제거 | 제거 개수. 0 = 전부 |
+| `summon_drone` | 드론 배치. 지속 턴 동안 매 턴 자동 공격 | 공격력 |
+| `reveal_intent` | 적의 다음 행동을 미리 표시 | — |
+
+#### persistentId 목록
+
+| persistentId | 설명 |
+|--------------|------|
+| `barricade` | 방어막을 소모하는 효과(`damageSource: CURRENT_SHIELD`)가 방어막을 소모하지 않게 한다 |
+
+> `duration`의 단위는 **액션 버튼 횟수** 기준이며, [enemy.md 미결 C-5](enemy.md)와 규약을 공유한다.
 
 ### 2-3. 카드 등급 정의 (CardGrade)
 
@@ -370,7 +491,8 @@ for each uniqueTriggerNumber in hand:
 ```
 전투 승리 확정
     ↓
-보상 후보 카드 3장 무작위 선정 (보상 풀에서 추출)
+보상 후보 카드 3장 무작위 선정
+  (출전 캐릭터 전용 카드 풀에서만 추출 — §1-1)
     ↓
 보상 화면 표시: 카드 3장을 나란히 표시, 각 카드의 이름·발동 숫자·효과 표시
     ↓
@@ -382,7 +504,9 @@ for each uniqueTriggerNumber in hand:
 보상 화면 종료 → 거점 귀환
 ```
 
-보상 후보 카드 3장은 현재 덱에 포함된 카드와 중복될 수 있다. 보상 화면에서 카드를 선택하지 않고 건너뛰는 옵션은 별도로 결정 필요 (현재 미정의).
+보상 후보 카드 3장은 현재 덱에 포함된 카드와 중복될 수 있다. **단, 후보는 출전 캐릭터가 소유한 카드(`ownerCharacterId` 일치)로만 구성된다.** 다른 캐릭터의 카드는 어떤 경로로도 보상에 등장하지 않는다. (§1-1 캐릭터 전용 원칙)
+
+보상 화면에서 카드를 선택하지 않고 건너뛰는 옵션은 별도로 결정 필요 (현재 미정의).
 
 ### 7-2. 챕터 클리어 시 덱 초기화
 
@@ -425,7 +549,9 @@ for each uniqueTriggerNumber in hand:
 
 | 번호 | 항목 | 영향 범위 | 결정 필요 시점 |
 |------|------|-----------|:-----------:|
-| **A-1** | 카드 효과 타입 목록 (4종 고정 vs. 확장) | Card 구조체, EffectParams 설계 전반 | 2단계 착수 전 |
+| ~~A-1~~ | ~~카드 효과 타입 목록~~ | **확정: 7종** (ATTACK·SHIELD·HEAL·BUFF·DEBUFF·UTILITY·PERSISTENT) (§2-2) | — |
+| ~~A-8~~ | ~~`power` 해석 (% vs. 절대값)~~ | **확정: 배율성 효과는 전부 %**, 독·횟수 등 수치형만 절대값. enemy.md도 통일 (§2-2) | — |
+| ~~A-9~~ | ~~버프·디버프 중첩 규칙~~ | **확정: `power` 합산 + effectId별 상한, `duration`은 max 갱신** (§2-2) | — |
 | ~~A-6~~ | ~~강화로 `0`까지 내려갈 수 있는지~~ | **확정: 가능.** 강화로 무코스트화 허용 (§2-1) | — |
 | ~~A-7~~ | ~~등급 구간 재산정~~ | **확정: 2048까지 확장 가능한 체계** (§2-3) | — |
 | **A-2** | 전투 시작 드로우 시 대기덱 5장 미만 처리 | `drawCards` 초기화 분기 | 2단계 착수 전 |
