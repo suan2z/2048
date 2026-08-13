@@ -8,6 +8,25 @@
 
 ---
 
+## ⚙️ 시트 작업 필요 목록 (TODO)
+
+> **실제 Google Sheets가 정본(source of truth)이다.** 아래는 현재 시트 상태와 2048·1인 전투 기획([systems/](systems/overview.md) · [skills.md](contents/skills.md)) 사이의 **시트 미반영 항목**으로, Google Sheets에서 직접 작업해야 게임에 반영된다. 문서(이 파일·[schema.md](schema.md))는 시트를 뒤따라 갱신한다.
+>
+> _최종 대조: 2026-08-13, 시트 실측(gviz CSV) 기준._
+
+| 우선 | 대상 시트 | 작업 내용 | 현재 시트 값 | 목표(기획) |
+|:--:|----------|----------|------------|-----------|
+| **P1** | `CardTBL` | **카드 코스트를 2048 발동 숫자로 전환** → **`Mana` 컬럼 재정의로 확정**(새 컬럼 불필요). `Mana`의 의미만 "발동 숫자(타일 숫자)"로 바꾸고 값 재입력, 강화 후 값은 기존 `UpgradeMana` 사용. `999` 등 이상치 정리. `TileRank` 컬럼은 시트에 없으며 신설 불필요(숫자 자체를 저장) | `Mana` 4·8·16·32·999 (마나 기반) | 발동 숫자 `0·2~2048`, 강화로 0까지 |
+| **P1** | `ChampionTBL` | **로스터 확정.** 현재 시트는 모험가·마녀 2종(성별 변형 4행). 기획 로스터(주베/사이퍼/펄스/케스트럴/베인) 채택 시 챔피언 행 신규 작성 + `SlideMax` 입력 | 모험가·마녀 4행 | 5인, `SlideMax` 30/60/120/260/520 |
+| **P2** | `CardTBL` | **캐릭터별 카드 대량 작성.** skills.md 100장(캐릭터당 공/방 20장) 미입력. P1 로스터 확정 후 진행 | 모험가15·마녀16·적39·저주5·아이템14·중립10 (99행) | 100장(전용 스킬) + 코스트 밴드 정합 |
+| **P2** | `CardTBL` | **캐릭터별 고정 코스트 밴드 반영.** 주베 0~64 … 베인 4~1024 | 밴드 개념 없음 | 캐릭터마다 사용 코스트 대역 고정 |
+| **P3** | `CardStatusTBL` `CardAbilityTBL` | **상태이상 수치 규약 확인.** A-8(배율=%, 수치=절대값)·A-9(합산+상한). `EffectValue` 해석/상한이 런타임 규칙이면 시트 변경 최소일 수 있음 — 검토 필요 | `EffectValue`만 존재, % 해석·상한 컬럼 없음 | [card.md §2-2](systems/card.md) 규약 |
+| **P3** | `ChampionTBL` | **보상 카드 수 정합.** 기획은 "3장 중 택1"인데 시트는 후보 2개 컬럼 | `RewardCard1`·`RewardCard2` (2개) | 3-of-1 (후보 3개 필요) |
+
+> ✅ **`SlideMax`(ChampionTBL)는 이미 시트에 반영됨** — 캐릭터 고유 최대 슬라이드 횟수로, 기획의 "슬라이드 스탯"과 동일 개념. 문서 쪽만 갱신하면 된다(아래 [ChampionTBL](#championtbl) 반영 완료).
+
+---
+
 ## 테이블 그룹
 
 각 그룹은 독립된 Google Sheets 파일로 관리된다. 그룹 ZIP에는 해당 그룹의 모든 JSON 파일이 포함된다.
@@ -36,7 +55,7 @@
 | `CardTeamTBL` | 카드와 챔피언이 속하는 진영(팀) 정의. 팀별 시너지 발동 및 덱 구성 제약의 기준 단위. | <button class="md-button md-button--sm" onclick="downloadSingleJSON('CardTeamTBL', this)">⬇ JSON</button> |
 | `CardRarityTBL` | 카드 희귀도 등급 정의. 상점 진열 확률(`Probability`)과 보상 카드 필터링에 사용된다. | <button class="md-button md-button--sm" onclick="downloadSingleJSON('CardRarityTBL', this)">⬇ JSON</button> |
 | `CardIntentTBL` | 적이 카드를 사용할 때 플레이어에게 보여주는 행동 예고(의도) 아이콘 정의. 우선순위와 표시 여부를 제어한다. | <button class="md-button md-button--sm" onclick="downloadSingleJSON('CardIntentTBL', this)">⬇ JSON</button> |
-| `CardTBL` | 플레이어·적이 사용하는 카드 전체 정의. 2048 전용 필드 `tileRank`·`upgradedTileRank`로 발동에 필요한 타일 등급을 지정한다. | <button class="md-button md-button--sm" onclick="downloadSingleJSON('CardTBL', this)">⬇ JSON</button> |
+| `CardTBL` | 플레이어·적이 사용하는 카드 전체 정의. 카드 발동 숫자는 `Mana` 컬럼에 타일 숫자(0·2~2048)로 저장하며, 강화 후 값은 `UpgradeMana`를 쓴다([상단 TODO P1](#️-시트-작업-필요-목록-todo) 참조). | <button class="md-button md-button--sm" onclick="downloadSingleJSON('CardTBL', this)">⬇ JSON</button> |
 | `BehaviorTBL` | 적 AI 행동 패턴 정의. C# 클래스명(`ClassName`)으로 런타임 행동 로직을 연결하며, 소환 카드·궁극기·페이즈 특성을 지정한다. | <button class="md-button md-button--sm" onclick="downloadSingleJSON('BehaviorTBL', this)">⬇ JSON</button> |
 | `ConditionTBL` | 카드·어빌리티·이벤트에서 사용되는 조건(Condition) 및 필터(Filter) 정의. C# 조건 클래스(`ScriptType`)와 연산자·비교값·대상 필터를 조합해 런타임 판별 로직을 구성한다. | <button class="md-button md-button--sm" onclick="downloadSingleJSON('ConditionTBL', this)">⬇ JSON</button> |
 | `ChampionTBL` | 플레이어가 파티에 편성하는 챔피언 정의. HP·Speed·Hand·Energy 4종 스탯과 레벨업 증분값, 시작 덱을 포함한다. | <button class="md-button md-button--sm" onclick="downloadSingleJSON('ChampionTBL', this)">⬇ JSON</button> |
@@ -83,11 +102,11 @@ Google Sheets 내 **23개 시트(테이블)**를 5개 그룹으로 분류한다.
 
 ---
 
-## TileRank 값 대응표
+## 발동 숫자 참고표
 
-카드 발동에 요구되는 2048 보드 타일 숫자. `CardTBL.tileRank` 및 `CardTBL.upgradedTileRank`에 사용한다.
+카드 발동에 요구되는 2048 보드 타일 숫자. **별도 `TileRank` 컬럼은 두지 않고 `CardTBL.Mana`에 타일 숫자를 직접 저장**한다([상단 TODO P1](#️-시트-작업-필요-목록-todo)). 아래 등급 문자는 밸런싱 논의용 참고 라벨일 뿐 시트 컬럼이 아니다.
 
-| TileRank | 타일 숫자 | 비고 |
+| 참고 등급 | 타일 숫자 | 비고 |
 |:--------:|:---------:|------|
 | `A` | **2** | 초기 생성 타일. 모든 보드에서 기본 등장 |
 | `B` | **4** | 기본 카드 발동 등급 |
@@ -95,6 +114,7 @@ Google Sheets 내 **23개 시트(테이블)**를 5개 그룹으로 분류한다.
 | `D` | **16** | 강화 카드 등급 |
 | `E` | **32** | 강력 카드 등급 |
 | `F` | **64** | 필살 카드 등급. 보드 최적화 필요 |
+| … | **~2048** | 캐릭터 코스트 밴드에 따라 상위 숫자까지 확장 |
 
 ---
 
@@ -416,6 +436,7 @@ Google Sheets 내 **23개 시트(테이블)**를 5개 그룹으로 분류한다.
 | `ArtFull` | `string` | 챔피언 풀샷 이미지 에셋 키 |
 | `ArtPortrait` | `string` | 챔피언 초상화 이미지 에셋 키 |
 | `Prefab` | `string` | 챔피언 프리팹 에셋 키 |
+| `SlideMax` | `number` | 캐릭터 고유 최대 슬라이드 횟수. 2048 보드에서 턴당 슬라이드 상한이며, 유물로 확장 가능. 기획의 "슬라이드 스탯"에 대응 |
 | `HP` | `number` | 초기 최대 체력 |
 | `Speed` | `number` | 초기 행동 속도. 낮을수록 먼저 행동 |
 | `Hand` | `number` | 초기 손패 최대 장수 |
@@ -438,11 +459,14 @@ Google Sheets 내 **23개 시트(테이블)**를 5개 그룹으로 분류한다.
 
 **예시**
 
-| Name | ID | titleStringId | hp | speed | hand | energy | LvUpHP | LvUpSpeed | LvUpHand | LvUpEnergy | team | StartDeck |
-|------|----|:-------------:|:--:|:-----:|:----:|:------:|:------:|:---------:|:--------:|:----------:|------|-----------|
-| kestrel | 1001 | 260001 | 80 | 3 | 5 | 3 | 8 | 0 | 0 | 1 | vanguard | deck_kestrel_start |
-| cipher | 1002 | 260002 | 60 | 2 | 6 | 4 | 5 | 0 | 1 | 0 | cipher | deck_cipher_start |
-| wanderer | 1003 | 260003 | 70 | 3 | 5 | 3 | 6 | 1 | 0 | 0 | wanderer | deck_wanderer_start |
+> 아래 예시는 2026-08-13 시트 실측값이다. 현재 시트 로스터는 모험가·마녀(성별 변형 포함 4행)이며, `SlideMax`가 이미 입력되어 있다.
+
+| ID | titleStringId | SlideMax | HP | Speed | Hand | Energy | LvUpHP | Team | StartDeck |
+|----|:-------------:|:--------:|:--:|:-----:|:----:|:------:|:------:|------|-----------|
+| adventurer_female | 260000 | 20 | 30 | 7 | 4 | 3 | 10 | adventurer | adventurer_female |
+| adventurer_male | 260001 | 20 | 30 | 7 | 4 | 3 | 10 | adventurer | adventurer_male |
+| witch_female | 260002 | 30 | 24 | 6 | 5 | 3 | 8 | witch | witch_female |
+| witch_male | 260003 | 30 | 24 | 6 | 5 | 3 | 8 | witch | witch_male |
 
 ---
 

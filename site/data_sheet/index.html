@@ -1195,6 +1195,17 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#todo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ⚙️ 시트 작업 필요 목록 (TODO)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#_2" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1239,10 +1250,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#tilerank" class="md-nav__link">
+  <a href="#_5" class="md-nav__link">
     <span class="md-ellipsis">
       
-        TileRank 값 대응표
+        발동 숫자 참고표
       
     </span>
   </a>
@@ -1758,6 +1769,70 @@
 <p><button id="btn-build-data" class="md-button" onclick="buildAndDownloadData()">📦 JSON 전체 다운로드</button></p>
 <p>시트별 JSON 파일(<code>{시트명}.json</code>)과 컬럼 정의 모음인 <code>schema.json</code>을 포함해 총 26개 파일을 <code>gamedata.zip</code>으로 제공한다. 각 파일은 단순 배열(<code>[]</code>) 형태이며, 배열 컬럼(Slots·Enemies 등)은 시트의 분할 슬롯들을 자동 집계한다.</p>
 <hr />
+<h2 id="todo">⚙️ 시트 작업 필요 목록 (TODO)</h2>
+<blockquote>
+<p><strong>실제 Google Sheets가 정본(source of truth)이다.</strong> 아래는 현재 시트 상태와 2048·1인 전투 기획(<a href="../systems/overview/">systems/</a> · <a href="../contents/skills/">skills.md</a>) 사이의 <strong>시트 미반영 항목</strong>으로, Google Sheets에서 직접 작업해야 게임에 반영된다. 문서(이 파일·<a href="../schema/">schema.md</a>)는 시트를 뒤따라 갱신한다.</p>
+<p><em>최종 대조: 2026-08-13, 시트 실측(gviz CSV) 기준.</em></p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;">우선</th>
+<th>대상 시트</th>
+<th>작업 내용</th>
+<th>현재 시트 값</th>
+<th>목표(기획)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;"><strong>P1</strong></td>
+<td><code>CardTBL</code></td>
+<td><strong>카드 코스트를 2048 발동 숫자로 전환</strong> → <strong><code>Mana</code> 컬럼 재정의로 확정</strong>(새 컬럼 불필요). <code>Mana</code>의 의미만 "발동 숫자(타일 숫자)"로 바꾸고 값 재입력, 강화 후 값은 기존 <code>UpgradeMana</code> 사용. <code>999</code> 등 이상치 정리. <code>TileRank</code> 컬럼은 시트에 없으며 신설 불필요(숫자 자체를 저장)</td>
+<td><code>Mana</code> 4·8·16·32·999 (마나 기반)</td>
+<td>발동 숫자 <code>0·2~2048</code>, 강화로 0까지</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>P1</strong></td>
+<td><code>ChampionTBL</code></td>
+<td><strong>로스터 확정.</strong> 현재 시트는 모험가·마녀 2종(성별 변형 4행). 기획 로스터(주베/사이퍼/펄스/케스트럴/베인) 채택 시 챔피언 행 신규 작성 + <code>SlideMax</code> 입력</td>
+<td>모험가·마녀 4행</td>
+<td>5인, <code>SlideMax</code> 30/60/120/260/520</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>P2</strong></td>
+<td><code>CardTBL</code></td>
+<td><strong>캐릭터별 카드 대량 작성.</strong> skills.md 100장(캐릭터당 공/방 20장) 미입력. P1 로스터 확정 후 진행</td>
+<td>모험가15·마녀16·적39·저주5·아이템14·중립10 (99행)</td>
+<td>100장(전용 스킬) + 코스트 밴드 정합</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>P2</strong></td>
+<td><code>CardTBL</code></td>
+<td><strong>캐릭터별 고정 코스트 밴드 반영.</strong> 주베 0~64 … 베인 4~1024</td>
+<td>밴드 개념 없음</td>
+<td>캐릭터마다 사용 코스트 대역 고정</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>P3</strong></td>
+<td><code>CardStatusTBL</code> <code>CardAbilityTBL</code></td>
+<td><strong>상태이상 수치 규약 확인.</strong> A-8(배율=%, 수치=절대값)·A-9(합산+상한). <code>EffectValue</code> 해석/상한이 런타임 규칙이면 시트 변경 최소일 수 있음 — 검토 필요</td>
+<td><code>EffectValue</code>만 존재, % 해석·상한 컬럼 없음</td>
+<td><a href="../systems/card/">card.md §2-2</a> 규약</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>P3</strong></td>
+<td><code>ChampionTBL</code></td>
+<td><strong>보상 카드 수 정합.</strong> 기획은 "3장 중 택1"인데 시트는 후보 2개 컬럼</td>
+<td><code>RewardCard1</code>·<code>RewardCard2</code> (2개)</td>
+<td>3-of-1 (후보 3개 필요)</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>✅ <strong><code>SlideMax</code>(ChampionTBL)는 이미 시트에 반영됨</strong> — 캐릭터 고유 최대 슬라이드 횟수로, 기획의 "슬라이드 스탯"과 동일 개념. 문서 쪽만 갱신하면 된다(아래 <a href="#championtbl">ChampionTBL</a> 반영 완료).</p>
+</blockquote>
+<hr />
 <h2 id="_2">테이블 그룹</h2>
 <p>각 그룹은 독립된 Google Sheets 파일로 관리된다. 그룹 ZIP에는 해당 그룹의 모든 JSON 파일이 포함된다.</p>
 <table>
@@ -1862,7 +1937,7 @@
 </tr>
 <tr>
 <td><code>CardTBL</code></td>
-<td>플레이어·적이 사용하는 카드 전체 정의. 2048 전용 필드 <code>tileRank</code>·<code>upgradedTileRank</code>로 발동에 필요한 타일 등급을 지정한다.</td>
+<td>플레이어·적이 사용하는 카드 전체 정의. 카드 발동 숫자는 <code>Mana</code> 컬럼에 타일 숫자(0·2~2048)로 저장하며, 강화 후 값은 <code>UpgradeMana</code>를 쓴다(<a href="#️-시트-작업-필요-목록-todo">상단 TODO P1</a> 참조).</td>
 <td style="text-align: center;"><button class="md-button md-button--sm" onclick="downloadSingleJSON('CardTBL', this)">⬇ JSON</button></td>
 </tr>
 <tr>
@@ -2024,12 +2099,12 @@
 </tbody>
 </table>
 <hr />
-<h2 id="tilerank">TileRank 값 대응표</h2>
-<p>카드 발동에 요구되는 2048 보드 타일 숫자. <code>CardTBL.tileRank</code> 및 <code>CardTBL.upgradedTileRank</code>에 사용한다.</p>
+<h2 id="_5">발동 숫자 참고표</h2>
+<p>카드 발동에 요구되는 2048 보드 타일 숫자. <strong>별도 <code>TileRank</code> 컬럼은 두지 않고 <code>CardTBL.Mana</code>에 타일 숫자를 직접 저장</strong>한다(<a href="#️-시트-작업-필요-목록-todo">상단 TODO P1</a>). 아래 등급 문자는 밸런싱 논의용 참고 라벨일 뿐 시트 컬럼이 아니다.</p>
 <table>
 <thead>
 <tr>
-<th style="text-align: center;">TileRank</th>
+<th style="text-align: center;">참고 등급</th>
 <th style="text-align: center;">타일 숫자</th>
 <th>비고</th>
 </tr>
@@ -2064,6 +2139,11 @@
 <td style="text-align: center;"><code>F</code></td>
 <td style="text-align: center;"><strong>64</strong></td>
 <td>필살 카드 등급. 보드 최적화 필요</td>
+</tr>
+<tr>
+<td style="text-align: center;">…</td>
+<td style="text-align: center;"><strong>~2048</strong></td>
+<td>캐릭터 코스트 밴드에 따라 상위 숫자까지 확장</td>
 </tr>
 </tbody>
 </table>
@@ -3178,6 +3258,11 @@
 <td>챔피언 프리팹 에셋 키</td>
 </tr>
 <tr>
+<td><code>SlideMax</code></td>
+<td><code>number</code></td>
+<td>캐릭터 고유 최대 슬라이드 횟수. 2048 보드에서 턴당 슬라이드 상한이며, 유물로 확장 가능. 기획의 "슬라이드 스탯"에 대응</td>
+</tr>
+<tr>
 <td><code>HP</code></td>
 <td><code>number</code></td>
 <td>초기 최대 체력</td>
@@ -3247,69 +3332,72 @@
 <li><code>RewardCard1</code>, <code>RewardCard2</code> → <code>CardTBL.Name</code></li>
 </ul>
 <p><strong>예시</strong></p>
+<blockquote>
+<p>아래 예시는 2026-08-13 시트 실측값이다. 현재 시트 로스터는 모험가·마녀(성별 변형 포함 4행)이며, <code>SlideMax</code>가 이미 입력되어 있다.</p>
+</blockquote>
 <table>
 <thead>
 <tr>
-<th>Name</th>
 <th>ID</th>
 <th style="text-align: center;">titleStringId</th>
-<th style="text-align: center;">hp</th>
-<th style="text-align: center;">speed</th>
-<th style="text-align: center;">hand</th>
-<th style="text-align: center;">energy</th>
+<th style="text-align: center;">SlideMax</th>
+<th style="text-align: center;">HP</th>
+<th style="text-align: center;">Speed</th>
+<th style="text-align: center;">Hand</th>
+<th style="text-align: center;">Energy</th>
 <th style="text-align: center;">LvUpHP</th>
-<th style="text-align: center;">LvUpSpeed</th>
-<th style="text-align: center;">LvUpHand</th>
-<th style="text-align: center;">LvUpEnergy</th>
-<th>team</th>
+<th>Team</th>
 <th>StartDeck</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>kestrel</td>
-<td>1001</td>
-<td style="text-align: center;">260001</td>
-<td style="text-align: center;">80</td>
+<td>adventurer_female</td>
+<td style="text-align: center;">260000</td>
+<td style="text-align: center;">20</td>
+<td style="text-align: center;">30</td>
+<td style="text-align: center;">7</td>
+<td style="text-align: center;">4</td>
 <td style="text-align: center;">3</td>
+<td style="text-align: center;">10</td>
+<td>adventurer</td>
+<td>adventurer_female</td>
+</tr>
+<tr>
+<td>adventurer_male</td>
+<td style="text-align: center;">260001</td>
+<td style="text-align: center;">20</td>
+<td style="text-align: center;">30</td>
+<td style="text-align: center;">7</td>
+<td style="text-align: center;">4</td>
+<td style="text-align: center;">3</td>
+<td style="text-align: center;">10</td>
+<td>adventurer</td>
+<td>adventurer_male</td>
+</tr>
+<tr>
+<td>witch_female</td>
+<td style="text-align: center;">260002</td>
+<td style="text-align: center;">30</td>
+<td style="text-align: center;">24</td>
+<td style="text-align: center;">6</td>
 <td style="text-align: center;">5</td>
 <td style="text-align: center;">3</td>
 <td style="text-align: center;">8</td>
-<td style="text-align: center;">0</td>
-<td style="text-align: center;">0</td>
-<td style="text-align: center;">1</td>
-<td>vanguard</td>
-<td>deck_kestrel_start</td>
+<td>witch</td>
+<td>witch_female</td>
 </tr>
 <tr>
-<td>cipher</td>
-<td>1002</td>
-<td style="text-align: center;">260002</td>
-<td style="text-align: center;">60</td>
-<td style="text-align: center;">2</td>
-<td style="text-align: center;">6</td>
-<td style="text-align: center;">4</td>
-<td style="text-align: center;">5</td>
-<td style="text-align: center;">0</td>
-<td style="text-align: center;">1</td>
-<td style="text-align: center;">0</td>
-<td>cipher</td>
-<td>deck_cipher_start</td>
-</tr>
-<tr>
-<td>wanderer</td>
-<td>1003</td>
+<td>witch_male</td>
 <td style="text-align: center;">260003</td>
-<td style="text-align: center;">70</td>
-<td style="text-align: center;">3</td>
+<td style="text-align: center;">30</td>
+<td style="text-align: center;">24</td>
+<td style="text-align: center;">6</td>
 <td style="text-align: center;">5</td>
 <td style="text-align: center;">3</td>
-<td style="text-align: center;">6</td>
-<td style="text-align: center;">1</td>
-<td style="text-align: center;">0</td>
-<td style="text-align: center;">0</td>
-<td>wanderer</td>
-<td>deck_wanderer_start</td>
+<td style="text-align: center;">8</td>
+<td>witch</td>
+<td>witch_male</td>
 </tr>
 </tbody>
 </table>
