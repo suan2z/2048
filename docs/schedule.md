@@ -2,69 +2,20 @@
 
 <small style="color:#7070a0;font-family:'Roboto Mono',monospace;background:rgba(255,255,255,0.05);padding:2px 12px;border-radius:20px;border:1px solid rgba(255,255,255,0.08);">📄 docs/schedule.md</small>
 
-> 전투 시스템 구현 범위만 포함. 스토리·아웃게임·성장 시스템은 별도 일정으로 분리 예정.
+## 8월 이후 작업 내용
 
----
+> 메인 화면 → 전투 모드 → 도전 로그라이크 모드 → 캐릭터 선택 → 로그라이크 맵 → 전투로 이어지는 진행 흐름에 포함된 UI 작업 진행.
 
-## 전체 일정 요약
+- 메인 메뉴 화면 구성 [[UI 목업 페이지 링크]](https://suan2z.github.io/2048/outgame_mockup/){onclick="return popupLink(this)"}
+- 전투 모드 화면 구성 [[UI 목업 페이지 링크]](https://suan2z.github.io/2048/outgame_mockup/){onclick="return popupLink(this)"}
+- 도전 로그라이크 모드 / 선택시 캐릭터 선택 화면 구성 [[UI 목업 페이지 링크]](https://suan2z.github.io/2048/outgame_mockup/){onclick="return popupLink(this)"}
+- 캐릭터 선택 후 로그라이크 맵 연결 [[UI 목업 페이지 링크]](https://suan2z.github.io/2048/outgame_mockup/){onclick="return popupLink(this)"}
+- 전투 화면 UI 구성 [[전투화면 슬라이드 문서 링크]](https://docs.google.com/presentation/d/1JzMdXptld5MqE0v4UewMHfpHIoRAGw5xu_gCLDjN8do/edit?slide=id.p#slide=id.p){onclick="return popupLink(this)"}
 
-| 단계 | 내용 | 기간 | 예정일 |
-|------|------|------|--------|
-| 1 | 보드 시스템 | 2주 | 05/11 – 05/22 |
-| 2 | 카드 · 덱 · 캐릭터 시스템 | 1주 | 05/25 – 05/29 |
-| 3 | 액션 버튼 · 카드 실행 | 1주 | 06/01 – 06/05 |
-| 4 | 적 AI | 2주 | 06/08 – 06/19 |
-| 5 | 전투 UI | 2주 | 06/22 – 07/03 |
-
-**총 예상 기간: 8주**
-
----
-
-## 단계별 상세
-
-### 1단계 — 보드 시스템 (05/11 – 05/22)
-
-- [ ] 4×4 격자 데이터 구조 및 렌더링
-- [ ] 상·하·좌·우 슬라이드 로직 (타일 이동 + 병합)
-- [ ] 슬라이드 후 랜덤 빈 칸에 2/4 타일 생성
-- [ ] 턴당 슬라이드 횟수 제한 처리
-- [ ] 행동 불능 판정 (슬라이드해도 타일 이동 없을 때)
-
-### 2단계 — 카드 · 덱 · 캐릭터 시스템 (05/25 – 05/29)
-
-- [ ] 캐릭터 데이터 구조 (ID, 체력)
-- [ ] 캐릭터별 카드 소유 연결
-- [ ] 선택 캐릭터의 카드 덱 구성
-- [ ] 카드 데이터 구조 (발동 숫자, 효과 타입, 소유 캐릭터)
-- [ ] 대기덱 · 핸드 · 소모덱 3영역 관리
-- [ ] 전투 시작 시 5장 드로우
-- [ ] 액션 이후 핸드 전체 소모덱 이동 + 재드로우
-- [ ] 대기덱 소진 시 소모덱 셔플 → 대기덱 전환
-
-### 3단계 — 액션 버튼 · 카드 실행 (06/01 – 06/05)
-
-- [ ] 액션 버튼 UI 및 활성화 조건
-- [ ] 핸드 카드 ↔ 보드 타일 매칭 로직
-- [ ] 매칭된 카드 효과 순차 실행 (공격·회복·버프·디버프)
-- [ ] 미매칭 카드 자동 소모 처리
-- [ ] 같은 숫자 카드 복수 존재 시 선택 UI
-
-### 4단계 — 적 AI (06/08 – 06/19)
-
-- [ ] 적 데이터 구조 (체력, 행동 카운트, 행동 패턴)
-- [ ] 액션 버튼 1회 → 전체 적 카운트 -1 처리
-- [ ] 카운트 0 도달 시 예고 행동 실행 → 카운트 리셋
-- [ ] 행동 유형 구현: 단일 공격, 광역 공격, 디버프, 강화
-- [ ] 복수 적 동시 카운트 0 처리 (순서 처리)
-- [ ] 보스 페이즈 전환 (체력 구간별 패턴 교체)
-
-### 5단계 — 전투 UI (06/22 – 07/03)
-
-- [ ] 전투 시작 전 캐릭터 선택 화면 (1인)
-- [ ] 전투 화면 레이아웃 (보드 / 핸드 / 적 목록)
-- [ ] 보드 슬라이드 애니메이션 · 타일 병합 이펙트
-- [ ] 핸드 카드 표시 및 매칭 타일 하이라이트
-- [ ] 적 행동 예고 UI (행동 유형, 수치, 카운트 표시)
-- [ ] 슬라이드 잔여 횟수 표시
-- [ ] 카드 실행 연출 (공격 이펙트, 피해 수치 팝업)
+<script>
+function popupLink(a){
+  window.open(a.href, 'schedulePopup', 'width=1100,height=800,toolbar=yes,menubar=yes,location=yes,status=yes,resizable=yes,scrollbars=yes,noopener,noreferrer');
+  return false;
+}
+</script>
 

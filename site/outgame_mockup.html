@@ -98,42 +98,21 @@
        SCREEN 1 — MAIN MENU
     ══════════════════════════ */
     #screen-menu {
-      background: #07071a; flex-direction: column;
+      background: #07071a url('images/title.png') center top / cover no-repeat;
+      flex-direction: column;
       align-items: center; overflow: hidden;
     }
 
-    /* 콘텐츠 레이어 — 중앙 상단 타이틀 / 중앙 하단 메뉴 */
+    /* 콘텐츠 레이어 — 중앙 하단 메뉴 (타이틀 로고는 배경 아트에 포함) */
     .menu-stage {
       position: relative; z-index: 2; flex: 1; width: 100%;
       display: flex; flex-direction: column;
-      align-items: center; justify-content: space-between;
-      padding: 150px 0 44px;
+      align-items: center; justify-content: flex-end;
+      padding: 0 0 44px;
     }
-    .menu-bg-grid {
+    .menu-bg-shade {
       position: absolute; inset: 0; pointer-events: none;
-      background-image:
-        linear-gradient(rgba(0,188,212,.03) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(0,188,212,.03) 1px, transparent 1px);
-      background-size: 60px 60px;
-    }
-    .menu-bg-glow {
-      position: absolute; top: 50%; left: 50%;
-      transform: translate(-50%,-50%);
-      width: 620px; height: 620px;
-      background: radial-gradient(circle, rgba(0,188,212,0.08) 0%, transparent 70%);
-      pointer-events: none;
-    }
-    /* 상단~중앙 타이틀 */
-    .menu-title { text-align: center; }
-    .menu-title h1 {
-      font-size: 58px; font-weight: 900; letter-spacing: .16em;
-      color: var(--accent2);
-      text-shadow: 0 0 34px #00e5ff66, 0 3px 10px rgba(0,0,0,.8);
-      line-height: 1.1;
-    }
-    .menu-title p {
-      font-size: 12px; color: var(--dim);
-      margin-top: 14px; letter-spacing: .1em;
+      background: linear-gradient(0deg, rgba(3,3,10,.92) 0%, rgba(3,3,10,.55) 32%, transparent 62%);
     }
 
     /* 중앙 하단 메뉴 — 테두리 없는 텍스트 목록 */
@@ -341,27 +320,65 @@
     .mode-card.locked { opacity:.5; cursor:default; }
     .mode-card.locked:hover { border-color: var(--border); box-shadow: none; }
 
-    .mc-header {
-      height: 120px; flex-shrink: 0;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 52px; border-bottom: 1px solid var(--border);
+    .mc-image {
+      flex:1; position:relative; overflow:hidden;
+      border-bottom: 1px solid var(--border);
+      background-size: cover; background-position: center;
     }
-    .mc-h-r { background: linear-gradient(135deg,#0a1a3a,#0d2050); }
-    .mc-h-n { background: linear-gradient(135deg,#0a2a1a,#0d3020); }
-    .mc-h-c { background: linear-gradient(135deg,#2a0a1a,#3a0d20); }
+    .mc-h-r { background-image: url('images/battle_btn1.png'); }
+    .mc-h-n { background-image: url('images/battle_btn2.png'); }
+    .mc-h-c { background-image: url('images/battle_btn3.png'); }
+    .mc-lock-ov {
+      position:absolute; inset:0; background:rgba(0,0,0,.55);
+      display:flex; flex-direction:column; align-items:center; justify-content:center; gap:8px;
+      font-size:40px;
+    }
+    .mc-lock-cond {
+      font-size:12px; font-weight:700; color:#fff; letter-spacing:.3px;
+      text-shadow:0 2px 6px rgba(0,0,0,.9);
+    }
 
-    .mc-body { flex:1; padding:20px; display:flex; flex-direction:column; gap:14px; }
+    .mc-body { flex-shrink:0; padding:16px 20px 20px; display:flex; flex-direction:column; gap:6px; }
     .mc-title    { font-size:16px; font-weight:700; color:var(--text); }
     .mc-subtitle { font-size:11px; color:var(--accent); }
-    .mc-desc     { font-size:12px; color:var(--dim); line-height:1.7; flex:1; }
-    .mc-stats    { padding:10px; background:var(--panel); border:1px solid var(--border); border-radius:6px; display:flex; flex-direction:column; gap:5px; }
-    .mc-stat-row { display:flex; justify-content:space-between; font-size:11px; }
-    .mc-stat-row span:first-child { color:var(--dim); }
-    .mc-btn      { padding:10px; border-radius:6px; text-align:center; font-size:13px; font-weight:700; cursor:pointer; letter-spacing:.5px; }
-    .mc-btn-r    { background:linear-gradient(135deg,#004d52,#007780); border:1px solid var(--accent); color:#fff; }
-    .mc-btn-n    { background:linear-gradient(135deg,#1a4d20,#257730); border:1px solid var(--success); color:#fff; }
-    .mc-btn-lk   { background:var(--panel); border:1px solid var(--border); color:var(--dim); cursor:default; }
-    .mc-lock-hint { font-size:10px; color:var(--dim); text-align:center; }
+    .mc-desc     { font-size:12px; color:var(--dim); line-height:1.7; }
+
+    /* ══════════════════════════
+       SCREEN 3B — ROGUELIKE CHARACTER SELECT
+    ══════════════════════════ */
+    .csel-body {
+      flex:1; padding:28px 40px; overflow-y:auto;
+      display:flex; flex-wrap:wrap; gap:16px; align-content:flex-start; justify-content:center;
+      background:linear-gradient(160deg,#0a0a1e,#07071a);
+    }
+    .csel-card {
+      width:220px; flex-shrink:0;
+      background:var(--card-bg); border:1px solid var(--border);
+      border-radius:12px; overflow:hidden; cursor:pointer;
+      display:flex; flex-direction:column;
+      transition:border-color .15s, transform .15s, box-shadow .15s;
+    }
+    .csel-card:hover { border-color:var(--accent); transform:translateY(-4px); box-shadow:0 14px 34px rgba(0,0,0,.5), 0 0 22px rgba(0,188,212,.18); }
+    .csel-portrait {
+      height:380px; position:relative;
+      background-color:#05050a;
+      background-image: radial-gradient(circle at 50% 25%, rgba(0,188,212,.14), transparent 65%);
+      border-bottom:1px solid var(--border);
+    }
+    .csel-portrait-img {
+      position:absolute; inset:0;
+      background-size:contain; background-repeat:no-repeat; background-position:center bottom;
+    }
+    .csel-p-kestrel { background-image:url('images/kestrel.png'); }
+    .csel-p-jube    { background-image:url('images/jube.png'); }
+    .csel-p-vane    { background-image:url('images/vane.png'); }
+    .csel-p-cipher  { background-image:url('images/cipher.png'); }
+    .csel-p-pulse   { background-image:url('images/pulse.png'); }
+    .csel-info { padding:14px 16px; display:flex; flex-direction:column; gap:6px; }
+    .csel-name { font-size:15px; font-weight:800; color:var(--text); }
+    .csel-stats { display:flex; flex-direction:column; gap:3px; margin-top:6px; }
+    .csel-stat-row { display:flex; justify-content:space-between; font-size:11px; }
+    .csel-stat-row span:first-child { color:var(--dim); }
 
     /* ══════════════════════════
        SCREEN 4 — CHARACTER INFO
@@ -703,14 +720,14 @@
 <body>
 
 <div class="toolbar">
-  <button class="tb-btn on" onclick="go('menu')">🏠 메인 메뉴</button>
+  <button class="tb-btn on" data-screen="menu" onclick="go('menu')">🏠 메인 메뉴</button>
   <div class="tb-sep"></div>
-  <button class="tb-btn" onclick="go('story')">📖 스토리 모드</button>
-  <button class="tb-btn" onclick="go('battle')">⚔ 전투 모드</button>
-  <button class="tb-btn" onclick="go('char')">👤 캐릭터</button>
-  <button class="tb-btn" onclick="go('team')">🧩 캐릭터 › 덱 관리</button>
+  <button class="tb-btn" data-screen="story" onclick="go('story')">📖 스토리 모드</button>
+  <button class="tb-btn" data-screen="battle" onclick="go('battle')">⚔ 전투 모드</button>
+  <button class="tb-btn" data-screen="char" onclick="go('char')">👤 캐릭터</button>
+  <button class="tb-btn" data-screen="team" onclick="go('team')">🧩 캐릭터 › 덱 관리</button>
   <div class="tb-sep"></div>
-  <button class="tb-btn" onclick="go('rogue')">🗺 로그라이크 맵</button>
+  <button class="tb-btn" data-screen="rogue" onclick="go('rogue')">🗺 로그라이크 맵</button>
 </div>
 
 <div class="bs-wrap" id="bs-wrap">
@@ -721,17 +738,11 @@
 ═══════════════════════════════════════ -->
 <div class="screen active" id="screen-menu">
 
-  <!-- 배경 레이어 -->
-  <div class="menu-bg-grid"></div>
-  <div class="menu-bg-glow"></div>
+  <!-- 배경 레이어 (타이틀 아트) -->
+  <div class="menu-bg-shade"></div>
 
-  <!-- 콘텐츠: 중앙 상단 타이틀 / 중앙 하단 메뉴 -->
+  <!-- 콘텐츠: 중앙 하단 메뉴 (타이틀 로고는 배경 아트에 포함) -->
   <div class="menu-stage">
-
-    <div class="menu-title">
-      <h1>TESSERA WEAVER</h1>
-      <p>당신의 스와이프가 도시의 코드를 다시 쓴다</p>
-    </div>
 
     <div class="menu-buttons">
       <div class="mbtn" onclick="go('story')">스토리</div>
@@ -912,50 +923,46 @@
   </div>
   <div class="battle-body">
 
-    <div class="mode-card">
-      <div class="mc-header mc-h-r">🔄</div>
+    <div class="mode-card" onclick="go('charsel')">
+      <div class="mc-image mc-h-r"></div>
       <div class="mc-body">
         <div class="mc-title">도전 로그라이크 모드</div>
         <div class="mc-subtitle">Challenge Roguelike</div>
         <div class="mc-desc">챕터 클리어 후에도 계속 도전 가능. 몬스터가 점점 강해지며 최종 패배 시 그 강해진 빌드를 도전 완성 덱으로 저장할 수 있다.</div>
-        <div class="mc-stats">
-          <div class="mc-stat-row"><span>최고 기록</span><span>3챕터 7막</span></div>
-          <div class="mc-stat-row"><span>도전 완성 덱</span><span>2 / 10</span></div>
-        </div>
-        <div class="mc-btn mc-btn-r" onclick="go('rogue')" style="cursor:pointer;">▶ 시작하기</div>
-      </div>
-    </div>
-
-    <div class="mode-card">
-      <div class="mc-header mc-h-n">⚔</div>
-      <div class="mc-body">
-        <div class="mc-title">일반 전투 모드</div>
-        <div class="mc-subtitle">Normal Battle</div>
-        <div class="mc-desc">저장된 일반 완성 덱으로 고정 스테이지를 도전. 각 스테이지는 고유한 적 구성과 특수 조건이 있으며 뒤로 갈수록 강해진다.</div>
-        <div class="mc-stats">
-          <div class="mc-stat-row"><span>진행 상황</span><span>스테이지 8 / 30</span></div>
-          <div class="mc-stat-row"><span>일반 완성 덱</span><span>3 / 10</span></div>
-        </div>
-        <div class="mc-btn mc-btn-n">▶ 시작하기</div>
       </div>
     </div>
 
     <div class="mode-card locked">
-      <div class="mc-header mc-h-c">🏆</div>
+      <div class="mc-image mc-h-n"><div class="mc-lock-ov">🔒<div class="mc-lock-cond">챕터 2 클리어</div></div></div>
+      <div class="mc-body">
+        <div class="mc-title">일반 전투 모드</div>
+        <div class="mc-subtitle">Normal Battle</div>
+        <div class="mc-desc">저장된 일반 완성 덱으로 고정 스테이지를 도전. 각 스테이지는 고유한 적 구성과 특수 조건이 있으며 뒤로 갈수록 강해진다.</div>
+      </div>
+    </div>
+
+    <div class="mode-card locked">
+      <div class="mc-image mc-h-c"><div class="mc-lock-ov">🔒<div class="mc-lock-cond">챕터 3 클리어</div></div></div>
       <div class="mc-body">
         <div class="mc-title">도전 전투 모드</div>
         <div class="mc-subtitle">Challenge Battle</div>
         <div class="mc-desc">저장된 도전 완성 덱으로 강화된 고정 스테이지를 도전. 도전 완성 덱 보유 시 해금된다.</div>
-        <div class="mc-stats">
-          <div class="mc-stat-row"><span>해금 조건</span><span>도전 완성 덱 보유</span></div>
-          <div class="mc-stat-row"><span>도전 완성 덱</span><span>2 / 10</span></div>
-        </div>
-        <div class="mc-btn mc-btn-lk">🔒 잠금 해제 필요</div>
-        <div class="mc-lock-hint">도전 로그라이크에서 도전 완성 덱을 획득하세요</div>
       </div>
     </div>
 
   </div>
+</div>
+
+<!-- ═══════════════════════════════════════
+     SCREEN 3B — ROGUELIKE CHARACTER SELECT
+═══════════════════════════════════════ -->
+<div class="screen" id="screen-charsel">
+  <div class="top-bar">
+    <div class="back-btn" onclick="go('battle')">← 뒤로</div>
+    <div class="screen-title">캐릭터 선택</div>
+    <span style="font-size:12px;color:var(--dim);margin-left:6px;">도전 로그라이크에 출전할 캐릭터 1인을 선택하세요</span>
+  </div>
+  <div class="csel-body" id="csel-body"></div>
 </div>
 
 <!-- ═══════════════════════════════════════
@@ -1145,12 +1152,12 @@
   <div class="rogue-top">
     <div class="rogue-chars">
       <div class="rogue-char-col">
-        <div class="rogue-char">🛡</div>
-        <div class="rogue-char-name">케스트럴</div>
+        <div class="rogue-char" id="rogue-char-icon">🛡</div>
+        <div class="rogue-char-name" id="rogue-char-name">케스트럴</div>
       </div>
     </div>
     <div class="rogue-hp-col">
-      <div class="rogue-hp-txt">430 / 430</div>
+      <div class="rogue-hp-txt" id="rogue-hp-txt">180 / 180</div>
       <div class="rogue-hpbar"><div class="rogue-hpfill" style="width:100%"></div></div>
     </div>
     <div class="rogue-res">
@@ -1189,10 +1196,10 @@
 
 <script>
 /* ── screen switch ── */
-const IDS = ['menu','story','battle','char','team','rogue'];
+const IDS = ['menu','story','battle','charsel','char','team','rogue'];
 function go(id) {
   IDS.forEach(s => document.getElementById('screen-'+s).classList.toggle('active', s===id));
-  document.querySelectorAll('.toolbar .tb-btn').forEach((b,i)=>b.classList.toggle('on', IDS[i]===id));
+  document.querySelectorAll('.toolbar .tb-btn').forEach(b=>b.classList.toggle('on', b.dataset.screen===id || (b.dataset.screen==='battle' && id==='charsel')));
   updateRef(id);
 }
 
@@ -1349,6 +1356,36 @@ function renderSkills(){
     </div>`).join('');
 }
 buildCharList(); selChar('kestrel');
+
+/* ── roguelike character select ── */
+let ROGUE_CHAR = 'kestrel';
+function buildCharSelect(){
+  document.getElementById('csel-body').innerHTML = CKEYS.map(k=>{
+    const c=CHARS[k];
+    return `
+    <div class="csel-card" onclick="chooseRogueChar('${k}')">
+      <div class="csel-portrait"><div class="csel-portrait-img csel-p-${k}"></div></div>
+      <div class="csel-info">
+        <div class="csel-name">${c.name}</div>
+        <div class="c-role-tag ${c.rc}">${c.role}</div>
+        <div class="csel-stats">
+          <div class="csel-stat-row"><span>체력</span><span>${c.hp}</span></div>
+          <div class="csel-stat-row"><span>공격력</span><span>${c.atk}</span></div>
+          <div class="csel-stat-row"><span>방어력</span><span>${c.def}</span></div>
+        </div>
+      </div>
+    </div>`;
+  }).join('');
+}
+function chooseRogueChar(k){
+  ROGUE_CHAR = k;
+  const c = CHARS[k];
+  document.getElementById('rogue-char-icon').textContent = c.icon;
+  document.getElementById('rogue-char-name').textContent = c.name;
+  document.getElementById('rogue-hp-txt').textContent = `${c.hp} / ${c.hp}`;
+  go('rogue');
+}
+buildCharSelect();
 
 /* ── roguelike map ── */
 const ROGUE_NODES = [

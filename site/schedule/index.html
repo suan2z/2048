@@ -1403,21 +1403,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#_2" class="md-nav__link">
+  <a href="#8" class="md-nav__link">
     <span class="md-ellipsis">
       
-        전체 일정 요약
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#_3" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        단계별 상세
+        8월 이후 작업 내용
       
     </span>
   </a>
@@ -1662,102 +1651,23 @@
 
 <h1 id="_1">일정</h1>
 <p><small style="color:#7070a0;font-family:'Roboto Mono',monospace;background:rgba(255,255,255,0.05);padding:2px 12px;border-radius:20px;border:1px solid rgba(255,255,255,0.08);">📄 docs/schedule.md</small></p>
+<h2 id="8">8월 이후 작업 내용</h2>
 <blockquote>
-<p>전투 시스템 구현 범위만 포함. 스토리·아웃게임·성장 시스템은 별도 일정으로 분리 예정.</p>
+<p>메인 화면 → 전투 모드 → 도전 로그라이크 모드 → 캐릭터 선택 → 로그라이크 맵 → 전투로 이어지는 진행 흐름에 포함된 UI 작업 진행.</p>
 </blockquote>
-<hr />
-<h2 id="_2">전체 일정 요약</h2>
-<table>
-<thead>
-<tr>
-<th>단계</th>
-<th>내용</th>
-<th>기간</th>
-<th>예정일</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>1</td>
-<td>보드 시스템</td>
-<td>2주</td>
-<td>05/11 – 05/22</td>
-</tr>
-<tr>
-<td>2</td>
-<td>카드 · 덱 · 캐릭터 시스템</td>
-<td>1주</td>
-<td>05/25 – 05/29</td>
-</tr>
-<tr>
-<td>3</td>
-<td>액션 버튼 · 카드 실행</td>
-<td>1주</td>
-<td>06/01 – 06/05</td>
-</tr>
-<tr>
-<td>4</td>
-<td>적 AI</td>
-<td>2주</td>
-<td>06/08 – 06/19</td>
-</tr>
-<tr>
-<td>5</td>
-<td>전투 UI</td>
-<td>2주</td>
-<td>06/22 – 07/03</td>
-</tr>
-</tbody>
-</table>
-<p><strong>총 예상 기간: 8주</strong></p>
-<hr />
-<h2 id="_3">단계별 상세</h2>
-<h3 id="1-0511-0522">1단계 — 보드 시스템 (05/11 – 05/22)</h3>
 <ul>
-<li>[ ] 4×4 격자 데이터 구조 및 렌더링</li>
-<li>[ ] 상·하·좌·우 슬라이드 로직 (타일 이동 + 병합)</li>
-<li>[ ] 슬라이드 후 랜덤 빈 칸에 2/4 타일 생성</li>
-<li>[ ] 턴당 슬라이드 횟수 제한 처리</li>
-<li>[ ] 행동 불능 판정 (슬라이드해도 타일 이동 없을 때)</li>
+<li>메인 메뉴 화면 구성 <a href="https://suan2z.github.io/2048/outgame_mockup/" onclick="return popupLink(this)">[UI 목업 페이지 링크]</a></li>
+<li>전투 모드 화면 구성 <a href="https://suan2z.github.io/2048/outgame_mockup/" onclick="return popupLink(this)">[UI 목업 페이지 링크]</a></li>
+<li>도전 로그라이크 모드 / 선택시 캐릭터 선택 화면 구성 <a href="https://suan2z.github.io/2048/outgame_mockup/" onclick="return popupLink(this)">[UI 목업 페이지 링크]</a></li>
+<li>캐릭터 선택 후 로그라이크 맵 연결 <a href="https://suan2z.github.io/2048/outgame_mockup/" onclick="return popupLink(this)">[UI 목업 페이지 링크]</a></li>
+<li>전투 화면 UI 구성 <a href="https://docs.google.com/presentation/d/1JzMdXptld5MqE0v4UewMHfpHIoRAGw5xu_gCLDjN8do/edit?slide=id.p#slide=id.p" onclick="return popupLink(this)">[전투화면 슬라이드 문서 링크]</a></li>
 </ul>
-<h3 id="2-0525-0529">2단계 — 카드 · 덱 · 캐릭터 시스템 (05/25 – 05/29)</h3>
-<ul>
-<li>[ ] 캐릭터 데이터 구조 (ID, 체력)</li>
-<li>[ ] 캐릭터별 카드 소유 연결</li>
-<li>[ ] 선택 캐릭터의 카드 덱 구성</li>
-<li>[ ] 카드 데이터 구조 (발동 숫자, 효과 타입, 소유 캐릭터)</li>
-<li>[ ] 대기덱 · 핸드 · 소모덱 3영역 관리</li>
-<li>[ ] 전투 시작 시 5장 드로우</li>
-<li>[ ] 액션 이후 핸드 전체 소모덱 이동 + 재드로우</li>
-<li>[ ] 대기덱 소진 시 소모덱 셔플 → 대기덱 전환</li>
-</ul>
-<h3 id="3-0601-0605">3단계 — 액션 버튼 · 카드 실행 (06/01 – 06/05)</h3>
-<ul>
-<li>[ ] 액션 버튼 UI 및 활성화 조건</li>
-<li>[ ] 핸드 카드 ↔ 보드 타일 매칭 로직</li>
-<li>[ ] 매칭된 카드 효과 순차 실행 (공격·회복·버프·디버프)</li>
-<li>[ ] 미매칭 카드 자동 소모 처리</li>
-<li>[ ] 같은 숫자 카드 복수 존재 시 선택 UI</li>
-</ul>
-<h3 id="4-ai-0608-0619">4단계 — 적 AI (06/08 – 06/19)</h3>
-<ul>
-<li>[ ] 적 데이터 구조 (체력, 행동 카운트, 행동 패턴)</li>
-<li>[ ] 액션 버튼 1회 → 전체 적 카운트 -1 처리</li>
-<li>[ ] 카운트 0 도달 시 예고 행동 실행 → 카운트 리셋</li>
-<li>[ ] 행동 유형 구현: 단일 공격, 광역 공격, 디버프, 강화</li>
-<li>[ ] 복수 적 동시 카운트 0 처리 (순서 처리)</li>
-<li>[ ] 보스 페이즈 전환 (체력 구간별 패턴 교체)</li>
-</ul>
-<h3 id="5-ui-0622-0703">5단계 — 전투 UI (06/22 – 07/03)</h3>
-<ul>
-<li>[ ] 전투 시작 전 캐릭터 선택 화면 (1인)</li>
-<li>[ ] 전투 화면 레이아웃 (보드 / 핸드 / 적 목록)</li>
-<li>[ ] 보드 슬라이드 애니메이션 · 타일 병합 이펙트</li>
-<li>[ ] 핸드 카드 표시 및 매칭 타일 하이라이트</li>
-<li>[ ] 적 행동 예고 UI (행동 유형, 수치, 카운트 표시)</li>
-<li>[ ] 슬라이드 잔여 횟수 표시</li>
-<li>[ ] 카드 실행 연출 (공격 이펙트, 피해 수치 팝업)</li>
-</ul>
+<script>
+function popupLink(a){
+  window.open(a.href, 'schedulePopup', 'width=1100,height=800,toolbar=yes,menubar=yes,location=yes,status=yes,resizable=yes,scrollbars=yes,noopener,noreferrer');
+  return false;
+}
+</script>
 
 
 
