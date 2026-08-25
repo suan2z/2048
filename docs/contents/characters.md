@@ -69,7 +69,7 @@
 
 ---
 
-## 베인 (Vane) — 스나이퍼
+## 베인 (Vayne) — 스나이퍼
 
 ![베인](../images/vane.png){ width="300" }
 
@@ -91,7 +91,7 @@
 
 ---
 
-## 사이퍼 (Cipher) — 호크
+## 사이퍼 (Cypher) — 호크
 
 ![사이퍼](../images/cipher.png){ width="300" }
 

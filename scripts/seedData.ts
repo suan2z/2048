@@ -276,8 +276,8 @@ const CARD_TBL = [
 const CHAMPION_TBL = [
   [1, 'kestrel', 260000, 100, 6, 4, 3, 10, 0.5, 0.25, 0, 'sentinel',     'kestrel_deck',     'sentinel',     'neutral'],
   [2, 'jube',    260002,  90, 7, 5, 3,  8, 0.5, 0.25, 0, 'striker',      'jube_deck',        'striker',      'neutral'],
-  [3, 'vane',    260004,  85, 7, 4, 3,  8, 0.5, 0.25, 0, 'sharpshooter', 'vane_deck',        'sharpshooter', 'neutral'],
-  [4, 'cipher',  260006,  85, 6, 5, 3,  8, 0.5, 0.25, 0, 'infiltrator',  'cipher_deck',      'infiltrator',  'neutral'],
+  [3, 'vayne',   260004,  85, 7, 4, 3,  8, 0.5, 0.25, 0, 'sharpshooter', 'vayne_deck',       'sharpshooter', 'neutral'],
+  [4, 'cypher',  260006,  85, 6, 5, 3,  8, 0.5, 0.25, 0, 'infiltrator',  'cypher_deck',      'infiltrator',  'neutral'],
   [5, 'pulse',   260008, 100, 6, 5, 3, 12, 0.5, 0.25, 0, 'medic',        'pulse_deck',       'medic',        'neutral'],
 ];
 
@@ -297,8 +297,8 @@ const DECK_TBL = [
   // 챔피언 덱
   [1,  'Champion', 'kestrel_deck',   'shield_strike_card','bastion_card','shield_strike_card','bastion_card','shockwave_card','','','','',''],
   [2,  'Champion', 'jube_deck',      'combo_strike_card', 'slide_kick_card','combo_strike_card','slide_kick_card','flash_dash_card','','','','',''],
-  [3,  'Champion', 'vane_deck',      'rapid_fire_card',   'precise_shot_card','rapid_fire_card','precise_shot_card','last_note_card','','','','',''],
-  [4,  'Champion', 'cipher_deck',    'data_hack_card',    'vuln_analysis_card','data_hack_card','vuln_analysis_card','sys_disruption_card','','','','',''],
+  [3,  'Champion', 'vayne_deck',     'rapid_fire_card',   'precise_shot_card','rapid_fire_card','precise_shot_card','last_note_card','','','','',''],
+  [4,  'Champion', 'cypher_deck',    'data_hack_card',    'vuln_analysis_card','data_hack_card','vuln_analysis_card','sys_disruption_card','','','','',''],
   [5,  'Champion', 'pulse_deck',     'nano_repair_card',  'bio_field_card','nano_repair_card','bio_field_card','pulse_wave_card','','','','',''],
   // 적 덱
   [6,  'Allies',   'guard_drone_deck',      'drone_strike','drone_strike','drone_strike','','','','','','',''],

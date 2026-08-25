@@ -10,8 +10,8 @@ const SPREADSHEET_ID = '1SRpzgAzrPeH7GlxGkBo3hs83RiYDknOo3uXKJkeRubM';
 const CHARACTERS = [
   [1001, 10001, 120, 'FALSE'],  // 케스트럴 (Kestrel)
   [1002, 10002,  90, 'FALSE'],  // 주베 (Jube)
-  [1003, 10003,  85, 'FALSE'],  // 베인 (Vane)
-  [1004, 10004,  95, 'FALSE'],  // 사이퍼 (Cipher)
+  [1003, 10003,  85, 'FALSE'],  // 베인 (Vayne)
+  [1004, 10004,  95, 'FALSE'],  // 사이퍼 (Cypher)
   [1005, 10005, 100, 'FALSE'],  // 펄스 (Pulse)
 ];
 
