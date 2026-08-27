@@ -346,39 +346,89 @@
     /* ══════════════════════════
        SCREEN 3B — ROGUELIKE CHARACTER SELECT
     ══════════════════════════ */
-    .csel-body {
-      flex:1; padding:28px 40px; overflow-y:auto;
-      display:flex; flex-wrap:wrap; gap:16px; align-content:flex-start; justify-content:center;
-      background:linear-gradient(160deg,#0a0a1e,#07071a);
-    }
-    .csel-card {
-      width:220px; flex-shrink:0;
-      background:var(--card-bg); border:1px solid var(--border);
-      border-radius:12px; overflow:hidden; cursor:pointer;
-      display:flex; flex-direction:column;
-      transition:border-color .15s, transform .15s, box-shadow .15s;
-    }
-    .csel-card:hover { border-color:var(--accent); transform:translateY(-4px); box-shadow:0 14px 34px rgba(0,0,0,.5), 0 0 22px rgba(0,188,212,.18); }
-    .csel-portrait {
-      height:380px; position:relative;
-      background-color:#05050a;
-      background-image: radial-gradient(circle at 50% 25%, rgba(0,188,212,.14), transparent 65%);
-      border-bottom:1px solid var(--border);
-    }
-    .csel-portrait-img {
-      position:absolute; inset:0;
-      background-size:contain; background-repeat:no-repeat; background-position:center bottom;
-    }
     .csel-p-kestrel { background-image:url('images/kestrel.png'); }
     .csel-p-jube    { background-image:url('images/jube.png'); }
     .csel-p-vane    { background-image:url('images/vane.png'); }
     .csel-p-cipher  { background-image:url('images/cipher.png'); }
     .csel-p-pulse   { background-image:url('images/pulse.png'); }
-    .csel-info { padding:14px 16px; display:flex; flex-direction:column; gap:6px; }
-    .csel-name { font-size:15px; font-weight:800; color:var(--text); }
-    .csel-stats { display:flex; flex-direction:column; gap:3px; margin-top:6px; }
-    .csel-stat-row { display:flex; justify-content:space-between; font-size:11px; }
-    .csel-stat-row span:first-child { color:var(--dim); }
+
+    .csel2-wrap {
+      flex:1; display:flex; flex-direction:column; overflow:hidden;
+      background:
+        radial-gradient(ellipse at 68% 15%, rgba(0,188,212,.10), transparent 55%),
+        linear-gradient(160deg,#0a0a1e,#07071a);
+    }
+    .csel2-main { flex:1; display:flex; overflow:hidden; padding:28px 40px 0; gap:28px; }
+
+    .csel2-left {
+      width:320px; flex-shrink:0;
+      background:var(--card-bg); border:1px solid var(--border);
+      border-radius:14px; padding:26px; display:flex; flex-direction:column; gap:14px;
+      overflow-y:auto;
+    }
+    .csel2-name-row { display:flex; align-items:baseline; gap:8px; flex-wrap:wrap; }
+    .csel2-name    { font-size:22px; font-weight:800; color:var(--text); }
+    .csel2-name-en { font-size:13px; color:var(--accent); font-weight:600; letter-spacing:.04em; }
+
+    .csel2-stats { display:flex; gap:8px; margin-top:4px; }
+    .csel2-stat-box {
+      flex:1; background:rgba(255,255,255,.03); border:1px solid var(--border);
+      border-radius:8px; padding:10px 4px; text-align:center;
+    }
+    .csel2-stat-icon  { font-size:13px; color:var(--dim); }
+    .csel2-stat-label { font-size:10px; color:var(--dim); margin-top:3px; }
+    .csel2-stat-val   { font-size:17px; font-weight:800; color:var(--text); margin-top:2px; }
+
+    .csel2-divider { height:1px; background:var(--border); margin:4px 0; }
+    .csel2-profile-title {
+      font-size:12px; font-weight:700; color:var(--accent); letter-spacing:.03em;
+      border-left:3px solid var(--accent); padding-left:8px;
+    }
+    .csel2-desc { font-size:12px; color:var(--dim); line-height:1.9; }
+
+    .csel2-right {
+      flex:1; position:relative; display:flex; align-items:flex-end; justify-content:center;
+      overflow:hidden; border-radius:14px;
+    }
+    .csel2-illus-glow {
+      position:absolute; width:56vh; height:56vh; max-width:520px; max-height:520px;
+      border-radius:50%; top:8%; left:50%; transform:translateX(-50%);
+      background:radial-gradient(circle, rgba(0,188,212,.22), transparent 70%);
+    }
+    .csel2-illus-ring {
+      position:absolute; width:48vh; height:48vh; max-width:460px; max-height:460px;
+      border-radius:50%; top:12%; left:50%; transform:translateX(-50%);
+      border:1px solid rgba(0,188,212,.25);
+    }
+    .csel2-illus-img {
+      position:relative; width:100%; height:100%; max-width:520px;
+      background-size:contain; background-repeat:no-repeat; background-position:center bottom;
+    }
+
+    .csel2-footer {
+      flex-shrink:0; display:flex; align-items:center; gap:20px; padding:20px 40px 28px;
+    }
+    .csel2-thumbs { flex:1; display:flex; gap:12px; overflow-x:auto; padding:2px; justify-content:center; }
+    .csel2-thumb {
+      width:92px; flex-shrink:0; cursor:pointer;
+      border:1px solid var(--border); border-radius:10px; overflow:hidden;
+      background:var(--card-bg); transition:border-color .15s, transform .15s, box-shadow .15s;
+    }
+    .csel2-thumb:hover { transform:translateY(-3px); }
+    .csel2-thumb.on { border-color:var(--accent); box-shadow:0 0 16px rgba(0,188,212,.35); }
+    .csel2-thumb-img { height:92px; background-size:cover; background-position:center top; }
+    .csel2-thumb-name { font-size:11px; text-align:center; padding:5px 2px; color:var(--dim); }
+    .csel2-thumb.on .csel2-thumb-name { color:var(--accent); font-weight:700; }
+
+    .csel2-nav-btn {
+      flex-shrink:0; padding:14px 24px; border-radius:10px; border:1px solid var(--border);
+      background:var(--card-bg); color:var(--text); font-size:13px; font-weight:600; cursor:pointer;
+      display:flex; align-items:center; gap:8px; transition:border-color .15s, background .15s;
+      white-space:nowrap;
+    }
+    .csel2-nav-btn:hover { border-color:var(--accent); }
+    .csel2-deploy-btn { border-color:#3a7a3a; color:#8bd97c; }
+    .csel2-deploy-btn:hover { background:rgba(76,175,80,.08); border-color:#4caf50; }
 
     /* ══════════════════════════
        SCREEN 4 — CHARACTER INFO
@@ -962,7 +1012,35 @@
     <div class="screen-title">캐릭터 선택</div>
     <span style="font-size:12px;color:var(--dim);margin-left:6px;">도전 로그라이크에 출전할 캐릭터 1인을 선택하세요</span>
   </div>
-  <div class="csel-body" id="csel-body"></div>
+  <div class="csel2-wrap">
+    <div class="csel2-main">
+      <div class="csel2-left">
+        <div class="csel2-name-row">
+          <div class="csel2-name" id="csel2-name">케스트럴</div>
+          <div class="csel2-name-en" id="csel2-name-en">/ KESTREL</div>
+        </div>
+        <div class="c-role-tag rt-tank" id="csel2-role">탱커</div>
+        <div class="csel2-stats">
+          <div class="csel2-stat-box"><div class="csel2-stat-icon">❤</div><div class="csel2-stat-label">체력</div><div class="csel2-stat-val" id="csel2-hp">180</div></div>
+          <div class="csel2-stat-box"><div class="csel2-stat-icon">⚔</div><div class="csel2-stat-label">공격력</div><div class="csel2-stat-val" id="csel2-atk">22</div></div>
+          <div class="csel2-stat-box"><div class="csel2-stat-icon">🛡</div><div class="csel2-stat-label">방어력</div><div class="csel2-stat-val" id="csel2-def">35</div></div>
+        </div>
+        <div class="csel2-divider"></div>
+        <div class="csel2-profile-title">전투 프로필</div>
+        <div class="csel2-desc" id="csel2-desc"></div>
+      </div>
+      <div class="csel2-right">
+        <div class="csel2-illus-glow"></div>
+        <div class="csel2-illus-ring"></div>
+        <div class="csel2-illus-img csel-p-kestrel" id="csel2-illus-img"></div>
+      </div>
+    </div>
+    <div class="csel2-footer">
+      <div class="csel2-nav-btn" onclick="go('battle')">← 뒤로</div>
+      <div class="csel2-thumbs" id="csel2-thumbs"></div>
+      <div class="csel2-nav-btn csel2-deploy-btn" onclick="deployRogueChar()">✔ 작전 투입</div>
+    </div>
+  </div>
 </div>
 
 <!-- ═══════════════════════════════════════
@@ -1208,6 +1286,7 @@ const REF_BASE = 'assets/references/';
 const REF_MAP = {
   menu:          {name:'로비/메인 메뉴',  imgs:[['ref_01_lobby.png','로비화면 (메인 메뉴)']]},
   battle:        {name:'전투 모드',       imgs:[['ref_07_battle_mode.png','전투 모드 선택']]},
+  charsel:       {name:'캐릭터 선택',     imgs:[['ref_11_charselect.png','로그라이크 캐릭터 선택']]},
   char:          {name:'캐릭터 정보',     imgs:[['ref_05_character.png','캐릭터 정보']]},
   team:          {name:'덱 관리',         imgs:[['ref_06_team.png','덱 관리']]},
   rogue:         {name:'로그라이크 맵',   imgs:[['ref_08_roguelike_map.png','로그라이크 스테이지 맵']]},
@@ -1278,22 +1357,27 @@ function storyBack() {
 /* ── character data ── */
 const CHARS={
   kestrel:{icon:'🛡',name:'케스트럴',role:'탱커',rc:'rt-tank',hp:180,atk:22,def:35,spd:12,
+    desc:'최전선에서 아군을 보호하는 견고한 방패.<br>강력한 방어 능력과 도발 스킬로 적의 공격을 이끈다.',
     base:[{n:4,nm:'방패 치기',ef:'단일 공격 6',c:'#607d8b'},{n:8,nm:'베스천 전개',ef:'방어막 +15',c:'#00bcd4'},{n:16,nm:'장벽 생성',ef:'타일 고정',c:'#4caf50'},{n:32,nm:'충격파',ef:'광역 공격 22',c:'#ff9800'},{n:64,nm:'철벽 요새',ef:'방어막 +40',c:'#f44336'}],
     unl: [{n:4,nm:'반격 자세',ef:'피해 반사 30%',c:'#607d8b'},{n:8,nm:'도발',ef:'적 집중 유도',c:'#00bcd4'}],
     lk:  [{n:16,nm:'?',ef:'?',c:'#333'},{n:32,nm:'?',ef:'?',c:'#333'},{n:128,nm:'?',ef:'?',c:'#333'}]},
   jube:{icon:'⚡',name:'주베',role:'스카우트',rc:'rt-sct',hp:120,atk:18,def:15,spd:28,
+    desc:'전장을 누비는 빠른 발걸음.<br>기동력을 살려 적진을 교란하고 아군의 진형을 재정비한다.',
     base:[{n:4,nm:'빠른 이동',ef:'타일 강제 이동',c:'#ffd740'},{n:4,nm:'슬라이더',ef:'슬라이드 +1',c:'#ffd740'},{n:8,nm:'부스터',ef:'단일 공격 10',c:'#ff9800'},{n:16,nm:'쇄도',ef:'광역 공격 14',c:'#f44336'},{n:32,nm:'네온 슬래시',ef:'단일 공격 30',c:'#c0392b'}],
     unl: [{n:4,nm:'타일 흡수',ef:'타일 병합 +1',c:'#ffd740'}],
     lk:  [{n:16,nm:'?',ef:'?',c:'#333'},{n:64,nm:'?',ef:'?',c:'#333'}]},
   vane:{icon:'🎯',name:'베인',role:'스나이퍼',rc:'rt-snp',hp:100,atk:45,def:10,spd:16,
+    desc:'한 발의 총성으로 전황을 뒤집는 저격수.<br>높은 화력으로 핵심 표적을 정확히 제거한다.',
     base:[{n:4,nm:'정밀 조준',ef:'단일 공격 8',c:'#e53935'},{n:8,nm:'저격',ef:'단일 공격 18',c:'#e74c3c'},{n:16,nm:'관통탄',ef:'방어 무시',c:'#ff5722'},{n:32,nm:'심장 겨냥',ef:'단일 공격 40',c:'#ff6b35'},{n:64,nm:'라스트 노트',ef:'단일 공격 80',c:'#ff3d00'}],
     unl: [{n:8,nm:'저격 예열',ef:'다음 공격 +50%',c:'#e74c3c'},{n:16,nm:'다중 조준',ef:'3연속 10',c:'#ff5722'}],
     lk:  [{n:32,nm:'?',ef:'?',c:'#333'},{n:128,nm:'?',ef:'?',c:'#333'}]},
   cipher:{icon:'👁',name:'사이퍼',role:'호크',rc:'rt-hwk',hp:110,atk:20,def:18,spd:20,
+    desc:'정보전의 지배자.<br>적의 약점을 분석하고 시스템을 해킹해 전투를 유리하게 이끈다.',
     base:[{n:4,nm:'스캔',ef:'취약 표시',c:'#9c27b0'},{n:4,nm:'해킹 패킷',ef:'디버프 부여',c:'#9c27b0'},{n:8,nm:'취약 지정',ef:'피해 +30%',c:'#7b1fa2'},{n:16,nm:'예측 조작',ef:'적 카운트 +1',c:'#6a1b9a'},{n:32,nm:'데이터 붕괴',ef:'광역 디버프',c:'#4a148c'}],
     unl: [{n:8,nm:'헤르메스',ef:'드론 배치',c:'#7b1fa2'}],
     lk:  [{n:32,nm:'?',ef:'?',c:'#333'},{n:64,nm:'?',ef:'?',c:'#333'},{n:128,nm:'?',ef:'?',c:'#333'}]},
   pulse:{icon:'💊',name:'펄스',role:'서스테이너',rc:'rt-sus',hp:130,atk:12,def:20,spd:18,
+    desc:'전선을 지탱하는 생명줄.<br>지속적인 회복과 정화로 아군의 생존을 책임진다.',
     base:[{n:4,nm:'응급 처치',ef:'아군 회복 10',c:'#e91e63'},{n:4,nm:'나노 필드',ef:'방해 타일 정화',c:'#e91e63'},{n:8,nm:'나노 치유',ef:'아군 회복 20',c:'#c2185b'},{n:16,nm:'회복 파동',ef:'전체 회복 15',c:'#880e4f'},{n:32,nm:'에테르 방출',ef:'전체 회복 30',c:'#ad1457'}],
     unl: [{n:8,nm:'생명선',ef:'HP 유지',c:'#c2185b'},{n:16,nm:'정화 파동',ef:'디버프 제거',c:'#880e4f'}],
     lk:  [{n:64,nm:'?',ef:'?',c:'#333'},{n:128,nm:'?',ef:'?',c:'#333'}]},
@@ -1360,26 +1444,36 @@ buildCharList(); selChar('kestrel');
 /* ── roguelike character select ── */
 let ROGUE_CHAR = 'kestrel';
 function buildCharSelect(){
-  document.getElementById('csel-body').innerHTML = CKEYS.map(k=>{
-    const c=CHARS[k];
+  document.getElementById('csel2-thumbs').innerHTML = CKEYS.map(k=>{
+    const c = CHARS[k];
     return `
-    <div class="csel-card" onclick="chooseRogueChar('${k}')">
-      <div class="csel-portrait"><div class="csel-portrait-img csel-p-${k}"></div></div>
-      <div class="csel-info">
-        <div class="csel-name">${c.name}</div>
-        <div class="c-role-tag ${c.rc}">${c.role}</div>
-        <div class="csel-stats">
-          <div class="csel-stat-row"><span>체력</span><span>${c.hp}</span></div>
-          <div class="csel-stat-row"><span>공격력</span><span>${c.atk}</span></div>
-          <div class="csel-stat-row"><span>방어력</span><span>${c.def}</span></div>
-        </div>
-      </div>
+    <div class="csel2-thumb ${k===ROGUE_CHAR?'on':''}" data-key="${k}" onclick="selectRogueChar('${k}')">
+      <div class="csel2-thumb-img csel-p-${k}"></div>
+      <div class="csel2-thumb-name">${c.name}</div>
     </div>`;
   }).join('');
+  renderRogueCharDetail();
 }
-function chooseRogueChar(k){
+function selectRogueChar(k){
   ROGUE_CHAR = k;
-  const c = CHARS[k];
+  document.querySelectorAll('#csel2-thumbs .csel2-thumb').forEach(t=>t.classList.toggle('on', t.dataset.key===k));
+  renderRogueCharDetail();
+}
+function renderRogueCharDetail(){
+  const c = CHARS[ROGUE_CHAR];
+  document.getElementById('csel2-name').textContent = c.name;
+  document.getElementById('csel2-name-en').textContent = '/ ' + ROGUE_CHAR.toUpperCase();
+  const roleEl = document.getElementById('csel2-role');
+  roleEl.textContent = c.role;
+  roleEl.className = 'c-role-tag ' + c.rc;
+  document.getElementById('csel2-hp').textContent = c.hp;
+  document.getElementById('csel2-atk').textContent = c.atk;
+  document.getElementById('csel2-def').textContent = c.def;
+  document.getElementById('csel2-desc').innerHTML = c.desc || '';
+  document.getElementById('csel2-illus-img').className = 'csel2-illus-img csel-p-' + ROGUE_CHAR;
+}
+function deployRogueChar(){
+  const c = CHARS[ROGUE_CHAR];
   document.getElementById('rogue-char-icon').textContent = c.icon;
   document.getElementById('rogue-char-name').textContent = c.name;
   document.getElementById('rogue-hp-txt').textContent = `${c.hp} / ${c.hp}`;
