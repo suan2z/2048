@@ -42,6 +42,7 @@ nav:
     - 캐릭터 시스템: systems/character.md
     - 보드 시스템: systems/board.md
     - 카드 시스템: systems/card.md
+    - 전투 밸런스 기준: systems/balance.md
     - 전투 흐름: systems/combat.md
     - 적 AI: systems/enemy.md
     - 전투 화면 목업: combat_mockup.md
