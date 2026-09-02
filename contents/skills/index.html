@@ -1,0 +1,3454 @@
+
+<!doctype html>
+<html lang="ko" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://suan2z.github.io/2048/contents/skills/">
+      
+      
+        <link rel="prev" href="../characters/">
+      
+      
+        <link rel="next" href="../../resources/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>스킬 - 테세라위버 기획서</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="teal" data-md-color-accent="cyan">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#_1" class="md-skip">
+          콘텐츠로 이동
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="상단/헤더">
+    <a href="../.." title="테세라위버 기획서" class="md-header__button md-logo" aria-label="테세라위버 기획서" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            테세라위버 기획서
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              스킬
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="검색" placeholder="검색" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="검색">
+        
+        <button type="reset" class="md-search__icon md-icon" title="지우기" aria-label="지우기" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            검색 초기화
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="탭" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  게임 개요
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../systems/overview/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  인게임 전투
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../outgame/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  게임 세부 시스템
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../outgame_flowchart/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  아웃게임 UI
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../schema/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  데이터
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../scenario/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  콘텐츠
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../resources/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  필요 리소스
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../schedule/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  일정
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../backup/concept_A/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  백업
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--lifted md-nav--integrated" aria-label="네비게이션" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="테세라위버 기획서" class="md-nav__button md-logo" aria-label="테세라위버 기획서" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    테세라위버 기획서
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    게임 개요
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    인게임 전투
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    인게임 전투
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../systems/overview/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    인게임 전투 개요
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../systems/character/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    캐릭터 시스템
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../systems/board/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    보드 시스템
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../systems/card/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    카드 시스템
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../systems/balance/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    전투 밸런스 기준
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../systems/combat/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    전투 흐름
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../systems/enemy/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    적 AI
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../combat_mockup/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    전투 화면 목업
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    게임 세부 시스템
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    게임 세부 시스템
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../outgame/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    아웃게임 시스템
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../systems/stage/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    스테이지 진행
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../systems/growth/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    성장 시스템
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    아웃게임 UI
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    아웃게임 UI
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../outgame_flowchart/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    아웃게임 UI구조
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../outgame_mockup/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UI 목업
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../outgame_reference/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    참고 레퍼런스
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    데이터
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    데이터
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../schema/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    스키마 설계
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../enums/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    열거형 정의
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data_sheet/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    기획 테이블 시트
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    콘텐츠
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    콘텐츠
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../scenario/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    시나리오
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../characters/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    캐릭터
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    스킬
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    스킬
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="목차">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      목차
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. 개요
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-kestrel" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. 케스트럴 (Kestrel) — 탱커
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-jube" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. 주베 (Jube) — 스카우트
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-vayne" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. 베인 (Vayne) — 스나이퍼
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-cypher" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. 사이퍼 (Cypher) — 호크
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-pulse" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. 펄스 (Pulse) — 서스테이너
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. 캐릭터별 카드 구성 요약
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. 미결 사항
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_23" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        관련 문서
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../resources/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    필요 리소스
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../schedule/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    일정
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_9" >
+        
+          
+          <label class="md-nav__link" for="__nav_9" id="__nav_9_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    백업
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_9">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    백업
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../backup/concept_A/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    안 A — 카제나 방식 × 패키지 RPG
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../backup/concept_B/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    안 B — 스테이지 클리어 × 덱 리셋 로그라이크
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../backup/concept_C/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    안 C — 2048 에너지 보드 × 덱 카드 RPG
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../references/limbus/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    림버스 컴퍼니
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../references/chaos_zero_nightmare/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    카오스 제로 나이트메어
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="_1">스킬</h1>
+<p><small style="color:#7070a0;font-family:'Roboto Mono',monospace;background:rgba(255,255,255,0.05);padding:2px 12px;border-radius:20px;border:1px solid rgba(255,255,255,0.08);">📄 docs/contents/skills.md</small></p>
+<blockquote>
+<p>캐릭터별 실제 스킬 카드 목록을 정의하는 <strong>콘텐츠 문서</strong>다.
+카드의 시스템 규칙(구조체·덱 운영·드로우·발동 흐름)은 <a href="../../systems/card/">카드 시스템</a>, 캐릭터 설정은 <a href="../characters/">캐릭터</a>를 참조한다.</p>
+</blockquote>
+<hr />
+<h2 id="1">1. 개요</h2>
+<p>스킬은 곧 <strong>스킬 카드</strong>다. 각 카드에는 보드에서 소모할 <strong>발동 숫자(코스트)</strong>가 지정되며, 허용값은 <code>0</code>과 2의 거듭제곱 <code>2 ~ 2048</code>이다. 숫자가 높을수록 강력하다.</p>
+<p>전투는 <strong>1인 출전</strong>이므로, 해당 전투의 덱은 출전 캐릭터의 스킬 카드로만 구성된다.</p>
+<p><strong>현재 캐릭터당 30장 · 총 150장</strong>을 정의한다. 최종 목표 규모(70장 이상)를 충족하며, 추가 확장 여지는 각 캐릭터의 빈 코스트 슬롯에 남아 있다.</p>
+<blockquote>
+<p>카드명에 <strong><code>†</code></strong> 표시가 있는 카드는 <a href="../../systems/balance/">systems/balance.md</a>의 신규 수치 공식(공격 <code>p=0.65</code>, 방어막·회복 <code>p=0.75</code>)으로 산정한 카드다. 표시 없는 기존 카드는 아직 이전 선형 스케일 그대로이며(S-6, BAL-2 미결), 추후 전체 재계산 시 함께 정리한다.</p>
+</blockquote>
+<h3 id="_2">캐릭터 전용 원칙</h3>
+<p><strong>모든 스킬은 캐릭터 고유다. 여러 캐릭터가 함께 쓰는 공통 스킬은 존재하지 않는다.</strong> (<a href="../../systems/card/">card.md §1-1</a>)</p>
+<ul>
+<li>카드 획득 경로(전투 보상·상점·이벤트) 전부 <strong>출전 캐릭터 소유 카드만</strong> 후보로 제시한다.</li>
+<li>같은 역할을 하는 카드라도 캐릭터마다 <strong>이름·수치·연출이 모두 다르다.</strong> 예를 들어 방어막 부여 카드는 케스트럴 "베스천 전개", 사이퍼 "방화벽", 펄스 "바이오 실드"로 각각 별개의 카드다.</li>
+<li>따라서 <strong>캐릭터 선택이 곧 카드 풀 선택</strong>이며, 코스트 밴드·슬라이드 스탯과 함께 전투 경험 전체를 규정한다.</li>
+</ul>
+<h3 id="_3">코스트 밴드와 슬라이드는 캐릭터가 정한다</h3>
+<p>캐릭터마다 <strong>사용하는 카드 코스트 범위가 고정</strong>되어 있고, 턴당 슬라이드 횟수도 <strong>캐릭터 고유 스탯</strong>이다. 핸드 구성이나 드로우 운과 무관하며, 전투 내내 동일하다. (<a href="../../systems/character/">character.md §슬라이드 스탯</a> · <a href="../../systems/board/">board.md §5-1</a>)</p>
+<div class="highlight"><pre><span></span><code>maxSlides = 캐릭터 슬라이드 스탯 + 유물 증감
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th>캐릭터</th>
+<th>역할</th>
+<th style="text-align: center;">코스트 밴드</th>
+<th style="text-align: center;"><strong>슬라이드 스탯</strong></th>
+<th style="text-align: center;">상한 완성 필요 (<code>N/2</code>)</th>
+<th style="text-align: center;">한 턴 내 완성</th>
+<th>턴 호흡</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>주베</strong></td>
+<td>스카우트</td>
+<td style="text-align: center;">2 ~ 64</td>
+<td style="text-align: center;"><strong>30</strong></td>
+<td style="text-align: center;">32</td>
+<td style="text-align: center;">✗</td>
+<td>짧고 빠르게 끊어 감</td>
+</tr>
+<tr>
+<td><strong>사이퍼</strong></td>
+<td>호크</td>
+<td style="text-align: center;">4 ~ 128</td>
+<td style="text-align: center;"><strong>60</strong></td>
+<td style="text-align: center;">64</td>
+<td style="text-align: center;">✗</td>
+<td>짧은~중간. 유틸 위주</td>
+</tr>
+<tr>
+<td><strong>펄스</strong></td>
+<td>서스테이너</td>
+<td style="text-align: center;">8 ~ 256</td>
+<td style="text-align: center;"><strong>120</strong></td>
+<td style="text-align: center;">128</td>
+<td style="text-align: center;">✗</td>
+<td>중간. 유지하며 운영</td>
+</tr>
+<tr>
+<td><strong>케스트럴</strong></td>
+<td>탱커</td>
+<td style="text-align: center;">16 ~ 512</td>
+<td style="text-align: center;"><strong>260</strong></td>
+<td style="text-align: center;">256</td>
+<td style="text-align: center;">✓</td>
+<td>길게 버티며 쌓음</td>
+</tr>
+<tr>
+<td><strong>베인</strong></td>
+<td>스나이퍼</td>
+<td style="text-align: center;">32 ~ 1024</td>
+<td style="text-align: center;"><strong>520</strong></td>
+<td style="text-align: center;">512</td>
+<td style="text-align: center;">✓</td>
+<td>가장 길게 쌓아 한 방</td>
+</tr>
+</tbody>
+</table>
+<p><strong>두 갈래의 운영 감각</strong> — 주베·사이퍼·펄스는 슬라이드가 상한 완성에 살짝 못 미쳐(각 -2·-4·-8) <strong>상한 카드를 쓰려면 턴을 넘겨 보드를 쌓아야</strong> 한다. 반면 케스트럴·베인은 여유가 있어(+4·+8) <strong>한 턴에 몰아서</strong> 완성할 수 있다.</p>
+<blockquote>
+<p><strong>2026-09-02 밴드 재설정</strong> — 캐릭터별 최저 코스트를 한 단계씩 끌어올려(캐릭터 최저 코스트가 이전 밴드의 두 번째 값이 되도록) 저코스트 구간을 좁혔다. 이전 밴드 대비 제외된 코스트 구간의 카드는 삭제하지 않고 <strong>획득 열에 <code>보류</code>로 표기</strong>해 로스터에 남겨둔다 — 추후 각 캐릭터에 더 낮은 코스트의 신규 카드가 추가될 수 있어, 그 여지를 남겨두기 위함이다. 상세는 <a href="../../systems/balance/">systems/balance.md §7-4</a> 참고.</p>
+<p>베인만 <strong>0·2 코스트가 없다.</strong> 짧게 끊을 수단이 없다는 것이 "저격수" 정체성을 만든다.</p>
+</blockquote>
+<h3 id="_4">등급 대응</h3>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;">발동 숫자</th>
+<th>등급</th>
+<th>성격</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;">0</td>
+<td>무코스트</td>
+<td>퍼즐 불요. 소량 유틸·드로우</td>
+</tr>
+<tr>
+<td style="text-align: center;">2 · 4</td>
+<td>기본</td>
+<td>약공격, 소량 유틸</td>
+</tr>
+<tr>
+<td style="text-align: center;">8 · 16</td>
+<td>일반</td>
+<td>단일 공격, 디버프 1개</td>
+</tr>
+<tr>
+<td style="text-align: center;">32 · 64</td>
+<td>강화</td>
+<td>중간 공격, 광역 디버프, 회복</td>
+</tr>
+<tr>
+<td style="text-align: center;">128 · 256</td>
+<td>강력</td>
+<td>강한 광역 공격, 방어막</td>
+</tr>
+<tr>
+<td style="text-align: center;">512 · 1024</td>
+<td>필살</td>
+<td>캐릭터 전용 필살기</td>
+</tr>
+<tr>
+<td style="text-align: center;">2048</td>
+<td>초월</td>
+<td>전투 판도를 뒤집는 효과</td>
+</tr>
+</tbody>
+</table>
+<h3 id="_5">수치 기준</h3>
+<p>모든 수치는 아래 기준으로 산정한 <strong>임시값</strong>이다. 아래 표의 "기본 스케일"은 <a href="../../systems/balance/">systems/balance.md</a>에서 정한 정식 밸런스 기준으로 대체되었으며, 실제 100장 수치를 그 공식으로 재계산하는 작업은 아직 미착수다(미결 S-6, BAL-2 연동).</p>
+<table>
+<thead>
+<tr>
+<th>항목</th>
+<th>기준</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>기본 스케일</strong></td>
+<td>~~값은 코스트에 비례~~ → <strong><a href="../../systems/balance/">systems/balance.md §2</a></strong> 참고. 수치는 코스트의 거듭제곱(<code>p &lt; 1</code>, 공격 0.6~0.65 · 방어막·회복 0.7~0.75)에 비례해 저코스트는 유지하고 고코스트로 갈수록 완만해지도록 산정한다</td>
+</tr>
+<tr>
+<td><strong>역할 배율</strong></td>
+<td>공격은 베인 ×1.4 · 사이퍼 ×1.0 · 주베 ×0.9 · 케스트럴 ×0.8 · 펄스 ×0.7 / 방어는 케스트럴 ×1.5 · 펄스 ×1.2 · 사이퍼 ×0.9 · 주베 ×0.8 · 베인 ×0.5 (배율은 캐릭터별 앵커 카드 값에 이미 반영되어 있으므로 별도 계산 불필요)</td>
+</tr>
+<tr>
+<td><strong>광역 공격</strong></td>
+<td>같은 코스트 단일 공격의 <strong>×0.7</strong>. 다수 적을 때 총 피해가 역전되도록 설계</td>
+</tr>
+<tr>
+<td><strong>다단 공격</strong></td>
+<td>타격 총합이 같은 코스트 단일 공격과 비슷. 분산되는 대신 방어막 관통·연계에 유리</td>
+</tr>
+<tr>
+<td><strong>회복</strong></td>
+<td>방어막과 동일 스케일. 방어막은 선불(피해 예방), 회복은 후불(피해 복구)</td>
+</tr>
+<tr>
+<td><strong>버프·디버프</strong></td>
+<td><code>%</code> 증감 + 지속 턴 수. 지속 턴은 액션 버튼 횟수 기준</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><strong>획득</strong> 열 — <code>기본</code>은 로그라이크 시작 시 보유(캐릭터당 정확히 <strong>10장</strong>: 공격 4 + 방어 4 + 지원/특수 2, 저코스트 위주 · 최고 코스트 카드 제외). <code>해금</code>은 보상·상점 풀 등장. 상세 정책은 <a href="../../systems/balance/">systems/balance.md §7</a> 참고.</p>
+<p><strong>동일 계열 카드명</strong> — 시작 덱의 공격·방어 카드 중 저~중코스트 구간은 <strong>같은 카드명</strong>을 공유한다(코스트만 다르고 이름·이미지는 동일한 "스펙업" 카드). 각 계열의 최고 코스트 단계는 별도 이름을 유지해 계열 내 상위 변형임을 드러낸다.</p>
+<p><strong><code>보류</code></strong> — 2026-09-02 밴드 재설정으로 캐릭터 최저 코스트보다 낮아져 현재 로스터에서 제외된 카드. 삭제된 것은 아니며, 추후 해당 캐릭터에 더 낮은 코스트 카드가 필요해지면 부활 후보가 된다.</p>
+<p>사용 효과 타입은 <a href="../../systems/card/">card.md §2-2</a>에서 확정한 <strong>7종</strong>(<code>ATTACK</code>·<code>SHIELD</code>·<code>HEAL</code>·<code>BUFF</code>·<code>DEBUFF</code>·<code>UTILITY</code>·<code>PERSISTENT</code>)에 모두 대응된다. 표의 <code>드로우</code>·<code>유틸</code>은 <code>UTILITY</code>, <code>지속</code>은 <code>PERSISTENT</code>에 해당한다.</p>
+</blockquote>
+<hr />
+<h2 id="2-kestrel">2. 케스트럴 (Kestrel) — 탱커</h2>
+<blockquote>
+<p>장벽 타일 생성, 적 공격 차단 · 핵심 장비 <strong>베스천(The Bastion)</strong>
+밴드 <strong>16~512</strong> · 슬라이드 <strong>260</strong> · HP 180 · ATK 22 · DEF 35 · <strong>방어 특화</strong></p>
+</blockquote>
+<h3 id="_6">공격 카드</h3>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;">코스트</th>
+<th>카드명</th>
+<th>효과</th>
+<th style="text-align: center;">획득</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;">2</td>
+<td>방패 치기</td>
+<td>단일 공격 3</td>
+<td style="text-align: center;">보류</td>
+</tr>
+<tr>
+<td style="text-align: center;">4</td>
+<td>방패 치기 †</td>
+<td>단일 공격 5</td>
+<td style="text-align: center;">보류</td>
+</tr>
+<tr>
+<td style="text-align: center;">8</td>
+<td>방패 치기</td>
+<td>단일 공격 10</td>
+<td style="text-align: center;">보류</td>
+</tr>
+<tr>
+<td style="text-align: center;">16</td>
+<td>여진 †</td>
+<td>광역 공격 8</td>
+<td style="text-align: center;">기본</td>
+</tr>
+<tr>
+<td style="text-align: center;">32</td>
+<td>여진</td>
+<td>광역 공격 24</td>
+<td style="text-align: center;">기본</td>
+</tr>
+<tr>
+<td style="text-align: center;">64</td>
+<td>여진 †</td>
+<td>단일 공격 29</td>
+<td style="text-align: center;">기본</td>
+</tr>
+<tr>
+<td style="text-align: center;">128</td>
+<td>분쇄</td>
+<td>단일 공격 130</td>
+<td style="text-align: center;">기본</td>
+</tr>
+<tr>
+<td style="text-align: center;">256</td>
+<td>대지 강타</td>
+<td>광역 공격 175</td>
+<td style="text-align: center;">해금</td>
+</tr>
+<tr>
+<td style="text-align: center;">512</td>
+<td>파쇄 강타</td>
+<td>단일 공격 480</td>
+<td style="text-align: center;">해금</td>
+</tr>
+</tbody>
+</table>
+<h3 id="_7">방어 카드</h3>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;">코스트</th>
+<th>카드명</th>
+<th>효과</th>
+<th style="text-align: center;">획득</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;">4</td>
+<td>베스천 전개</td>
+<td>방어막 8</td>
+<td style="text-align: center;">보류</td>
+</tr>
+<tr>
+<td style="text-align: center;">8</td>
+<td>베스천 전개 †</td>
+<td>방어막 13</td>
+<td style="text-align: center;">보류</td>
+</tr>
+<tr>
+<td style="text-align: center;">16</td>
+<td>베스천 전개</td>
+<td>방어막 29</td>
+<td style="text-align: center;">기본</td>
+</tr>
+<tr>
+<td style="text-align: center;">32</td>
+<td>베스천 전개 †</td>
+<td>방어막 38</td>
+<td style="text-align: center;">기본</td>
+</tr>
+<tr>
+<td style="text-align: center;">64</td>
+<td>베스천 전개</td>
+<td>방어막 105</td>
+<td style="text-align: center;">기본</td>
+</tr>
+<tr>
+<td style="text-align: center;">128</td>
+<td>요새 강화 †</td>
+<td>방어막 108</td>
+<td style="text-align: center;">기본</td>
+</tr>
+<tr>
+<td style="text-align: center;">256</td>
+<td>요새화</td>
+<td>방어막 390</td>
+<td style="text-align: center;">해금</td>
+</tr>
+<tr>
+<td style="text-align: center;">512</td>
+<td>철벽 요새</td>
+<td>방어막 750</td>
+<td style="text-align: center;">해금</td>
+</tr>
+</tbody>
+</table>
+<h3 id="_8">지원 카드</h3>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;">코스트</th>
+<th>카드명</th>
+<th style="text-align: center;">유형</th>
+<th>효과</th>
+<th style="text-align: center;">획득</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;">0</td>
+<td>반격 자세</td>
+<td style="text-align: center;">버프</td>
+<td>이번 턴 받는 피해의 30%를 공격자에게 반사</td>
+<td style="text-align: center;">보류</td>
+</tr>
+<tr>
+<td style="text-align: center;">2</td>
+<td>위협 †</td>
+<td style="text-align: center;">디버프</td>
+<td>적 1체 공격력 1턴간 -10%</td>
+<td style="text-align: center;">보류</td>
+</tr>
+<tr>
+<td style="text-align: center;">4</td>
+<td>도발</td>
+<td style="text-align: center;">디버프</td>
+<td>적 1체가 다음 행동을 반드시 캐릭터에게 사용</td>
+<td style="text-align: center;">보류</td>
+</tr>
+<tr>
+<td style="text-align: center;">8</td>
+<td>견고한 자세</td>
+<td style="text-align: center;">버프</td>
+<td>2턴간 방어막 획득량 +30%</td>
+<td style="text-align: center;">보류</td>
+</tr>
+<tr>
+<td style="text-align: center;">16</td>
+<td>재정비</td>
+<td style="text-align: center;">회복</td>
+<td>체력 23 회복</td>
+<td style="text-align: center;">기본</td>
+</tr>
+<tr>
+<td style="text-align: center;">32</td>
+<td>장벽 생성</td>
+<td style="text-align: center;">유틸</td>
+<td>보드 타일 1개를 이동 불가로 고정</td>
+<td style="text-align: center;">기본</td>
+</tr>
+<tr>
+<td style="text-align: center;">64</td>
+<td>강철 의지</td>
+<td style="text-align: center;">버프</td>
+<td>3턴간 받는 피해 -20%</td>
+<td style="text-align: center;">해금</td>
+</tr>
+<tr>
+<td style="text-align: center;">64</td>
+<td>불굴 †</td>
+<td style="text-align: center;">버프</td>
+<td>3턴간 받는 피해 -15% (강철 의지와 합산, 상한 -50%)</td>
+<td style="text-align: center;">해금</td>
+</tr>
+<tr>
+<td style="text-align: center;">128</td>
+<td>총사령관의 명령 †</td>
+<td style="text-align: center;">유틸</td>
+<td>모든 적의 행동 카운트 +1</td>
+<td style="text-align: center;">해금</td>
+</tr>
+</tbody>
+</table>
+<h3 id="_9">추가 스킬덱 — 바리케이드 콤보</h3>
+<p>슬레이 더 스파이어의 <strong>바리케이드 + 몸통 박치기</strong> 조합을 케스트럴 전용으로 이식한 조합 덱. 쌓아 올린 방어막을 그대로 화력으로 전환하는 <strong>"방어가 곧 공격"</strong> 운영이다.</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;">코스트</th>
+<th>카드명</th>
+<th style="text-align: center;">유형</th>
+<th>효과</th>
+<th style="text-align: center;">획득</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;">2</td>
+<td>버티기</td>
+<td style="text-align: center;">방어막</td>
+<td>방어막 4</td>
+<td style="text-align: center;">보류</td>
+</tr>
+<tr>
+<td style="text-align: center;">16</td>
+<td>몸통 박치기</td>
+<td style="text-align: center;">공격</td>
+<td><strong>현재 방어막 수치만큼</strong> 단일 공격. 발동 후 방어막을 0으로 소모</td>
+<td style="text-align: center;">해금</td>
+</tr>
+<tr>
+<td style="text-align: center;">32</td>
+<td>연쇄 타격 †</td>
+<td style="text-align: center;">버프</td>
+<td>다음 "몸통 박치기"의 피해 +30%</td>
+<td style="text-align: center;">해금</td>
+</tr>
+<tr>
+<td style="text-align: center;">128</td>
+<td>바리케이드</td>
+<td style="text-align: center;"><strong>지속</strong></td>
+<td>이번 전투 동안 <strong>몸통 박치기가 방어막을 소모하지 않는다</strong></td>
+<td style="text-align: center;">해금</td>
+</tr>
+</tbody>
+</table>
+<div class="highlight"><pre><span></span><code>[바리케이드 미보유]  방어막 750 → 몸통 박치기 → 750 피해 + 방어막 0   (1회성)
+[바리케이드 보유]    방어막 750 → 몸통 박치기 → 750 피해 + 방어막 유지 (매 턴 반복)
+</code></pre></div>
+<p><strong>자연스러운 제동 장치</strong> — 바리케이드가 있어도 <strong>적의 공격은 방어막을 그대로 깎는다.</strong> 몸통 박치기의 피해량이 곧 남은 생존력이므로, 맞을수록 화력이 줄어든다.</p>
+<p><strong>설계 근거</strong> — 우리 게임은 방어막이 <strong>기본적으로 누적 유지</strong>되므로(슬더스의 턴별 리셋과 다름), 바리케이드를 원본대로 "유지" 역할로 두면 의미가 없다. 역할을 뒤집어 <strong>소모를 막는</strong> 카드로 재정의해, 원본의 손맛은 살리면서 다른 캐릭터의 방어막 규칙은 건드리지 않는다.</p>
+<blockquote>
+<p><strong>[미결 S-10]</strong> 이 조합은 <strong>지속(파워) 효과 타입</strong>과 <strong>파생 수치 참조</strong>(<code>damageSource: CURRENT_SHIELD</code>)를 요구한다. 현재 <code>CardEffectType</code>·<code>EffectParams</code>로는 표현 불가. (<a href="../../systems/card/">card.md 미결 A-1</a> 연동)</p>
+</blockquote>
+<hr />
+<h2 id="3-jube">3. 주베 (Jube) — 스카우트</h2>
+<blockquote>
+<p>낮은 숫자 타일 빠르게 합치기, 타일 강제 이동 · 핵심 장비 <strong>슬라이더(The Sliders)</strong>
+밴드 <strong>2~64</strong> · 슬라이드 <strong>30</strong> (가장 짧음) · HP 120 · ATK 18 · SPD 28 · <strong>경량 다발</strong></p>
+</blockquote>
+<h3 id="_10">공격 카드</h3>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;">코스트</th>
+<th>카드명</th>
+<th>효과</th>
+<th style="text-align: center;">획득</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;">2</td>
+<td>잽</td>
+<td>단일 공격 3</td>
+<td style="text-align: center;">기본</td>
+</tr>
+<tr>
+<td style="text-align: center;">2</td>
+<td>짧은 찌르기 †</td>
+<td>단일 공격 3</td>
+<td style="text-align: center;">해금</td>
+</tr>
+<tr>
+<td style="text-align: center;">4</td>
+<td>잽</td>
+<td>단일 공격 6</td>
+<td style="text-align: center;">기본</td>
+</tr>
+<tr>
+<td style="text-align: center;">4</td>
+<td>이중 타격</td>
+<td>단일 공격 3 × 2회</td>
+<td style="text-align: center;">해금</td>
+</tr>
+<tr>
+<td style="text-align: center;">8</td>
+<td>잽</td>
+<td>단일 공격 11</td>
+<td style="text-align: center;">기본</td>
+</tr>
+<tr>
+<td style="text-align: center;">8</td>
+<td>연속 니킥 †</td>
+<td>단일 공격 4 × 2회</td>
+<td style="text-align: center;">해금</td>
+</tr>
+<tr>
+<td style="text-align: center;">16</td>
+<td>쇄도</td>
+<td>광역 공격 14</td>
+<td style="text-align: center;">기본</td>
+</tr>
+<tr>
+<td style="text-align: center;">16</td>
+<td>회전 슬래시 †</td>
+<td>단일 공격 12</td>
+<td style="text-align: center;">해금</td>
+</tr>
+<tr>
+<td style="text-align: center;">32</td>
+<td>강습</td>
+<td>단일 공격 38</td>
+<td style="text-align: center;">해금</td>
+</tr>
+<tr>
+<td style="text-align: center;">32</td>
+<td>연속 베기</td>
+<td>단일 공격 13 × 3회</td>
+<td style="text-align: center;">해금</td>
+</tr>
+<tr>
+<td style="text-align: center;">64</td>
+<td>네온 슬래시</td>
+<td>단일 공격 74</td>
+<td style="text-align: center;">해금</td>
+</tr>
+<tr>
+<td style="text-align: center;">64</td>
+<td>회오리베기 †</td>
+<td>광역 공격 20</td>
+<td style="text-align: center;">해금</td>
+</tr>
+</tbody>
+</table>
+<h3 id="_11">방어 카드</h3>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;">코스트</th>
+<th>카드명</th>
+<th>효과</th>
+<th style="text-align: center;">획득</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;">2</td>
+<td>즉각 회피 †</td>
+<td>방어막 2</td>
+<td style="text-align: center;">기본</td>
+</tr>
+<tr>
+<td style="text-align: center;">4</td>
+<td>즉각 회피</td>
+<td>방어막 4</td>
+<td style="text-align: center;">기본</td>
+</tr>
+<tr>
+<td style="text-align: center;">8</td>
+<td>즉각 회피</td>
+<td>방어막 8</td>
+<td style="text-align: center;">기본</td>
+</tr>
+<tr>
+<td style="text-align: center;">16</td>
+<td>잔상</td>
+<td>방어막 15</td>
+<td style="text-align: center;">기본</td>
+</tr>
+<tr>
+<td style="text-align: center;">32</td>
+<td>잔영 방벽</td>
+<td>방어막 29</td>
+<td style="text-align: center;">해금</td>
+</tr>
+<tr>
+<td style="text-align: center;">64</td>
+<td>완전 회피 †</td>
+<td>방어막 32</td>
+<td style="text-align: center;">해금</td>
+</tr>
+</tbody>
+</table>
+<h3 id="_12">지원 카드</h3>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;">코스트</th>
+<th>카드명</th>
+<th style="text-align: center;">유형</th>
+<th>효과</th>
+<th style="text-align: center;">획득</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;">0</td>
+<td>슬라이더</td>
+<td style="text-align: center;">유틸</td>
+<td>이번 턴 슬라이드 +1</td>
+<td style="text-align: center;">보류</td>
+</tr>
+<tr>
+<td style="text-align: center;">0</td>
+<td>타일 흡수</td>
+<td style="text-align: center;">유틸</td>
+<td>타일 1개를 인접 타일과 즉시 병합</td>
+<td style="text-align: center;">보류</td>
+</tr>
+<tr>
+<td style="text-align: center;">0</td>
+<td>잔불꽃 †</td>
+<td style="text-align: center;">디버프</td>
+<td>적 1체 공격력 1턴간 -10%</td>
+<td style="text-align: center;">보류</td>
+</tr>
+<tr>
+<td style="text-align: center;">2</td>
+<td>빠른 이동</td>
+<td style="text-align: center;">유틸</td>
+<td>타일 1개를 원하는 빈 칸으로 이동</td>
+<td style="text-align: center;">기본</td>
+</tr>
+<tr>
+<td style="text-align: center;">2</td>
+<td>견제</td>
+<td style="text-align: center;">디버프</td>
+<td>적 1체 공격력 2턴간 -15%</td>
+<td style="text-align: center;">기본</td>
+</tr>
+<tr>
+<td style="text-align: center;">4</td>
+<td>표식</td>
+<td style="text-align: center;">디버프</td>
+<td>적 1체가 받는 피해 2턴간 +15%</td>
+<td style="text-align: center;">해금</td>
+</tr>
+<tr>
+<td style="text-align: center;">4</td>
+<td>허점 노출 †</td>
+<td style="text-align: center;">디버프</td>
+<td>적 1체가 받는 피해 2턴간 +15% (표식과 합산)</td>
+<td style="text-align: center;">해금</td>
+</tr>
+<tr>
+<td style="text-align: center;">8</td>
+<td>교란</td>
+<td style="text-align: center;">디버프</td>
+<td>적 1체가 받는 피해 2턴간 +20%</td>
+<td style="text-align: center;">해금</td>
+</tr>
+<tr>
+<td style="text-align: center;">16</td>
+<td>가속</td>
+<td style="text-align: center;">드로우</td>
+<td>카드 2장 즉시 드로우</td>
+<td style="text-align: center;">해금</td>
+</tr>
+<tr>
+<td style="text-align: center;">16</td>
+<td>연속 가속 †</td>
+<td style="text-align: center;">드로우</td>
+<td>카드 1장 즉시 드로우</td>
+<td style="text-align: center;">해금</td>
+</tr>
+<tr>
+<td style="text-align: center;">32</td>
+<td>잔영 강화 †</td>
+<td style="text-align: center;">버프</td>
+<td>2턴간 방어막 획득량 +25%</td>
+<td style="text-align: center;">해금</td>
+</tr>
+<tr>
+<td style="text-align: center;">64</td>
+<td>그림자 분신</td>
+<td style="text-align: center;">버프</td>
+<td>3턴간 받는 피해 -25%</td>
+<td style="text-align: center;">해금</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><strong>"슬라이더"가 0 코스트인 것이 주베의 핵심이다.</strong> 슬라이드를 얻는 카드가 슬라이드를 요구하면 순환 모순이 되므로, 퍼즐 없이 발동해야만 성립한다. 밴드 상한이 가장 낮아(64) 턴이 짧은 대신, 0 코스트 카드로 그 짧은 턴을 스스로 늘려 쓴다.</p>
+<p><strong>[검토 필요]</strong> 2026-09-02 밴드 재설정(주베 최저 코스트 0→2)으로 "슬라이더"가 <code>보류</code> 처리되어, 위 문단이 설명하는 핵심 정체성과 현재 로스터가 어긋난다. 밴드 실험 결과에 따라 주베만 예외로 0 코스트를 허용하거나, "슬라이더"를 2 코스트 버전으로 재설계하는 두 방향 중 하나를 추후 확정해야 한다.</p>
+<p><strong>[미결 S-8]</strong> "슬라이더"의 +1이 <code>slideCount</code>만 늘리는지 <code>maxSlides</code>를 늘리는지 정의 필요.</p>
+</blockquote>
+<hr />
+<h2 id="4-vayne">4. 베인 (Vayne) — 스나이퍼</h2>
+<blockquote>
+<p>고단계 타일 소모 → 강력한 단일 딜링 · 핵심 장비 <strong>라스트 노트(The Last Note)</strong>
+밴드 <strong>32~1024</strong> · 슬라이드 <strong>520</strong> (가장 김) · HP 100 · ATK 45 · DEF 10 · <strong>단일 고화력</strong></p>
+</blockquote>
+<h3 id="_13">공격 카드</h3>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;">코스트</th>
+<th>카드명</th>
+<th>효과</th>
+<th style="text-align: center;">획득</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;">4</td>
+<td>정밀 조준</td>
+<td>단일 공격 8</td>
+<td style="text-align: center;">보류</td>
+</tr>
+<tr>
+<td style="text-align: center;">4</td>
+<td>연속 조준 †</td>
+<td>단일 공격 4 × 2회</td>
+<td style="text-align: center;">보류</td>
+</tr>
+<tr>
+<td style="text-align: center;">8</td>
+<td>정밀 조준</td>
+<td>단일 공격 8 × 2회</td>
+<td style="text-align: center;">보류</td>
+</tr>
+<tr>
+<td style="text-align: center;">16</td>
+<td>정밀 조준</td>
+<td>단일 공격 30</td>
+<td style="text-align: center;">보류</td>
+</tr>
+<tr>
+<td style="text-align: center;">32</td>
+<td>저격</td>
+<td>단일 공격 58</td>
+<td style="text-align: center;">기본</td>
+</tr>
+<tr>
+<td style="text-align: center;">32</td>
+<td>정밀 저격 †</td>
+<td>단일 공격 31</td>
+<td style="text-align: center;">해금</td>
+</tr>
+<tr>
+<td style="text-align: center;">64</td>
+<td>저격</td>
+<td>단일 공격 38 × 3회</td>
+<td style="text-align: center;">기본</td>
+</tr>
+<tr>
+<td style="text-align: center;">128</td>
+<td>저격</td>
+<td>단일 공격 200 · <strong>방어 무시</strong></td>
+<td style="text-align: center;">기본</td>
+</tr>
+<tr>
+<td style="text-align: center;">128</td>
+<td>관통 조준 †</td>
+<td>단일 공격 76 · <strong>방어 무시</strong></td>
+<td style="text-align: center;">해금</td>
+</tr>
+<tr>
+<td style="text-align: center;">256</td>
+<td>헤드샷</td>
+<td>단일 공격 435</td>
+<td style="text-align: center;">기본</td>
+</tr>
+<tr>
+<td style="text-align: center;">256</td>
+<td>심판의 탄환 †</td>
+<td>단일 공격 120. 대상 체력 30% 이하면 <strong>피해 1.5배</strong></td>
+<td style="text-align: center;">해금</td>
+</tr>
+<tr>
+<td style="text-align: center;">512</td>
+<td>심장 겨냥</td>
+<td>단일 공격 840</td>
+<td style="text-align: center;">해금</td>
+</tr>
+<tr>
+<td style="text-align: center;">512</td>
+<td>처형</td>
+<td>단일 공격 840. 대상 체력 30% 이하면 <strong>피해 2배</strong></td>
+<td style="text-align: center;">해금</td>
+</tr>
+<tr>
+<td style="text-align: center;">1024</td>
+<td>라스트 노트</td>
+<td>단일 공격 1650</td>
+<td style="text-align: center;">해금</td>
+</tr>
+<tr>
+<td style="text-align: center;">1024</td>
+<td>심연 관통 †</td>
+<td>단일 공격 295 · <strong>방어 무시</strong></td>
+<td style="text-align: center;">해금</td>
+</tr>
+</tbody>
+</table>
+<h3 id="_14">방어 카드</h3>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;">코스트</th>
+<th>카드명</th>
+<th>효과</th>
+<th style="text-align: center;">획득</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;">8</td>
+<td>엄폐</td>
+<td>방어막 6</td>
+<td style="text-align: center;">보류</td>
+</tr>
+<tr>
+<td style="text-align: center;">16</td>
+<td>엄폐 †</td>
+<td>방어막 10</td>
+<td style="text-align: center;">보류</td>
+</tr>
+<tr>
+<td style="text-align: center;">32</td>
+<td>엄폐</td>
+<td>방어막 18</td>
+<td style="text-align: center;">기본</td>
+</tr>
+<tr>
+<td style="text-align: center;">64</td>
+<td>엄폐</td>
+<td>방어막 35</td>
+<td style="text-align: center;">기본</td>
+</tr>
+<tr>
+<td style="text-align: center;">128</td>
+<td>엄폐</td>
+<td>방어막 68</td>
+<td style="text-align: center;">기본</td>
+</tr>
+<tr>
+<td style="text-align: center;">256</td>
+<td>장거리 엄폐 †</td>
+<td>방어막 81</td>
+<td style="text-align: center;">기본</td>
+</tr>
+</tbody>
+</table>
+<h3 id="_15">지원 카드</h3>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;">코스트</th>
+<th>카드명</th>
+<th style="text-align: center;">유형</th>
+<th>효과</th>
+<th style="text-align: center;">획득</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;">4</td>
+<td>조준 보정</td>
+<td style="text-align: center;">버프</td>
+<td>다음 공격 카드의 피해 +30%</td>
+<td style="text-align: center;">보류</td>
+</tr>
+<tr>
+<td style="text-align: center;">8</td>
+<td>속사 조준 †</td>
+<td style="text-align: center;">버프</td>
+<td>다음 공격 카드의 피해 +15%</td>
+<td style="text-align: center;">보류</td>
+</tr>
+<tr>
+<td style="text-align: center;">16</td>
+<td>저격 예열</td>
+<td style="text-align: center;">버프</td>
+<td>다음 공격 카드의 피해 +50%</td>
+<td style="text-align: center;">보류</td>
+</tr>
+<tr>
+<td style="text-align: center;">32</td>
+<td>약점 간파</td>
+<td style="text-align: center;">디버프</td>
+<td>적 1체 방어력 3턴간 -30%</td>
+<td style="text-align: center;">기본</td>
+</tr>
+<tr>
+<td style="text-align: center;">32</td>
+<td>냉정 유지 †</td>
+<td style="text-align: center;">디버프</td>
+<td>적 1체 방어력 3턴간 -20% (약점 간파와 합산)</td>
+<td style="text-align: center;">해금</td>
+</tr>
+<tr>
+<td style="text-align: center;">64</td>
+<td>집중</td>
+<td style="text-align: center;">버프</td>
+<td>3턴간 공격 피해 +25%</td>
+<td style="text-align: center;">기본</td>
+</tr>
+<tr>
+<td style="text-align: center;">128</td>
+<td>숨 고르기</td>
+<td style="text-align: center;">드로우</td>
+<td>카드 2장 드로우 + 다음 공격 피해 +20%</td>
+<td style="text-align: center;">해금</td>
+</tr>
+<tr>
+<td style="text-align: center;">256</td>
+<td>완벽한 정적</td>
+<td style="text-align: center;">버프</td>
+<td>다음 공격 카드의 피해 <strong>2배</strong></td>
+<td style="text-align: center;">해금</td>
+</tr>
+<tr>
+<td style="text-align: center;">512</td>
+<td>표적 고정 †</td>
+<td style="text-align: center;">디버프</td>
+<td>적 1체가 받는 피해 2턴간 +40%</td>
+<td style="text-align: center;">해금</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><strong>베인만 0·2 코스트가 없다.</strong> 방어 카드도 배율이 가장 낮아(×0.5) 구색만 갖춘 수준이다. 520 슬라이드로 1024 "라스트 노트"(1650 피해)를 한 턴에 완성할 수 있으나 여유가 8회뿐이라 정밀 플레이를 요구한다. 버프 카드로 한 방의 기댓값을 끌어올리는 것이 핵심 운영이다.</p>
+<p><strong>2026-09-02 밴드 재설정</strong> — 최저 코스트가 4→32로 올라가며 4·8·16 코스트 카드가 전부 <code>보류</code> 처리됐다. 베인은 원래도 저코스트가 희박한 캐릭터였으므로 다섯 캐릭터 중 이번 재설정의 영향이 가장 크다 — 저코스트 카드가 사실상 전무해진다.</p>
+</blockquote>
+<hr />
+<h2 id="5-cypher">5. 사이퍼 (Cypher) — 호크</h2>
+<blockquote>
+<p>적 패턴 사전 표시, 취약 부여, 디버프 · 핵심 장비 <strong>헤르메스(Hermes)</strong> 드론 3기
+밴드 <strong>4~128</strong> · 슬라이드 <strong>60</strong> · HP 110 · ATK 20 · DEF 18 · <strong>디버프 특화</strong></p>
+</blockquote>
+<h3 id="_16">공격 카드</h3>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;">코스트</th>
+<th>카드명</th>
+<th>효과</th>
+<th style="text-align: center;">획득</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;">2</td>
+<td>데이터 스파이크</td>
+<td>단일 공격 3</td>
+<td style="text-align: center;">보류</td>
+</tr>
+<tr>
+<td style="text-align: center;">4</td>
+<td>데이터 스파이크 †</td>
+<td>단일 공격 5</td>
+<td style="text-align: center;">기본</td>
+</tr>
+<tr>
+<td style="text-align: center;">8</td>
+<td>데이터 스파이크</td>
+<td>단일 공격 12</td>
+<td style="text-align: center;">기본</td>
+</tr>
+<tr>
+<td style="text-align: center;">16</td>
+<td>데이터 스파이크 †</td>
+<td>단일 공격 12</td>
+<td style="text-align: center;">기본</td>
+</tr>
+<tr>
+<td style="text-align: center;">32</td>
+<td>시스템 쇼크</td>
+<td>단일 공격 42</td>
+<td style="text-align: center;">기본</td>
+</tr>
+<tr>
+<td style="text-align: center;">64</td>
+<td>과부하</td>
+<td>단일 공격 82</td>
+<td style="text-align: center;">해금</td>
+</tr>
+<tr>
+<td style="text-align: center;">64</td>
+<td>논리 폭탄 †</td>
+<td>단일 공격 29</td>
+<td style="text-align: center;">해금</td>
+</tr>
+<tr>
+<td style="text-align: center;">128</td>
+<td>데이터 붕괴</td>
+<td>광역 공격 112</td>
+<td style="text-align: center;">해금</td>
+</tr>
+</tbody>
+</table>
+<h3 id="_17">방어 카드</h3>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;">코스트</th>
+<th>카드명</th>
+<th>효과</th>
+<th style="text-align: center;">획득</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;">4</td>
+<td>방화벽</td>
+<td>방어막 5</td>
+<td style="text-align: center;">기본</td>
+</tr>
+<tr>
+<td style="text-align: center;">8</td>
+<td>방화벽</td>
+<td>방어막 9</td>
+<td style="text-align: center;">기본</td>
+</tr>
+<tr>
+<td style="text-align: center;">16</td>
+<td>방화벽</td>
+<td>방어막 17</td>
+<td style="text-align: center;">기본</td>
+</tr>
+<tr>
+<td style="text-align: center;">32</td>
+<td>샌드박스 †</td>
+<td>방어막 24</td>
+<td style="text-align: center;">기본</td>
+</tr>
+<tr>
+<td style="text-align: center;">64</td>
+<td>암호화 장벽</td>
+<td>방어막 63</td>
+<td style="text-align: center;">해금</td>
+</tr>
+<tr>
+<td style="text-align: center;">128</td>
+<td>절대 방벽</td>
+<td>방어막 122</td>
+<td style="text-align: center;">해금</td>
+</tr>
+<tr>
+<td style="text-align: center;">128</td>
+<td>격리 프로토콜 †</td>
+<td>방어막 67</td>
+<td style="text-align: center;">해금</td>
+</tr>
+</tbody>
+</table>
+<h3 id="_18">지원 카드</h3>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;">코스트</th>
+<th>카드명</th>
+<th style="text-align: center;">유형</th>
+<th>효과</th>
+<th style="text-align: center;">획득</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;">0</td>
+<td>스캔</td>
+<td style="text-align: center;">유틸</td>
+<td>적 1체의 다음 행동을 미리 표시</td>
+<td style="text-align: center;">보류</td>
+</tr>
+<tr>
+<td style="text-align: center;">0</td>
+<td>노이즈</td>
+<td style="text-align: center;">디버프</td>
+<td>적 1체 공격력 1턴간 -10%</td>
+<td style="text-align: center;">보류</td>
+</tr>
+<tr>
+<td style="text-align: center;">2</td>
+<td>해킹 패킷</td>
+<td style="text-align: center;">디버프</td>
+<td>적 1체가 받는 피해 2턴간 +15%</td>
+<td style="text-align: center;">보류</td>
+</tr>
+<tr>
+<td style="text-align: center;">2</td>
+<td>핑 플러드 †</td>
+<td style="text-align: center;">디버프</td>
+<td>적 1체 방어력 2턴간 -15%</td>
+<td style="text-align: center;">보류</td>
+</tr>
+<tr>
+<td style="text-align: center;">4</td>
+<td>데이터 수집</td>
+<td style="text-align: center;">드로우</td>
+<td>카드 1장 즉시 드로우</td>
+<td style="text-align: center;">기본</td>
+</tr>
+<tr>
+<td style="text-align: center;">8</td>
+<td>취약 지정</td>
+<td style="text-align: center;">디버프</td>
+<td>적 1체가 받는 피해 2턴간 +30%</td>
+<td style="text-align: center;">기본</td>
+</tr>
+<tr>
+<td style="text-align: center;">8</td>
+<td>리버스 셸 †</td>
+<td style="text-align: center;">버프</td>
+<td>3턴간 받는 피해 -15%</td>
+<td style="text-align: center;">해금</td>
+</tr>
+<tr>
+<td style="text-align: center;">16</td>
+<td>시스템 오류</td>
+<td style="text-align: center;">디버프</td>
+<td>적 1체 방어력 3턴간 -25%</td>
+<td style="text-align: center;">해금</td>
+</tr>
+<tr>
+<td style="text-align: center;">16</td>
+<td>헤르메스</td>
+<td style="text-align: center;">유틸</td>
+<td>드론 배치. 3턴간 매 턴 자동 단일 공격 6</td>
+<td style="text-align: center;">해금</td>
+</tr>
+<tr>
+<td style="text-align: center;">32</td>
+<td>예측 조작</td>
+<td style="text-align: center;">유틸</td>
+<td>적 1체의 행동 카운트 +1</td>
+<td style="text-align: center;">해금</td>
+</tr>
+<tr>
+<td style="text-align: center;">32</td>
+<td>다중 접속 †</td>
+<td style="text-align: center;">드로우</td>
+<td>카드 2장 즉시 드로우</td>
+<td style="text-align: center;">해금</td>
+</tr>
+<tr>
+<td style="text-align: center;">64</td>
+<td>방화벽 강화</td>
+<td style="text-align: center;">버프</td>
+<td>3턴간 받는 피해 -20%</td>
+<td style="text-align: center;">해금</td>
+</tr>
+<tr>
+<td style="text-align: center;">64</td>
+<td>제로데이 †</td>
+<td style="text-align: center;">디버프</td>
+<td>적 1체가 받는 피해 2턴간 +40% (취약 지정과 합산)</td>
+<td style="text-align: center;">해금</td>
+</tr>
+<tr>
+<td style="text-align: center;">128</td>
+<td>시스템 마비</td>
+<td style="text-align: center;">디버프</td>
+<td><strong>모든 적</strong>의 행동 카운트 +1</td>
+<td style="text-align: center;">해금</td>
+</tr>
+<tr>
+<td style="text-align: center;">128</td>
+<td>전역 락다운 †</td>
+<td style="text-align: center;">디버프</td>
+<td><strong>모든 적</strong> 방어력 3턴간 -25%</td>
+<td style="text-align: center;">해금</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>사이퍼는 지원 카드가 10장으로 가장 많다. 직접 화력은 평범하지만 <strong>취약·방어력 감소를 겹쳐 아군 피해량을 증폭</strong>시키는 것이 본체다.</p>
+<p><strong>[미결 S-5]</strong> "예측 조작"·"시스템 마비"(적 카운트 +1)와 유물 "시간의 모래"의 중첩 규칙 정의 필요.</p>
+</blockquote>
+<hr />
+<h2 id="6-pulse">6. 펄스 (Pulse) — 서스테이너</h2>
+<blockquote>
+<p>체력 회복, 방해 타일 정화 · 핵심 장비 <strong>에테르(Aether)</strong>
+밴드 <strong>8~256</strong> · 슬라이드 <strong>120</strong> · HP 130 · ATK 12 · DEF 20 · <strong>회복 특화</strong></p>
+</blockquote>
+<h3 id="_19">공격 카드</h3>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;">코스트</th>
+<th>카드명</th>
+<th>효과</th>
+<th style="text-align: center;">획득</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;">2</td>
+<td>나노 침</td>
+<td>단일 공격 2</td>
+<td style="text-align: center;">보류</td>
+</tr>
+<tr>
+<td style="text-align: center;">8</td>
+<td>나노 침 †</td>
+<td>단일 공격 5</td>
+<td style="text-align: center;">기본</td>
+</tr>
+<tr>
+<td style="text-align: center;">16</td>
+<td>나노 침</td>
+<td>단일 공격 15</td>
+<td style="text-align: center;">기본</td>
+</tr>
+<tr>
+<td style="text-align: center;">64</td>
+<td>나노 침</td>
+<td>광역 공격 40</td>
+<td style="text-align: center;">기본</td>
+</tr>
+<tr>
+<td style="text-align: center;">128</td>
+<td>코어 드릴 †</td>
+<td>단일 공격 30</td>
+<td style="text-align: center;">기본</td>
+</tr>
+<tr>
+<td style="text-align: center;">256</td>
+<td>오버로드</td>
+<td>단일 공격 217</td>
+<td style="text-align: center;">해금</td>
+</tr>
+</tbody>
+</table>
+<h3 id="_20">방어 카드</h3>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;">코스트</th>
+<th>카드명</th>
+<th>효과</th>
+<th style="text-align: center;">획득</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;">4</td>
+<td>바이오 실드</td>
+<td>방어막 6</td>
+<td style="text-align: center;">보류</td>
+</tr>
+<tr>
+<td style="text-align: center;">8</td>
+<td>바이오 실드</td>
+<td>방어막 12</td>
+<td style="text-align: center;">기본</td>
+</tr>
+<tr>
+<td style="text-align: center;">16</td>
+<td>바이오 실드 †</td>
+<td>방어막 17</td>
+<td style="text-align: center;">기본</td>
+</tr>
+<tr>
+<td style="text-align: center;">32</td>
+<td>바이오 실드</td>
+<td>방어막 43</td>
+<td style="text-align: center;">기본</td>
+</tr>
+<tr>
+<td style="text-align: center;">128</td>
+<td>에테르 방벽</td>
+<td>방어막 162</td>
+<td style="text-align: center;">기본</td>
+</tr>
+<tr>
+<td style="text-align: center;">256</td>
+<td>에테르 코어 †</td>
+<td>방어막 136</td>
+<td style="text-align: center;">해금</td>
+</tr>
+</tbody>
+</table>
+<h3 id="_21">회복 카드</h3>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;">코스트</th>
+<th>카드명</th>
+<th>효과</th>
+<th style="text-align: center;">획득</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;">2</td>
+<td>응급 처치</td>
+<td>체력 4 회복</td>
+<td style="text-align: center;">보류</td>
+</tr>
+<tr>
+<td style="text-align: center;">4</td>
+<td>진정제</td>
+<td>체력 6 회복</td>
+<td style="text-align: center;">보류</td>
+</tr>
+<tr>
+<td style="text-align: center;">8</td>
+<td>나노 치유</td>
+<td>체력 12 회복</td>
+<td style="text-align: center;">기본</td>
+</tr>
+<tr>
+<td style="text-align: center;">16</td>
+<td>재생 촉진</td>
+<td><strong>3턴간</strong> 매 턴 체력 8 회복 (총 24)</td>
+<td style="text-align: center;">해금</td>
+</tr>
+<tr>
+<td style="text-align: center;">32</td>
+<td>세포 재생 †</td>
+<td>체력 32 회복</td>
+<td style="text-align: center;">해금</td>
+</tr>
+<tr>
+<td style="text-align: center;">64</td>
+<td>회복 파동</td>
+<td>체력 84 회복</td>
+<td style="text-align: center;">해금</td>
+</tr>
+<tr>
+<td style="text-align: center;">64</td>
+<td>정화의 빛 †</td>
+<td>체력 54 회복</td>
+<td style="text-align: center;">해금</td>
+</tr>
+<tr>
+<td style="text-align: center;">128</td>
+<td>에테르 방출</td>
+<td>체력 150 회복 + <strong>디버프 전부 제거</strong></td>
+<td style="text-align: center;">해금</td>
+</tr>
+<tr>
+<td style="text-align: center;">128</td>
+<td>생체 재구성 †</td>
+<td>체력 90 회복</td>
+<td style="text-align: center;">해금</td>
+</tr>
+<tr>
+<td style="text-align: center;">256</td>
+<td>완전 소생</td>
+<td>체력 312 회복</td>
+<td style="text-align: center;">해금</td>
+</tr>
+<tr>
+<td style="text-align: center;">256</td>
+<td>완전 재생 †</td>
+<td>체력 152 회복</td>
+<td style="text-align: center;">해금</td>
+</tr>
+</tbody>
+</table>
+<h3 id="_22">지원 카드</h3>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;">코스트</th>
+<th>카드명</th>
+<th style="text-align: center;">유형</th>
+<th>효과</th>
+<th style="text-align: center;">획득</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;">0</td>
+<td>나노 필드</td>
+<td style="text-align: center;">유틸</td>
+<td>방해 타일 1개 정화</td>
+<td style="text-align: center;">기본</td>
+</tr>
+<tr>
+<td style="text-align: center;">2</td>
+<td>나노 스캔 †</td>
+<td style="text-align: center;">유틸</td>
+<td>적 1체의 다음 행동을 미리 표시</td>
+<td style="text-align: center;">해금</td>
+</tr>
+<tr>
+<td style="text-align: center;">8</td>
+<td>생명선</td>
+<td style="text-align: center;">버프</td>
+<td>전투 중 1회, 치명 피해를 체력 1로 버팀</td>
+<td style="text-align: center;">해금</td>
+</tr>
+<tr>
+<td style="text-align: center;">16</td>
+<td>생명 흐름 †</td>
+<td style="text-align: center;">버프</td>
+<td>3턴간 받는 피해 -15%</td>
+<td style="text-align: center;">해금</td>
+</tr>
+<tr>
+<td style="text-align: center;">32</td>
+<td>정화 파동</td>
+<td style="text-align: center;">유틸</td>
+<td>자신의 디버프 전부 제거</td>
+<td style="text-align: center;">해금</td>
+</tr>
+<tr>
+<td style="text-align: center;">32</td>
+<td>활력 주입</td>
+<td style="text-align: center;">버프</td>
+<td>3턴간 방어막 획득량 +30%</td>
+<td style="text-align: center;">해금</td>
+</tr>
+<tr>
+<td style="text-align: center;">64</td>
+<td>억제 필드</td>
+<td style="text-align: center;">디버프</td>
+<td><strong>모든 적</strong> 공격력 2턴간 -20%</td>
+<td style="text-align: center;">해금</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><strong>회복 계열의 축 분리</strong> — 1인 전투로 "단일/전체" 구분이 사라진 자리를 다른 축으로 대체했다. <code>2·4·8</code>은 즉시 소량, <code>16 재생 촉진</code>은 총량이 크지만 <strong>턴을 나눠 받는</strong> 선행 투자, <code>128 에테르 방출</code>은 회복에 <strong>정화를 겸하는</strong> 위기 탈출용, <code>256 완전 소생</code>은 순수 대회복. 단순 수치 상위호환이 아니라 목적이 갈린다.</p>
+</blockquote>
+<hr />
+<h2 id="7">7. 캐릭터별 카드 구성 요약</h2>
+<table>
+<thead>
+<tr>
+<th>캐릭터</th>
+<th style="text-align: center;">밴드</th>
+<th style="text-align: center;">공격</th>
+<th style="text-align: center;">방어</th>
+<th style="text-align: center;">회복</th>
+<th style="text-align: center;">지원</th>
+<th style="text-align: center;">콤보</th>
+<th style="text-align: center;"><strong>합계</strong></th>
+<th>성향</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>주베</td>
+<td style="text-align: center;">0~64</td>
+<td style="text-align: center;">12</td>
+<td style="text-align: center;">6</td>
+<td style="text-align: center;">—</td>
+<td style="text-align: center;">12</td>
+<td style="text-align: center;">—</td>
+<td style="text-align: center;"><strong>30</strong></td>
+<td>경량 다발 · 타일 조작</td>
+</tr>
+<tr>
+<td>사이퍼</td>
+<td style="text-align: center;">0~128</td>
+<td style="text-align: center;">8</td>
+<td style="text-align: center;">7</td>
+<td style="text-align: center;">—</td>
+<td style="text-align: center;">15</td>
+<td style="text-align: center;">—</td>
+<td style="text-align: center;"><strong>30</strong></td>
+<td>디버프 특화</td>
+</tr>
+<tr>
+<td>펄스</td>
+<td style="text-align: center;">0~256</td>
+<td style="text-align: center;">6</td>
+<td style="text-align: center;">6</td>
+<td style="text-align: center;">11</td>
+<td style="text-align: center;">7</td>
+<td style="text-align: center;">—</td>
+<td style="text-align: center;"><strong>30</strong></td>
+<td>회복 특화</td>
+</tr>
+<tr>
+<td>케스트럴</td>
+<td style="text-align: center;">0~512</td>
+<td style="text-align: center;">9</td>
+<td style="text-align: center;">8</td>
+<td style="text-align: center;">—</td>
+<td style="text-align: center;">9</td>
+<td style="text-align: center;">4</td>
+<td style="text-align: center;"><strong>30</strong></td>
+<td>방어 특화 + 바리케이드 콤보</td>
+</tr>
+<tr>
+<td>베인</td>
+<td style="text-align: center;">4~1024</td>
+<td style="text-align: center;">15</td>
+<td style="text-align: center;">6</td>
+<td style="text-align: center;">—</td>
+<td style="text-align: center;">9</td>
+<td style="text-align: center;">—</td>
+<td style="text-align: center;"><strong>30</strong></td>
+<td>단일 고화력</td>
+</tr>
+<tr>
+<td></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"><strong>50</strong></td>
+<td style="text-align: center;"><strong>33</strong></td>
+<td style="text-align: center;"><strong>11</strong></td>
+<td style="text-align: center;"><strong>52</strong></td>
+<td style="text-align: center;"><strong>4</strong></td>
+<td style="text-align: center;"><strong>150</strong></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p><strong>핵심 딜레마와의 연결</strong> — 코스트가 클수록 강하지만 슬라이드 예산을 그만큼 소모한다. 케스트럴·베인은 상한 카드를 한 턴에 완성할 수 있어 <strong>"한 방 vs 다발"</strong>을 매 턴 저울질하고, 주베·사이퍼·펄스는 상한 카드를 위해 <strong>턴을 넘겨 보드를 쌓을지</strong> 저코스트로 끊어 갈지 선택한다.</p>
+<p><strong>0 코스트의 역할</strong> — 0 코스트 카드는 모두 <em>"보드 상황과 무관하게 성립해야 하는 것"</em>이다. 슬라이드 획득(슬라이더), 정보(스캔), 방어 태세(반격 자세), 정화(나노 필드). 퍼즐이 막힌 최악의 상황에서도 최소한의 행동을 보장하는 안전망이며, <strong>베인에게는 그 안전망이 없다.</strong></p>
+<hr />
+<h2 id="8">8. 미결 사항</h2>
+<table>
+<thead>
+<tr>
+<th>번호</th>
+<th>항목</th>
+<th>내용</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>S-6</strong></td>
+<td><strong>수치 밸런싱</strong></td>
+<td><a href="../../systems/balance/">systems/balance.md</a> 공식(BAL-1~3)을 신규 추가 50장(†)에는 적용 완료. <strong>기존 100장은 아직 이전 선형 스케일 그대로</strong>라 재적용 필요. 광역 ×0.7 계수·다단 공격 총합의 검증도 그 재적용과 함께 진행</td>
+</tr>
+<tr>
+<td>~~S-12~~</td>
+<td>~~버프·디버프 중첩 규칙~~</td>
+<td><strong>해소됨.</strong> <code>power</code> 합산 + effectId별 상한, <code>duration</code>은 max 갱신 (<a href="../../systems/card/">card.md §2-2</a>). 사이퍼의 취약 +15%+30%는 <strong>45%로 합산</strong>된다</td>
+</tr>
+<tr>
+<td>~~S-10~~</td>
+<td>~~지속 타입·파생 수치 미지원~~</td>
+<td><strong>해소됨.</strong> <code>PERSISTENT</code> 타입과 <code>damageSource: CURRENT_SHIELD</code> 확정 (<a href="../../systems/card/">card.md §2-2</a>)</td>
+</tr>
+<tr>
+<td>~~S-11~~</td>
+<td>~~방어막·드로우 타입 미확정~~</td>
+<td><strong>해소됨.</strong> <code>SHIELD</code> 확정, 드로우는 <code>UTILITY</code>의 <code>draw</code>로 흡수</td>
+</tr>
+<tr>
+<td><strong>S-2</strong></td>
+<td>2048(초월) 카드 미배치</td>
+<td>밴드 상한이 베인 1024까지라 2048은 어느 캐릭터에도 없다. 보상·유물 한정 등장 여부 결정 필요</td>
+</tr>
+<tr>
+<td><strong>S-5</strong></td>
+<td>적 카운트 개입 중첩</td>
+<td>사이퍼 "예측 조작"·"시스템 마비"와 유물 "시간의 모래"의 중첩 규칙</td>
+</tr>
+<tr>
+<td><strong>S-8</strong></td>
+<td>슬라이더 +1의 대상</td>
+<td>주베 "슬라이더"가 <code>slideCount</code>만 늘리는지 <code>maxSlides</code>를 늘리는지</td>
+</tr>
+<tr>
+<td>~~S-1~~</td>
+<td>~~펄스 회복 상위호환~~</td>
+<td><strong>해소됨.</strong> 즉시/지속/정화겸용/대회복으로 축 분리 (§6)</td>
+</tr>
+<tr>
+<td>~~S-3~~</td>
+<td>~~미해금 스킬 내용~~</td>
+<td><strong>해소됨.</strong> 캐릭터당 20장으로 전 슬롯 확정</td>
+</tr>
+<tr>
+<td>~~S-4~~</td>
+<td>~~발동 숫자 상한 불일치~~</td>
+<td><strong>해소됨.</strong> 코스트가 2048까지 확장</td>
+</tr>
+<tr>
+<td>~~S-7~~</td>
+<td>~~코스트 재배치~~</td>
+<td><strong>완료.</strong> 캐릭터별 밴드 방식 (§1)</td>
+</tr>
+<tr>
+<td>~~S-9~~</td>
+<td>~~기타 유형 카드 미작성~~</td>
+<td><strong>완료.</strong> 회복·버프·디버프·드로우·유틸 전부 작성</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="_23">관련 문서</h2>
+<table>
+<thead>
+<tr>
+<th>문서</th>
+<th>연결 내용</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="../../systems/card/">systems/card.md</a></td>
+<td>카드 구조체, 캐릭터 전용 원칙, 덱 운영, 발동 흐름</td>
+</tr>
+<tr>
+<td><a href="../../systems/balance/">systems/balance.md</a></td>
+<td>코스트 대비 수치 산정 공식, 정식 밸런스 기준</td>
+</tr>
+<tr>
+<td><a href="../characters/">contents/characters.md</a></td>
+<td>캐릭터 설정, 장비, 전투 역할</td>
+</tr>
+<tr>
+<td><a href="../../systems/character/">systems/character.md</a></td>
+<td>캐릭터 시스템 규칙 (출전, 체력, 슬라이드 스탯)</td>
+</tr>
+<tr>
+<td><a href="../../systems/growth/">systems/growth.md</a></td>
+<td>카드 강화·유물·패시브</td>
+</tr>
+<tr>
+<td><a href="../../schema/">schema.md</a></td>
+<td>카드 데이터 테이블 정의</td>
+</tr>
+</tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  맨위로
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.tabs", "navigation.tabs.sticky", "navigation.sections", "navigation.indexes", "navigation.top", "toc.integrate", "search.suggest", "search.highlight", "content.code.copy"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\ud074\ub9bd\ubcf4\ub4dc\uc5d0 \ubcf5\uc0ac\ub428", "clipboard.copy": "\ud074\ub9bd\ubcf4\ub4dc\ub85c \ubcf5\uc0ac", "search.result.more.one": "\uc774 \ubb38\uc11c\uc5d0\uc11c 1\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.more.other": "\uc774 \ubb38\uc11c\uc5d0\uc11c #\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.none": "\uac80\uc0c9\uc5b4\uc640 \uc77c\uce58\ud558\ub294 \ubb38\uc11c\uac00 \uc5c6\uc2b5\ub2c8\ub2e4", "search.result.one": "1\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.other": "#\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.placeholder": "\uac80\uc0c9\uc5b4\ub97c \uc785\ub825\ud558\uc138\uc694", "search.result.term.missing": "\ud3ec\ud568\ub418\uc9c0 \uc54a\uc740 \uac80\uc0c9\uc5b4", "select.version": "\ubc84\uc804 \uc120\ud0dd"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+        <script src="../../javascripts/scroll_top.js"></script>
+      
+        <script src="../../javascripts/build_data.js"></script>
+      
+    
+  </body>
+</html>
